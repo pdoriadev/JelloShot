@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 7d904a0e6ceb1524b97e76c5b1df873c
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: koliko
+  fontNames:
+  - koliko
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 403d9927904e6994f92ba46a226d03ef, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
