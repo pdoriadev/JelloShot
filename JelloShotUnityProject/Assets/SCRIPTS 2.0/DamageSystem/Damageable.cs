@@ -9,26 +9,28 @@ public abstract class Damageable : MonoBehaviour, IDamageTaker
     }
 
     #region --VARIABLES--
-    private float _CurrentHealth;
-    [SerializeField]
-    private float _MaxHealth = 3;
+    public float _CurrentHealth
+    {
+        get { return _CurrentHealth; }
 
-    //public float currentHealth
-    //{
-    //    get { return _CurrentHealth; }
-    //    set { _CurrentHealth = value; }
-    //}
-
-    //public float startingHealth
-    //{
-    //    get { return _StartingHealth; }
-    //    set { _StartingHealth = value; }
-    //}
+        set
+        {
+            if (_CurrentHealth < 0)
+                _CurrentHealth = 0;
+        }
+    }
+    public float _MaxHealth { get; }
+    
     #endregion
 
     public virtual void TakeDamage(float damage)
     {
-        // Define how much damage
+        _CurrentHealth -= damage;
+
+        if (_CurrentHealth < 1)
+        {
+            CheckForDeathCo();
+        }
     }
 
     protected IEnumerator CheckForDeathCo()
@@ -36,7 +38,7 @@ public abstract class Damageable : MonoBehaviour, IDamageTaker
         bool _isChecking = true;
         while (_isChecking == true)
         {
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.02f);
             if (DeathCheck() == true)
             {
                 OnDeath();
