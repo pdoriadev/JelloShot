@@ -20,18 +20,50 @@ public abstract class Damageable : MonoBehaviour, IDamageTaker
         }
     }
     public float _MaxHealth { get; }
-    
+
     #endregion
 
-    public virtual void TakeDamage(float damage)
+    #region TakeDamageInterfaces
+    public void TakeFullDmg()
     {
-        _CurrentHealth -= damage;
+        _CurrentHealth -= _CurrentHealth;
 
         if (_CurrentHealth < 1)
         {
             CheckForDeathCo();
         }
     }
+
+    public virtual void TakeDmg(float _damage)
+    {
+        _CurrentHealth -= _damage;
+
+        if (_CurrentHealth < 1)
+        {
+            CheckForDeathCo();
+        }
+    }
+
+    public void TakeDmgPercentOfMaxHealth(float _damagePercent)
+    {
+        _CurrentHealth -= (_damagePercent * _MaxHealth);
+
+        if (_CurrentHealth < 1)
+        {
+            CheckForDeathCo();
+        }
+    }
+
+    public void TakeDmgPercentOfCurrentHealth(float _damagePercent)
+    {
+        _CurrentHealth -= (_damagePercent * _CurrentHealth);
+
+        if (_CurrentHealth < 1)
+        {
+            CheckForDeathCo();
+        }
+    }
+    #endregion
 
     protected IEnumerator CheckForDeathCo()
     {

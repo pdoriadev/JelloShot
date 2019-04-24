@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class DamageDealer : MonoBehaviour
+public interface ILerpable
 {
-    
+    void Lerp();
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// Detects if ball has passed through a wall or the ground. Calls scripts to destroy ball and update score. 
 /// </summary>
-public class OutOfBounds : PoolingTrigger
+public class OutOfBounds : MonoBehaviour
 {
     OutOfBounds instance;
 
@@ -23,18 +23,14 @@ public class OutOfBounds : PoolingTrigger
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == (int)GameLayers.BallsLayer || collision.gameObject.layer == (int)GameLayers.SideyTopsey)
+        GameObject _CollidedObj = collision.gameObject;
+      
+        if (_CollidedObj.layer == (int)GameLayers.BallsLayer || _CollidedObj.layer == (int)GameLayers.SideyTopsey)
         {
-            // REPLACE WITH CHECK FOR REFLECTOR COMPONENT OR INTERFACE
-            if (collision.gameObject.tag == "reflector")
+            if (_CollidedObj.GetComponent<IDamageTaker>() != null)
             {
-                collision.GetComponent<VelocityReflector>().OnDeath();
-            }
-
-            else
-            {
-                PoolPassedObj(collision.gameObject);
-                IterateBallKoScore();
+                IDamageTaker damageTaker = _CollidedObj.GetComponent<IDamageTaker>();
+                damageTaker.TakeFullDmg();
             }
         }
     }

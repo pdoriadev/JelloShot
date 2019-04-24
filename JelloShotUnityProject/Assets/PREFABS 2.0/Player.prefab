@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 4693007853085734}
   - component: {fileID: 114868910239450134}
   - component: {fileID: 50032747648492810}
-  - component: {fileID: 114576233466148308}
+  - component: {fileID: 114978337437183820}
   - component: {fileID: 114507992992617756}
   - component: {fileID: 60492796316508268}
   - component: {fileID: 95090184432611792}
@@ -547,21 +547,6 @@ MonoBehaviour:
   playerAnimator: {fileID: 95090184432611792}
   scalerValue: 0
   scaleTime: 0
---- !u!114 &114576233466148308
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1670362734178294}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b4e58f74dee0f842988fcf0229aa327, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultPower: 0
-  firstPowerUp: 0
-  secondPowerUp: 0
-  currentPowerUp: 0
 --- !u!114 &114868910239450134
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -594,6 +579,18 @@ MonoBehaviour:
   hasShot: 0
   _BallSpeedMultiplier: 0
   _ScreenWidth: 0
+--- !u!114 &114978337437183820
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1670362734178294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b9b59a9177fda040b23514434e00acf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _DmgPerAttack: 1
 --- !u!212 &212286456509320788
 SpriteRenderer:
   m_ObjectHideFlags: 1
