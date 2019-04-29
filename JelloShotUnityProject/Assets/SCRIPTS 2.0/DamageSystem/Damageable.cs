@@ -5,72 +5,78 @@ public abstract class Damageable : MonoBehaviour, IDamageTaker
 {
     void OnEnable()
     {
-        _CurrentHealth = _MaxHealth;
+        currentHealth = maxHealth;
     }
 
     #region --VARIABLES--
-    public float _CurrentHealth
+    public float currentHealth
     {
-        get { return _CurrentHealth; }
+        get { return currentHealth; }
 
         set
         {
-            if (_CurrentHealth < 0)
-                _CurrentHealth = 0;
+            if (currentHealth < 0)
+                currentHealth = 0;
         }
     }
-    public float _MaxHealth { get; }
-
+    public float maxHealth { get; }
     #endregion
 
-    #region TakeDamageInterfaces
+    // Alternative To this is to have static TakeDamage class where these are all methods that can be called by Damageable
+    // under certain conditions. ADVANTAGE: Damager can directly interact with Damageable without creating spaghett.
+    // Loose coupling. DISADVANTAGE: Interfaces are slower compared to direct calls, albeit only slightly --> https://stackoverflow.com/questions/7225205/performance-of-direct-virtual-call-vs-interface-call-in-c-sharp
+    #region IDamageTakerMethods
     public void TakeFullDmg()
     {
-        _CurrentHealth -= _CurrentHealth;
-
-        if (_CurrentHealth < 1)
-        {
-            CheckForDeathCo();
-        }
+        currentHealth -= currentHealth;
+        OnTakeDmg();
     }
 
     public virtual void TakeDmg(float _damage)
     {
-        _CurrentHealth -= _damage;
-
-        if (_CurrentHealth < 1)
-        {
-            CheckForDeathCo();
-        }
+        currentHealth -= _damage;
+        OnTakeDmg();
     }
 
     public void TakeDmgPercentOfMaxHealth(float _damagePercent)
     {
-        _CurrentHealth -= (_damagePercent * _MaxHealth);
-
-        if (_CurrentHealth < 1)
-        {
-            CheckForDeathCo();
-        }
+        currentHealth -= (_damagePercent * maxHealth);
+        OnTakeDmg();
     }
 
     public void TakeDmgPercentOfCurrentHealth(float _damagePercent)
     {
-        _CurrentHealth -= (_damagePercent * _CurrentHealth);
+        currentHealth -= (_damagePercent * currentHealth);
+        OnTakeDmg();
+    }
 
-        if (_CurrentHealth < 1)
+    public virtual void OnTakeDmg()
+    {
+        if (currentHealth < 1)
         {
             CheckForDeathCo();
         }
     }
     #endregion
 
+    #region DEATH HANDLING 
+
+    public float waitTime
+    {
+        get { return waitTime; }
+
+        set
+        {
+            if (waitTime < 0)
+                waitTime = 0;
+        }
+    }
     protected IEnumerator CheckForDeathCo()
     {
         bool _isChecking = true;
         while (_isChecking == true)
         {
-            yield return new WaitForSeconds(0.02f);
+            yield return new WaitForSeconds(waitTime);
             if (DeathCheck() == true)
             {
                 OnDeath();
@@ -81,7 +87,7 @@ public abstract class Damageable : MonoBehaviour, IDamageTaker
 
     protected virtual bool DeathCheck()
     {
-        if (_CurrentHealth <= 0)
+        if (currentHealth <= 0)
             return true;
         else
             return false;
@@ -89,10 +95,11 @@ public abstract class Damageable : MonoBehaviour, IDamageTaker
 
     protected virtual void OnDeath()
     {
-        print("Died at " + _CurrentHealth + " Health");
+        print("Died at " + currentHealth + " Health");
         StopCoroutine(CheckForDeathCo());
-        _CurrentHealth = _MaxHealth;
+        currentHealth = maxHealth;
         SpawnManager.instance.PoolObject(gameObject);
         ScoreManager.instance.IterateBallsKoScore();
     }
+    #endregion
 }

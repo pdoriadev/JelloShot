@@ -4,6 +4,7 @@ using UnityEngine;
 
 public interface IDamageTaker
 {
+    void OnTakeDmg();
     void TakeFullDmg();
     void TakeDmg(float damage);
     void TakeDmgPercentOfMaxHealth(float damagePercent);

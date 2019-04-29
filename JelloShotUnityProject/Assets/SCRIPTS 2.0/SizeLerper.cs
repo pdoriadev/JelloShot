@@ -1,17 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class Lerper : MonoBehaviour
+public class SizeLerper : MonoBehaviour
 {
     private void OnEnable()
     {
         _ObjScaleAtSpawn = transform.localScale;
     }
 
-    #region LERP VARIABLES
-    public bool _IsLerping = false;
-    public Vector2 _ObjScaleAtSpawn;
+    private void OnDisable()
+    {
+        transform.localScale = _ObjScaleAtSpawn;
+    }
 
+    #region LERP VARIABLES
+    [SerializeField]
+    private bool _CanLerp = true;
+    [SerializeField]
+    private bool _IsLerping = false;
     [SerializeField]
     private float _TimeTakenToLerp = 0.5f;
     [SerializeField]
@@ -21,21 +27,28 @@ public class Lerper : MonoBehaviour
     [SerializeField]
     private float _LerpPercentageComplete;
     [SerializeField]
+    private Vector2 _ObjScaleAtSpawn;
+    [SerializeField]
     private Vector2 _ObjStartLerpScale;
     [SerializeField]
     private Vector2 _ObjNextScale;
     #endregion 
 
-    public void StartLerp(float currentHealth, float startingHealth)
+    public void StartLerp(float _currentHealth, float _startingHealth)
     {
-        _IsLerping = true;
-        _LerpPercentageComplete = 0.0f;
-        _StartLerpTime = Time.time;
+        if (_CanLerp)
+        {
+            _IsLerping = true;
+            _LerpPercentageComplete = 0.0f;
+            _StartLerpTime = Time.time;
 
-        _ObjStartLerpScale = transform.localScale;
+            _ObjStartLerpScale = transform.localScale;
 
-        float _ScaleDifference = (currentHealth + 0.1f) / startingHealth;
-        _ObjNextScale = new Vector2(_ObjScaleAtSpawn.x * _ScaleDifference, _ObjScaleAtSpawn.y * _ScaleDifference);
+            float _ScaleDifference = (_currentHealth + 0.1f) / _startingHealth;
+            _ObjNextScale = new Vector2(_ObjScaleAtSpawn.x * _ScaleDifference, _ObjScaleAtSpawn.y * _ScaleDifference);
+        }
+
+        // else throw exception here for if _CanLerp is false
     }
 
     void FixedUpdate()

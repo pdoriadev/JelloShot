@@ -5,6 +5,8 @@ using UnityEngine;
 public class Reflector : MonoBehaviour
 {
     [SerializeField]
+    private bool _ReflectOn = true;
+    [SerializeField]
     private float _ReflectForce;
     protected float ReflectForce
     {
@@ -14,9 +16,12 @@ public class Reflector : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Vector2 _ReflectorPos = transform.position;
-        Vector2 _ReflectedObjPos = collision.transform.position;
-        Vector2 _ReflectDirection = _ReflectedObjPos - _ReflectorPos;
-        collision.gameObject.GetComponent<Rigidbody2D>().AddForce(_ReflectDirection * _ReflectForce, ForceMode2D.Impulse);
+        if (_ReflectOn)
+        {
+            Vector2 _ReflectorPos = transform.position;
+            Vector2 _ReflectedObjPos = collision.transform.position;
+            Vector2 _ReflectDirection = _ReflectedObjPos - _ReflectorPos;
+            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(_ReflectDirection * _ReflectForce, ForceMode2D.Impulse);
+        }     
     }
 }
