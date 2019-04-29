@@ -19,19 +19,41 @@ public class SizeLerper : MonoBehaviour
     [SerializeField]
     private bool _IsLerping = false;
     [SerializeField]
-    private float _TimeTakenToLerp = 0.5f;
-    [SerializeField]
-    private float _StartLerpTime;
-    [SerializeField]
-    private float _TimeSinceLerpStarted;
-    [SerializeField]
     private float _LerpPercentageComplete;
+[HeaderAttribute("Size")]
     [SerializeField]
     private Vector2 _ObjScaleAtSpawn;
     [SerializeField]
     private Vector2 _ObjStartLerpScale;
     [SerializeField]
     private Vector2 _ObjNextScale;
+[HeaderAttribute("Time")]
+    [SerializeField]
+    private float _LerpTime = 0.5f;
+    [SerializeField]
+    private float _StartLerpTime;
+    [SerializeField]
+    private float _TimeSinceLerpStarted;
+
+    [HideInInspector]
+    public float lerpTime
+    {
+        get { return _LerpTime; }
+        set
+        {
+            if (value <= 0)
+            {
+                _LerpTime = value;
+                lerpTime = _LerpTime;
+            }
+
+            if (_LerpTime <= 0)
+            {
+                _LerpTime = 0.4f;
+                lerpTime = _LerpTime;
+            }
+        }
+    }
     #endregion 
 
     public void StartLerp(float _currentHealth, float _startingHealth)
@@ -57,7 +79,7 @@ public class SizeLerper : MonoBehaviour
         {
             //StartCoroutine(TestCo());
             _TimeSinceLerpStarted = Time.time - _StartLerpTime;
-            _LerpPercentageComplete = _TimeSinceLerpStarted / _TimeTakenToLerp;
+            _LerpPercentageComplete = _TimeSinceLerpStarted / _LerpTime;
             transform.localScale = Vector2.Lerp(_ObjStartLerpScale, _ObjNextScale, _LerpPercentageComplete);
         }
 

@@ -5,7 +5,19 @@ using UnityEngine;
 public class DamageableLerpOnDmg : Damageable
 {
     private SizeLerper _LerperInstance;
-    
+    [SerializeField]
+    private float _MaxHealth = 3;
+    private float _WaitTime
+    {
+        get { return waitTime; }
+        set
+        {
+            _WaitTime = value;
+            if (_WaitTime > 0)
+                waitTime = _WaitTime;
+        }
+    }
+
     #region UNITY CALLBACKS
     void OnEnable()
     {
@@ -15,6 +27,9 @@ public class DamageableLerpOnDmg : Damageable
         }
         else
             _LerperInstance = GetComponent<SizeLerper>();
+
+        maxHealth = _MaxHealth;
+        _WaitTime = _LerperInstance.lerpTime;
     }
 
     void OnDisable()

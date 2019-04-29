@@ -11,7 +11,10 @@ public class Reflector : MonoBehaviour
     protected float ReflectForce
     {
         get { return _ReflectForce; }
-        set { _ReflectForce = value; }
+        set {
+            if (value >= 0)
+                _ReflectForce = value;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

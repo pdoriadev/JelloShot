@@ -8,7 +8,7 @@ public abstract class Damageable : MonoBehaviour, IDamageTaker
         currentHealth = maxHealth;
     }
 
-    #region --VARIABLES--
+    #region --HEALTH PROPERTIES--
     public float currentHealth
     {
         get { return currentHealth; }
@@ -19,7 +19,17 @@ public abstract class Damageable : MonoBehaviour, IDamageTaker
                 currentHealth = 0;
         }
     }
-    public float maxHealth { get; }
+    public float maxHealth {
+        get { return maxHealth; }
+
+        set
+        {
+            if (maxHealth < 1)
+                maxHealth = 1;
+            if (value > 1)
+                maxHealth = value;
+        }
+    }
     #endregion
 
     // Alternative To this is to have static TakeDamage class where these are all methods that can be called by Damageable
@@ -101,5 +111,6 @@ public abstract class Damageable : MonoBehaviour, IDamageTaker
         SpawnManager.instance.PoolObject(gameObject);
         ScoreManager.instance.IterateBallsKoScore();
     }
+
     #endregion
 }

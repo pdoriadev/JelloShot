@@ -89,6 +89,8 @@ GameObject:
   - component: {fileID: 232559794294084950}
   - component: {fileID: 95867138204413804}
   - component: {fileID: 255696002138345972}
+  - component: {fileID: 114324939922504458}
+  - component: {fileID: 114904924240071382}
   m_Layer: 14
   m_Name: SmallBall
   m_TagString: smallBall
@@ -328,6 +330,38 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &114324939922504458
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1914277872518012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39ac636268151e94089827c1eddbb986, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _CanLerp: 1
+  _IsLerping: 0
+  _LerpPercentageComplete: 0
+  _TimeTakenToLerp: 0.5
+  _StartLerpTime: 0
+  _TimeSinceLerpStarted: 0
+  _ObjScaleAtSpawn: {x: 0, y: 0}
+  _ObjStartLerpScale: {x: 0, y: 0}
+  _ObjNextScale: {x: 0, y: 0}
+--- !u!114 &114904924240071382
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1914277872518012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e296f4540fff5945b72c9c53de78deb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _MaxHealth: 1
 --- !u!212 &212379387924481420
 SpriteRenderer:
   m_ObjectHideFlags: 1

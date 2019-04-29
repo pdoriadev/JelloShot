@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 61149150985332790}
   - component: {fileID: 114298237181030864}
   - component: {fileID: 114712940014113500}
+  - component: {fileID: 114896191148170672}
   m_Layer: 14
   m_Name: ReflectorBox
   m_TagString: reflector
@@ -129,9 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e296f4540fff5945b72c9c53de78deb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ReflectForce: 30
-  _StartingHealth: 3
-  _CurrentHealth: 0
+  _MaxHealth: 3
 --- !u!114 &114712940014113500
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -143,14 +142,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39ac636268151e94089827c1eddbb986, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _CanLerp: 1
   _IsLerping: 0
-  _ObjScaleAtSpawn: {x: 0, y: 0}
-  _TimeTakenToLerp: 0.1
+  _TimeTakenToLerp: 0.2
   _StartLerpTime: 0
   _TimeSinceLerpStarted: 0
   _LerpPercentageComplete: 0
+  _ObjScaleAtSpawn: {x: 0, y: 0}
   _ObjStartLerpScale: {x: 0, y: 0}
   _ObjNextScale: {x: 0, y: 0}
+--- !u!114 &114896191148170672
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1982373068832696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afeb228184fb5564da53dbe1f3a4f7bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ReflectOn: 1
+  _ReflectForce: 80
 --- !u!212 &212159006903478034
 SpriteRenderer:
   m_ObjectHideFlags: 1

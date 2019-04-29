@@ -387,6 +387,7 @@
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/CameraController.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/DamageSystem/Damageable.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/DamageSystem/DamageDealer.cs"
+-i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/DamageSystem/DeathChecker.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/DamageSystem/IDamageTaker.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/DataManagement.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/Enemies/DamageableLerpOnDmg.cs"

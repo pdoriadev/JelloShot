@@ -25,6 +25,8 @@ GameObject:
   - component: {fileID: 95217180057276210}
   - component: {fileID: 233355950955801312}
   - component: {fileID: 255786679103578344}
+  - component: {fileID: 114603547046359606}
+  - component: {fileID: 114602372028852844}
   m_Layer: 14
   m_Name: BounceBall
   m_TagString: ball
@@ -357,6 +359,38 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &114602372028852844
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1138869199507208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39ac636268151e94089827c1eddbb986, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _CanLerp: 1
+  _IsLerping: 0
+  _LerpPercentageComplete: 0
+  _TimeTakenToLerp: 0.5
+  _StartLerpTime: 0
+  _TimeSinceLerpStarted: 0
+  _ObjScaleAtSpawn: {x: 0, y: 0}
+  _ObjStartLerpScale: {x: 0, y: 0}
+  _ObjNextScale: {x: 0, y: 0}
+--- !u!114 &114603547046359606
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1138869199507208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e296f4540fff5945b72c9c53de78deb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _MaxHealth: 3
 --- !u!212 &212071065228709776
 SpriteRenderer:
   m_ObjectHideFlags: 1
