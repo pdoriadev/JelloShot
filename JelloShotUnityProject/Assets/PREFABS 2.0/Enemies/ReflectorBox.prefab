@@ -148,7 +148,7 @@ MonoBehaviour:
   _ObjScaleAtSpawn: {x: 0, y: 0}
   _ObjStartLerpScale: {x: 0, y: 0}
   _ObjNextScale: {x: 0, y: 0}
-  _LerpTime: 0.5
+  _LerpTime: 0.3
   _StartLerpTime: 0
   _TimeSinceLerpStarted: 0
 --- !u!114 &114896191148170672
@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ReflectOn: 1
-  _ReflectForce: 80
+  _ReflectForce: 10
 --- !u!212 &212159006903478034
 SpriteRenderer:
   m_ObjectHideFlags: 1

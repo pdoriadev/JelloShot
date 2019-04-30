@@ -43,4 +43,10 @@ public class DamageableLerpOnDmg : Damageable
         base.OnTakeDmg();
         _LerperInstance.StartLerp(currentHealth, maxHealth);
     }
+
+    protected override void OnDeath()
+    {
+
+        base.OnDeath();
+    }
 }

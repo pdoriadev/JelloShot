@@ -38,9 +38,9 @@ public abstract class Damageable : MonoBehaviour, IDamageTaker
     }
     #endregion
 
-    // Alternative To this is to have static TakeDamage class where these are all methods that can be called by Damageable
-    // under certain conditions. ADVANTAGE: Damager can directly interact with Damageable without creating spaghett.
-    // Loose coupling. DISADVANTAGE: Interfaces are slower compared to direct calls, albeit only slightly --> https://stackoverflow.com/questions/7225205/performance-of-direct-virtual-call-vs-interface-call-in-c-sharp
+    // Alternative To this is to use a OnTakeDmg event that dependent methods can listen to. 
+    // ADVANTAGE: Damager can directly interact with Damageable without creating spaghett.
+    // Loose coupling. 
     #region IDamageTakerMethods
     public void TakeFullDmg()
     {
@@ -50,7 +50,7 @@ public abstract class Damageable : MonoBehaviour, IDamageTaker
 
     public virtual void TakeDmg(float _damage)
     {
-        print("PreDamage :" + gameObject + " : " + _CurrentHealth);
+        print("PreDamage :" + gameObject + " : " + currentHealth);
         currentHealth -= _damage;
         OnTakeDmg();
     }
@@ -71,13 +71,21 @@ public abstract class Damageable : MonoBehaviour, IDamageTaker
     {
         if (currentHealth < 1)
         {
-            CheckForDeathCo();
+            StartCoroutine(CheckForDeathCo());
         }
-        print("Post-Damage :" + gameObject + " : " + _CurrentHealth);
+        print("Post-Damage :" + gameObject + " : " + currentHealth);
     }
     #endregion
 
     #region DEATH HANDLING 
+    protected virtual bool DeathCheck()
+    {
+        if (currentHealth <= 0)
+            return true;
+        else
+            return false;
+    }
+
     private float _WaitTime;
     protected float waitTime
     {
@@ -85,6 +93,7 @@ public abstract class Damageable : MonoBehaviour, IDamageTaker
 
         set
         {
+            _WaitTime = value;
             if (_WaitTime < 0)
                 _WaitTime = 0;
         }
@@ -103,22 +112,13 @@ public abstract class Damageable : MonoBehaviour, IDamageTaker
         yield return null;
     }
 
-    protected virtual bool DeathCheck()
-    {
-        if (currentHealth <= 0)
-            return true;
-        else
-            return false;
-    }
-
     protected virtual void OnDeath()
     {
-        print("Died at " + currentHealth + " Health");
+        print("Died at " + _CurrentHealth + " Health");
         StopCoroutine(CheckForDeathCo());
         currentHealth = maxHealth;
         SpawnManager.instance.PoolObject(gameObject);
         ScoreManager.instance.IterateBallsKoScore();
     }
-
     #endregion
 }
