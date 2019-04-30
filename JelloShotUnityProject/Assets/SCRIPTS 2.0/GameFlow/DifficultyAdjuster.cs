@@ -19,13 +19,16 @@ public class DifficultyAdjuster : MonoBehaviour
         if (instance == null)
             instance = this;
         GameManager.OnUpdateEvent += OnUpdateHandler;
-        SetStartingDifficulty();
     }
-
     private void OnDisable()
     {
         instance = null;
         GameManager.OnUpdateEvent -= OnUpdateHandler;
+    }
+
+    private void Start()
+    {
+        SetStartingDifficulty();
     }
     #endregion
 

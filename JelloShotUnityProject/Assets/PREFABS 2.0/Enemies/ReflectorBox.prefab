@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e296f4540fff5945b72c9c53de78deb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _MaxHealth: 3
+  _NewMaxHealth: 3
 --- !u!114 &114712940014113500
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -144,13 +144,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _CanLerp: 1
   _IsLerping: 0
-  _TimeTakenToLerp: 0.2
-  _StartLerpTime: 0
-  _TimeSinceLerpStarted: 0
   _LerpPercentageComplete: 0
   _ObjScaleAtSpawn: {x: 0, y: 0}
   _ObjStartLerpScale: {x: 0, y: 0}
   _ObjNextScale: {x: 0, y: 0}
+  _LerpTime: 0.5
+  _StartLerpTime: 0
+  _TimeSinceLerpStarted: 0
 --- !u!114 &114896191148170672
 MonoBehaviour:
   m_ObjectHideFlags: 1

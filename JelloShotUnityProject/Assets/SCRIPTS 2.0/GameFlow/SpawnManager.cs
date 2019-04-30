@@ -15,8 +15,12 @@ public class SpawnManager : MonoBehaviour
     public static SpawnManager instance;
 
     #region UNITY CALLBACKS
-    // Called when monobehaviour has been enabled. Adds BallSpawnDestroy instance to scene if there is none. 
-    // Subscribes BallSpawnDestroy's FixedUpdateHandler to GM's FixedUpdate Event
+    private void Awake()
+    {
+        startMinSpawnWait = spawnMinWait;
+        startMaxSpawnWait = spawnMaxWait;
+    }
+
     private void OnEnable()
     {
         if (instance == null)
@@ -31,8 +35,6 @@ public class SpawnManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(CoSpawnItem());
-        startMinSpawnWait = spawnMinWait;
-        startMaxSpawnWait = spawnMaxWait;
     }
     #endregion
 
@@ -42,8 +44,8 @@ public class SpawnManager : MonoBehaviour
 
     // Wait time before checking if can spawn
     public float startWait;
-    // bool that stops spawning when true. 
-    public bool stop;
+    // bool that stops spawning when false. 
+    public bool IsSpawning = true;
 
     public float spawnMinWait;
     public float spawnMaxWait;
@@ -60,7 +62,7 @@ public class SpawnManager : MonoBehaviour
     IEnumerator CoSpawnItem()
     {
         yield return new WaitForSeconds(startWait);
-        while (!stop)
+        while (IsSpawning)
         {
             spawnWait = Random.Range(spawnMinWait, spawnMaxWait);
             spawnPosition = new Vector3(Random.Range(-spawningZone.x, spawningZone.x), Random.Range(-spawningZone.y, spawningZone.y), 1);

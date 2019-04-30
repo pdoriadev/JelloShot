@@ -238,7 +238,7 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1138869199507208}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 664bbd0dde22662489aae952e4f98968, type: 2}
   m_CullingMode: 0
@@ -373,12 +373,12 @@ MonoBehaviour:
   _CanLerp: 1
   _IsLerping: 0
   _LerpPercentageComplete: 0
-  _TimeTakenToLerp: 0.5
-  _StartLerpTime: 0
-  _TimeSinceLerpStarted: 0
   _ObjScaleAtSpawn: {x: 0, y: 0}
   _ObjStartLerpScale: {x: 0, y: 0}
   _ObjNextScale: {x: 0, y: 0}
+  _LerpTime: 0.5
+  _StartLerpTime: 0
+  _TimeSinceLerpStarted: 0
 --- !u!114 &114603547046359606
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -390,7 +390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e296f4540fff5945b72c9c53de78deb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _MaxHealth: 3
+  _NewMaxHealth: 3
 --- !u!212 &212071065228709776
 SpriteRenderer:
   m_ObjectHideFlags: 1

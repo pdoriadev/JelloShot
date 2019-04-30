@@ -6,15 +6,14 @@ public class DamageableLerpOnDmg : Damageable
 {
     private SizeLerper _LerperInstance;
     [SerializeField]
-    private float _MaxHealth = 3;
+    private float _NewMaxHealth = 3;
     private float _WaitTime
     {
         get { return waitTime; }
         set
         {
-            _WaitTime = value;
-            if (_WaitTime > 0)
-                waitTime = _WaitTime;
+            if (value >= 0)
+                waitTime = value;
         }
     }
 
@@ -28,7 +27,8 @@ public class DamageableLerpOnDmg : Damageable
         else
             _LerperInstance = GetComponent<SizeLerper>();
 
-        maxHealth = _MaxHealth;
+        maxHealth = _NewMaxHealth;
+        currentHealth = _NewMaxHealth;
         _WaitTime = _LerperInstance.lerpTime;
     }
 

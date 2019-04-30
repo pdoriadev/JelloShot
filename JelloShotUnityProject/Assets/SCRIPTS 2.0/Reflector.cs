@@ -19,7 +19,7 @@ public class Reflector : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (_ReflectOn)
+        if (_ReflectOn && collision.gameObject.layer == (int)GameLayers.Player || collision.gameObject.layer == (int)GameLayers.BallsLayer)
         {
             Vector2 _ReflectorPos = transform.position;
             Vector2 _ReflectedObjPos = collision.transform.position;

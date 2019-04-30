@@ -5,29 +5,35 @@ public abstract class Damageable : MonoBehaviour, IDamageTaker
 {
     void OnEnable()
     {
-        currentHealth = maxHealth;
+        _CurrentHealth = _MaxHealth;
     }
 
     #region --HEALTH PROPERTIES--
+    private float _CurrentHealth = 3f;
     public float currentHealth
     {
-        get { return currentHealth; }
+        get { return _CurrentHealth; }
 
-        set
+        protected set
         {
-            if (currentHealth < 0)
-                currentHealth = 0;
+            _CurrentHealth = value;
+            if (_CurrentHealth < 0)
+                _CurrentHealth = 0;
+            print("Current: " + _CurrentHealth);
         }
     }
-    public float maxHealth {
-        get { return maxHealth; }
+    private float _MaxHealth = 3f;
+    public float maxHealth
+    {
+        get { return _MaxHealth; }
 
-        set
+        protected set
         {
-            if (maxHealth < 1)
-                maxHealth = 1;
+            if (_MaxHealth < 1)
+                _MaxHealth = 1;
             if (value > 1)
-                maxHealth = value;
+                _MaxHealth = value;
+            print("Max: " + _MaxHealth);
         }
     }
     #endregion
@@ -44,6 +50,7 @@ public abstract class Damageable : MonoBehaviour, IDamageTaker
 
     public virtual void TakeDmg(float _damage)
     {
+        print("PreDamage :" + gameObject + " : " + _CurrentHealth);
         currentHealth -= _damage;
         OnTakeDmg();
     }
@@ -66,19 +73,20 @@ public abstract class Damageable : MonoBehaviour, IDamageTaker
         {
             CheckForDeathCo();
         }
+        print("Post-Damage :" + gameObject + " : " + _CurrentHealth);
     }
     #endregion
 
     #region DEATH HANDLING 
-
-    public float waitTime
+    private float _WaitTime;
+    protected float waitTime
     {
-        get { return waitTime; }
+        get { return _WaitTime; }
 
         set
         {
-            if (waitTime < 0)
-                waitTime = 0;
+            if (_WaitTime < 0)
+                _WaitTime = 0;
         }
     }
     protected IEnumerator CheckForDeathCo()

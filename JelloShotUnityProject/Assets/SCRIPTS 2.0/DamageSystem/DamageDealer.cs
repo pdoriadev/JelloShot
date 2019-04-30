@@ -9,7 +9,10 @@ public class DamageDealer : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        IDamageTaker damageTaker = collision.gameObject.GetComponent<IDamageTaker>();
-        damageTaker.TakeDmg(_DmgPerAttack);
+        if (collision.gameObject.GetComponent<IDamageTaker>() != null)
+        {
+            IDamageTaker damageTaker = collision.gameObject.GetComponent<IDamageTaker>();
+            damageTaker.TakeDmg(_DmgPerAttack);
+        }     
     }
 }
