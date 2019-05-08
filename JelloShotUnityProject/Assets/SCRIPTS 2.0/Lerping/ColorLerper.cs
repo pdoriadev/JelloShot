@@ -6,12 +6,20 @@ public class ColorLerper : LerperBase
 {
     private void OnEnable()
     {
-        _ColorAtSpawn = _ObjSpriteRenderer.material.color;
+        if (GetComponent<SpriteRenderer>() == null)
+        {
+            _ObjSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        }
+
+        else
+            _ObjSpriteRenderer = GetComponent<SpriteRenderer>();
+
+        _ColorAtSpawn = _ObjSpriteRenderer.color;
     }
 
     private void OnDisable()
     {
-        _ObjSpriteRenderer.material.color = _ColorAtSpawn;
+        _ObjSpriteRenderer.color = _ColorAtSpawn;
     }
 
     private SpriteRenderer _ObjSpriteRenderer;
@@ -19,23 +27,25 @@ public class ColorLerper : LerperBase
     [HeaderAttribute("Color")]
     [SerializeField]
     private Color _ColorAtSpawn;
-    [SerializeField]
     private Color _StartLerpColor;
+    private Color _NextLerpColor;
+    // Set in the inspector
     [SerializeField]
-    private Color _TargetLerpColor;
+    private Color _FinalColor;
+
 
     public override void StartLerp(float _currentHealth, float _maxHealth)
     {
-        _StartLerpColor = _ObjSpriteRenderer.material.color;
+        _StartLerpColor = _ObjSpriteRenderer.color;
 
-        float _ScaleDifference = (_currentHealth + 0.1f) / _maxHealth;
-        _TargetLerpColor = new Color(_ColorAtSpawn.a * _ScaleDifference, _ColorAtSpawn.g * _ScaleDifference, _ColorAtSpawn.b * _ScaleDifference);
+        float _Scaler = (_maxHealth - _currentHealth) + 1;
+        _NextLerpColor = new Color(_ColorAtSpawn.a + _FinalColor.a, _ColorAtSpawn.g + _FinalColor.g, _ColorAtSpawn.b + _FinalColor.b) / _Scaler;
         base.StartLerp(_currentHealth, _maxHealth);
     }
 
     protected override void HandleLerp()
     {
         base.HandleLerp();
-        _ObjSpriteRenderer.material.color = Color.Lerp(_StartLerpColor, _TargetLerpColor, lerpPercentageComplete);
+        _ObjSpriteRenderer.color = Color.Lerp(_StartLerpColor, _NextLerpColor, lerpPercentageComplete);
     }
 }
