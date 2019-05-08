@@ -5091,8 +5091,8 @@ MonoBehaviour:
     type: 2}
   _SupportTwo: {fileID: 1138869199507208, guid: b7c41f0ea77121b4cb12ad0dc37c9fc4,
     type: 2}
-  _AttackOne: {fileID: 1982373068832696, guid: d51c06928647b704d9ee7c27296d84a4, type: 2}
-  _AttackTwo: {fileID: 1982373068832696, guid: d51c06928647b704d9ee7c27296d84a4, type: 2}
+  _AttackOne: {fileID: 1387913447705422, guid: 218b5bff0a758d143820b025b6d0c7ec, type: 2}
+  _AttackTwo: {fileID: 1387913447705422, guid: 218b5bff0a758d143820b025b6d0c7ec, type: 2}
   _SupportChanceThreshold: 10
   _AttackChanceThreshold: 20
   _TankTwoThreshold: 90

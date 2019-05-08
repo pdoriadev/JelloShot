@@ -7,6 +7,7 @@ using UnityEditor;
 
 public class DamageableLerpOnDmg : Damageable
 {
+    #region VARIABLES
     private SizeLerper _SizerInstance = null;
     private ColorLerper _ColorerInstance = null;
     [SerializeField]
@@ -26,20 +27,26 @@ public class DamageableLerpOnDmg : Damageable
                 waitTime = value;
         }
     }
+    #endregion
 
     #region UNITY CALLBACKS
     void OnEnable()
     {
-        if (GetComponent<SizeLerper>() == null)
-        {
-            _SizerInstance = gameObject.AddComponent<SizeLerper>() as SizeLerper;
-        }
-        else
+        if (GetComponent<SizeLerper>() != null)
             _SizerInstance = GetComponent<SizeLerper>();
+        if (GetComponent<ColorLerper>() != null)
+            _ColorerInstance = GetComponent<ColorLerper>();
 
         maxHealth = _NewMaxHealth;
         currentHealth = _NewMaxHealth;
-        _WaitTime = _SizerInstance.lerpTime;
+        if (_SizerInstance != null)
+        {
+            _WaitTime = _SizerInstance.lerpTime;
+        }
+        if (_ColorerInstance != null)
+        {
+            _WaitTime = _SizerInstance.lerpTime;
+        }
     }
 
     void OnDisable()
@@ -51,7 +58,10 @@ public class DamageableLerpOnDmg : Damageable
     public override void OnTakeDmg()
     {
         base.OnTakeDmg();
-        _SizerInstance.StartLerp(currentHealth, maxHealth);
+        if (_SizerInstance != null)
+            _SizerInstance.StartLerp(currentHealth, maxHealth);
+        if (_ColorerInstance != null)
+            _ColorerInstance.StartLerp(currentHealth, maxHealth);
     }
 
     protected override void OnDeath()

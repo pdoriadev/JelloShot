@@ -38,6 +38,8 @@ GameObject:
   - component: {fileID: 50265173480379498}
   - component: {fileID: 61062514913448488}
   - component: {fileID: 114777435465410128}
+  - component: {fileID: 114030589600682124}
+  - component: {fileID: 114939047325599278}
   m_Layer: 14
   m_Name: ReflectorBox
   m_TagString: Untagged
@@ -117,6 +119,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &114030589600682124
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1387913447705422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c60cf95d21edefb4dae51dbe77b4e6ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _CanLerp: 1
+  _IsLerping: 0
+  _LerpPercentageComplete: 0
+  _StartLerpTime: 0
+  _TimeSinceLerpStarted: 0
+  _LerpTime: 0.5
+  _ColorAtSpawn: {r: 1, g: 1, b: 1, a: 1}
+  _FinalColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &114777435465410128
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -129,8 +150,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _IsSizeLerper: 1
-  _IsColorLerper: 0
+  _IsColorLerper: 1
   _NewMaxHealth: 3
+--- !u!114 &114939047325599278
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1387913447705422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39ac636268151e94089827c1eddbb986, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _CanLerp: 1
+  _IsLerping: 0
+  _LerpPercentageComplete: 0
+  _StartLerpTime: 0
+  _TimeSinceLerpStarted: 0
+  _LerpTime: 0.5
+  _ObjScaleAtSpawn: {x: 0, y: 0}
+  _ObjStartLerpScale: {x: 0, y: 0}
+  _ObjNextScale: {x: 0, y: 0}
 --- !u!212 &212448242623870388
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -19,7 +19,6 @@ public abstract class Damageable : MonoBehaviour, IDamageTaker
             _CurrentHealth = value;
             if (_CurrentHealth < 0)
                 _CurrentHealth = 0;
-            print("Current: " + _CurrentHealth);
         }
     }
     private float _MaxHealth = 3f;
@@ -33,7 +32,6 @@ public abstract class Damageable : MonoBehaviour, IDamageTaker
                 _MaxHealth = 1;
             if (value > 1)
                 _MaxHealth = value;
-            print("Max: " + _MaxHealth);
         }
     }
     #endregion
@@ -50,7 +48,6 @@ public abstract class Damageable : MonoBehaviour, IDamageTaker
 
     public virtual void TakeDmg(float _damage)
     {
-        print("PreDamage :" + gameObject + " : " + currentHealth);
         currentHealth -= _damage;
         OnTakeDmg();
     }
@@ -73,7 +70,6 @@ public abstract class Damageable : MonoBehaviour, IDamageTaker
         {
             StartCoroutine(CheckForDeathCo());
         }
-        print("Post-Damage :" + gameObject + " : " + currentHealth);
     }
     #endregion
 

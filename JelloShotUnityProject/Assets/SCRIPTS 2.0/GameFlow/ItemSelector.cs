@@ -101,7 +101,6 @@ public class ItemSelector : MonoBehaviour
             if (selectedBallType == "Tank")
             {
                 gameObjectToReturn = (SelectItem(_TankBalls));
-                print(gameObjectToReturn);
             }
 
             else if (selectedBallType == "Support")

@@ -25,9 +25,9 @@ public class ColorLerper : LerperBase
     private SpriteRenderer _ObjSpriteRenderer;
 
     [HeaderAttribute("Color")]
-    [SerializeField]
     private Color _ColorAtSpawn;
     private Color _StartLerpColor;
+    [SerializeField]
     private Color _NextLerpColor;
     // Set in the inspector
     [SerializeField]
