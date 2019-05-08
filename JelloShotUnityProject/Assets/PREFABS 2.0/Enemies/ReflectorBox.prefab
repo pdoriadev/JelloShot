@@ -136,7 +136,7 @@ MonoBehaviour:
   _StartLerpTime: 0
   _TimeSinceLerpStarted: 0
   _LerpTime: 0.5
-  _ColorAtSpawn: {r: 1, g: 1, b: 1, a: 1}
+  _NextLerpColor: {r: 0, g: 0, b: 0, a: 0}
   _FinalColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &114777435465410128
 MonoBehaviour:

@@ -39,7 +39,7 @@ public class ColorLerper : LerperBase
         _StartLerpColor = _ObjSpriteRenderer.color;
 
         float _Scaler = (_maxHealth - _currentHealth) + 1;
-        _NextLerpColor = new Color(_ColorAtSpawn.a + _FinalColor.a, _ColorAtSpawn.g + _FinalColor.g, _ColorAtSpawn.b + _FinalColor.b) / _Scaler;
+        _NextLerpColor = new Color(_ColorAtSpawn.r + _FinalColor.r, _ColorAtSpawn.g + _FinalColor.g, _ColorAtSpawn.b + _FinalColor.b) / _Scaler;
         base.StartLerp(_currentHealth, _maxHealth);
     }
 

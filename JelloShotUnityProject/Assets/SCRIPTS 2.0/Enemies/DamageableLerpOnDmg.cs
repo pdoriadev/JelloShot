@@ -45,7 +45,7 @@ public class DamageableLerpOnDmg : Damageable
         }
         if (_ColorerInstance != null)
         {
-            _WaitTime = _SizerInstance.lerpTime;
+            _WaitTime = _ColorerInstance.lerpTime;
         }
     }
 

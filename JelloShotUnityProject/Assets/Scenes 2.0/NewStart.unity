@@ -5556,7 +5556,7 @@ Transform:
   m_Children:
   - {fileID: 983628485}
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &604811873
 GameObject:
@@ -5768,58 +5768,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1001 &751717804
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4037829781891924, guid: 218b5bff0a758d143820b025b6d0c7ec, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -4.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4037829781891924, guid: 218b5bff0a758d143820b025b6d0c7ec, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 34.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4037829781891924, guid: 218b5bff0a758d143820b025b6d0c7ec, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4037829781891924, guid: 218b5bff0a758d143820b025b6d0c7ec, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4037829781891924, guid: 218b5bff0a758d143820b025b6d0c7ec, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4037829781891924, guid: 218b5bff0a758d143820b025b6d0c7ec, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4037829781891924, guid: 218b5bff0a758d143820b025b6d0c7ec, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4037829781891924, guid: 218b5bff0a758d143820b025b6d0c7ec, type: 2}
-      propertyPath: m_RootOrder
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 114777435465410128, guid: 218b5bff0a758d143820b025b6d0c7ec,
-        type: 2}
-      propertyPath: _IsSizeLerper
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114777435465410128, guid: 218b5bff0a758d143820b025b6d0c7ec,
-        type: 2}
-      propertyPath: _IsColorLerper
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 218b5bff0a758d143820b025b6d0c7ec, type: 2}
-  m_IsPrefabAsset: 0
 --- !u!1001 &795511519
 Prefab:
   m_ObjectHideFlags: 0
@@ -5857,7 +5805,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4998414728814140, guid: f2c23a838f41cee40a6c102582822cf3, type: 2}
       propertyPath: m_RootOrder
-      value: 18
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 58628511136070180, guid: f2c23a838f41cee40a6c102582822cf3,
         type: 2}
@@ -5930,6 +5878,8 @@ GameObject:
   - component: {fileID: 836749807}
   - component: {fileID: 836749808}
   - component: {fileID: 836749809}
+  - component: {fileID: 836749811}
+  - component: {fileID: 836749810}
   m_Layer: 10
   m_Name: Ground
   m_TagString: ground
@@ -6032,7 +5982,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 836749805}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f8717fc1835c6c42a3294abca4790fd, type: 3}
   m_Name: 
@@ -6049,6 +5999,39 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &836749810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 836749805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c60cf95d21edefb4dae51dbe77b4e6ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _CanLerp: 1
+  _IsLerping: 0
+  _LerpPercentageComplete: 0
+  _StartLerpTime: 0
+  _TimeSinceLerpStarted: 0
+  _LerpTime: 0.5
+  _NextLerpColor: {r: 1, g: 1, b: 1, a: 1}
+  _FinalColor: {r: 1, g: 0, b: 0, a: 1}
+--- !u!114 &836749811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 836749805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e296f4540fff5945b72c9c53de78deb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _IsSizeLerper: 0
+  _IsColorLerper: 1
+  _NewMaxHealth: 3
 --- !u!1 &840856662
 GameObject:
   m_ObjectHideFlags: 0
@@ -6109,7 +6092,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &842255079
 GameObject:
@@ -6968,7 +6951,7 @@ Transform:
   - {fileID: 405427710}
   - {fileID: 984472694}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1698174469
 GameObject:
@@ -7023,7 +7006,7 @@ Transform:
   m_Children:
   - {fileID: 128105511}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1717508942
 GameObject:
@@ -12033,50 +12016,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2112956587 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1387913447705422, guid: 218b5bff0a758d143820b025b6d0c7ec,
-    type: 2}
-  m_PrefabInternal: {fileID: 751717804}
---- !u!114 &2112956588
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2112956587}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c60cf95d21edefb4dae51dbe77b4e6ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _CanLerp: 1
-  _IsLerping: 0
-  _LerpPercentageComplete: 0
-  _StartLerpTime: 0
-  _TimeSinceLerpStarted: 0
-  _LerpTime: 0.5
-  _ColorAtSpawn: {r: 1, g: 1, b: 1, a: 1}
-  _FinalColor: {r: 1, g: 0, b: 0, a: 1}
---- !u!114 &2112956589
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2112956587}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39ac636268151e94089827c1eddbb986, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _CanLerp: 1
-  _IsLerping: 0
-  _LerpPercentageComplete: 0
-  _StartLerpTime: 0
-  _TimeSinceLerpStarted: 0
-  _LerpTime: 0.5
-  _ObjScaleAtSpawn: {x: 0, y: 0}
-  _ObjStartLerpScale: {x: 0, y: 0}
-  _ObjNextScale: {x: 0, y: 0}
 --- !u!1 &2137935402
 GameObject:
   m_ObjectHideFlags: 0
@@ -12184,5 +12123,5 @@ Transform:
   m_LocalScale: {x: 2.974, y: 3.592, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
