@@ -6136,8 +6136,6 @@ GameObject:
   - component: {fileID: 836749807}
   - component: {fileID: 836749808}
   - component: {fileID: 836749809}
-  - component: {fileID: 836749811}
-  - component: {fileID: 836749810}
   m_Layer: 10
   m_Name: Ground
   m_TagString: ground
@@ -6257,38 +6255,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &836749810
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 836749805}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e296f4540fff5945b72c9c53de78deb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _NewMaxHealth: 3
---- !u!114 &836749811
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 836749805}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39ac636268151e94089827c1eddbb986, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _CanLerp: 1
-  _IsLerping: 0
-  _LerpPercentageComplete: 0
-  _ObjScaleAtSpawn: {x: 0, y: 0}
-  _ObjStartLerpScale: {x: 0, y: 0}
-  _ObjNextScale: {x: 0, y: 0}
-  _LerpTime: 0.5
-  _StartLerpTime: 0
-  _TimeSinceLerpStarted: 0
 --- !u!1 &840856662
 GameObject:
   m_ObjectHideFlags: 0

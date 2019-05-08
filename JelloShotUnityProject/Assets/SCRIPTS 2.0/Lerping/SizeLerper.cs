@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class SizeLerper : MonoBehaviour
+public class SizeLerper : LerperBase
 {
     private void OnEnable()
     {
@@ -13,82 +13,102 @@ public class SizeLerper : MonoBehaviour
         transform.localScale = _ObjScaleAtSpawn;
     }
 
-    #region LERP VARIABLES
-    [SerializeField]
-    private bool _CanLerp = true;
-    [SerializeField]
-    private bool _IsLerping = false;
-    [SerializeField]
-    private float _LerpPercentageComplete;
-[HeaderAttribute("Size")]
+    [HeaderAttribute("Size")]
     [SerializeField]
     private Vector2 _ObjScaleAtSpawn;
     [SerializeField]
     private Vector2 _ObjStartLerpScale;
     [SerializeField]
-    private Vector2 _ObjNextScale;
-[HeaderAttribute("Time")]
-    [SerializeField]
-    private float _LerpTime = 0.5f;
-    [SerializeField]
-    private float _StartLerpTime;
-    [SerializeField]
-    private float _TimeSinceLerpStarted;
+    private Vector2 _ObjNextScale;   
 
-    [HideInInspector]
-    public float lerpTime
+    public override void StartLerp(float _currentHealth, float _maxHealth)
     {
-        get { return _LerpTime; }
-        set
-        {
-            if (value <= 0)
-            {
-                _LerpTime = value;
-                lerpTime = _LerpTime;
-            }
+        _ObjStartLerpScale = transform.localScale;
 
-            if (_LerpTime <= 0)
-            {
-                _LerpTime = 0.4f;
-                lerpTime = _LerpTime;
-            }
-        }
-    }
-    #endregion 
-
-    public void StartLerp(float _currentHealth, float _startingHealth)
-    {
-        if (_CanLerp)
-        {
-            _IsLerping = true;
-            _LerpPercentageComplete = 0.0f;
-            _StartLerpTime = Time.time;
-
-            _ObjStartLerpScale = transform.localScale;
-
-            float _ScaleDifference = (_currentHealth + 0.1f) / _startingHealth;
-            _ObjNextScale = new Vector2(_ObjScaleAtSpawn.x * _ScaleDifference, _ObjScaleAtSpawn.y * _ScaleDifference);
-        }
-
-        // else throw exception here for if _CanLerp is false
+        float _ScaleDifference = (_currentHealth + 0.1f) / _maxHealth;
+        _ObjNextScale = new Vector2(_ObjScaleAtSpawn.x * _ScaleDifference, _ObjScaleAtSpawn.y * _ScaleDifference);
+        base.StartLerp(_currentHealth, _maxHealth);
     }
 
-    void FixedUpdate()
+    protected override void HandleLerp()
     {
-        if (_IsLerping == true && _LerpPercentageComplete <= 1.0f)
-        {
-            //StartCoroutine(TestCo());
-            _TimeSinceLerpStarted = Time.time - _StartLerpTime;
-            _LerpPercentageComplete = _TimeSinceLerpStarted / _LerpTime;
-            transform.localScale = Vector2.Lerp(_ObjStartLerpScale, _ObjNextScale, _LerpPercentageComplete);
-        }
-
-        else if (_IsLerping == true && _LerpPercentageComplete >= 1.0f)
-        {
-            _IsLerping = false;
-            //StopCoroutine(TestCo());
-        }
+        base.HandleLerp();
+        transform.localScale = Vector2.Lerp(_ObjStartLerpScale, _ObjNextScale, lerpPercentageComplete);
     }
+    
+    //    #region LERP VARIABLES
+    //    [SerializeField]
+    //    private Transform _LerpedTransform;
+
+    //    [SerializeField]
+    //    private bool _CanLerp = true;
+    //    [SerializeField]
+    //    private bool _IsLerping = false;
+    //    [SerializeField]
+    //    private float _LerpPercentageComplete;
+
+    //[HeaderAttribute("Time")]
+    //    [SerializeField]
+    //    private float _LerpTime = 0.5f;
+    //    [SerializeField]
+    //    private float _StartLerpTime;
+    //    [SerializeField]
+    //    private float _TimeSinceLerpStarted;
+
+    //    [HideInInspector]
+    //    public float lerpTime
+    //    {
+    //        get { return _LerpTime; }
+    //        set
+    //        {
+    //            if (value <= 0)
+    //            {
+    //                _LerpTime = value;
+    //                lerpTime = _LerpTime;
+    //            }
+
+    //            if (_LerpTime <= 0)
+    //            {
+    //                _LerpTime = 0.4f;
+    //                lerpTime = _LerpTime;
+    //            }
+    //        }
+    //    }
+    //    #endregion 
+
+    //    public void StartLerp(float _currentHealth, float _startingHealth)
+    //    {
+    //        if (_CanLerp)
+    //        {
+    //            _IsLerping = true;
+    //            _LerpPercentageComplete = 0.0f;
+    //            _StartLerpTime = Time.time;
+
+    //            _ObjStartLerpScale = transform.localScale;
+
+    //            float _ScaleDifference = (_currentHealth + 0.1f) / _startingHealth;
+    //            _ObjNextScale = new Vector2(_ObjScaleAtSpawn.x * _ScaleDifference, _ObjScaleAtSpawn.y * _ScaleDifference);
+    //        }
+
+    //        // else throw exception here for if _CanLerp is false
+    //    }
+
+    //    void FixedUpdate()
+    //    {
+    //        if (_IsLerping == true && _LerpPercentageComplete <= 1.0f)
+    //        {
+    //            //StartCoroutine(TestCo());
+    //            _TimeSinceLerpStarted = Time.time - _StartLerpTime;
+    //            _LerpPercentageComplete = _TimeSinceLerpStarted / _LerpTime;
+    //            _LerpedTransform.localScale = Vector2.Lerp(_ObjStartLerpScale, _ObjNextScale, _LerpPercentageComplete);
+    //        }
+
+    //        else if (_IsLerping == true && _LerpPercentageComplete >= 1.0f)
+    //        {
+    //            _IsLerping = false;
+    //            //StopCoroutine(TestCo());
+    //        }
+    //    }
 }
 //    IEnumerator TestCo()
 //    {

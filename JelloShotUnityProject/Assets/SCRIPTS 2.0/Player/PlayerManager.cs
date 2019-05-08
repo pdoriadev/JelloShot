@@ -5,6 +5,7 @@ using UnityEditor;
 /// <summary>
 ///  Manages player movement inputs and physics for both PC and Mobile. On collision with player, Handles other ball's velocity changes.
 /// </summary>
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager instance;
@@ -23,8 +24,6 @@ public class PlayerManager : MonoBehaviour
     public Color beforeHitColor;
     public Color afterHitColor;
 
-    public GameObject firstTouchVisual;
-    public GameObject lastTouchVisual;
     [Space(10)]
     public Vector2 offScreenPosition;
     public Vector2 shotVelocity;
@@ -49,6 +48,9 @@ public class PlayerManager : MonoBehaviour
     private float _BallSpeedMultiplier;
     [SerializeField]
     private float _ScreenWidth;
+
+    private GameObject _FirstTouchVisual;
+    private GameObject _LastTouchVisual;
 
     private Touch _LatestTouch;
     private Vector2 _FirstTouchPosition;
