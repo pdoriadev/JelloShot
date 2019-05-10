@@ -25,9 +25,9 @@ public class ColorLerper : LerperBase
     private SpriteRenderer _ObjSpriteRenderer;
 
     [HeaderAttribute("Color")]
+    [SerializeField]
     private Color _ColorAtSpawn;
     private Color _StartLerpColor;
-    [SerializeField]
     private Color _NextLerpColor;
     // Set in the inspector
     [SerializeField]
@@ -39,7 +39,9 @@ public class ColorLerper : LerperBase
         _StartLerpColor = _ObjSpriteRenderer.color;
 
         float _Scaler = (_maxHealth - _currentHealth) + 1;
-        _NextLerpColor = new Color(_ColorAtSpawn.r + _FinalColor.r, _ColorAtSpawn.g + _FinalColor.g, _ColorAtSpawn.b + _FinalColor.b) / _Scaler;
+        _NextLerpColor = new Color(_ColorAtSpawn.r - _FinalColor.r, _ColorAtSpawn.g - _FinalColor.g, 
+                _ColorAtSpawn.b - _FinalColor.b, _ColorAtSpawn.a - _FinalColor.a) * _Scaler;
+        _NextLerpColor.a = 1f;
         base.StartLerp(_currentHealth, _maxHealth);
     }
 

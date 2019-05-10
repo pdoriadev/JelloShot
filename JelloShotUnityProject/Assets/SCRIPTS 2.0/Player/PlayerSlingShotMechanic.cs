@@ -6,9 +6,9 @@ using UnityEditor;
 ///  Manages player movement inputs and physics for both PC and Mobile. On collision with player, Handles other ball's velocity changes.
 /// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerManager : MonoBehaviour
+public class PlayerSlingShotMechanic : MonoBehaviour
 {
-    public static PlayerManager instance;
+    public static PlayerSlingShotMechanic instance;
     public static GameObject playerGOInstance;
 
     #region PUBLIC VARIABLES

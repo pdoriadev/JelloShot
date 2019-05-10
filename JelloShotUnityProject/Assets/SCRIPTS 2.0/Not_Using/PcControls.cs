@@ -4,9 +4,8 @@ using UnityEngine;
 // Leftover PC controls copy/pasted from PlayerManager
 public class PcControls : MonoBehaviour {
 
-
     public static GameObject playerGameObject;
-    public static PlayerManager instance;
+    public static PlayerSlingShotMechanic instance;
 
     [Space(10)]
     public Rigidbody2D playerRigidbody;

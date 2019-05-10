@@ -416,7 +416,7 @@
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/Not_Using/PlayerScreenWrap.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/OutOfBounds.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/Player/PlayerCollisions.cs"
--i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/Player/PlayerManager.cs"
+-i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/Player/PlayerSlingShotMechanic.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/Player/SlingShotVisuals.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/Range.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/Reflector.cs"
