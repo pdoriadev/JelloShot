@@ -86,8 +86,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 20
-  m_LinearDrag: 3
-  m_AngularDrag: 1
+  m_LinearDrag: 6
+  m_AngularDrag: 0.5
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -136,8 +136,8 @@ MonoBehaviour:
   _StartLerpTime: 0
   _TimeSinceLerpStarted: 0
   _LerpTime: 0.5
-  _ColorAtSpawn: {r: 0, g: 0, b: 0, a: 0}
-  _FinalColor: {r: 1, g: 0, b: 0, a: 1}
+  _ColorAtSpawn: {r: 1, g: 1, b: 1, a: 1}
+  _FinalColor: {r: 0.8301887, g: 0.37360293, b: 0, a: 1}
 --- !u!114 &114777435465410128
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -8,8 +8,8 @@ using UnityEditor;
 public class DamageableLerpOnDmg : Damageable
 {
     #region VARIABLES
-    private SizeLerper _SizerInstance = null;
-    private ColorLerper _ColorerInstance = null;
+    private SizeLerper _SizeLerper = null;
+    private ColorLerper _ColorLerper = null;
     [SerializeField]
     private bool _IsSizeLerper;
     public bool isSizeLerper { get { return _IsSizeLerper; } set { _IsSizeLerper = value; } }
@@ -33,35 +33,35 @@ public class DamageableLerpOnDmg : Damageable
     void OnEnable()
     {
         if (GetComponent<SizeLerper>() != null)
-            _SizerInstance = GetComponent<SizeLerper>();
+            _SizeLerper = GetComponent<SizeLerper>();
         if (GetComponent<ColorLerper>() != null)
-            _ColorerInstance = GetComponent<ColorLerper>();
+            _ColorLerper = GetComponent<ColorLerper>();
 
         maxHealth = _NewMaxHealth;
         currentHealth = _NewMaxHealth;
-        if (_SizerInstance != null)
+        if (_SizeLerper != null)
         {
-            _WaitTime = _SizerInstance.lerpTime;
+            _WaitTime = _SizeLerper.lerpTime;
         }
-        if (_ColorerInstance != null)
+        if (_ColorLerper != null)
         {
-            _WaitTime = _ColorerInstance.lerpTime;
+            _WaitTime = _ColorLerper.lerpTime;
         }
     }
 
     void OnDisable()
     {
-        _SizerInstance = null;
+        _SizeLerper = null;
     }
     #endregion
 
     public override void OnTakeDmg()
     {
         base.OnTakeDmg();
-        if (_SizerInstance != null)
-            _SizerInstance.StartLerp(currentHealth, maxHealth);
-        if (_ColorerInstance != null)
-            _ColorerInstance.StartLerp(currentHealth, maxHealth);
+        if (_SizeLerper != null)
+            _SizeLerper.StartLerp(currentHealth, maxHealth);
+        if (_ColorLerper != null)
+            _ColorLerper.StartLerp(currentHealth, maxHealth);
     }
 
     protected override void OnDeath()

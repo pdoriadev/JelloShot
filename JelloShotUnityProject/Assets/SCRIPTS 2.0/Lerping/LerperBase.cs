@@ -47,6 +47,7 @@ public abstract class LerperBase : MonoBehaviour
     }
     #endregion 
 
+    // params are used in child class overrides
     public virtual void StartLerp(float _currentHealth, float _maxHealth)
     {
         if (_CanLerp)

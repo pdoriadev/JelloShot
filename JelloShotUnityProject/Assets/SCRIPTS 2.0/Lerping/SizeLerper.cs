@@ -10,6 +10,7 @@ public class SizeLerper : LerperBase
 
     private void OnDisable()
     {
+        base.EndLerp();
         transform.localScale = _ObjScaleAtSpawn;
     }
 

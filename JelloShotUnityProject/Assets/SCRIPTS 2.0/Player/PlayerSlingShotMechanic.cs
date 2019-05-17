@@ -49,9 +49,6 @@ public class PlayerSlingShotMechanic : MonoBehaviour
     [SerializeField]
     private float _ScreenWidth;
 
-    private GameObject _FirstTouchVisual;
-    private GameObject _LastTouchVisual;
-
     private Touch _LatestTouch;
     private Vector2 _FirstTouchPosition;
     private Vector2 _LastTouchPosition;

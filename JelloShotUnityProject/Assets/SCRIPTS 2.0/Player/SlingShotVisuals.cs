@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
-/// Moves and rotates touch visuals. Called by player manager. 
+/// Moves and rotates touch visuals. To be attached to touch visuals. Called by player manager. 
 /// </summary>
 public class SlingShotVisuals : MonoBehaviour
 {

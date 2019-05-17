@@ -1,6 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
+public enum DamageableFactions
+{
+    Generic, // 0                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+    Player, // 1
+    Enemy // 2
+}
+
 public abstract class Damageable : MonoBehaviour, IDamageTaker
 {
     void OnEnable()
@@ -110,7 +121,6 @@ public abstract class Damageable : MonoBehaviour, IDamageTaker
 
     protected virtual void OnDeath()
     {
-        print("Died at " + _CurrentHealth + " Health");
         StopCoroutine(CheckForDeathCo());
         currentHealth = maxHealth;
         SpawnManager.instance.PoolObject(gameObject);
@@ -118,3 +128,41 @@ public abstract class Damageable : MonoBehaviour, IDamageTaker
     }
     #endregion
 }
+
+#if UNITY_EDITOR
+[CustomEditor(typeof(DamageableLerpOnDmg))]
+public class LerperAdder : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector(); // for other non-HideInInspector fields
+
+        Damageable script = (Damageable)target;
+
+        // draw checkbox for the bool
+        if (script.isSizeLerper == true && script.gameObject.GetComponent<SizeLerper>() == null)
+        {
+            script.gameObject.AddComponent<SizeLerper>();
+        }
+        else if (script.isSizeLerper == false && script.gameObject.GetComponent<SizeLerper>() != null)
+        {
+
+            DestroyImmediate(script.gameObject.GetComponent<SizeLerper>());
+        }
+
+        if (script.isColorLerper == true && script.gameObject.GetComponent<ColorLerper>() == null)
+        {
+            script.gameObject.AddComponent<ColorLerper>();
+        }
+        else if (script.isColorLerper == false && script.gameObject.GetComponent<ColorLerper>() != null)
+        {
+            DestroyImmediate(script.gameObject.GetComponent<ColorLerper>(), true);
+        }
+
+        if (script.gameObject.GetComponent<ColorLerper>() == null && script.gameObject.GetComponent<SizeLerper>() == null)
+        {
+            Debug.Log("ERROR ERROR: DamageableLerpOnDmg has nothing to lerp!");
+        }
+    }
+}
+#endif

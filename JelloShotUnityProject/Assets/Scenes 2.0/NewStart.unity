@@ -1905,6 +1905,44 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
+--- !u!1 &2045508855 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1658269785460210, guid: fd7d912c31352be4ea512fe04364b761,
+    type: 2}
+  m_PrefabInternal: {fileID: 37221726}
+--- !u!114 &2045508856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2045508855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c60cf95d21edefb4dae51dbe77b4e6ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _CanLerp: 1
+  _IsLerping: 0
+  _LerpPercentageComplete: 0
+  _StartLerpTime: 0
+  _TimeSinceLerpStarted: 0
+  _LerpTime: 0.5
+  _ColorAtSpawn: {r: 1, g: 1, b: 1, a: 1}
+  _FinalColor: {r: 0.6886792, g: 0, b: 0, a: 0.6}
+--- !u!114 &2045508857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2045508855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e296f4540fff5945b72c9c53de78deb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _IsSizeLerper: 0
+  _IsColorLerper: 1
+  _NewMaxHealth: 3
 --- !u!1 &2083494899
 GameObject:
   m_ObjectHideFlags: 0
