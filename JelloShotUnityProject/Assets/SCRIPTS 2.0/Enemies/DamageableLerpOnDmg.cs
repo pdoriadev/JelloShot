@@ -74,14 +74,11 @@ public class DamageableLerpOnDmg : DamageableBase
 [CustomEditor(typeof(DamageableLerpOnDmg))]
 public class LerperAdder : Editor
 {
-    ColorLerper _CLerper = null;
-
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector(); // for other non-HideInInspector fields
 
         DamageableLerpOnDmg _DamageableLerpScript = (DamageableLerpOnDmg)target;
-        LerperBase[] _lerpers = new LerperBase[2];
 
         if (_DamageableLerpScript.isSizeLerper == true && _DamageableLerpScript.gameObject.GetComponent<SizeLerper>() == null)
         {
