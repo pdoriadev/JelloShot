@@ -83,24 +83,22 @@ public class LerperAdder : Editor
         DamageableLerpOnDmg _DamageableLerpScript = (DamageableLerpOnDmg)target;
         LerperBase[] _lerpers = new LerperBase[2];
 
-        if (_DamageableLerpScript.isSizeLerper == true && (_lerpers[0] =_DamageableLerpScript.gameObject.GetComponent<SizeLerper>()) == null)
+        if (_DamageableLerpScript.isSizeLerper == true && _DamageableLerpScript.gameObject.GetComponent<SizeLerper>() == null)
         {
-            _lerpers[0] =  _DamageableLerpScript.gameObject.AddComponent<SizeLerper>();
+            _DamageableLerpScript.gameObject.AddComponent<SizeLerper>();
         }
-        else if (_DamageableLerpScript.isSizeLerper == false && _lerpers[0] != null)
+        else if (_DamageableLerpScript.isSizeLerper == false && _DamageableLerpScript.gameObject.GetComponent<SizeLerper>() != null)
         {
-            Debug.Log("Remove");
-            DestroyImmediate(_lerpers[0]);
+            DestroyImmediate(_DamageableLerpScript.gameObject.GetComponent<SizeLerper>(), true);
         }
 
-        if (_DamageableLerpScript.isColorLerper == true && (_lerpers[1] = _DamageableLerpScript.gameObject.GetComponent<ColorLerper>()) == null)
+        if (_DamageableLerpScript.isColorLerper == true && _DamageableLerpScript.gameObject.GetComponent<ColorLerper>() == null)
         {
-            _lerpers[1] = _DamageableLerpScript.gameObject.AddComponent<ColorLerper>();
-            Debug.Log(_lerpers[1]);
+            _DamageableLerpScript.gameObject.AddComponent<ColorLerper>();
         }
-        else if (_DamageableLerpScript.isColorLerper == false && _lerpers[1] != null)
+        else if (_DamageableLerpScript.isColorLerper == false && _DamageableLerpScript.gameObject.GetComponent<ColorLerper>() != null)
         {
-            DestroyImmediate(_lerpers[1]);
+            DestroyImmediate(_DamageableLerpScript.gameObject.GetComponent<ColorLerper>(), true);
         }
 
         if (_DamageableLerpScript.gameObject.GetComponent<ColorLerper>() == null && _DamageableLerpScript.gameObject.GetComponent<SizeLerper>() == null)
