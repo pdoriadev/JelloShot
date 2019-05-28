@@ -525,34 +525,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1670362734178294, guid: 71dbfe7099bc9954388240969dfe1193,
     type: 2}
   m_PrefabInternal: {fileID: 1951052053}
---- !u!114 &403566883
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 403566882}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4580e9039d27569439b569e802604d18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerRigidbody: {fileID: 403566887}
-  playerSpriteRenderer: {fileID: 1606444177}
-  _PlayerSpriteColor: {r: 0, g: 0, b: 0, a: 0}
-  _BeforeHitColor: {r: 0, g: 0, b: 0, a: 0}
-  _AfterHitColor: {r: 0, g: 0, b: 0, a: 0}
-  offScreenPosition: {x: 0, y: 0}
-  shotVelocity: {x: 0, y: 0}
-  playerCurrentVelocity: {x: 0, y: 0}
-  newBallVelocity: {x: 0, y: 0}
-  dragDistance: 0
-  dragShotForce: 50
-  shotVelocityMaxMagnitude: 150
-  fastTimeScale: 1.25
-  regularTimeScale: 1
-  slowTimeScale: 0.25
-  hasShot: 0
-  _BallSpeedMultiplier: 0
 --- !u!50 &403566887 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 50032747648492810, guid: 71dbfe7099bc9954388240969dfe1193,
