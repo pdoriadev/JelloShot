@@ -80,22 +80,20 @@ public class LerperAdder : Editor
 
         DamageableLerpOnDmg _DamageableLerpScript = (DamageableLerpOnDmg)target;
 
-        SizeLerper _SLerper = (SizeLerper)target;
+        SizeLerper _SLerper = null;
         if (_DamageableLerpScript.isSizeLerper == true && _DamageableLerpScript.gameObject.GetComponent<SizeLerper>() == null)
         {
-            _DamageableLerpScript.gameObject.AddComponent<SizeLerper>();
-            _SLerper = _DamageableLerpScript.gameObject.GetComponent<SizeLerper>();
+            _SLerper = _DamageableLerpScript.gameObject.AddComponent<SizeLerper>();
         }
-        else if (_DamageableLerpScript.isSizeLerper == false && _DamageableLerpScript.gameObject.GetComponent<SizeLerper>() != null)
+        else if (_DamageableLerpScript.isSizeLerper == false && _SLerper != null)
         {
             DestroyImmediate(_SLerper, true);
         }
 
-        ColorLerper _CLerper = (ColorLerper)target;
+        ColorLerper _CLerper = null;
         if (_DamageableLerpScript.isColorLerper == true && _DamageableLerpScript.gameObject.GetComponent<ColorLerper>() == null)
         {
-            _DamageableLerpScript.gameObject.AddComponent<ColorLerper>();
-            _CLerper = _DamageableLerpScript.gameObject.GetComponent<ColorLerper>();
+            _CLerper = _DamageableLerpScript.gameObject.AddComponent<ColorLerper>();
         }
         else if (_DamageableLerpScript.isColorLerper == false && _DamageableLerpScript.gameObject.GetComponent<ColorLerper>() != null)
         {
