@@ -74,30 +74,33 @@ public class DamageableLerpOnDmg : DamageableBase
 [CustomEditor(typeof(DamageableLerpOnDmg))]
 public class LerperAdder : Editor
 {
+    SizeLerper _SLerper = null;
+    ColorLerper _CLerper = null;
+
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector(); // for other non-HideInInspector fields
 
         DamageableLerpOnDmg _DamageableLerpScript = (DamageableLerpOnDmg)target;
 
-        SizeLerper _SLerper = null;
         if (_DamageableLerpScript.isSizeLerper == true && _DamageableLerpScript.gameObject.GetComponent<SizeLerper>() == null)
         {
-            _SLerper = _DamageableLerpScript.gameObject.AddComponent<SizeLerper>();
+            _SLerper =  _DamageableLerpScript.gameObject.AddComponent<SizeLerper>();
         }
         else if (_DamageableLerpScript.isSizeLerper == false && _SLerper != null)
         {
-            DestroyImmediate(_SLerper, true);
+            Debug.Log("Remove");
+            DestroyImmediate(_SLerper);
         }
 
-        ColorLerper _CLerper = null;
         if (_DamageableLerpScript.isColorLerper == true && _DamageableLerpScript.gameObject.GetComponent<ColorLerper>() == null)
         {
             _CLerper = _DamageableLerpScript.gameObject.AddComponent<ColorLerper>();
+            Debug.Log(_CLerper);
         }
-        else if (_DamageableLerpScript.isColorLerper == false && _DamageableLerpScript.gameObject.GetComponent<ColorLerper>() != null)
+        else if (_DamageableLerpScript.isColorLerper == false && _CLerper != null)
         {
-            DestroyImmediate(_CLerper, true);
+            DestroyImmediate(_CLerper);
         }
 
         if (_DamageableLerpScript.gameObject.GetComponent<ColorLerper>() == null && _DamageableLerpScript.gameObject.GetComponent<SizeLerper>() == null)
