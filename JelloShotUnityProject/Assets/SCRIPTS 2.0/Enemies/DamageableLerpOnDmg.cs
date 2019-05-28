@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-public class DamageableLerpOnDmg : Damageable
+public class DamageableLerpOnDmg : DamageableBase
 {
     #region VARIABLES
     private SizeLerper _SizeLerper = null;

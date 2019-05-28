@@ -537,11 +537,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerRigidbody: {fileID: 403566887}
-  ballRigidBody: {fileID: 403566887}
   playerSpriteRenderer: {fileID: 1606444177}
-  playerSpriteColor: {r: 1, g: 1, b: 1, a: 1}
-  beforeHitColor: {r: 1, g: 0, b: 0, a: 1}
-  afterHitColor: {r: 1, g: 1, b: 1, a: 1}
+  _PlayerSpriteColor: {r: 0, g: 0, b: 0, a: 0}
+  _BeforeHitColor: {r: 0, g: 0, b: 0, a: 0}
+  _AfterHitColor: {r: 0, g: 0, b: 0, a: 0}
   offScreenPosition: {x: 0, y: 0}
   shotVelocity: {x: 0, y: 0}
   playerCurrentVelocity: {x: 0, y: 0}
@@ -554,7 +553,6 @@ MonoBehaviour:
   slowTimeScale: 0.25
   hasShot: 0
   _BallSpeedMultiplier: 0
-  _ScreenWidth: 0
 --- !u!50 &403566887 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 50032747648492810, guid: 71dbfe7099bc9954388240969dfe1193,
@@ -1826,12 +1824,12 @@ Prefab:
     - target: {fileID: 114868910239450134, guid: 71dbfe7099bc9954388240969dfe1193,
         type: 2}
       propertyPath: shotVelocityMaxMagnitude
-      value: 120
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 114868910239450134, guid: 71dbfe7099bc9954388240969dfe1193,
         type: 2}
       propertyPath: dragShotForce
-      value: 40
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 50032747648492810, guid: 71dbfe7099bc9954388240969dfe1193,
         type: 2}
@@ -1842,6 +1840,141 @@ Prefab:
         type: 2}
       propertyPath: m_AngularDrag
       value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 114868910239450134, guid: 71dbfe7099bc9954388240969dfe1193,
+        type: 2}
+      propertyPath: ballRigidBody
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114868910239450134, guid: 71dbfe7099bc9954388240969dfe1193,
+        type: 2}
+      propertyPath: playerSpriteRenderer
+      value: 
+      objectReference: {fileID: 1606444177}
+    - target: {fileID: 114868910239450134, guid: 71dbfe7099bc9954388240969dfe1193,
+        type: 2}
+      propertyPath: playerSpriteColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114868910239450134, guid: 71dbfe7099bc9954388240969dfe1193,
+        type: 2}
+      propertyPath: playerSpriteColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114868910239450134, guid: 71dbfe7099bc9954388240969dfe1193,
+        type: 2}
+      propertyPath: playerSpriteColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114868910239450134, guid: 71dbfe7099bc9954388240969dfe1193,
+        type: 2}
+      propertyPath: playerSpriteColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114868910239450134, guid: 71dbfe7099bc9954388240969dfe1193,
+        type: 2}
+      propertyPath: beforeHitColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114868910239450134, guid: 71dbfe7099bc9954388240969dfe1193,
+        type: 2}
+      propertyPath: beforeHitColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114868910239450134, guid: 71dbfe7099bc9954388240969dfe1193,
+        type: 2}
+      propertyPath: afterHitColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114868910239450134, guid: 71dbfe7099bc9954388240969dfe1193,
+        type: 2}
+      propertyPath: afterHitColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114868910239450134, guid: 71dbfe7099bc9954388240969dfe1193,
+        type: 2}
+      propertyPath: afterHitColor.b
+      value: 0.95862055
+      objectReference: {fileID: 0}
+    - target: {fileID: 114868910239450134, guid: 71dbfe7099bc9954388240969dfe1193,
+        type: 2}
+      propertyPath: afterHitColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114868910239450134, guid: 71dbfe7099bc9954388240969dfe1193,
+        type: 2}
+      propertyPath: playerRigidbody
+      value: 
+      objectReference: {fileID: 403566887}
+    - target: {fileID: 114868910239450134, guid: 71dbfe7099bc9954388240969dfe1193,
+        type: 2}
+      propertyPath: beforeHitColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114868910239450134, guid: 71dbfe7099bc9954388240969dfe1193,
+        type: 2}
+      propertyPath: beforeHitColor.b
+      value: 0.14482784
+      objectReference: {fileID: 0}
+    - target: {fileID: 114868910239450134, guid: 71dbfe7099bc9954388240969dfe1193,
+        type: 2}
+      propertyPath: _PlayerSpriteColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114868910239450134, guid: 71dbfe7099bc9954388240969dfe1193,
+        type: 2}
+      propertyPath: _PlayerSpriteColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114868910239450134, guid: 71dbfe7099bc9954388240969dfe1193,
+        type: 2}
+      propertyPath: _PlayerSpriteColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114868910239450134, guid: 71dbfe7099bc9954388240969dfe1193,
+        type: 2}
+      propertyPath: _PlayerSpriteColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114868910239450134, guid: 71dbfe7099bc9954388240969dfe1193,
+        type: 2}
+      propertyPath: _BeforeHitColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114868910239450134, guid: 71dbfe7099bc9954388240969dfe1193,
+        type: 2}
+      propertyPath: _BeforeHitColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114868910239450134, guid: 71dbfe7099bc9954388240969dfe1193,
+        type: 2}
+      propertyPath: _BeforeHitColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114868910239450134, guid: 71dbfe7099bc9954388240969dfe1193,
+        type: 2}
+      propertyPath: _BeforeHitColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114868910239450134, guid: 71dbfe7099bc9954388240969dfe1193,
+        type: 2}
+      propertyPath: _AfterHitColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114868910239450134, guid: 71dbfe7099bc9954388240969dfe1193,
+        type: 2}
+      propertyPath: _AfterHitColor.g
+      value: 0.78681874
+      objectReference: {fileID: 0}
+    - target: {fileID: 114868910239450134, guid: 71dbfe7099bc9954388240969dfe1193,
+        type: 2}
+      propertyPath: _AfterHitColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114868910239450134, guid: 71dbfe7099bc9954388240969dfe1193,
+        type: 2}
+      propertyPath: _AfterHitColor.a
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71dbfe7099bc9954388240969dfe1193, type: 2}
@@ -1927,7 +2060,7 @@ MonoBehaviour:
   _StartLerpTime: 0
   _TimeSinceLerpStarted: 0
   _LerpTime: 0.5
-  _ColorAtSpawn: {r: 1, g: 1, b: 1, a: 1}
+  _ColorAtSpawn: {r: 0, g: 0, b: 0, a: 0}
   _FinalColor: {r: 0.6886792, g: 0, b: 0, a: 0.6}
 --- !u!114 &2045508857
 MonoBehaviour:

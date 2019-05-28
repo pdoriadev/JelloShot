@@ -14,15 +14,12 @@ public class PlayerSlingShotMechanic : MonoBehaviour
     #region PUBLIC VARIABLES
     [Space(10)]
     public Rigidbody2D playerRigidbody;
-    // Rigidbody of ball that player is colliding with.
-    public Rigidbody2D ballRigidBody;
 
     [Space(10)]
     public SpriteRenderer playerSpriteRenderer;
     // Player sprite colors depending on gamestate.
-    public Color playerSpriteColor;
-    public Color beforeHitColor;
-    public Color afterHitColor;
+    [SerializeField]
+    private Color _PlayerSpriteColor, _BeforeHitColor, _AfterHitColor;
 
     [Space(10)]
     public Vector2 offScreenPosition;
@@ -30,9 +27,9 @@ public class PlayerSlingShotMechanic : MonoBehaviour
     public Vector2 playerCurrentVelocity;
     public Vector2 newBallVelocity;
     [Space(10)]
-    public float dragDistance;
-    public float dragShotForce;
-    public float shotVelocityMaxMagnitude;
+    public float dragDistance = 0;
+    public float dragShotForce = 0;
+    public float shotVelocityMaxMagnitude = 0;
     [Space(10)]
     public float fastTimeScale = 1.25f;
     public float regularTimeScale = 1f;
@@ -45,9 +42,10 @@ public class PlayerSlingShotMechanic : MonoBehaviour
     // PRIVATE VARIABLES
     [Space(10)]
     [SerializeField]
-    private float _BallSpeedMultiplier;
-    [SerializeField]
-    private float _ScreenWidth;
+    private float _BallSpeedMultiplier = 1;
+    private float _ScreenWidth; 
+    // Rigidbody of ball that player is colliding with.
+    private Rigidbody2D _BallRigidBody;
 
     private Touch _LatestTouch;
     private Vector2 _FirstTouchPosition;
@@ -111,15 +109,15 @@ public class PlayerSlingShotMechanic : MonoBehaviour
     #region METHODS FOR BOTH PC AND MOBILE
     private void BeforeHit()
     {
-        playerSpriteColor = playerSpriteRenderer.color;
-        playerSpriteColor = beforeHitColor;
-        playerSpriteRenderer.color = playerSpriteColor;
+        _PlayerSpriteColor = playerSpriteRenderer.color;
+        _PlayerSpriteColor = _BeforeHitColor;
+        playerSpriteRenderer.color = _PlayerSpriteColor;
     }
 
     private void AfterHit()
     {
-        playerSpriteColor = afterHitColor;
-        playerSpriteRenderer.color = playerSpriteColor;
+        _PlayerSpriteColor = _AfterHitColor;
+        playerSpriteRenderer.color = _PlayerSpriteColor;
     }
 
 
