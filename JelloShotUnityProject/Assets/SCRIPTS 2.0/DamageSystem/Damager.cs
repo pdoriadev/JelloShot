@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageDealer : MonoBehaviour
+public class Damager : MonoBehaviour
 {
     [SerializeField]
     private float _DmgPerAttack = 1;
@@ -11,8 +11,14 @@ public class DamageDealer : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<IDamageTaker>() != null)
         {
-            IDamageTaker damageTaker = collision.gameObject.GetComponent<IDamageTaker>();
-            damageTaker.TakeDmg(_DmgPerAttack);
+
+            DamageOnCollision(ref collision);
         }     
+    }
+
+    protected virtual void DamageOnCollision(ref Collision2D _collision)
+    {
+        IDamageTaker damageTaker = _collision.gameObject.GetComponent<IDamageTaker>();
+        damageTaker.TakeDmg(_DmgPerAttack);
     }
 }

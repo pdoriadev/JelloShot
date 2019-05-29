@@ -378,17 +378,18 @@
 -i:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/OldProject/Scripts/ProgrammingRefs.cs
 -i:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/OldProject/Scripts/ProjectTestScript.cs
 -i:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/OldProject/Scripts/Shared_Vars.cs
--i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/BallCollisions.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/BallVelocityLimiter.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/BombCollisionTrigger.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/BombEnemy.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/BounceAnimation.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/CameraController.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/DamageSystem/DamageableBase.cs"
--i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/DamageSystem/DamageDealer.cs"
+-i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/DamageSystem/Damager.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/DamageSystem/IDamageTaker.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/DataManagement.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/Enemies/DamageableLerpOnDmg.cs"
+-i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/FactionSystem/FactionImmunityManager.cs"
+-i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/FactionSystem/FactionImmunitySO.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/GameFlow/DifficultyAdjuster.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/GameFlow/GameManager.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/GameFlow/ItemSelector.cs"
@@ -418,7 +419,6 @@
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/Player/PlayerCollisions.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/Player/PlayerSlingShotMechanic.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/Player/SlingShotVisuals.cs"
--i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/Range.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/Reflector.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/ScoreManager.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/ScreenShaderFX.cs"

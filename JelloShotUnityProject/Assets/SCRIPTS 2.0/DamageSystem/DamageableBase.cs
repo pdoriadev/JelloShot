@@ -5,13 +5,6 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-public enum DamageableFactions
-{
-    Generic, // 0                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
-    Player, // 1
-    Enemy // 2
-}
-
 public abstract class DamageableBase : MonoBehaviour, IDamageTaker
 {
     void OnEnable()
