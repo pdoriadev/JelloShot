@@ -39,7 +39,10 @@ GameObject:
   - component: {fileID: 212903551529480856}
   - component: {fileID: 50772443196206664}
   - component: {fileID: 61408136725555650}
-  - component: {fileID: 114588227811238636}
+  - component: {fileID: 114119671045924050}
+  - component: {fileID: 114703755514970562}
+  - component: {fileID: 114983107801265810}
+  - component: {fileID: 114572539047493192}
   m_Layer: 17
   m_Name: Sidey
   m_TagString: Untagged
@@ -84,7 +87,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1418212708434406}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.3803, y: 36.79, z: -4.8086047}
+  m_LocalPosition: {x: 1, y: 27.65, z: -4.8086047}
   m_LocalScale: {x: 2.8572562, y: 3.4509969, z: 0.9607451}
   m_Children:
   - {fileID: 4311259507119104}
@@ -134,10 +137,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0000063478947, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -148,7 +151,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.82121986, y: 1}
   m_EdgeRadius: 0
 --- !u!61 &61467946758022398
 BoxCollider2D:
@@ -200,7 +203,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &114588227811238636
+--- !u!114 &114119671045924050
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -208,9 +211,64 @@ MonoBehaviour:
   m_GameObject: {fileID: 1418212708434406}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 719011bafa8c0e240b60b2a08411a7cb, type: 3}
+  m_Script: {fileID: 11500000, guid: 7e296f4540fff5945b72c9c53de78deb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _IsSizeLerper: 1
+  _IsColorLerper: 1
+  _NewMaxHealth: 1
+--- !u!114 &114572539047493192
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1418212708434406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c60cf95d21edefb4dae51dbe77b4e6ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _CanLerp: 1
+  _IsLerping: 0
+  _LerpPercentageComplete: 0
+  _StartLerpTime: 0
+  _TimeSinceLerpStarted: 0
+  _LerpTime: 0.5
+  _ColorAtSpawn: {r: 1, g: 1, b: 1, a: 0}
+  _FinalColor: {r: 0.104888916, g: 0, b: 0.5, a: 0}
+--- !u!114 &114703755514970562
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1418212708434406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39ac636268151e94089827c1eddbb986, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _CanLerp: 1
+  _IsLerping: 0
+  _LerpPercentageComplete: 0
+  _StartLerpTime: 0
+  _TimeSinceLerpStarted: 0
+  _LerpTime: 0.6
+  _ObjScaleAtSpawn: {x: 0, y: 0}
+  _ObjStartLerpScale: {x: 0, y: 0}
+  _ObjNextScale: {x: 0, y: 0}
+--- !u!114 &114983107801265810
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1418212708434406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afeb228184fb5564da53dbe1f3a4f7bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ReflectOn: 1
+  _ReflectForce: 30
 --- !u!212 &212064532651902090
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
         SpawnManager.instance.ResetSpawnListsAndTimers();
     }
 
-    internal void Restart()
+    private void Restart()
     {
         _CurrentTime = 0;
         ScoreManager.instance.LevelScoreSetup();

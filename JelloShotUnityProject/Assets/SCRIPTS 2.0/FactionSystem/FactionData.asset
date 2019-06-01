@@ -11,3 +11,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74edcbfca01dbca49907bc0d27563953, type: 3}
   m_Name: FactionData
   m_EditorClassIdentifier: 
+  name: 

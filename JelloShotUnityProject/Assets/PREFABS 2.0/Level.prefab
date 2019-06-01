@@ -101,7 +101,9 @@ GameObject:
   - component: {fileID: 4274781047311518}
   - component: {fileID: 212869653042509272}
   - component: {fileID: 60489145242358366}
-  - component: {fileID: 114583036355385440}
+  - component: {fileID: 114008624393649800}
+  - component: {fileID: 114213334450853442}
+  - component: {fileID: 114064788707562656}
   m_Layer: 10
   m_Name: Ground
   m_TagString: ground
@@ -513,6 +515,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 16.872686, y: 32.43131}
   m_EdgeRadius: 0
+--- !u!114 &114008624393649800
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1658269785460210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b9b59a9177fda040b23514434e00acf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _DmgPerAttack: 1
 --- !u!114 &114014030460388354
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -524,6 +538,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7051bd8aad82634d9d2af91122d5d6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114064788707562656
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1658269785460210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c60cf95d21edefb4dae51dbe77b4e6ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _CanLerp: 1
+  _IsLerping: 0
+  _LerpPercentageComplete: 0
+  _StartLerpTime: 0
+  _TimeSinceLerpStarted: 0
+  _LerpTime: 0.5
+  _ColorAtSpawn: {r: 0, g: 0, b: 0, a: 0}
+  _FinalColor: {r: 0.6886792, g: 0, b: 0, a: 0.69803923}
 --- !u!114 &114103395716232968
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -535,6 +568,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7051bd8aad82634d9d2af91122d5d6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114213334450853442
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1658269785460210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e296f4540fff5945b72c9c53de78deb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _IsSizeLerper: 0
+  _IsColorLerper: 1
+  _NewMaxHealth: 3
 --- !u!114 &114257737005678148
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -557,29 +604,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7051bd8aad82634d9d2af91122d5d6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114583036355385440
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1658269785460210}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f8717fc1835c6c42a3294abca4790fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  groundColors:
-  - {r: 0.8301887, g: 0.24468984, b: 0, a: 1}
-  - {r: 1, g: 0.95602494, b: 0.4481132, a: 1}
-  - {r: 0.10226073, g: 0.83137256, b: 0, a: 1}
-  groundSpriteRenderer: {fileID: 212869653042509272}
-  groundHealth: 3
-  startingGroundHealth: 3
-  groundExitCollision:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!198 &198279505562129132
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -766,7 +790,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 0.4745098}
+      maxColor: {r: 1, g: 1, b: 1, a: 0.44705883}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -1791,9 +1815,9 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.1191736, g: 0.010902463, b: 0.3301887, a: 1}
-        key1: {r: 1, g: 0.93103456, b: 0, a: 1}
-        key2: {r: 0.18315591, g: 0.024875412, b: 0.4056604, a: 1}
+        key0: {r: 0.1191736, g: 0.010902463, b: 0.3301887, a: 0.5803922}
+        key1: {r: 1, g: 0.93103456, b: 0, a: 0.19215687}
+        key2: {r: 0.18315591, g: 0.024875412, b: 0.4056604, a: 0.41960785}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0.058934886, g: 0.004049484, b: 0.066037714, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
@@ -1808,10 +1832,10 @@ ParticleSystem:
         ctime6: 42405
         ctime7: 65535
         atime0: 0
-        atime1: 22166
+        atime1: 11951
         atime2: 47802
         atime3: 65535
-        atime4: 0
+        atime4: 65535
         atime5: 0
         atime6: 0
         atime7: 0
@@ -1820,8 +1844,8 @@ ParticleSystem:
         m_NumAlphaKeys: 4
       minGradient:
         serializedVersion: 2
-        key0: {r: 0.1191736, g: 0.010902463, b: 0.3301887, a: 0.87058824}
-        key1: {r: 1, g: 1, b: 1, a: 0.7254902}
+        key0: {r: 0.1191736, g: 0.010902463, b: 0.3301887, a: 0.4509804}
+        key1: {r: 1, g: 1, b: 1, a: 0.3372549}
         key2: {r: 0.18315591, g: 0.024875412, b: 0.4056604, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0.093172885, g: 0.011258458, b: 0.103773594, a: 0}
@@ -1838,7 +1862,7 @@ ParticleSystem:
         ctime7: 65535
         atime0: 0
         atime1: 49344
-        atime2: 52235
+        atime2: 65535
         atime3: 0
         atime4: 0
         atime5: 0
@@ -5299,7 +5323,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 0.3647059}
+      maxColor: {r: 1, g: 1, b: 1, a: 0.050980393}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -6324,8 +6348,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 1, b: 1, a: 1}
-        key1: {r: 1, g: 1, b: 1, a: 0}
+        key0: {r: 1, g: 1, b: 1, a: 0.53333336}
+        key1: {r: 1, g: 1, b: 1, a: 0.14509805}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -6340,7 +6364,7 @@ ParticleSystem:
         ctime5: 0
         ctime6: 0
         ctime7: 0
-        atime0: 35466
+        atime0: 30455
         atime1: 65535
         atime2: 0
         atime3: 0

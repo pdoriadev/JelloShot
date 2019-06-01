@@ -19,7 +19,8 @@ public class PlayerSlingShotMechanic : MonoBehaviour
     public SpriteRenderer playerSpriteRenderer;
     // Player sprite colors depending on gamestate.
     [SerializeField]
-    private Color _PlayerSpriteColor, _BeforeHitColor, _AfterHitColor;
+    private Color _BeforeHitColor, _AfterHitColor;
+    private Color _PlayerSpriteColor;
 
     [Space(10)]
     public Vector2 offScreenPosition;

@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 114777435465410128}
   - component: {fileID: 114030589600682124}
   - component: {fileID: 114939047325599278}
+  - component: {fileID: 114163466612475846}
   m_Layer: 14
   m_Name: ReflectorBox
   m_TagString: Untagged
@@ -135,9 +136,22 @@ MonoBehaviour:
   _LerpPercentageComplete: 0
   _StartLerpTime: 0
   _TimeSinceLerpStarted: 0
-  _LerpTime: 0.5
-  _ColorAtSpawn: {r: 0, g: 0, b: 0, a: 1}
-  _FinalColor: {r: 1, g: 0, b: 0, a: 1}
+  _LerpTime: 0.2
+  _ColorAtSpawn: {r: 1, g: 1, b: 1, a: 1}
+  _FinalColor: {r: 1, g: 0, b: 0, a: 0.24313726}
+--- !u!114 &114163466612475846
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1387913447705422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afeb228184fb5564da53dbe1f3a4f7bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ReflectOn: 1
+  _ReflectForce: 20
 --- !u!114 &114777435465410128
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -208,7 +222,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e1b92fc95d1952e4288cd6ab3f9f187c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.9833336, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

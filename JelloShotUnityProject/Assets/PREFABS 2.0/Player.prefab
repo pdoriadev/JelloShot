@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 4693007853085734}
   - component: {fileID: 114868910239450134}
   - component: {fileID: 50032747648492810}
-  - component: {fileID: 114978337437183820}
+  - component: {fileID: 114875615709929886}
   - component: {fileID: 114507992992617756}
   - component: {fileID: 60492796316508268}
   - component: {fileID: 95090184432611792}
@@ -296,8 +296,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 3
-  m_LinearDrag: 1.4
-  m_AngularDrag: 0.01
+  m_LinearDrag: 1.8
+  m_AngularDrag: 0.05
   m_GravityScale: 1.5
   m_Material: {fileID: 6200000, guid: 3f25c60d8593e844499df8958b6a495f, type: 2}
   m_Interpolate: 0
@@ -559,27 +559,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerRigidbody: {fileID: 50032747648492810}
-  ballRigidBody: {fileID: 50032747648492810}
   playerSpriteRenderer: {fileID: 212292411621135170}
-  playerSpriteColor: {r: 1, g: 1, b: 1, a: 1}
-  beforeHitColor: {r: 1, g: 0, b: 0, a: 1}
-  afterHitColor: {r: 1, g: 1, b: 1, a: 1}
-  firstTouchVisual: {fileID: 0}
-  lastTouchVisual: {fileID: 0}
+  _PlayerSpriteColor: {r: 1, g: 1, b: 1, a: 1}
+  _BeforeHitColor: {r: 1, g: 0, b: 0, a: 1}
+  _AfterHitColor: {r: 0, g: 0.78681874, b: 1, a: 1}
   offScreenPosition: {x: 0, y: 0}
   shotVelocity: {x: 0, y: 0}
   playerCurrentVelocity: {x: 0, y: 0}
   newBallVelocity: {x: 0, y: 0}
   dragDistance: 0
-  dragShotForce: 50
+  dragShotForce: 30
   shotVelocityMaxMagnitude: 150
   fastTimeScale: 1.25
   regularTimeScale: 1
   slowTimeScale: 0.25
   hasShot: 0
   _BallSpeedMultiplier: 0
-  _ScreenWidth: 0
---- !u!114 &114978337437183820
+--- !u!114 &114875615709929886
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -587,7 +583,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1670362734178294}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b9b59a9177fda040b23514434e00acf, type: 3}
+  m_Script: {fileID: 11500000, guid: 2c9d280aab9abd54e8432bfdc98af135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _DmgPerAttack: 1

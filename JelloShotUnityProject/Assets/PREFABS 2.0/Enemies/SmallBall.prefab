@@ -89,8 +89,9 @@ GameObject:
   - component: {fileID: 232559794294084950}
   - component: {fileID: 95867138204413804}
   - component: {fileID: 255696002138345972}
-  - component: {fileID: 114324939922504458}
+  - component: {fileID: 114169337148600662}
   - component: {fileID: 114904924240071382}
+  - component: {fileID: 114081710883767816}
   m_Layer: 14
   m_Name: SmallBall
   m_TagString: smallBall
@@ -330,7 +331,7 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
---- !u!114 &114324939922504458
+--- !u!114 &114081710883767816
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -346,10 +347,22 @@ MonoBehaviour:
   _LerpPercentageComplete: 0
   _StartLerpTime: 0
   _TimeSinceLerpStarted: 0
-  _LerpTime: 0.5
+  _LerpTime: 0.2
   _ObjScaleAtSpawn: {x: 0, y: 0}
   _ObjStartLerpScale: {x: 0, y: 0}
   _ObjNextScale: {x: 0, y: 0}
+--- !u!114 &114169337148600662
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1914277872518012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 462cd032f89e1f64f911927cab4ca900, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _DmgPerAttack: 1
 --- !u!114 &114904924240071382
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -361,7 +374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e296f4540fff5945b72c9c53de78deb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _IsSizeLerper: 0
+  _IsSizeLerper: 1
   _IsColorLerper: 0
   _NewMaxHealth: 3
 --- !u!212 &212379387924481420
