@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-public abstract class DamageableBase : MonoBehaviour, IDamageTaker
+public abstract class DamageableBase : MonoBehaviour, IDamageable
 {
     void OnEnable()
     {
@@ -17,7 +17,6 @@ public abstract class DamageableBase : MonoBehaviour, IDamageTaker
     public float currentHealth
     {
         get { return _CurrentHealth; }
-
         protected set
         {
             _CurrentHealth = value;
@@ -29,7 +28,6 @@ public abstract class DamageableBase : MonoBehaviour, IDamageTaker
     public float maxHealth
     {
         get { return _MaxHealth; }
-
         protected set
         {
             if (_MaxHealth < 1)
@@ -116,8 +114,26 @@ public abstract class DamageableBase : MonoBehaviour, IDamageTaker
     {
         StopCoroutine(CheckForDeathCo());
         currentHealth = maxHealth;
+
+        GetComponent<IKillable>();
         SpawnManager.instance.PoolObject(gameObject);
         ScoreManager.instance.IterateBallsKoScore();
     }
     #endregion
 }
+#if UNITY_EDITOR
+[CustomEditor(typeof(DamageableBase))]
+public class DeathHandlerCheck : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector(); // for other non-HideInInspector fields
+
+        DamageableBase _DamageableBase = (DamageableBase)target;
+        if (_DamageableBase.gameObject.GetComponent<IKillable>() == null)
+        {
+            Debug.LogError("ERROR: Missing derived DeathHandler script on gameobject!");
+        }
+    }
+}
+#endif

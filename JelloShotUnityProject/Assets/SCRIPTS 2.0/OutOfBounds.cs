@@ -27,9 +27,9 @@ public class OutOfBounds : MonoBehaviour
       
         if (_CollidedObj.layer == (int)GameLayers.BallsLayer || _CollidedObj.layer == (int)GameLayers.SideyTopsey)
         {
-            if (_CollidedObj.GetComponent<IDamageTaker>() != null)
+            if (_CollidedObj.GetComponent<IDamageable>() != null)
             {
-                IDamageTaker damageTaker = _CollidedObj.GetComponent<IDamageTaker>();
+                IDamageable damageTaker = _CollidedObj.GetComponent<IDamageable>();
                 damageTaker.TakeFullDmg();
             }
         }

@@ -10,7 +10,7 @@ public class Damager : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<IDamageTaker>() != null)
+        if (collision.gameObject.GetComponent<IDamageable>() != null)
         {
             DamageOnColliderInteraction(ref collision);
         }     
@@ -18,7 +18,7 @@ public class Damager : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<IDamageTaker>() != null)
+        if (collision.gameObject.GetComponent<IDamageable>() != null)
         {
             DamageOnTriggerInteraction(ref collision);
         }
@@ -26,13 +26,13 @@ public class Damager : MonoBehaviour
 
     protected virtual void DamageOnColliderInteraction(ref Collision2D _collision)
     {
-        IDamageTaker damageTaker = _collision.gameObject.GetComponent<IDamageTaker>();
+        IDamageable damageTaker = _collision.gameObject.GetComponent<IDamageable>();
         damageTaker.TakeDmg(_DmgPerAttack);
     }
 
     protected virtual void DamageOnTriggerInteraction(ref Collider2D _collision)
     {
-        IDamageTaker damageTaker = _collision.gameObject.GetComponent<IDamageTaker>();
+        IDamageable damageTaker = _collision.gameObject.GetComponent<IDamageable>();
         damageTaker.TakeDmg(_DmgPerAttack);
     }
 }

@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour
         DifficultyAdjuster.instance.SetStartingDifficulty();
 
         UIManager.instance.RetryUI(finalScore, DataManagement.instance.dManHighScore, retryUiIsOn = false);
-        GroundHealth.instance.GroundSetup(); 
+        //GroundHealth.instance.GroundSetup(); 
         
         Time.timeScale = 1f;
     }

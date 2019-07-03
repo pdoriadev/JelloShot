@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IDamageTaker
+public interface IDamageable
 {
     void OnTakeDmg();
     void TakeFullDmg();

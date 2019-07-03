@@ -63,11 +63,6 @@ public class DamageableLerpOnDmg : DamageableBase
         if (_ColorLerper != null)
             _ColorLerper.StartLerp(currentHealth, maxHealth);
     }
-
-    protected override void OnDeath()
-    {
-        base.OnDeath();
-    }
 }
 
 #if UNITY_EDITOR

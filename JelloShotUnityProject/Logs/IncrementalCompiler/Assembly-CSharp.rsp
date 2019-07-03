@@ -5,6 +5,26 @@
 -out:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Temp/Assembly-CSharp.dll
 -nostdlib
 -unsafe
+-r:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/ScriptAssemblies/Unity.Entities.Properties.dll
+-r:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/ScriptAssemblies/Unity.Properties.Codegen.dll
+-r:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/ScriptAssemblies/Unity.Jobs.dll
+-r:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/ScriptAssemblies/Unity.Jobs.Editor.dll
+-r:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/ScriptAssemblies/Unity.Entities.Editor.dll
+-r:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/ScriptAssemblies/Unity.Properties.dll
+-r:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/ScriptAssemblies/Unity.Collections.dll
+-r:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll
+-r:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll
+-r:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/ScriptAssemblies/Unity.Burst.dll
+-r:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll
+-r:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/ScriptAssemblies/Unity.Rendering.Hybrid.dll
+-r:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/ScriptAssemblies/Unity.Properties.Editor.dll
+-r:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/ScriptAssemblies/Unity.Entities.Hybrid.dll
+-r:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/ScriptAssemblies/Unity.Mathematics.dll
+-r:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/ScriptAssemblies/Unity.Entities.dll
+-r:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/ScriptAssemblies/Unity.Transforms.dll
+-r:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/ScriptAssemblies/Unity.Burst.Editor.dll
+-r:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/ScriptAssemblies/Unity.TextMeshPro.dll
+-r:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/ScriptAssemblies/Unity.Transforms.Hybrid.dll
 -r:"C:\Program Files\Unity\Hub\Editor\2018.2.4f1\Editor\Data\Managed/UnityEngine/UnityEngine.dll"
 -r:"C:\Program Files\Unity\Hub\Editor\2018.2.4f1\Editor\Data\Managed/UnityEngine/UnityEngine.AIModule.dll"
 -r:"C:\Program Files\Unity\Hub\Editor\2018.2.4f1\Editor\Data\Managed/UnityEngine/UnityEngine.ARModule.dll"
@@ -66,26 +86,6 @@
 -r:"C:\Program Files\Unity\Hub\Editor\2018.2.4f1\Editor\Data\Managed/UnityEngine/UnityEngine.XRModule.dll"
 -r:"C:\Program Files\Unity\Hub\Editor\2018.2.4f1\Editor\Data\Managed/UnityEditor.dll"
 -r:"C:\Program Files\Unity\Hub\Editor\2018.2.4f1\Editor\Data\Managed/Unity.Locator.dll"
--r:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/ScriptAssemblies/Unity.Entities.Properties.dll
--r:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/ScriptAssemblies/Unity.Properties.Codegen.dll
--r:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/ScriptAssemblies/Unity.Jobs.dll
--r:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/ScriptAssemblies/Unity.Jobs.Editor.dll
--r:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/ScriptAssemblies/Unity.Entities.Editor.dll
--r:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/ScriptAssemblies/Unity.Properties.dll
--r:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/ScriptAssemblies/Unity.Collections.dll
--r:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll
--r:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll
--r:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/ScriptAssemblies/Unity.Burst.dll
--r:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll
--r:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/ScriptAssemblies/Unity.Rendering.Hybrid.dll
--r:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/ScriptAssemblies/Unity.Properties.Editor.dll
--r:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/ScriptAssemblies/Unity.Entities.Hybrid.dll
--r:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/ScriptAssemblies/Unity.Mathematics.dll
--r:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/ScriptAssemblies/Unity.Entities.dll
--r:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/ScriptAssemblies/Unity.Transforms.dll
--r:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/ScriptAssemblies/Unity.Burst.Editor.dll
--r:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/ScriptAssemblies/Unity.TextMeshPro.dll
--r:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/ScriptAssemblies/Unity.Transforms.Hybrid.dll
 -r:"C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll"
@@ -366,21 +366,6 @@
 -i:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/GroundDeath.cs
 -i:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/JellyShader/Scripts/JellyClickReceiver.cs
 -i:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/LazySingleton.cs
--i:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/OldProject/Scripts/Block_Break.cs
--i:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/OldProject/Scripts/CameraFallow.cs
--i:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/OldProject/Scripts/cloudMove.cs
--i:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/OldProject/Scripts/CollectableScript.cs
--i:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/OldProject/Scripts/CollisionDetect.cs
--i:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/OldProject/Scripts/DontGoThroughThings.cs
--i:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/OldProject/Scripts/EnemyPlayerInteractions.cs
--i:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/OldProject/Scripts/Goom_Move.cs
--i:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/OldProject/Scripts/GoToNewArea.cs
--i:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/OldProject/Scripts/LevelReset.cs
--i:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/OldProject/Scripts/Player_Score.cs
--i:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/OldProject/Scripts/PlayerMove.cs
--i:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/OldProject/Scripts/ProgrammingRefs.cs
--i:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/OldProject/Scripts/ProjectTestScript.cs
--i:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/OldProject/Scripts/Shared_Vars.cs
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/BallVelocityLimiter.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/BombCollisionTrigger.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/BombEnemy.cs"
@@ -390,7 +375,9 @@
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/DamageSystem/Damager.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/DamageSystem/DamagerEnemyFaction.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/DamageSystem/DamagerPlayerFaction.cs"
--i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/DamageSystem/IDamageTaker.cs"
+-i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/DamageSystem/DeathHandler.cs"
+-i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/DamageSystem/IDamageable.cs"
+-i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/DamageSystem/IKillable.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/DataManagement.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/Enemies/DamageableLerpOnDmg.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/SCRIPTS 2.0/FactionSystem/FactionImmunityManager.cs"

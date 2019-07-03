@@ -29,8 +29,6 @@ public class TapChecker : MonoBehaviour
     [SerializeField]
     private float _TimeSinceLastTap = 0;
     [SerializeField]
-    private float _TapDuration = 0.05f;
-    [SerializeField]
     private bool _HaveTapped;
 
     private void OnUpdateHandler()
@@ -62,9 +60,6 @@ public class TapChecker : MonoBehaviour
                 _HaveTapped = true;
                 _NumberOfTapsInARow++;
             }
-
-
-
         }
     }
 }
