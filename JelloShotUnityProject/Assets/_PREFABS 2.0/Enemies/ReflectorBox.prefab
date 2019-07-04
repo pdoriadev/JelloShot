@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 114030589600682124}
   - component: {fileID: 114939047325599278}
   - component: {fileID: 114163466612475846}
+  - component: {fileID: 114458574378322188}
   m_Layer: 14
   m_Name: ReflectorBox
   m_TagString: Untagged
@@ -152,6 +153,46 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ReflectOn: 1
   _ReflectForce: 20
+--- !u!114 &114458574378322188
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1387913447705422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39d146723ca4e34449b62b02d2319724, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onKillEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114355629047773390, guid: 2827f755fe290834a8e903f36931689c,
+          type: 2}
+        m_MethodName: PoolObject
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1387913447705422}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 114289592611947410, guid: a0e10226d23ad6847a43c61a97c938cf,
+          type: 2}
+        m_MethodName: IterateBallsKoScore
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &114777435465410128
 MonoBehaviour:
   m_ObjectHideFlags: 1

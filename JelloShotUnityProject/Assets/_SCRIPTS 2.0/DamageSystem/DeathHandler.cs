@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class DeathHandlerBase : MonoBehaviour, IKillable
+public class DeathHandler : MonoBehaviour
 {
-    UnityEvent onKillEvent;
-
+    public UnityEvent onKillEvent;
     public virtual void OnKill()
     {
         onKillEvent.Invoke();

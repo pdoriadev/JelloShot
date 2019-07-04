@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 114703755514970562}
   - component: {fileID: 114983107801265810}
   - component: {fileID: 114572539047493192}
+  - component: {fileID: 114905127375477634}
   m_Layer: 17
   m_Name: Sidey
   m_TagString: Untagged
@@ -256,6 +257,46 @@ MonoBehaviour:
   _ObjScaleAtSpawn: {x: 0, y: 0}
   _ObjStartLerpScale: {x: 0, y: 0}
   _ObjNextScale: {x: 0, y: 0}
+--- !u!114 &114905127375477634
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1418212708434406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39d146723ca4e34449b62b02d2319724, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onKillEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114355629047773390, guid: 2827f755fe290834a8e903f36931689c,
+          type: 2}
+        m_MethodName: PoolObject
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1418212708434406}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 114289592611947410, guid: a0e10226d23ad6847a43c61a97c938cf,
+          type: 2}
+        m_MethodName: IterateBallsKoScore
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &114983107801265810
 MonoBehaviour:
   m_ObjectHideFlags: 1

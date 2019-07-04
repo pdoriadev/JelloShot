@@ -9,6 +9,8 @@ using UnityEngine.UI;
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager instance;
+    internal delegate void OnScoreUpdate(int _param);
+    internal static event OnScoreUpdate OnScoreUpdateEvent;
 
     #region UNITY CALLBACKS
     private void OnEnable()
@@ -38,10 +40,10 @@ public class ScoreManager : MonoBehaviour
         previouslySavedScore = DataManagement.instance.dManHighScore;
     }
 
-    // Called by GameManager
     public void IterateBallsKoScore()
     {      
         ballsKnockedOut++;
+        OnScoreUpdateEvent(ballsKnockedOut);
     }
 
     public void CountScore(int difficulty)

@@ -9,4 +9,6 @@ public interface IDamageable
     void TakeDmg(float damage);
     void TakeDmgPercentOfMaxHealth(float damagePercent);
     void TakeDmgPercentOfCurrentHealth(float damagePercent);
+
+    bool CanDamageCheck();
 }

@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     {
         if (instance == null)
             instance = this;
+        ScoreManager.OnScoreUpdateEvent += UIScoreUpdate;
     }
 
     private void OnDisable()
@@ -25,16 +26,13 @@ public class UIManager : MonoBehaviour
     public Text ballsKnockedOutText;
     public Text inGameHighScoreText;
 
-    internal void ScoreUpdate (int _ballsKnockedOut)
+    public void UIScoreUpdate(int _ballsKnockedOut)
     {
-        //_currentTime = (int)_currentTime;
-        //timeTextObj.GetComponent<Text>().text = ("CUTE BALL'S LIVED FOR: " + _currentTime);
         ballsKnockedOutText.text = ("KOs: " + _ballsKnockedOut);
         inGameHighScoreText.text = ("HIGH SCORE: " + DataManagement.instance.dManHighScore);
     }
 
     public Text currentDifficultyText;
-    
     internal void DifficultyUpdate (int _difficulty)
     {
         currentDifficultyText.text = ("DIFFICULTY: " + _difficulty);
@@ -43,16 +41,14 @@ public class UIManager : MonoBehaviour
     public GameObject retryPanel;
     public Text finalScoreText;
     public Text retryHighScoreText;
-
-    internal void RetryUI(int _finalScore, int _highScore, bool _activePanel)
+    internal void RetryUI(int _finalScore, int _highScore, bool _isActivePanel)
     {
-        retryPanel.SetActive(_activePanel);
+        retryPanel.SetActive(_isActivePanel);
         
         if (ScoreManager.instance.previouslySavedScore < _finalScore)
         {
             retryHighScoreText.text = ("NEW HIGH SCORE: " + _highScore);
         }
-
         else
         {
             finalScoreText.text = ("SCORE: " + _finalScore);

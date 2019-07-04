@@ -41,15 +41,15 @@ public class GameManager : MonoBehaviour
     internal static GameManager instance;
     // variable for GameState enum
     internal GameState state;
-    // event syntax
+    // events
     internal delegate void OnUpdate();
-    internal static event OnUpdate OnUpdateEvent; // event contained in OnUpdate delegate
+    internal static event OnUpdate OnUpdateEvent; 
     internal delegate void OnFixedUpdate();
-    internal static event OnFixedUpdate OnFixedUpdateEvent; // Fixed Update Event
+    internal static event OnFixedUpdate OnFixedUpdateEvent; 
     internal delegate void OnRetry();
     internal static event OnRetry OnRetryEvent;
 
-    public bool retryUiIsOn;
+    public bool retryUiIsOn = false;
     public int finalScore;
 
     [SerializeField]
@@ -85,7 +85,7 @@ public class GameManager : MonoBehaviour
         }
 
         if (retryUiIsOn == false)
-            UIManager.instance.ScoreUpdate(ScoreManager.instance.ballsKnockedOut);
+            UIManager.instance.UIScoreUpdate(ScoreManager.instance.ballsKnockedOut);
     }
 
     private void FixedUpdate()
@@ -94,25 +94,29 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-    internal void LevelEnd()
+    public void LevelEnd()
     {
-        // Get time passed since tapToStartTap.
         Time.timeScale = 0f;
 
         ScoreManager.instance.CountScore(DifficultyAdjuster.instance._CurrentDifficulty);
-        UIManager.instance.RetryUI(finalScore, DataManagement.instance.dManHighScore, retryUiIsOn = true);
+
+        retryUiIsOn = true;
+        UIManager.instance.RetryUI(finalScore, DataManagement.instance.dManHighScore, retryUiIsOn);
+
         SpawnManager.instance.ResetSpawnListsAndTimers();
     }
 
     private void Restart()
     {
         _CurrentTime = 0;
-        ScoreManager.instance.LevelScoreSetup();
         _PlayerGameObject.transform.position = _PlayerStartPos;
+
+        ScoreManager.instance.LevelScoreSetup();
         DifficultyAdjuster.instance.SetStartingDifficulty();
 
-        UIManager.instance.RetryUI(finalScore, DataManagement.instance.dManHighScore, retryUiIsOn = false);
-        //GroundHealth.instance.GroundSetup(); 
+        retryUiIsOn = false;
+        UIManager.instance.RetryUI(finalScore, DataManagement.instance.dManHighScore, retryUiIsOn);
+
         
         Time.timeScale = 1f;
     }
