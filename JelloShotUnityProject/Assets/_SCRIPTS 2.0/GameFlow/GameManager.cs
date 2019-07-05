@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
     // instance of game manager script
     internal static GameManager instance;
     // variable for GameState enum
-    internal GameState state;
+    public GameState state;
     // events
     internal delegate void OnUpdate();
     internal static event OnUpdate OnUpdateEvent; 
@@ -49,8 +49,13 @@ public class GameManager : MonoBehaviour
     internal delegate void OnRetry();
     internal static event OnRetry OnRetryEvent;
 
-    public bool retryUiIsOn = false;
-    public int finalScore;
+    private bool _RetryUIIsOn = false;
+    public bool retryUIIsOn
+    {
+        get { return _RetryUIIsOn; }
+        set { _RetryUIIsOn = value; }
+    }
+    private int finalScore;
 
     [SerializeField]
     private GameObject _PlayerGameObject;
@@ -58,6 +63,7 @@ public class GameManager : MonoBehaviour
     private Vector2 _PlayerStartPos;
     [SerializeField]
     private float _CurrentTime;
+
 
     #region UNITY CALLBACKS
     private void OnEnable()
@@ -81,12 +87,12 @@ public class GameManager : MonoBehaviour
 
         _CurrentTime += Time.deltaTime;
 
-        if (retryUiIsOn && TapChecker.instance._NumberOfTapsInARow > 1)
+        if (retryUIIsOn && TapChecker.instance._NumberOfTapsInARow > 1)
         {
             OnRetryEvent();
         }
 
-        if (retryUiIsOn == false)
+        if (retryUIIsOn == false)
             UIManager.instance.UIScoreUpdate(ScoreManager.instance.ballsKnockedOut);
     }
 
@@ -98,14 +104,15 @@ public class GameManager : MonoBehaviour
 
     public void LevelEnd()
     {
+        state = GameState.End;
         Time.timeScale = 0f;
 
         ScoreManager.instance.CountScore(DifficultyAdjuster.instance._CurrentDifficulty);
 
-        retryUiIsOn = true;
-        UIManager.instance.RetryUI(finalScore, DataManagement.instance.dManHighScore, retryUiIsOn);
+        retryUIIsOn = true;
+        UIManager.instance.RetryUI(finalScore, DataManagement.instance.dManHighScore, retryUIIsOn);
 
-        SpawnManager.instance.ResetSpawnListsAndTimers();
+        SpawnManager.instance.PoolAllSpawnables();
     }
 
     private void Retry()
@@ -116,9 +123,10 @@ public class GameManager : MonoBehaviour
         UIManager.instance.UIScoreUpdate(ScoreManager.instance.ballsKnockedOut);
         DifficultyAdjuster.instance.SetStartingDifficulty();
 
-        retryUiIsOn = false;
-        UIManager.instance.RetryUI(finalScore, DataManagement.instance.dManHighScore, retryUiIsOn);
-        
+        retryUIIsOn = false;
+        UIManager.instance.RetryUI(finalScore, DataManagement.instance.dManHighScore, retryUIIsOn);
+
+        state = GameState.Gameplay;
         Time.timeScale = 1f;
     }
 }

@@ -25,10 +25,12 @@ public class SpawnManager : MonoBehaviour
     {
         if (instance == null)
             instance = this;
+        GameManager.OnRetryEvent += PoolAllSpawnables;
     }
 
     private void OnDisable()
     {
+        GameManager.OnRetryEvent -= PoolAllSpawnables;
         instance = null;
     }
 
@@ -115,17 +117,21 @@ public class SpawnManager : MonoBehaviour
         spawnablesInGame.Remove(_pooledObj);
     }
 
-    public void ResetSpawnListsAndTimers()
+    // Pools all items in spawnablesInGameList into pooledObjectsList. Deactivates pooled items.
+    public void PoolAllSpawnables()
     {
-        // Pools all items in spawnablesInGameList into pooledObjectsList
-        for (int index = 0; index < SpawnManager.instance.spawnablesInGame.Count; index++)
+        pooledObjectsList.AddRange(spawnablesInGame);
+        spawnablesInGame.RemoveRange(0, spawnablesInGame.Count);
+
+        for (int index = 0; index < SpawnManager.instance.pooledObjectsList.Count; index++)
         {
-            GameObject currentBall = (GameObject)SpawnManager.instance.spawnablesInGame[index];
-            pooledObjectsList.AddRange(spawnablesInGame);
-            spawnablesInGame.RemoveRange(0, spawnablesInGame.Count);
+            GameObject currentBall = (GameObject)SpawnManager.instance.pooledObjectsList[index];
+            currentBall.SetActive(false);
         }
 
-        spawnablesInGame.Clear();
+        //spawnablesInGame.Clear();
+        if (SpawnManager.instance.spawnablesInGame.Count > 0)
+            Debug.LogError("spawnablesInGame list should be empty");
     }
 }
 

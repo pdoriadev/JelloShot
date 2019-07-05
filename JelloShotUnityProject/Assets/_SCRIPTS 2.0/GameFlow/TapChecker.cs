@@ -35,7 +35,7 @@ public class TapChecker : MonoBehaviour
 
         if (_HaveTapped)
         {
-            _TimeSinceLastTap += Time.deltaTime;
+            _TimeSinceLastTap += Time.unscaledDeltaTime;
 
             if (_TimeSinceLastTap >= _MaxTimeBetweenTaps)
             {
