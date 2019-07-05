@@ -139,10 +139,10 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 34710090}
   m_LocalRotation: {x: -0, y: -0, z: 1, w: 0.0000029504295}
-  m_LocalPosition: {x: -0.0000000033254512, y: 9.53, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.01200006, y: 33.66, z: 0}
+  m_LocalScale: {x: 1, y: 3, z: 1}
   m_Children: []
-  m_Father: {fileID: 2045508858}
+  m_Father: {fileID: 1285468783}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180.00002}
 --- !u!199 &34710092
@@ -4763,10 +4763,10 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 86229958}
   m_LocalRotation: {x: -0, y: -0, z: 1, w: 0.0000029504295}
-  m_LocalPosition: {x: 0.0000000036372123, y: 9.579999, z: 0}
-  m_LocalScale: {x: 1.0000002, y: 1, z: 1}
+  m_LocalPosition: {x: -0.011999935, y: 33.809998, z: 0}
+  m_LocalScale: {x: 1, y: 3, z: 1}
   m_Children: []
-  m_Father: {fileID: 2045508858}
+  m_Father: {fileID: 1285468783}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180.00002}
 --- !u!199 &86229960
@@ -5014,7 +5014,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 0.44705883}
+      maxColor: {r: 1, g: 1, b: 1, a: 0.21568628}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -9519,18 +9519,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114603547046359606, guid: b7c41f0ea77121b4cb12ad0dc37c9fc4,
-        type: 2}
-      propertyPath: _IsSizeLerper
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114603547046359606, guid: b7c41f0ea77121b4cb12ad0dc37c9fc4,
-        type: 2}
-      propertyPath: _IsColorLerper
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7c41f0ea77121b4cb12ad0dc37c9fc4, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &370291964
@@ -9564,7 +9553,7 @@ Transform:
   m_Children:
   - {fileID: 727757867}
   m_Father: {fileID: 1862596381}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &370291966
 MonoBehaviour:
@@ -9927,7 +9916,7 @@ Transform:
   m_Children:
   - {fileID: 1744927658}
   m_Father: {fileID: 1862596381}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &734847859
 MonoBehaviour:
@@ -10301,26 +10290,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1138869199507208, guid: b7c41f0ea77121b4cb12ad0dc37c9fc4,
     type: 2}
   m_PrefabInternal: {fileID: 249743920}
---- !u!114 &1054533200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1054533199}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39ac636268151e94089827c1eddbb986, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _CanLerp: 1
-  _IsLerping: 0
-  _LerpPercentageComplete: 0
-  _StartLerpTime: 0
-  _TimeSinceLerpStarted: 0
-  _LerpTime: 0.5
-  _ObjScaleAtSpawn: {x: 0, y: 0}
-  _ObjStartLerpScale: {x: 0, y: 0}
-  _ObjNextScale: {x: 0, y: 0}
 --- !u!1001 &1083480300
 Prefab:
   m_ObjectHideFlags: 0
@@ -10363,6 +10332,36 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83ebc46913e559043967b24ad5232e29, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &1285468782
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1285468783}
+  m_Layer: 10
+  m_Name: BGTrails
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1285468783
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1285468782}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 34710091}
+  - {fileID: 86229959}
+  m_Father: {fileID: 1862596381}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1539235251
 Prefab:
   m_ObjectHideFlags: 0
@@ -10412,6 +10411,16 @@ Prefab:
       propertyPath: pooledObjectsList.Array.data[0]
       value: 
       objectReference: {fileID: 1054533199}
+    - target: {fileID: 114997902193888820, guid: 2827f755fe290834a8e903f36931689c,
+        type: 2}
+      propertyPath: _AttackChanceThreshold
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 114997902193888820, guid: 2827f755fe290834a8e903f36931689c,
+        type: 2}
+      propertyPath: _SupportChanceThreshold
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2827f755fe290834a8e903f36931689c, type: 2}
   m_IsPrefabAsset: 0
@@ -10519,7 +10528,7 @@ Transform:
   m_LocalScale: {x: 72.527, y: 72.527, z: 72.527}
   m_Children: []
   m_Father: {fileID: 1862596381}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!45 &1595689586
 Skybox:
@@ -10561,7 +10570,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1862596381}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1630428564
 MonoBehaviour:
@@ -10686,7 +10695,7 @@ Transform:
   m_Children:
   - {fileID: 506206264}
   m_Father: {fileID: 1862596381}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1670648661
 MonoBehaviour:
@@ -10892,6 +10901,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1285468783}
   - {fileID: 1630428563}
   - {fileID: 2045508858}
   - {fileID: 734847858}
@@ -10912,9 +10922,8 @@ GameObject:
   - component: {fileID: 2045508858}
   - component: {fileID: 2045508861}
   - component: {fileID: 2045508860}
-  - component: {fileID: 2045508859}
   - component: {fileID: 2045508857}
-  - component: {fileID: 2045508862}
+  - component: {fileID: 2045508859}
   - component: {fileID: 2045508856}
   m_Layer: 10
   m_Name: Ground
@@ -10934,6 +10943,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39d146723ca4e34449b62b02d2319724, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _IsPooled: 0
   onKillEvent:
     m_PersistentCalls:
       m_Calls:
@@ -10964,7 +10974,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _IsSizeLerper: 0
   _IsColorLerper: 1
-  _NewMaxHealth: 3
+  _MaxHealthPoints: 3
 --- !u!4 &2045508858
 Transform:
   m_ObjectHideFlags: 0
@@ -10975,11 +10985,9 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.012, y: 5.0699997, z: 0}
   m_LocalScale: {x: 17.923777, y: 3, z: 1}
-  m_Children:
-  - {fileID: 34710091}
-  - {fileID: 86229959}
+  m_Children: []
   m_Father: {fileID: 1862596381}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2045508859
 MonoBehaviour:
@@ -10989,10 +10997,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 2045508855}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c9d280aab9abd54e8432bfdc98af135, type: 3}
+  m_Script: {fileID: 11500000, guid: c60cf95d21edefb4dae51dbe77b4e6ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _DmgPerAttack: 20
+  _CanLerp: 1
+  _IsLerping: 0
+  _LerpPercentageComplete: 0
+  _StartLerpTime: 0
+  _TimeSinceLerpStarted: 0
+  _LerpTime: 0.5
+  _ColorAtSpawn: {r: 0, g: 0, b: 0, a: 0}
+  _FinalColor: {r: 1, g: 0, b: 0, a: 0.65882355}
 --- !u!60 &2045508860
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -11069,25 +11084,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2045508862
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2045508855}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c60cf95d21edefb4dae51dbe77b4e6ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _CanLerp: 1
-  _IsLerping: 0
-  _LerpPercentageComplete: 0
-  _StartLerpTime: 0
-  _TimeSinceLerpStarted: 0
-  _LerpTime: 0.5
-  _ColorAtSpawn: {r: 0, g: 0, b: 0, a: 0}
-  _FinalColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1001 &2076687280
 Prefab:
   m_ObjectHideFlags: 0

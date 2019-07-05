@@ -344,33 +344,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39d146723ca4e34449b62b02d2319724, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _IsPooled: 1
   onKillEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114355629047773390, guid: 2827f755fe290834a8e903f36931689c,
-          type: 2}
-        m_MethodName: PoolObject
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 1138869199507208}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 114289592611947410, guid: a0e10226d23ad6847a43c61a97c938cf,
-          type: 2}
-        m_MethodName: IterateBallsKoScore
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114323413623445096
@@ -386,7 +363,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _IsSizeLerper: 1
   _IsColorLerper: 1
-  _NewMaxHealth: 5
+  _MaxHealthPoints: 3
 --- !u!114 &114462629012337248
 MonoBehaviour:
   m_ObjectHideFlags: 1

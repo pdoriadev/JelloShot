@@ -6,7 +6,6 @@ public class Damager : MonoBehaviour
 {
     [SerializeField]
     private float _DmgPerAttack = 1;
-    private bool _DamageOnTrigger, _DamageOnCollision;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

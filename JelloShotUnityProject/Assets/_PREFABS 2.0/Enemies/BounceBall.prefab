@@ -149,7 +149,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1138869199507208}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2, y: 22.404612, z: -0.76166344}
+  m_LocalPosition: {x: -0.0056767464, y: 23.073175, z: -0.76166344}
   m_LocalScale: {x: 6, y: 6, z: 1}
   m_Children:
   - {fileID: 4083114416777588}
@@ -384,6 +384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39d146723ca4e34449b62b02d2319724, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _IsPooled: 1
   onKillEvent:
     m_PersistentCalls:
       m_Calls:
@@ -426,7 +427,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _IsSizeLerper: 1
   _IsColorLerper: 0
-  _NewMaxHealth: 3
+  _MaxHealthPoints: 3
 --- !u!114 &114888527880253010
 MonoBehaviour:
   m_ObjectHideFlags: 1

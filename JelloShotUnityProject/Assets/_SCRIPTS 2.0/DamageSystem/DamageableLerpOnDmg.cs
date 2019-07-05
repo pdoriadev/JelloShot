@@ -17,7 +17,7 @@ public class DamageableLerpOnDmg : DamageableBase
     private bool _IsColorLerper;
     public bool isColorLerper { get { return _IsColorLerper; } set { _IsColorLerper = value; } }
     [SerializeField]
-    private float _NewMaxHealth = 3;
+    private float _MaxHealthPoints = 3;
     private float _WaitTime
     {
         get { return waitTime; }
@@ -37,8 +37,8 @@ public class DamageableLerpOnDmg : DamageableBase
         if (GetComponent<ColorLerper>() != null)
             _ColorLerper = GetComponent<ColorLerper>();
 
-        maxHealth = _NewMaxHealth;
-        currentHealth = _NewMaxHealth;
+        maxHealth = _MaxHealthPoints;
+        currentHealth = _MaxHealthPoints;
         if (_SizeLerper != null)
         {
             _WaitTime = _SizeLerper.lerpTime;
@@ -62,6 +62,11 @@ public class DamageableLerpOnDmg : DamageableBase
             _SizeLerper.StartLerp(currentHealth, maxHealth);
         if (_ColorLerper != null)
             _ColorLerper.StartLerp(currentHealth, maxHealth);
+    }
+
+    public override void OnHeal()
+    {
+
     }
 }
 

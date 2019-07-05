@@ -8,22 +8,23 @@ public class ColorLerper : LerperBase
     {
         if (GetComponent<SpriteRenderer>() == null)
         {
-            _ObjSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+            _SpriteRend = GetComponentInChildren<SpriteRenderer>();
         }
+        else if (GetComponent<SpriteRenderer>() != null)
+            _SpriteRend = GetComponent<SpriteRenderer>();
+        else 
+            Debug.LogError("No Sprite Renderer found on " + gameObject);
 
-        else
-            _ObjSpriteRenderer = GetComponent<SpriteRenderer>();
-
-        _ColorAtSpawn = _ObjSpriteRenderer.color;
+        _ColorAtSpawn = _SpriteRend.color;
     }
 
     private void OnDisable()
     {
         base.EndLerp();
-        _ObjSpriteRenderer.color = _ColorAtSpawn;
+        _SpriteRend.color = _ColorAtSpawn;
     }
 
-    private SpriteRenderer _ObjSpriteRenderer;
+    private SpriteRenderer _SpriteRend;
 
     [HeaderAttribute("Color")]
     [SerializeField]
@@ -37,7 +38,7 @@ public class ColorLerper : LerperBase
 
     public override void StartLerp(float _currentHealth, float _maxHealth)
     {
-        _StartLerpColor = _ObjSpriteRenderer.color;
+        _StartLerpColor = _SpriteRend.color;
 
         float _Scaler = (_maxHealth - _currentHealth) / _maxHealth;
         _NextLerpColor = Color.Lerp(_ColorAtSpawn, _FinalColor, _Scaler);
@@ -47,6 +48,6 @@ public class ColorLerper : LerperBase
     protected override void HandleLerp()
     {
         base.HandleLerp();
-        _ObjSpriteRenderer.color = Color.Lerp(_StartLerpColor, _NextLerpColor, lerpPercentageComplete);
+        _SpriteRend.color = Color.Lerp(_StartLerpColor, _NextLerpColor, lerpPercentageComplete);
     }
 }

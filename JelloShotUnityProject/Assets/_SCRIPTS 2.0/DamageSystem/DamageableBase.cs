@@ -10,6 +10,10 @@ public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
     void OnEnable()
     {
         _CurrentHealth = _MaxHealth;
+        if (GetComponent<DeathHandler>() == null)
+        {
+            Debug.LogError("No DeathHandler component on " + gameObject);
+        }
     }
 
     #region --HEALTH PROPERTIES--
@@ -38,14 +42,12 @@ public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
     }
     #endregion
 
-
     private bool _IsInvulnerable = false;
     public bool isInvulnerable
     {
         get { return _IsInvulnerable; }
         set { _IsInvulnerable = value; }
     }
-
     // Alternative To this is to use a OnTakeDmg event that dependent methods can listen to. 
     // ADVANTAGE: Damager can directly interact with Damageable. Understandable. Not inefficient.
     #region IDamageTakerMethods
@@ -93,85 +95,7 @@ public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
     }
     #endregion
 
-
-    private bool _IsHealable = true;
-    public bool isHealable
-    {
-        get { return _IsHealable; }
-        set { _IsHealable = value; }
-    }
-
-    #region IHealableMethods
-    public virtual bool CanHealCheck()
-    {
-        if (isHealable)
-            return true;
-        else
-        {
-            Debug.Log(gameObject + " cannot be healed");
-            return false;
-        }
-    }
-
-    public virtual void OnHeal()
-    {
-
-    }
-    public virtual void HealToFullHealth()
-    {
-        if (CanHealCheck())
-        {
-            currentHealth = maxHealth;
-            OnHeal();
-        }
-            
-    }
-    public virtual void HealToValue(float _newHealthValue)
-    {
-        if (CanHealCheck())
-        {
-            currentHealth = _newHealthValue;
-            OnHeal();
-        }
-
-    }
-    public virtual void HealByXMuch(float _addedHealth)
-    {
-        if (CanHealCheck())
-        {
-            currentHealth += _addedHealth;
-            OnHeal();
-        }      
-    }
-
-    public virtual void HealPercentageOfMaxHealth(float _percentageRegenned)
-    {
-        if (CanHealCheck())
-        {
-            currentHealth += (_percentageRegenned * maxHealth);
-            OnHeal();
-        }
-    }
-    public virtual void HealPercentageOfCurrentHealth(float _percentageRegenned)
-    {
-        if (CanHealCheck())
-        {
-            currentHealth += (_percentageRegenned * currentHealth);
-            OnHeal();
-        }
-    }
-    public virtual void HealPercentageOfCurrentDamageTaken(float _percentageRegenned)
-    {
-        if (CanHealCheck())
-        {
-            currentHealth += (_percentageRegenned * (maxHealth - currentHealth));
-            OnHeal();
-        }
-
-    }
-    #endregion
-
-    #region DEATH HANDLING 
+    #region DEATH CHECK
     protected virtual bool DeathCheck()
     {
         if (currentHealth <= 0)
@@ -210,12 +134,100 @@ public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
     {
         StopCoroutine(CheckForDeathCo());
         currentHealth = maxHealth;
+        // Handles any death related functionality unrelated to health system
+        GetComponent<DeathHandler>().OnKill();
+    }
+    #endregion
 
-        if (GetComponent<DeathHandler>() != null)
+    #region HEALABLE PROPERTIES
+    private bool _IsHealable = true;
+    public bool isHealable
+    {
+        get { return _IsHealable; }
+        set { _IsHealable = value; }
+    }
+    private float _HealedHPValue;
+    protected float healedHPValue
+    {
+        get { return _HealedHPValue; }
+        set
         {
-            GetComponent<DeathHandler>().OnKill();
+            _HealedHPValue = value;
+            if (_HealedHPValue > maxHealth)
+            {
+                _HealedHPValue = maxHealth;
+            }
+            else if (_HealedHPValue < 0)
+                _HealedHPValue = 0;
         }
-        else Debug.LogError("No Death Handler found on : " + gameObject);
+    }
+    #region IHealableMethods
+    public virtual bool CanHealCheck()
+    {
+        if (isHealable)
+            return true;
+        else
+        {
+            Debug.Log(gameObject + " cannot be healed.");
+            return false;
+        }
+    }
+
+    public virtual void OnHeal()
+    {
+        currentHealth = _HealedHPValue;
+    }
+    public virtual void HealToFullHealth()
+    {
+        if (CanHealCheck())
+        {
+            _HealedHPValue = maxHealth;
+            OnHeal();
+        }
+
+    }
+    public virtual void HealToValue(float _newHealthValue)
+    {
+        if (CanHealCheck())
+        {
+            _HealedHPValue = _newHealthValue;
+            OnHeal();
+        }
+
+    }
+    public virtual void HealByXMuch(float _addedHealth)
+    {
+        if (CanHealCheck())
+        {
+            _HealedHPValue = currentHealth + _addedHealth;
+            OnHeal();
+        }
+    }
+
+    public virtual void HealPercentageOfMaxHealth(float _percentageRegenned)
+    {
+        if (CanHealCheck())
+        {
+            _HealedHPValue = currentHealth + (_percentageRegenned * maxHealth);
+            OnHeal();
+        }
+    }
+    public virtual void HealPercentageOfCurrentHealth(float _percentageRegenned)
+    {
+        if (CanHealCheck())
+        {
+            _HealedHPValue = currentHealth + (_percentageRegenned * currentHealth);
+            OnHeal();
+        }
+    }
+    public virtual void HealPercentageOfCurrentDamageTaken(float _percentageRegenned)
+    {
+        if (CanHealCheck())
+        {
+            _HealedHPValue = currentHealth + (_percentageRegenned * (maxHealth - currentHealth));
+            OnHeal();
+        }
+
     }
     #endregion
 }
