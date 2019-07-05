@@ -48,17 +48,19 @@ public class ScoreManager : MonoBehaviour
         OnScoreUpdateEvent(ballsKnockedOut);
     }
 
-    public void CountScore(int difficulty)
+    public int CountScore(int difficulty)
     {
-        int finalScore;
-        finalScore = difficulty * ballsKnockedOut;
+        int _FinalScore;
+        _FinalScore = difficulty * ballsKnockedOut;
 
-        if (finalScore > DataManagement.instance.dManHighScore)
+        if (_FinalScore > DataManagement.instance.dManHighScore)
         {
-            DataManagement.instance.dManHighScore = finalScore;
+            DataManagement.instance.dManHighScore = _FinalScore;
             DataManagement.instance.SaveData();
             Debug.Log("Now that we've added the score to DataManagement, Data says high score is " + DataManagement.instance.dManHighScore);
         }
+
+        return _FinalScore;
     }
 }
 

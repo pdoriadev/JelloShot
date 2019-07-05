@@ -55,7 +55,6 @@ public class GameManager : MonoBehaviour
         get { return _RetryUIIsOn; }
         set { _RetryUIIsOn = value; }
     }
-    private int finalScore;
 
     [SerializeField]
     private GameObject _PlayerGameObject;
@@ -102,16 +101,15 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    private int _FinalScore;
     public void LevelEnd()
     {
         state = GameState.End;
         Time.timeScale = 0f;
-
-        ScoreManager.instance.CountScore(DifficultyAdjuster.instance._CurrentDifficulty);
-
         retryUIIsOn = true;
-        UIManager.instance.RetryUI(finalScore, DataManagement.instance.dManHighScore, retryUIIsOn);
 
+        _FinalScore = ScoreManager.instance.CountScore(DifficultyAdjuster.instance._CurrentDifficulty);
+        UIManager.instance.RetryUI(_FinalScore, DataManagement.instance.dManHighScore, retryUIIsOn);
         SpawnManager.instance.PoolAllSpawnables();
     }
 
@@ -124,7 +122,7 @@ public class GameManager : MonoBehaviour
         DifficultyAdjuster.instance.SetStartingDifficulty();
 
         retryUIIsOn = false;
-        UIManager.instance.RetryUI(finalScore, DataManagement.instance.dManHighScore, retryUIIsOn);
+        UIManager.instance.RetryUI(_FinalScore, DataManagement.instance.dManHighScore, retryUIIsOn);
 
         state = GameState.Gameplay;
         Time.timeScale = 1f;
