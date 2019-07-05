@@ -20,6 +20,7 @@ public class UIManager : MonoBehaviour
     private void OnDisable()
     {
         instance = null;
+        ScoreManager.OnScoreUpdateEvent -= UIScoreUpdate;
     }
 
     //public GameObject timeTextObj;

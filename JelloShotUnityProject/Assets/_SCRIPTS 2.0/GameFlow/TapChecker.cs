@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-// DOUBLE TAP FEATURE TO-DO: check for one tap. Add one to numberOfTaps int. Start a timer from first tap.
+// Checks for number of taps. Add one to numberOfTaps int. Start a timer from first tap.
 // If timer exceeds double tap time window, then numberOfTaps = 0. If another tap occurs before timer exceeds
 // double tap time window, then game is restarted.
 // Checks for double tap on screen. Could easily make this a repurposable tap input script that checks how many taps have happened.
@@ -13,25 +13,23 @@ public class TapChecker : MonoBehaviour
     {
         if (instance == null)
             instance = this;
-        GameManager.OnUpdateEvent += OnUpdateHandler;
     }
     private void OnDisable()
     {
         instance = null;
-        GameManager.OnUpdateEvent -= OnUpdateHandler;
     }
 
-    public int _NumberOfTapsInARow;
+    public int _NumberOfTapsInARow = 0;
 
     private int _TouchCount;
     [SerializeField]
-    private float _MaxTimeBetweenTaps;
+    private float _MaxTimeBetweenTaps = 0.2f;
     [SerializeField]
     private float _TimeSinceLastTap = 0;
     [SerializeField]
     private bool _HaveTapped;
 
-    private void OnUpdateHandler()
+    private void Update()
     {
         _TouchCount = Input.touchCount;
 

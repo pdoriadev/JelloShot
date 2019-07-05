@@ -66,10 +66,12 @@ public class GameManager : MonoBehaviour
             instance = this;
         state = GameState.Gameplay;
         _PlayerStartPos = _PlayerGameObject.transform.position;
+        OnRetryEvent += Retry;
     }
 
     private void OnDisable()
     {
+        OnRetryEvent -= Retry;
         instance = null;    
     }
 
@@ -79,9 +81,9 @@ public class GameManager : MonoBehaviour
 
         _CurrentTime += Time.deltaTime;
 
-        if (TapChecker.instance._NumberOfTapsInARow > 1 && retryUiIsOn)
+        if (retryUiIsOn && TapChecker.instance._NumberOfTapsInARow > 1)
         {
-            Restart();
+            OnRetryEvent();
         }
 
         if (retryUiIsOn == false)
@@ -106,17 +108,16 @@ public class GameManager : MonoBehaviour
         SpawnManager.instance.ResetSpawnListsAndTimers();
     }
 
-    private void Restart()
+    private void Retry()
     {
         _CurrentTime = 0;
         _PlayerGameObject.transform.position = _PlayerStartPos;
 
-        ScoreManager.instance.LevelScoreSetup();
+        UIManager.instance.UIScoreUpdate(ScoreManager.instance.ballsKnockedOut);
         DifficultyAdjuster.instance.SetStartingDifficulty();
 
         retryUiIsOn = false;
         UIManager.instance.RetryUI(finalScore, DataManagement.instance.dManHighScore, retryUiIsOn);
-
         
         Time.timeScale = 1f;
     }

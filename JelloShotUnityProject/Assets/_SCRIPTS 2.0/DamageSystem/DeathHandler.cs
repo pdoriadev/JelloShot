@@ -17,5 +17,9 @@ public class DeathHandler : MonoBehaviour
             ScoreManager.instance.IterateBallsKoScore();
             SpawnManager.instance.PoolObject(gameObject);
         }
+        else
+        {
+            GetComponent<DamageableBase>().HealToFullHealth();
+        }
     }
 }

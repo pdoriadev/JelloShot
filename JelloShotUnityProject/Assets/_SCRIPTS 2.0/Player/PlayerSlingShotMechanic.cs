@@ -160,7 +160,7 @@ public class PlayerSlingShotMechanic : MonoBehaviour
 
         // Mobile movement.
 #if UNITY_STANDALONE || UNITY_ANDROID 
-        if (Input.touchCount > 0 /*&& hasShot == false */)
+        if (Input.touchCount > 0)
         {
             _LatestTouch = Input.GetTouch(0);
             _LatestTouch.position = CameraController.instance.mainCamera.ScreenToWorldPoint(Input.GetTouch(0).position);

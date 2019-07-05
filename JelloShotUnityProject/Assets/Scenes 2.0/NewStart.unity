@@ -10156,6 +10156,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 4911744123003886, guid: a01640ea7dd0fa84fbda6a188c07ff74, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4911744123003886, guid: a01640ea7dd0fa84fbda6a188c07ff74, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a01640ea7dd0fa84fbda6a188c07ff74, type: 2}
   m_IsPrefabAsset: 0
@@ -10922,6 +10930,7 @@ GameObject:
   - component: {fileID: 2045508858}
   - component: {fileID: 2045508861}
   - component: {fileID: 2045508860}
+  - component: {fileID: 2045508862}
   - component: {fileID: 2045508857}
   - component: {fileID: 2045508859}
   - component: {fileID: 2045508856}
@@ -11084,6 +11093,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2045508862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2045508855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c9d280aab9abd54e8432bfdc98af135, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _DmgPerAttack: 10
 --- !u!1001 &2076687280
 Prefab:
   m_ObjectHideFlags: 0

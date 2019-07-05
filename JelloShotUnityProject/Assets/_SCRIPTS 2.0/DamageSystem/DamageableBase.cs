@@ -161,6 +161,8 @@ public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
                 _HealedHPValue = 0;
         }
     }
+    #endregion
+
     #region IHealableMethods
     public virtual bool CanHealCheck()
     {
