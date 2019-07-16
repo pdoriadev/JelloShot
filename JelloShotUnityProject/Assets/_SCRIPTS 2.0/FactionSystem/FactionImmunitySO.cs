@@ -5,14 +5,14 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-public enum Factions
+public enum Faction
 {
     Generic, // 0                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
     Player, // 1
     Enemy // 2
 }
 
-[CreateAssetMenu(fileName = "FactionImmunity", menuName = "FactionData")]
+[CreateAssetMenu(fileName = "FactionImmunity", menuName = "FactionData", order = 51)]
 public class FactionImmunitySO : ScriptableObject
 {
     // 2D Array index matches the matching Faction's enum value. i.e. Generic is the first column or subscript 0.
@@ -21,13 +21,15 @@ public class FactionImmunitySO : ScriptableObject
 
     public new string name;
 
-    public void SetImmunity(int _damagerFaction, int _damageableFaction, bool _canDamage)
+    public void SetImmunity(Faction _damagerFaction, Faction _damageableFaction, bool _canDamage)
     {
-        _FriendOrFoe[_damagerFaction, _damageableFaction] = _canDamage;
+        int _DamagerInt = (int)_damagerFaction;
+        int _DamageableInt = (int)_damageableFaction;
+        _FriendOrFoe[_DamagerInt, _DamageableInt] = _canDamage;
     }
 
     // Can damagerFaction damage damageableFaction
-    public bool CheckImmunity(int _damagerFaction, int _damageableFaction)
+    public bool CanDamage(int _damagerFaction, int _damageableFaction)
     {
         if (_FriendOrFoe[_damagerFaction, _damageableFaction] == true)
             { return true; }

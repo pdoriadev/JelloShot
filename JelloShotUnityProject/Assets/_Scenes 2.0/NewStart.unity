@@ -9720,6 +9720,66 @@ Prefab:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 224626927439598650, guid: 4b01f91282b98ef48b1fe15a09fe5923,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224626927439598650, guid: 4b01f91282b98ef48b1fe15a09fe5923,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224626927439598650, guid: 4b01f91282b98ef48b1fe15a09fe5923,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224555201106814812, guid: 4b01f91282b98ef48b1fe15a09fe5923,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224555201106814812, guid: 4b01f91282b98ef48b1fe15a09fe5923,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224555201106814812, guid: 4b01f91282b98ef48b1fe15a09fe5923,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224709834705484960, guid: 4b01f91282b98ef48b1fe15a09fe5923,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224709834705484960, guid: 4b01f91282b98ef48b1fe15a09fe5923,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224709834705484960, guid: 4b01f91282b98ef48b1fe15a09fe5923,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224626927439598650, guid: 4b01f91282b98ef48b1fe15a09fe5923,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224555201106814812, guid: 4b01f91282b98ef48b1fe15a09fe5923,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224709834705484960, guid: 4b01f91282b98ef48b1fe15a09fe5923,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b01f91282b98ef48b1fe15a09fe5923, type: 2}
   m_IsPrefabAsset: 0
