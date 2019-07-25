@@ -57,7 +57,7 @@ public abstract class LerperBase : MonoBehaviour
             _StartLerpTime = Time.time;
         }
 
-        else { print("ERROR ERROR ERROR : _CanLerp = false"); }
+        else { Debug.LogError("_CanLerp = false on derived LerperBase class, but StartLerp() was called."); }
     }
 
     void FixedUpdate()

@@ -1,16 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
-/// <summary>
-///  Manages player movement inputs and physics for both PC and Mobile. On collision with player, Handles other ball's velocity changes.
-/// </summary>
+// NEXT MAJOR STEP IS FIGURE OUT HOW AND WHERE TO REFERENCE THE INPUT EVENTS IN SCRIPT! <--------------
+
 [RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(DragReleaseStateHandler))]
-public class PlayerSlingShotMechanic : MonoBehaviour
+public class SlingShotMechanic : MonoBehaviour
 {
-    public static PlayerSlingShotMechanic instance;
     public static GameObject playerGOInstance;
 
     #region PUBLIC VARIABLES
@@ -30,7 +26,6 @@ public class PlayerSlingShotMechanic : MonoBehaviour
     public Vector2 playerCurrentVelocity;
     public Vector2 newBallVelocity;
     [Space(10)]
-    public float dragDistance = 0;
     public float dragShotForce = 0;
     public float shotVelocityMaxMagnitude = 0;
     [Space(10)]
@@ -44,16 +39,8 @@ public class PlayerSlingShotMechanic : MonoBehaviour
     [Space(10)]
     [SerializeField]
     private float _BallSpeedMultiplier = 1;
-    private float _ScreenWidth; 
     // Rigidbody of ball that player is colliding with.
-    private Rigidbody2D _BallRigidBody;
-
-    private DragReleaseStateHandler _MySlingShotStateHandler;
-    private Touch _LatestTouch;
-    private Vector2 _FirstTouchPosition;
-    private Vector2 _LastTouchPosition;
-    private Vector2 _DragVector;
-    private Vector2 _PreviousDragVector;
+    private Rigidbody2D _CollidedRigidBody;
     #endregion
 
     // Handles when script instance is enabled or disabled. 
@@ -64,36 +51,27 @@ public class PlayerSlingShotMechanic : MonoBehaviour
     {
         if (instance == null)
             instance = this;
-        
+
         // If no player in scene
         if (playerGOInstance == null)
             playerGOInstance = gameObject;
 
-        GameManager.OnFixedUpdateEvent += OnFixedUpdateHandler;
-        GameManager.OnUpdateEvent += OnUpdateHandler;
-
-        _ScreenWidth = Screen.width;
-
         playerCurrentVelocity = playerRigidbody.velocity;
-        _MySlingShotStateHandler = GetComponent<DragReleaseStateHandler>();
     }
 
     // Called when monobehaviour has been disabled or attached object is destroyed. Unsubscribes Handlers.
     private void OnDisable()
     {
-        GameManager.OnFixedUpdateEvent -= OnFixedUpdateHandler;
-        GameManager.OnUpdateEvent -= OnUpdateHandler;
         playerGOInstance = null;
-        instance = null;
     }
 
-#endregion
+    #endregion
 
     #region HANDLERS
     private void OnUpdateHandler()
     {
         MovementControls();
-        
+
         if (_MySlingShotStateHandler.slingshotState == DragReleaseState.Release)
             BeforeHit();
 
@@ -138,7 +116,7 @@ public class PlayerSlingShotMechanic : MonoBehaviour
 
             Time.timeScale = regularTimeScale;
         }
-        
+
         else if (collision.gameObject.tag == ("ground") || collision.gameObject.tag == ("wall"))
         {
 
@@ -159,20 +137,16 @@ public class PlayerSlingShotMechanic : MonoBehaviour
     {
 
         // Controls 3 phases of touch movement
-#if UNITY_STANDALONE || UNITY_ANDROID 
+#if UNITY_STANDALONE || UNITY_ANDROID
         if (GameManager.instance.state == GameState.Gameplay && Input.touchCount > 0)
         {
-            
+
             _LatestTouch = Input.GetTouch(0);
             _LatestTouch.position = CameraController.instance.mainCamera.ScreenToWorldPoint(Input.GetTouch(0).position);
 
             // Create drag anchor at tap position. Slow Down time.
-            if (_LatestTouch.phase == TouchPhase.Began)
+            if ()
             {
-                _MySlingShotStateHandler.slingshotState = DragReleaseState.BeginningTap;
-                //ATTENTION YO HERE BOI :: look at next comment
-                   // Move this functionality to other script that handles what happens. this script, or at least method, just checks input
-                _FirstTouchPosition = _LatestTouch.position;
                 Time.timeScale = slowTimeScale;
             }
 
@@ -235,3 +209,4 @@ public class PlayerSlingShotMechanic : MonoBehaviour
 
     }
 }
+

@@ -2,25 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
-/// Manages spawning loop for all spawnables. 
+/// Singleton Manager spawning loop for enemy spawnables. 
 /// 1. Does NOT select what to spawn (see ItemSelector script). 
 /// 2. Spawning: If selected item has a matching pooled item, then SpawnManager spawns the pooled item. If selected item has no matching item 
-/// in pooled objects list, then a new instance of that item is instantiated. 
+///    in pooled objects list, then a new instance of that item is instantiated. 
 /// 3. PoolObject() function.
-/// 4. ResetSpawnListsAndTimers() function
+/// 4. PoolAllSpawnables() function for game reset.
 /// </summary>
 
 public class SpawnManager : MonoBehaviour
 {
+
     public static SpawnManager instance;
 
     #region UNITY CALLBACKS
-    private void Awake()
-    {
-        startMinSpawnWait = spawnMinWait;
-        startMaxSpawnWait = spawnMaxWait;
-    }
-
     private void OnEnable()
     {
         if (instance == null)
@@ -32,6 +27,12 @@ public class SpawnManager : MonoBehaviour
     {
         GameManager.OnRetryEvent -= PoolAllSpawnables;
         instance = null;
+    }
+
+    private void Awake()
+    {
+        startMinSpawnWait = spawnMinWait;
+        startMaxSpawnWait = spawnMaxWait;
     }
 
     private void Start()
@@ -61,9 +62,11 @@ public class SpawnManager : MonoBehaviour
     public Vector3 spawnPosition;
     #endregion
 
+    // Handles spawn loop
     IEnumerator CoSpawnItem()
     {
         yield return new WaitForSeconds(startWait);
+
         while (IsSpawning)
         {
             spawnWait = Random.Range(spawnMinWait, spawnMaxWait);
@@ -76,7 +79,7 @@ public class SpawnManager : MonoBehaviour
             spawnable = ItemSelector.instance.SelectItem();
 
             // 2. Check object pool for matching item
-            while (index < pooledObjectsList.Count)
+            for ( ; index < pooledObjectsList.Count; index++ )
             {
                 // iterate through pooled obj list. if equivalent obj, spawn it.
                 if (pooledObjectsList[index].tag == spawnable.tag)
@@ -85,12 +88,11 @@ public class SpawnManager : MonoBehaviour
                     spawnable = pooledObjectsList[index];
                     break;
                 }
-                index++;
             }
 
             // Unpool and move GameObject to spawnPosition. Add item to spawnablesInGameList.
             // random spawn position on x and z axis min/max of spawn values. spawn position does not go above 1 on the y axis.  <---- ???
-            if (spawnPooledObject)
+            if (spawnPooledObject == true)
             {
                 spawnable.SetActive(true);
                 spawnable.transform.position = spawnPosition + transform.TransformPoint(0, 0, 0);
@@ -109,7 +111,7 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    /// Sets passed object to inactive and pools it. Called by OutOfBounds and BallCollisions Script
+    // Sets passed object to inactive and pools it. Called by OutOfBounds and BallCollisions Script
     public void PoolObject(GameObject _pooledObj)
     {
         _pooledObj.SetActive(false);

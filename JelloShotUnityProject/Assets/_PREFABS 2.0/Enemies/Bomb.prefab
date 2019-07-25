@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4176349440145544}
   - component: {fileID: 58599369502720890}
-  - component: {fileID: 114494130118635224}
   m_Layer: 14
   m_Name: ExplosiveRange
   m_TagString: bomb
@@ -52,7 +51,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4998414728814140}
-  - component: {fileID: 114475998885066872}
   - component: {fileID: 50522773166881516}
   - component: {fileID: 58628511136070180}
   m_Layer: 14
@@ -153,30 +151,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1
---- !u!114 &114475998885066872
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1674900621242554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb1fff6b003acfc46a5909253e5bd625, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _BombCollisionTrigger: {fileID: 0}
-  _ExplosiveForce: 30
---- !u!114 &114494130118635224
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1336926305180656}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34897a00091d38742a421a190e08d940, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &212590885836042338
 SpriteRenderer:
   m_ObjectHideFlags: 1
