@@ -94,7 +94,7 @@ public class PlayerSlingShotMechanic : MonoBehaviour
     {
         MovementControls();
         
-        if (_MySlingShotStateHandler.slingshotState == DragReleaseState.Release)
+        if (_MySlingShotStateHandler.slingshotState == TouchInputState.Release)
             BeforeHit();
 
         else
@@ -169,7 +169,7 @@ public class PlayerSlingShotMechanic : MonoBehaviour
             // Create drag anchor at tap position. Slow Down time.
             if (_LatestTouch.phase == TouchPhase.Began)
             {
-                _MySlingShotStateHandler.slingshotState = DragReleaseState.BeginningTap;
+                _MySlingShotStateHandler.slingshotState = TouchInputState.BeginningTap;
                 //ATTENTION YO HERE BOI :: look at next comment
                    // Move this functionality to other script that handles what happens. this script, or at least method, just checks input
                 _FirstTouchPosition = _LatestTouch.position;
@@ -179,7 +179,7 @@ public class PlayerSlingShotMechanic : MonoBehaviour
             // Drag circle to latest touch position. 
             if (_LatestTouch.phase == TouchPhase.Stationary || _LatestTouch.phase == TouchPhase.Moved)
             {
-                _MySlingShotStateHandler.slingshotState = DragReleaseState.WindUp;
+                _MySlingShotStateHandler.slingshotState = TouchInputState.Dragging;
 
                 _LastTouchPosition = _LatestTouch.position;
 
@@ -197,7 +197,7 @@ public class PlayerSlingShotMechanic : MonoBehaviour
             // Applies shotVelocity to player rigidbody at transform.position. Speeds up timeScale. 
             else if (_LatestTouch.phase == TouchPhase.Ended)
             {
-                _MySlingShotStateHandler.slingshotState = DragReleaseState.Release;
+                _MySlingShotStateHandler.slingshotState = TouchInputState.Release;
                 MinMaxVelocity();
 
                 playerRigidbody.AddForceAtPosition(shotVelocity, transform.position, ForceMode2D.Impulse);
@@ -226,7 +226,7 @@ public class PlayerSlingShotMechanic : MonoBehaviour
             // Moves touch position visuals off screen.
             void Reset()
             {
-                _MySlingShotStateHandler.slingshotState = DragReleaseState.AtRest;
+                _MySlingShotStateHandler.slingshotState = TouchInputState.AtRest;
                 SlingShotVisuals.instance.MoveVisualsOffScreen();
             }
         }

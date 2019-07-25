@@ -49,21 +49,82 @@ public class SlingShotMechanic : MonoBehaviour
     // Called when monobehaviour has been enabled. Subscribes Handlers.
     private void OnEnable()
     {
-        if (instance == null)
-            instance = this;
-
         // If no player in scene
         if (playerGOInstance == null)
             playerGOInstance = gameObject;
 
         playerCurrentVelocity = playerRigidbody.velocity;
-    }
 
+        DragReleaseInputController.OnTouchInputEvent += OnTouchInputObserver;
+    }
     // Called when monobehaviour has been disabled or attached object is destroyed. Unsubscribes Handlers.
     private void OnDisable()
     {
         playerGOInstance = null;
     }
+
+    private void OnTouchInputObserver(Vector3 _dragVector, float _dragDistance, TouchInputState _state)
+    {
+        // Controls 3 phases of touch movement
+#if UNITY_STANDALONE || UNITY_ANDROID
+        if (GameManager.instance.state == GameState.Gameplay)
+        {
+            // Create drag anchor at tap position. Slow Down time.
+            if (_state == TouchInputState.BeginningTap)
+            {
+                Time.timeScale = slowTimeScale;
+            }
+
+            // Drag circle to latest touch position. 
+            if (_state == TouchInputState.Dragging)
+            {
+                shotVelocity = new Vector2(_dragVector.x * _dragDistance * dragShotForce, _dragVector.y * _dragDistance * dragShotForce);
+                shotVelocity = Vector2.ClampMagnitude(shotVelocity, shotVelocityMaxMagnitude);
+
+                SlingShotVisuals.instance.MoveTouchVisuals(transform.position, shotVelocity, _FirstTouchPosition, _LastTouchPosition);
+            }
+
+            // Multiplies dragVector, dragDist, and slingShotForce to get shotVelocity. 
+            // Applies shotVelocity to player rigidbody at transform.position. Speeds up timeScale. 
+            else if (_LatestTouch.phase == TouchPhase.Ended)
+            {
+                _MySlingShotStateHandler.slingshotState = TouchInputState.Release;
+                MinMaxVelocity();
+
+                playerRigidbody.AddForceAtPosition(shotVelocity, transform.position, ForceMode2D.Impulse);
+
+                Time.timeScale = fastTimeScale;
+
+                Reset();
+            }
+
+            // if shot velocity is slower than min/max velocities, shotVelocity = appropriate min/max velocities
+            void MinMaxVelocity()
+            {
+                if (shotVelocity.x > 0)
+                    shotVelocity.x = Mathf.Max(shotVelocity.x, 10);
+
+                if (shotVelocity.x < 0)
+                    shotVelocity.x = Mathf.Min(shotVelocity.x, -10);
+
+                if (shotVelocity.y > 0)
+                    shotVelocity.y = Mathf.Max(shotVelocity.y, 10);
+
+                if (shotVelocity.y < 0)
+                    shotVelocity.y = Mathf.Min(shotVelocity.y, -10);
+            }
+
+            // Moves touch position visuals off screen.
+            void Reset()
+            {
+                _MySlingShotStateHandler.slingshotState = TouchInputState.AtRest;
+                SlingShotVisuals.instance.MoveVisualsOffScreen();
+            }
+        }
+#endif
+    }
+
+
 
     #endregion
 
@@ -72,7 +133,7 @@ public class SlingShotMechanic : MonoBehaviour
     {
         MovementControls();
 
-        if (_MySlingShotStateHandler.slingshotState == DragReleaseState.Release)
+        if (_MySlingShotStateHandler.slingshotState == TouchInputState.Release)
             BeforeHit();
 
         else
@@ -136,75 +197,7 @@ public class SlingShotMechanic : MonoBehaviour
     private void MovementControls()
     {
 
-        // Controls 3 phases of touch movement
-#if UNITY_STANDALONE || UNITY_ANDROID
-        if (GameManager.instance.state == GameState.Gameplay && Input.touchCount > 0)
-        {
 
-            _LatestTouch = Input.GetTouch(0);
-            _LatestTouch.position = CameraController.instance.mainCamera.ScreenToWorldPoint(Input.GetTouch(0).position);
-
-            // Create drag anchor at tap position. Slow Down time.
-            if ()
-            {
-                Time.timeScale = slowTimeScale;
-            }
-
-            // Drag circle to latest touch position. 
-            if (_LatestTouch.phase == TouchPhase.Stationary || _LatestTouch.phase == TouchPhase.Moved)
-            {
-                _MySlingShotStateHandler.slingshotState = DragReleaseState.WindUp;
-
-                _LastTouchPosition = _LatestTouch.position;
-
-                // Reference firstTouchPosition and lastTouchPosition to get dragVector and dragDistance.
-                _DragVector = new Vector2(_FirstTouchPosition.x - _LastTouchPosition.x, _FirstTouchPosition.y - _LastTouchPosition.y);
-                dragDistance = Vector2.Distance(_FirstTouchPosition, _LastTouchPosition);
-
-                shotVelocity = new Vector2(_DragVector.x * dragDistance * dragShotForce, _DragVector.y * dragDistance * dragShotForce);
-                shotVelocity = Vector2.ClampMagnitude(shotVelocity, shotVelocityMaxMagnitude);
-
-                SlingShotVisuals.instance.MoveTouchVisuals(transform.position, shotVelocity, _FirstTouchPosition, _LastTouchPosition);
-            }
-
-            // Multiplies dragVector, dragDist, and slingShotForce to get shotVelocity. 
-            // Applies shotVelocity to player rigidbody at transform.position. Speeds up timeScale. 
-            else if (_LatestTouch.phase == TouchPhase.Ended)
-            {
-                _MySlingShotStateHandler.slingshotState = DragReleaseState.Release;
-                MinMaxVelocity();
-
-                playerRigidbody.AddForceAtPosition(shotVelocity, transform.position, ForceMode2D.Impulse);
-
-                Time.timeScale = fastTimeScale;
-
-                Reset();
-            }
-
-            // if shot velocity is slower than min/max velocities, shotVelocity = appropriate min/max velocities
-            void MinMaxVelocity()
-            {
-                if (shotVelocity.x > 0)
-                    shotVelocity.x = Mathf.Max(shotVelocity.x, 10);
-
-                if (shotVelocity.x < 0)
-                    shotVelocity.x = Mathf.Min(shotVelocity.x, -10);
-
-                if (shotVelocity.y > 0)
-                    shotVelocity.y = Mathf.Max(shotVelocity.y, 10);
-
-                if (shotVelocity.y < 0)
-                    shotVelocity.y = Mathf.Min(shotVelocity.y, -10);
-            }
-
-            // Moves touch position visuals off screen.
-            void Reset()
-            {
-                _MySlingShotStateHandler.slingshotState = DragReleaseState.AtRest;
-                SlingShotVisuals.instance.MoveVisualsOffScreen();
-            }
-        }
-#endif
         #endregion
 
     }

@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum DragReleaseState
+public enum TouchInputState
 {
     AtRest, // 0
     BeginningTap, // 1
-    WindUp, // 2
+    Dragging, // 2
     Release // 3
 }
 
@@ -14,11 +14,11 @@ public class DragReleaseStateHandler : MonoBehaviour
 {
     private void OnEnable()
     {
-        slingshotState = DragReleaseState.AtRest;
+        slingshotState = TouchInputState.AtRest;
     }
 
-    DragReleaseState _SlingShotState;
-    public DragReleaseState slingshotState
+    TouchInputState _SlingShotState;
+    public TouchInputState slingshotState
     {
         get { return _SlingShotState; }
         set { _SlingShotState = value; }
