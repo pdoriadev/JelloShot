@@ -16,11 +16,15 @@ public class CameraController : MonoBehaviour
 
     //// DEFINE SCREEN.WIDTH AND EVERYTHING CAMERA RELATED HERE!!!
 
-    private void OnEnable()
+    private void Awake()
+    {
+        mainCamera = GetComponent<Camera>();
+    }
+
+    private void Start()
     {
         if (instance == null)
             instance = this;
-        mainCamera = GetComponent<Camera>();
     }
 
     private void OnDisable()

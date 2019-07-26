@@ -344,10 +344,9 @@
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/_SCRIPTS 2.0/Not_Using/PcControls.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/_SCRIPTS 2.0/Not_Using/PlayerScreenWrap.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/_SCRIPTS 2.0/OutOfBounds.cs"
--i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/_SCRIPTS 2.0/Player/DragReleaseInputController.cs"
--i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/_SCRIPTS 2.0/Player/DragReleaseStateHandler.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/_SCRIPTS 2.0/Player/PlayerCollisions.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/_SCRIPTS 2.0/Player/PlayerSlingShotMechanic.cs"
+-i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/_SCRIPTS 2.0/Player/SingleTouchInputController.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/_SCRIPTS 2.0/Player/SlingShotMechanic.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/_SCRIPTS 2.0/Player/SlingShotVisuals.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/_SCRIPTS 2.0/Reflector.cs"
@@ -418,6 +417,7 @@
 -i:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/DamagerOutOfBounds.cs
 -i:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/GroundDeath.cs
 -i:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/JellyShader/Example/Scripts/JellyClickReceiver.cs
+-i:C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/PlayerVisualsController.cs
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/Virtual Joystick Pack/Examples/2D Example/Player2DExample.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/Virtual Joystick Pack/Examples/3D Example/Player3DExample.cs"
 -i:"C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Assets/Virtual Joystick Pack/Scripts/Base/Joystick.cs"

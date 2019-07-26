@@ -1,10 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[RequireComponent(typeof(DragReleaseStateHandler))]
-public class DragReleaseInputController : MonoBehaviour
+// Checks for touch inputs and passes relevant input data through OnTouchInput event as a struct argument. 
+
+public enum TouchInputState
 {
-    public static DragReleaseInputController instance;
+    AtRest, // 0
+    BeginningTap, // 1
+    Dragging, // 2
+    Release // 3
+}
+
+public class SingleTouchInputController : MonoBehaviour
+{
+    public static SingleTouchInputController instance;
 
     // Touch Input Event
     public delegate void OnTouchInput(TouchInfo _touchInfo);
@@ -14,8 +23,6 @@ public class DragReleaseInputController : MonoBehaviour
     private Camera _TouchCamera;
     private float _ScreenWidth;
 
-    // Touch info
-    DragReleaseStateHandler _MyDragReleaseStateHandler;
     private Touch _LatestTouch;
 
     #region UNITY CALLBACKS
@@ -24,15 +31,17 @@ public class DragReleaseInputController : MonoBehaviour
         if (instance == null)
             instance = this;
 
-        _TouchCamera = CameraController.instance.mainCamera;
+        _TouchInfo = new TouchInfo(_LatestTouch);
+        //_TouchCamera = CameraController.instance.mainCamera;
         _ScreenWidth = Screen.width;
-        _MyDragReleaseStateHandler = GetComponent<DragReleaseStateHandler>();
     }
     private void OnDisable()
     {
         instance = null;
     }
     #endregion
+
+
 
     private void Update()
     {
@@ -49,26 +58,31 @@ public class DragReleaseInputController : MonoBehaviour
         if (Input.touchCount > 0)
         {
             _LatestTouch = Input.GetTouch(0);
-            _LatestTouch.position = _TouchCamera.ScreenToWorldPoint(Input.GetTouch(0).position);
+            _LatestTouch.position = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
 
             // Create drag anchor at tap position. Slow Down time.
             if (_LatestTouch.phase == TouchPhase.Began)
             {
-                _MyDragReleaseStateHandler.slingshotState = TouchInputState.BeginningTap;
                 _TouchInfo = new TouchInfo(_LatestTouch);
+                _TouchInfo.touchState = TouchInputState.BeginningTap;
+                Debug.Log("Tap Beginning");
+                
                 OnTouchInputEvent(_TouchInfo);
             }
 
             // Drag circle to latest touch position. 
             if (_LatestTouch.phase == TouchPhase.Stationary || _LatestTouch.phase == TouchPhase.Moved)
             {
-                _MyDragReleaseStateHandler.slingshotState = TouchInputState.Dragging;
+                _TouchInfo.touchState = TouchInputState.Dragging;
 
-                _LastTouchPosition = _LatestTouch.position;
+                _TouchInfo.lastTouchPos = _LatestTouch.position;
 
                 // Reference firstTouchPosition and lastTouchPosition to get dragVector and dragDistance.
-                _TouchInfo._DragVector = new Vector3(_FirstTouchPosition.x - _LastTouchPosition.x, _FirstTouchPosition.y - _LastTouchPosition.y);
-                _TouchInfo._DragDistance = Vector3.Distance(_FirstTouchPosition, _LastTouchPosition);
+                _TouchInfo.dragVector = new Vector3(_TouchInfo.firstTouchPos.x - _TouchInfo.lastTouchPos.x, _TouchInfo.firstTouchPos.y - _TouchInfo.lastTouchPos.y);
+                // Can change this to square magnitude method
+                _TouchInfo.dragDistance = Vector3.Distance(_TouchInfo.firstTouchPos, _TouchInfo.lastTouchPos);
+
+                Debug.Log("Dragging");
 
                 OnTouchInputEvent(_TouchInfo);
             }
@@ -77,15 +91,18 @@ public class DragReleaseInputController : MonoBehaviour
             // Applies shotVelocity to player rigidbody at transform.position. Speeds up timeScale. 
             else if (_LatestTouch.phase == TouchPhase.Ended)
             {
-                _MyDragReleaseStateHandler.slingshotState = TouchInputState.Release;
+                _TouchInfo.touchState = TouchInputState.Release;
                 OnTouchInputEvent(_TouchInfo);
+
+                Debug.Log("Ended");
 
                 Reset();
             }
 
             void Reset()
             {
-                _MyDragReleaseStateHandler.slingshotState = TouchInputState.AtRest;
+                Debug.Log("Reset");
+                _TouchInfo.touchState = TouchInputState.AtRest;
                 OnTouchInputEvent(_TouchInfo);
             }
         }
@@ -94,18 +111,18 @@ public class DragReleaseInputController : MonoBehaviour
 
 public struct TouchInfo
 {
-    public Vector3 _FirstTouchPos;
-    public Vector3 _LastTouchPos;
-    public Vector3 _DragVector;
-    public float _DragDistance;
-    public TouchInputState _TouchState;
+    public Vector3 firstTouchPos;
+    public Vector3 lastTouchPos;
+    public Vector3 dragVector;
+    public float dragDistance;
+    public TouchInputState touchState;
 
     public TouchInfo(Touch _touch)
     {
-        _FirstTouchPos = _touch.position;
-        _LastTouchPos = _touch.position;
-        _DragVector = _FirstTouchPos - _LastTouchPos;
-        _DragDistance = 0;
-        _TouchState = TouchInputState.BeginningTap;
+        firstTouchPos = _touch.position;
+        lastTouchPos = _touch.position;
+        dragVector = firstTouchPos - lastTouchPos;
+        dragDistance = 0;
+        touchState = TouchInputState.BeginningTap;
     }
 }
