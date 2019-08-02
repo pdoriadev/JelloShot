@@ -6,13 +6,13 @@ JelloShotUnityProject/Library/PackageCache/com.unity.multiplayer-hlapi@1.0.2/Tes
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
-JelloShotUnityProject/[Ll]ibrary/
-JelloShotUnityProject/[Tt]emp/
-JelloShotUnityProject/[Oo]bj/
-JelloShotUnityProject/[Bb]uild/
-JelloShotUnityProject/[Bb]uilds/
-JelloShotUnityProject/[Ll]ogs/
-JelloShotUnityProject/[Mm]emoryCaptures/
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Mm]emoryCaptures/
 
 # Never ignore Asset meta data
 !/[Aa]ssets/**/*.meta

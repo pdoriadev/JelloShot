@@ -319,16 +319,16 @@
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.12f1/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
-      <HintPath>C:/Users/peter/Documents/JelloShotProject/JelloShotProjectMainFolder/JelloShotRepo/JelloShotUnityProject/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Editor.dll</HintPath>
+      <HintPath>C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>C:/Users/peter/Documents/JelloShotProject/JelloShotProjectMainFolder/JelloShotRepo/JelloShotUnityProject/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.StandardEvents.dll</HintPath>
+      <HintPath>C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>C:/Users/peter/Documents/JelloShotProject/JelloShotProjectMainFolder/JelloShotRepo/JelloShotUnityProject/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Tracker.dll</HintPath>
+      <HintPath>C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Tracker.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe">
-      <HintPath>C:/Users/peter/Documents/JelloShotProject/JelloShotProjectMainFolder/JelloShotRepo/JelloShotUnityProject/Library/PackageCache/com.unity.collections@0.0.9-preview.3/System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <HintPath>C:/Users/peter/Documents/JelloShotProject/JelloShotRepo/JelloShotUnityProject/Library/PackageCache/com.unity.collections@0.0.9-preview.3/System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.12f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
