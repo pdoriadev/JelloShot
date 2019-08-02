@@ -242,7 +242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39d146723ca4e34449b62b02d2319724, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _IsPooled: 1
+  _ShouldPool: 1
   onKillEvent:
     m_PersistentCalls:
       m_Calls: []

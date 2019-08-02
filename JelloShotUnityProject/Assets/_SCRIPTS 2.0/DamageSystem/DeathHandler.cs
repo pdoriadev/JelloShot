@@ -6,14 +6,15 @@ using UnityEngine.Events;
 public class DeathHandler : MonoBehaviour
 {
     [SerializeField]
-    private bool _IsPooled = true;
+    private bool _ShouldPool = true;
     public UnityEvent onKillEvent;
 
     public virtual void OnKill()
     {
         onKillEvent.Invoke();
-        if (_IsPooled)
+        if (_ShouldPool)
         {
+            Debug.Log("DeathHandler OnKill");
             ScoreManager.instance.IterateBallsKoScore();
             SpawnManager.instance.PoolObject(gameObject);
         }

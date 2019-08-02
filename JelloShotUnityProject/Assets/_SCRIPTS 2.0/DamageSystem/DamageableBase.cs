@@ -64,8 +64,9 @@ public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
 
     public virtual void OnTakeDmg()
     {
-        if (currentHealth < maxHealth)
+        if (currentHealth < 1 && _IsCheckingDeath == false)
         {
+            Debug.Log("Starting Co");
             StartCoroutine(CheckForDeathCo());
         }
     }
@@ -116,24 +117,30 @@ public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
                 _WaitTime = 0;
         }
     }
+
+    private bool _IsCheckingDeath = false;
     protected IEnumerator CheckForDeathCo()
     {
-        bool _isChecking = true;
-        while (_isChecking == true)
+        _IsCheckingDeath = true;
+        while (_IsCheckingDeath == true)
         {
             yield return new WaitForSeconds(waitTime);
             if (DeathCheck() == true)
             {
+                _IsCheckingDeath = false;
                 OnDeath();
             }
         }
+
+        Debug.Log("Is CheckForDeathCo running? " + _IsCheckingDeath);
         yield return null;
+
     }
 
     protected virtual void OnDeath()
     {
-        Debug.Log("OnDeath");
         StopCoroutine(CheckForDeathCo());
+        Debug.Log("Is CheckForDeathCo running? " + _IsCheckingDeath);
         currentHealth = maxHealth;
         // Handles any death related functionality unrelated to health system
         GetComponent<DeathHandler>().OnKill();

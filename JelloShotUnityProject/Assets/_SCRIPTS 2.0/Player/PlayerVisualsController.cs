@@ -41,8 +41,6 @@ public class PlayerVisualsController : MonoBehaviour
     {
         _ShotMagnitPercent = _slingShotInfo.shotVelocity.sqrMagnitude / (_slingShotInfo.slingShotMaxMagnitude * _slingShotInfo.slingShotMaxMagnitude);
 
-        Debug.Log("Percent: " + _ShotMagnitPercent);
-
         currentSize = maxSize - (maxSize * _ShotMagnitPercent);
 
         if (currentSize.x < minSize.x)

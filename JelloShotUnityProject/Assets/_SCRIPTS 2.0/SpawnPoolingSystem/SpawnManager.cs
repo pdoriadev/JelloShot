@@ -114,6 +114,7 @@ public class SpawnManager : MonoBehaviour
     // Sets passed object to inactive and pools it. Called by OutOfBounds and BallCollisions Script
     public void PoolObject(GameObject _pooledObj)
     {
+        Debug.Log("Pooling");
         _pooledObj.SetActive(false);
         pooledObjectsList.Add(_pooledObj);
         spawnablesInGame.Remove(_pooledObj);
