@@ -51,11 +51,13 @@ public class PlayerVisualsController : MonoBehaviour
         }
 
         _PlayerTransform.localScale = currentSize;
-    }  
+    }
 
+    private float _SizeNumerator = 1f;
+    private float _SizeDenominator = 1f;
     void ChangePlayerVisOnRelease()
     {
-        _SizeLerper.StartLerp(maxSize.magnitude, currentSize.magnitude);
+        _SizeLerper.StartLerp(_SizeNumerator, _SizeDenominator);
     }
 
 }
