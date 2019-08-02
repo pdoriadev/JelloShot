@@ -9939,7 +9939,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shotVelocity: {x: 0, y: 0, z: 0}
   shotVelocityMaxMagnitude: 200
-  shotForceMultiplier: 10
+  shotForceMultiplier: 1.4
   playerReboundVelocity: {x: 0, y: 0, z: 0}
   fastTimeScale: 1.25
   regularTimeScale: 1
@@ -11473,7 +11473,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1630428563}
   - component: {fileID: 1630428565}
-  - component: {fileID: 1630428564}
   - component: {fileID: 1630428566}
   m_Layer: 10
   m_Name: LevelBounds
@@ -11497,19 +11496,6 @@ Transform:
   m_Father: {fileID: 1862596381}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1630428564
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 114014030460388354, guid: fd7d912c31352be4ea512fe04364b761,
-    type: 3}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1630428562}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7051bd8aad82634d9d2af91122d5d6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &1630428565
 BoxCollider2D:
   m_ObjectHideFlags: 0

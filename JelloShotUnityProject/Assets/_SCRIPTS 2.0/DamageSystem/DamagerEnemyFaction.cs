@@ -20,6 +20,8 @@ public class DamagerEnemyFaction : Damager
                 _HasDamaged = true;
                 
                 base.DamageOnColliderInteraction(ref _collision);
+
+                _HasDamaged = false;
             }
         }
     }

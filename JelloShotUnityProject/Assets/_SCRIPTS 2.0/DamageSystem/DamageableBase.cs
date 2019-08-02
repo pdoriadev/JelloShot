@@ -48,7 +48,7 @@ public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
         get { return _IsInvulnerable; }
         set { _IsInvulnerable = value; }
     }
-    // Alternative To this is to use a OnTakeDmg event that dependent methods can listen to. 
+    // Alternative To this is to use a OnTakeDmg event listens to all the other TakeDmg methods
     // ADVANTAGE: Damager can directly interact with Damageable. Understandable. Not inefficient.
     #region IDamageTakerMethods
     public virtual bool CanDamageCheck()
@@ -64,7 +64,7 @@ public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
 
     public virtual void OnTakeDmg()
     {
-        if (currentHealth < 1)
+        if (currentHealth < maxHealth)
         {
             StartCoroutine(CheckForDeathCo());
         }
@@ -132,6 +132,7 @@ public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
 
     protected virtual void OnDeath()
     {
+        Debug.Log("OnDeath");
         StopCoroutine(CheckForDeathCo());
         currentHealth = maxHealth;
         // Handles any death related functionality unrelated to health system

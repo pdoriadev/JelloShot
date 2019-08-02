@@ -1,9 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-// Write the script description here
-
+/// <summary>
+/// - Controls slingshot physics and listens to SingleTouchInputController's events to know when to enter each phase of the slingshot. 
+/// - Has events for when the slingshot changes position (pre-release) and when it is released. 
+/// - Clamps player rigidbody's velocity so (1) it will never exceed the max velocity and (2) whenever the player shoots the slingshot, 
+///     it will always be at least a minimum velocity. 
+/// - Adds additional force to each enemy the player collides with. 
+/// - Slows down time when slingshot is pulled back. Resets time upon slingshot release. 
+/// - SlingShotInfo struct at bottom of struct for events to pass relevant info. 
+/// - Calls animation clips in BounceAnimation script on OnCollisionEnter and OnCollisionExit
+/// 
+/// If I have time, I'd like to separate this functionality, some which can be easily done, but for the time being, it works.
+/// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
 public class SlingShotMechanic : MonoBehaviour
 {
@@ -109,7 +118,6 @@ public class SlingShotMechanic : MonoBehaviour
                     shotVelocity.y = Mathf.Min(shotVelocity.y, -10);
             }
 
-            // Moves touch position visuals off screen.
             void Reset()
             {
                 if (slingShotResetEvent != null)

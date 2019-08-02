@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-// Checks for touch inputs and passes relevant input data through OnTouchInput event as a struct argument. 
 
 public enum TouchInputState
 {
@@ -11,6 +10,9 @@ public enum TouchInputState
     Release // 3
 }
 
+/// <summary>
+/// Checks for touch inputs and passes relevant input data through OnTouchInput event as a struct argument. 
+/// </summary>
 public class SingleTouchInputController : MonoBehaviour
 {
     public static SingleTouchInputController instance;
