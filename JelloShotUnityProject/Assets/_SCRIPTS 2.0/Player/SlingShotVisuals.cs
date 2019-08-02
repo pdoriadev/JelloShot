@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
@@ -12,40 +13,45 @@ public class SlingShotVisuals : MonoBehaviour
     // Arrows rotating at First touch
     public Transform arrowsAtFirstTouchTransform;
     public Transform latestTouchVisualTransform;
-    public Vector2 offScreenPosition;
+    public Vector3 offScreenPosition;
     public float angleArrowIsPointing;
 
     private void OnEnable()
     {
         if (instance == null)
             instance = this;
+
+        SlingShotMechanic.slingShotMovesEvent += MoveVisualsOnSlingMove;
+        SlingShotMechanic.slingShotResetEvent += MoveVisualsOffScreen;
     }
 
     private void OnDisable()
     {
+        SlingShotMechanic.slingShotMovesEvent -= MoveVisualsOnSlingMove;
+        SlingShotMechanic.slingShotResetEvent -= MoveVisualsOffScreen;
         instance = null;
     }
-    
+
     // NOTE: Maybe make struct of these values? 
-    public void MoveTouchVisuals(Vector2 _playerPosition, Vector2 _shotVelocity, Vector2 _firstTouchPosition, Vector2 _lastTouchPosition) 
+    private void MoveVisualsOnSlingMove(TouchInfo _touchInfo, SlingShotInfo _slingShotInfo)
     {
 
         // arrows that rotate around player. 
-        ballArrowTransform.position = _playerPosition;
+        ballArrowTransform.position = _slingShotInfo.slingerRigidbody.transform.position;
         // ballArrowTransform and arrowsAtFirstTouchPosition's angle of rotation
-        angleArrowIsPointing = Vector3.Angle(Vector3.up, _shotVelocity);
+        angleArrowIsPointing = Vector3.Angle(Vector3.up, _slingShotInfo.shotVelocity);
 
         // Need 2 statements to calculate angle because Vector3.Angle only goes up to 180. 
         // Does not calculate angle going in one direction. Takes shortest distance from either side. 
         // if lastTouchPosition is right of firstTouchPosition, the arrowTransform's rotation changes to match
-        if (_lastTouchPosition.x > _firstTouchPosition.x)
+        if (_touchInfo.lastTouchPos.x > _touchInfo.firstTouchPos.x)
         {
             ballArrowTransform.eulerAngles = new Vector3(0, 0, angleArrowIsPointing);
             arrowsAtFirstTouchTransform.eulerAngles = new Vector3(0, 0, angleArrowIsPointing);
             latestTouchVisualTransform.eulerAngles = new Vector3(0, 0, angleArrowIsPointing);
         }
-            
-        if (_lastTouchPosition.x <= _firstTouchPosition.x)
+
+        if (_touchInfo.lastTouchPos.x <= _touchInfo.firstTouchPos.x)
         {
             ballArrowTransform.eulerAngles = new Vector3(0, 0, 360 - angleArrowIsPointing);
             arrowsAtFirstTouchTransform.eulerAngles = new Vector3(0, 0, 360 - angleArrowIsPointing);
@@ -53,10 +59,10 @@ public class SlingShotVisuals : MonoBehaviour
         }
 
         // Moves finger touch visual to the latest touch position
-        latestTouchVisualTransform.position = _lastTouchPosition;
+        latestTouchVisualTransform.position = _touchInfo.lastTouchPos;
         // Moves big arrows to first touch position
-        arrowsAtFirstTouchTransform.position = _firstTouchPosition;
-    }   
+        arrowsAtFirstTouchTransform.position = _touchInfo.firstTouchPos;
+    }
 
     public void MoveVisualsOffScreen()
     {

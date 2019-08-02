@@ -22,13 +22,18 @@ public class SizeLerper : LerperBase
     [SerializeField]
     private Vector2 _ObjNextScale;   
 
-    public override void StartLerp(float _currentHealth, float _maxHealth)
+    public override void StartLerp(float _lerpToValue, float _previousValue)
     {
         _ObjStartLerpScale = transform.localScale;
 
-        float _ScaleDifference = (_currentHealth + 0.1f) / _maxHealth;
+        if (_lerpToValue == 0)
+        {
+            _lerpToValue = 0.1f;
+        }
+
+        float _ScaleDifference = (_lerpToValue) / _previousValue;
         _ObjNextScale = new Vector2(_ObjScaleAtSpawn.x * _ScaleDifference, _ObjScaleAtSpawn.y * _ScaleDifference);
-        base.StartLerp(_currentHealth, _maxHealth);
+        base.StartLerp(_lerpToValue, _previousValue);
     }
 
     protected override void HandleLerp()

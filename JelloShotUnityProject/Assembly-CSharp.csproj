@@ -101,6 +101,7 @@
     <Compile Include="Assets\_SCRIPTS 2.0\OutOfBounds.cs" />
     <Compile Include="Assets\_SCRIPTS 2.0\Player\PlayerCollisions.cs" />
     <Compile Include="Assets\_SCRIPTS 2.0\Player\PlayerSlingShotMechanic.cs" />
+    <Compile Include="Assets\_SCRIPTS 2.0\Player\PlayerVisualsController.cs" />
     <Compile Include="Assets\_SCRIPTS 2.0\Player\SingleTouchInputController.cs" />
     <Compile Include="Assets\_SCRIPTS 2.0\Player\SlingShotMechanic.cs" />
     <Compile Include="Assets\_SCRIPTS 2.0\Player\SlingShotVisuals.cs" />
@@ -119,7 +120,6 @@
     <Compile Include="Assets\DamagerOutOfBounds.cs" />
     <Compile Include="Assets\GroundDeath.cs" />
     <Compile Include="Assets\JellyShader\Example\Scripts\JellyClickReceiver.cs" />
-    <Compile Include="Assets\PlayerVisualsController.cs" />
     <Compile Include="Assets\Virtual Joystick Pack\Examples\2D Example\Player2DExample.cs" />
     <Compile Include="Assets\Virtual Joystick Pack\Examples\3D Example\Player3DExample.cs" />
     <Compile Include="Assets\Virtual Joystick Pack\Scripts\Base\Joystick.cs" />

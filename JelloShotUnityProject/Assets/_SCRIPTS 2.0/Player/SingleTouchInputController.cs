@@ -65,7 +65,6 @@ public class SingleTouchInputController : MonoBehaviour
             {
                 _TouchInfo = new TouchInfo(_LatestTouch);
                 _TouchInfo.touchState = TouchInputState.BeginningTap;
-                Debug.Log("Tap Beginning");
                 
                 OnTouchInputEvent(_TouchInfo);
             }
@@ -82,8 +81,6 @@ public class SingleTouchInputController : MonoBehaviour
                 // Can change this to square magnitude method
                 _TouchInfo.dragDistance = Vector3.Distance(_TouchInfo.firstTouchPos, _TouchInfo.lastTouchPos);
 
-                Debug.Log("Dragging");
-
                 OnTouchInputEvent(_TouchInfo);
             }
 
@@ -94,14 +91,11 @@ public class SingleTouchInputController : MonoBehaviour
                 _TouchInfo.touchState = TouchInputState.Release;
                 OnTouchInputEvent(_TouchInfo);
 
-                Debug.Log("Ended");
-
                 Reset();
             }
 
             void Reset()
             {
-                Debug.Log("Reset");
                 _TouchInfo.touchState = TouchInputState.AtRest;
                 OnTouchInputEvent(_TouchInfo);
             }

@@ -7,17 +7,21 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class SlingShotMechanic : MonoBehaviour
 {
-    public static GameObject playerGOInstance;
+
+    public delegate void SlingShotMoves(TouchInfo _touchInfo, SlingShotInfo _slingShotInfo);
+    public static event SlingShotMoves slingShotMovesEvent;
+    public delegate void SlingShotReset();
+    public static event SlingShotReset slingShotResetEvent;
 
     #region PUBLIC VARIABLES
     [Space(10)]
-    public Vector2 offScreenPosition;
-    public Vector2 shotVelocity;
-    public Vector2 newBallVelocity;
+    public Vector3 shotVelocity;
+    public float shotVelocityMaxMagnitude = 0;
+    public float shotForceMultiplier = 0;
 
     [Space(10)]
-    public float dragShotForce = 0;
-    public float shotVelocityMaxMagnitude = 0;
+    public Vector3 playerReboundVelocity;
+
     [Space(10)]
     public float fastTimeScale = 1.25f;
     public float regularTimeScale = 1f;
@@ -27,27 +31,25 @@ public class SlingShotMechanic : MonoBehaviour
     #region PRIVATE VARIABLES
     [Space(10)]
     [SerializeField]
-    private float _BallSpeedMultiplier = 1;
+    private float _OtherBallSpeedMultip = 1;
     // Rigidbody of ball that player is colliding with.
     private Rigidbody2D _CollidedRigidBody;
     private Rigidbody2D playerRigidbody;
+    private SlingShotInfo slingShotInfo;
     #endregion
 
     #region UNITY CALLBACKS
     private void OnEnable()
     {
-        // If no player in scene
-        if (playerGOInstance == null)
-            playerGOInstance = gameObject;
-
         playerRigidbody = GetComponent<Rigidbody2D>();
+        slingShotInfo = new SlingShotInfo(playerRigidbody, shotVelocity, shotVelocityMaxMagnitude );
 
         SingleTouchInputController.OnTouchInputEvent += OnTouchInputObserver;
     }
 
     private void OnDisable()
     {
-        playerGOInstance = null;
+        SingleTouchInputController.OnTouchInputEvent -= OnTouchInputObserver;
     }
 
     private void FixedUpdate()
@@ -70,10 +72,12 @@ public class SlingShotMechanic : MonoBehaviour
             // Drag circle to latest touch position. 
             if (_touchInfo.touchState == TouchInputState.Dragging)
             {
-                shotVelocity = new Vector2(_touchInfo.dragVector.x * _touchInfo.dragDistance * dragShotForce, _touchInfo.dragVector.y * _touchInfo.dragDistance * dragShotForce);
-                shotVelocity = Vector2.ClampMagnitude(shotVelocity, shotVelocityMaxMagnitude);
+                shotVelocity = new Vector3(_touchInfo.dragVector.x * _touchInfo.dragDistance * shotForceMultiplier, _touchInfo.dragVector.y * _touchInfo.dragDistance * shotForceMultiplier);
+                shotVelocity = Vector3.ClampMagnitude(shotVelocity, shotVelocityMaxMagnitude);
 
-                SlingShotVisuals.instance.MoveTouchVisuals(transform.position, shotVelocity, _touchInfo.firstTouchPos, _touchInfo.lastTouchPos);
+                slingShotInfo.shotVelocity = shotVelocity;
+
+                slingShotMovesEvent(_touchInfo, slingShotInfo);
             }
 
             // Multiplies dragVector, dragDist, and slingShotForce to get shotVelocity. 
@@ -108,7 +112,9 @@ public class SlingShotMechanic : MonoBehaviour
             // Moves touch position visuals off screen.
             void Reset()
             {
-                SlingShotVisuals.instance.MoveVisualsOffScreen();
+                if (slingShotResetEvent != null)
+                    slingShotResetEvent();
+                else Debug.LogWarning(slingShotResetEvent + " is null");
             }
         }
 #endif
@@ -120,9 +126,9 @@ public class SlingShotMechanic : MonoBehaviour
         if (collision.gameObject.layer == (int)GameLayers.BallsLayer)
         {
             Rigidbody2D ballRigidBody = collision.gameObject.GetComponent<Rigidbody2D>();
-            Vector2 newBallVelocity = new Vector2((ballRigidBody.velocity.x + (playerRigidbody.velocity.x * _BallSpeedMultiplier)), (ballRigidBody.velocity.y + (playerRigidbody.velocity.y * _BallSpeedMultiplier)));
+            Vector3 newBallVelocity = new Vector3((ballRigidBody.velocity.x + (playerRigidbody.velocity.x * _OtherBallSpeedMultip)), (ballRigidBody.velocity.y + (playerRigidbody.velocity.y * _OtherBallSpeedMultip)));
 
-            newBallVelocity = Vector2.ClampMagnitude(newBallVelocity, BallVelocityLimiter.instance.ballVelocityMagnitudeCap);
+            newBallVelocity = Vector3.ClampMagnitude(newBallVelocity, BallVelocityLimiter.instance.ballVelocityMagnitudeCap);
 
             //Velocity added to collided with ball is proportional to player's current velocity.
             ballRigidBody.AddForceAtPosition(newBallVelocity, collision.gameObject.transform.position, ForceMode2D.Impulse);
@@ -136,7 +142,20 @@ public class SlingShotMechanic : MonoBehaviour
     private void OnCollisionExit2D(Collision2D collision)
     {
         BounceAnimation.instance.PlayerBounceExitClip(playerRigidbody.velocity);
-        playerRigidbody.velocity = Vector2.ClampMagnitude(playerRigidbody.velocity, shotVelocityMaxMagnitude);
+        playerRigidbody.velocity = Vector3.ClampMagnitude(playerRigidbody.velocity, shotVelocityMaxMagnitude);
     }
 }
 
+public struct SlingShotInfo
+{
+    public Rigidbody2D slingerRigidbody;
+    public Vector3 shotVelocity;
+    public float slingShotMaxMagnitude;
+
+    public SlingShotInfo(Rigidbody2D _slingerRB, Vector3 _shotVel, float _slingShotMaxMagnitude)
+    {
+        slingerRigidbody = _slingerRB;
+        shotVelocity = _shotVel;
+        slingShotMaxMagnitude = _slingShotMaxMagnitude;
+    }
+}
