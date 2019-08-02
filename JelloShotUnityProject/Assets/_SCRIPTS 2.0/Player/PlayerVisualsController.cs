@@ -55,7 +55,7 @@ public class PlayerVisualsController : MonoBehaviour
 
     void ChangePlayerVisOnRelease()
     {
-        _SizeLerper.StartLerp(1f, 1f);
+        _SizeLerper.StartLerp(maxSize.magnitude, currentSize.magnitude);
     }
 
 }
