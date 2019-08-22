@@ -127,7 +127,6 @@ public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
             yield return new WaitForSeconds(waitTime);
             if (DeathCheck() == true)
             {
-                _IsCheckingDeath = false;
                 OnDeath();
             }
         }
@@ -140,10 +139,13 @@ public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
     protected virtual void OnDeath()
     {
         StopCoroutine(CheckForDeathCo());
-        Debug.Log("Is CheckForDeathCo running? " + _IsCheckingDeath);
         currentHealth = maxHealth;
+
         // Handles any death related functionality unrelated to health system
         GetComponent<DeathHandler>().OnKill();
+        // Setting false here after OnKill instead of CheckForDeathCo because collision can happen 
+        // in time between coroutine time OnKill();
+        _IsCheckingDeath = false;
     }
     #endregion
 
@@ -237,7 +239,6 @@ public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
             _HealedHPValue = currentHealth + (_percentageRegenned * (maxHealth - currentHealth));
             OnHeal();
         }
-
     }
     #endregion
 }

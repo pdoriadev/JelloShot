@@ -11,7 +11,7 @@ public class Damager : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<IDamageable>() != null)
         {
-            DamageOnColliderInteraction(ref collision);
+            DamageOnCollisionEnter(ref collision);
         }     
     }
 
@@ -19,19 +19,25 @@ public class Damager : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<IDamageable>() != null)
         {
-            DamageOnTriggerInteraction(ref collision);
+            DamageOnTriggerExit(ref collision);
         }
     }
 
-    protected virtual void DamageOnColliderInteraction(ref Collision2D _collision)
+    protected virtual void DamageOnCollisionEnter(ref Collision2D _collision)
     {
-        IDamageable damageTaker = _collision.gameObject.GetComponent<IDamageable>();
-        damageTaker.TakeDmg(_DmgPerAttack);
+        if (_collision.gameObject.GetComponent<IDamageable>() != null)
+        {
+            IDamageable damageTaker = _collision.gameObject.GetComponent<IDamageable>();
+            damageTaker.TakeDmg(_DmgPerAttack);
+        }
     }
 
-    protected virtual void DamageOnTriggerInteraction(ref Collider2D _collision)
+    protected virtual void DamageOnTriggerExit(ref Collider2D _collision)
     {
-        IDamageable damageTaker = _collision.gameObject.GetComponent<IDamageable>();
-        damageTaker.TakeDmg(_DmgPerAttack);
+        if (_collision.gameObject.GetComponent<IDamageable>() != null)
+        {
+            IDamageable damageTaker = _collision.gameObject.GetComponent<IDamageable>();
+            damageTaker.TakeDmg(_DmgPerAttack);
+        }
     }
 }

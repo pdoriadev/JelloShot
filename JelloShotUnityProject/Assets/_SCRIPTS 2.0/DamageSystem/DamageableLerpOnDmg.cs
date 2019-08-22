@@ -15,9 +15,9 @@ public class DamageableLerpOnDmg : DamageableBase
     public bool isSizeLerper { get { return _IsSizeLerper; } set { _IsSizeLerper = value; } }
     [SerializeField]
     private bool _IsColorLerper;
-    public bool isColorLerper { get { return _IsColorLerper; } set { _IsColorLerper = value; } }
-    [SerializeField]
-    private float _MaxHealthPoints = 3;
+    public bool isColorLerper { get { return _IsColorLerper; } set { _IsColorLerper = value; } } 
+    public float maxHealthPoints { get { return maxHealth; } set { maxHealth = value; } }
+    public float currenthealthPoints { get { return currentHealth; } set { currentHealth = value; } }
     private float _WaitTime
     {
         get { return waitTime; }
@@ -37,8 +37,8 @@ public class DamageableLerpOnDmg : DamageableBase
         if (GetComponent<ColorLerper>() != null)
             _ColorLerper = GetComponent<ColorLerper>();
 
-        maxHealth = _MaxHealthPoints;
-        currentHealth = _MaxHealthPoints;
+        maxHealth = maxHealthPoints;
+        currentHealth = maxHealthPoints;
         if (_SizeLerper != null)
         {
             _WaitTime = _SizeLerper.lerpTime;

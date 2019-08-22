@@ -5,13 +5,12 @@ using UnityEngine;
 public class DamagerEnemyFaction : Damager
 {
     bool _HasDamaged = false;
-
     private void OnEnable()
     {
         _HasDamaged = false;
     }
 
-    protected override void DamageOnColliderInteraction(ref Collision2D _collision)
+    protected override void DamageOnCollisionEnter(ref Collision2D _collision)
     {
         if (_collision.gameObject.layer != (int)GameLayers.Enemy && _HasDamaged == false)
         {
@@ -19,7 +18,7 @@ public class DamagerEnemyFaction : Damager
             {
                 _HasDamaged = true;
                 
-                base.DamageOnColliderInteraction(ref _collision);
+                base.DamageOnCollisionEnter(ref _collision);
             }
         }
     }
