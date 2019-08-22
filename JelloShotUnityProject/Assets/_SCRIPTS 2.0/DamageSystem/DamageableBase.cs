@@ -17,6 +17,7 @@ public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
     }
 
     #region --HEALTH PROPERTIES--
+    [SerializeField] // so can see it in inspector
     private float _CurrentHealth = 3f;
     public float currentHealth
     {
@@ -28,6 +29,7 @@ public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
                 _CurrentHealth = 0;
         }
     }
+    [SerializeField] // so can see it in inspector
     private float _MaxHealth = 3f;
     public float maxHealth
     {
@@ -64,7 +66,7 @@ public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
 
     public virtual void OnTakeDmg()
     {
-        if (currentHealth < 1 && _IsCheckingDeath == false)
+        if (_IsCheckingDeath == false && DeathCheck() == false)
         {
             Debug.Log("Starting Co");
             StartCoroutine(CheckForDeathCo());
@@ -100,7 +102,9 @@ public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
     protected virtual bool DeathCheck()
     {
         if (currentHealth <= 0)
+        {
             return true;
+        }
         else
             return false;
     }
@@ -119,6 +123,7 @@ public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
     }
 
     private bool _IsCheckingDeath = false;
+    //private bool _IsDying = false;
     protected IEnumerator CheckForDeathCo()
     {
         _IsCheckingDeath = true;
@@ -127,11 +132,10 @@ public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
             yield return new WaitForSeconds(waitTime);
             if (DeathCheck() == true)
             {
+                //_IsDying = true;
                 OnDeath();
             }
         }
-
-        Debug.Log("Is CheckForDeathCo running? " + _IsCheckingDeath);
         yield return null;
 
     }
@@ -139,13 +143,12 @@ public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
     protected virtual void OnDeath()
     {
         StopCoroutine(CheckForDeathCo());
-        currentHealth = maxHealth;
 
         // Handles any death related functionality unrelated to health system
         GetComponent<DeathHandler>().OnKill();
-        // Setting false here after OnKill instead of CheckForDeathCo because collision can happen 
-        // in time between coroutine time OnKill();
+
         _IsCheckingDeath = false;
+        currentHealth = maxHealth;
     }
     #endregion
 

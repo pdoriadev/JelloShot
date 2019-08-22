@@ -11,7 +11,7 @@ using UnityEngine;
 /// - SlingShotInfo struct at bottom of struct for events to pass relevant info. 
 /// - Calls animation clips in BounceAnimation script on OnCollisionEnter and OnCollisionExit
 /// 
-/// If I have time, I'd like to separate this functionality, some which can be easily done, but for the time being, it works.
+/// If I have time, I'd like to separate some of this functionality, some which can be easily done, but for the time being, it works.
 /// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
 public class SlingShotMechanic : MonoBehaviour

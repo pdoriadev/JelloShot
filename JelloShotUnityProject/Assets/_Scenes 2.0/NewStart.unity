@@ -9938,8 +9938,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shotVelocity: {x: 0, y: 0, z: 0}
-  shotVelocityMaxMagnitude: 200
-  shotForceMultiplier: 1.4
+  shotVelocityMaxMagnitude: 100
+  shotForceMultiplier: 0.9
   playerReboundVelocity: {x: 0, y: 0, z: 0}
   fastTimeScale: 1.25
   regularTimeScale: 1
@@ -9979,7 +9979,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minSize: {x: 0.5, y: 0.5, z: 1}
-  maxSize: {x: 2, y: 2, z: 1}
+  maxSize: {x: 3, y: 3, z: 1}
   currentSize: {x: 0, y: 0, z: 0}
   _ShotMagnitPercent: 0
 --- !u!1 &506206263
@@ -10782,7 +10782,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4911744123003886, guid: a01640ea7dd0fa84fbda6a188c07ff74, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4911744123003886, guid: a01640ea7dd0fa84fbda6a188c07ff74, type: 3}
       propertyPath: m_LocalScale.x
@@ -10820,13 +10820,13 @@ Transform:
   m_GameObject: {fileID: 403566882}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.5, y: 17, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
   - {fileID: 1120013384}
   - {fileID: 2122182086}
   - {fileID: 580125970}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1023284785
 GameObject:
@@ -11801,6 +11801,7 @@ GameObject:
   - component: {fileID: 2045508857}
   - component: {fileID: 2045508859}
   - component: {fileID: 2045508856}
+  - component: {fileID: 2045508863}
   m_Layer: 10
   m_Name: Ground
   m_TagString: ground
@@ -11820,7 +11821,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39d146723ca4e34449b62b02d2319724, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _IsPooled: 0
+  _ShouldPool: 0
   onKillEvent:
     m_PersistentCalls:
       m_Calls:
@@ -11850,9 +11851,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e296f4540fff5945b72c9c53de78deb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _CurrentHealth: 3
+  _MaxHealth: 3
   _IsSizeLerper: 0
   _IsColorLerper: 1
-  _MaxHealthPoints: 3
 --- !u!4 &2045508858
 Transform:
   m_ObjectHideFlags: 0
@@ -11979,7 +11981,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9d280aab9abd54e8432bfdc98af135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _DmgPerAttack: 10
+  _DmgPerAttack: 1000
+--- !u!114 &2045508863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2045508855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afeb228184fb5564da53dbe1f3a4f7bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ReflectOn: 1
+  _ReflectForceMultiplier: 30
+  _WhatToReflect: 2
 --- !u!1001 &2076687280
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(SizeLerper))]
-public class PlayerVisualsController : MonoBehaviour
+public class PlayerSizeController : MonoBehaviour
 {
     //[Space(10)]
     //public SpriteRenderer playerSpriteRenderer;
 
-    //// Player sprite colors depending on gamestate.
+    //// Player sprite colors dependsing on gamestate.
     //[SerializeField]
     //private Color NormalColor, FullyChargedColor;
     //private Color _PlayerSpriteColor;
@@ -39,7 +39,7 @@ public class PlayerVisualsController : MonoBehaviour
 
     void ChangePlayeVisOnDrag(TouchInfo _touchInfo, SlingShotInfo _slingShotInfo)
     {
-        _ShotMagnitPercent = _slingShotInfo.shotVelocity.sqrMagnitude / (_slingShotInfo.slingShotMaxMagnitude * _slingShotInfo.slingShotMaxMagnitude);
+        _ShotMagnitPercent = _slingShotInfo.shotVelocity.magnitude / ( _slingShotInfo.slingShotMaxMagnitude);
 
         currentSize = maxSize - (maxSize * _ShotMagnitPercent);
 

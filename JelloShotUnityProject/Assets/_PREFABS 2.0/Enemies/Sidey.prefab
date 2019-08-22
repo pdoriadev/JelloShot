@@ -253,9 +253,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e296f4540fff5945b72c9c53de78deb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _CurrentHealth: 3
+  _MaxHealth: 3
   _IsSizeLerper: 1
   _IsColorLerper: 1
-  _MaxHealthPoints: 3
 --- !u!114 &114703755514970562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -290,7 +291,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ReflectOn: 1
-  _ReflectForce: 30
+  _ReflectForceMultiplier: 0
+  _WhatToReflect: 0
 --- !u!114 &114572539047493192
 MonoBehaviour:
   m_ObjectHideFlags: 0
