@@ -18,9 +18,9 @@ public class SlingShotMechanic : MonoBehaviour
 {
 
     public delegate void SlingShotMoves(TouchInfo _touchInfo, SlingShotInfo _slingShotInfo);
-    public static event SlingShotMoves slingShotMovesEvent;
+    public event SlingShotMoves slingShotMovesEvent;
     public delegate void SlingShotReset();
-    public static event SlingShotReset slingShotResetEvent;
+    public event SlingShotReset slingShotResetEvent;
 
     #region PUBLIC VARIABLES
     [Space(10)]
@@ -85,8 +85,10 @@ public class SlingShotMechanic : MonoBehaviour
                 shotVelocity = Vector3.ClampMagnitude(shotVelocity, shotVelocityMaxMagnitude);
 
                 slingShotInfo.shotVelocity = shotVelocity;
-
-                slingShotMovesEvent(_touchInfo, slingShotInfo);
+                if (slingShotMovesEvent != null)
+                {
+                    slingShotMovesEvent(_touchInfo, slingShotInfo);
+                }
             }
 
             // Multiplies dragVector, dragDist, and slingShotForce to get shotVelocity. 

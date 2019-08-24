@@ -4,13 +4,6 @@ using UnityEngine;
 [RequireComponent(typeof(SizeLerper))]
 public class PlayerSizeController : MonoBehaviour
 {
-    //[Space(10)]
-    //public SpriteRenderer playerSpriteRenderer;
-
-    //// Player sprite colors dependsing on gamestate.
-    //[SerializeField]
-    //private Color NormalColor, FullyChargedColor;
-    //private Color _PlayerSpriteColor;
     private Transform _PlayerTransform;
     private LerperBase _SizeLerper;
 
@@ -23,17 +16,18 @@ public class PlayerSizeController : MonoBehaviour
     #region UNITY CALLBACKS
     private void OnEnable()
     {
+
         _SizeLerper = GetComponent<LerperBase>();
         _PlayerTransform = gameObject.transform;
 
-        SlingShotMechanic.slingShotMovesEvent += ChangePlayeVisOnDrag;
-        SlingShotMechanic.slingShotResetEvent += ChangePlayerVisOnRelease;
+        GetComponent<SlingShotMechanic>().slingShotMovesEvent += ChangePlayeVisOnDrag;
+        GetComponent<SlingShotMechanic>().slingShotResetEvent += ChangePlayerVisOnRelease;
     }
 
     private void OnDisable()
     {
-        SlingShotMechanic.slingShotMovesEvent -= ChangePlayeVisOnDrag;
-        SlingShotMechanic.slingShotResetEvent -= ChangePlayerVisOnRelease;
+        GetComponent<SlingShotMechanic>().slingShotMovesEvent -= ChangePlayeVisOnDrag;
+        GetComponent<SlingShotMechanic>().slingShotResetEvent -= ChangePlayerVisOnRelease;
     }
     #endregion
 

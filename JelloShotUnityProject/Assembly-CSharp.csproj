@@ -75,8 +75,8 @@
     <Compile Include="Assets\_SCRIPTS 2.0\DamageSystem\IDamageable.cs" />
     <Compile Include="Assets\_SCRIPTS 2.0\DamageSystem\IHealable.cs" />
     <Compile Include="Assets\_SCRIPTS 2.0\DataManagement.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\FactionSystem\FactionImmunityManager.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\FactionSystem\FactionImmunitySO.cs" />
+    <Compile Include="Assets\_SCRIPTS 2.0\FactionSystem-WIP\FactionImmunityManager.cs" />
+    <Compile Include="Assets\_SCRIPTS 2.0\FactionSystem-WIP\FactionImmunitySO.cs" />
     <Compile Include="Assets\_SCRIPTS 2.0\GameFlow\DifficultyAdjuster.cs" />
     <Compile Include="Assets\_SCRIPTS 2.0\GameFlow\GameManager.cs" />
     <Compile Include="Assets\_SCRIPTS 2.0\GameFlow\TapChecker.cs" />

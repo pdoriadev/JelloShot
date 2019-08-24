@@ -43,8 +43,6 @@ public class SingleTouchInputController : MonoBehaviour
     }
     #endregion
 
-
-
     private void Update()
     {
 #if UNITY_STANDALONE || UNITY_ANDROID || UNITY_IOS

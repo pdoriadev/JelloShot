@@ -9,7 +9,6 @@ public enum FactionsToReflect
     Enemy
 }
 
-
 public class Reflector : MonoBehaviour
 {
     [SerializeField]

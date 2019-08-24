@@ -4,16 +4,35 @@ using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
+
+public struct DamagedInfo
+{
+    public float currentHealth;
+    public float maxHealth;
+
+    DamagedInfo(float _currentHealth, float _maxHealth)
+    {
+        currentHealth = _currentHealth;
+        maxHealth = _maxHealth;
+    }
+}
+
 [RequireComponent(typeof(DeathHandler))]
 public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
 {
+    public delegate void OnTakeDamageEvent(DamagedInfo _damagedInfo);
+    public event OnTakeDamageEvent onTakeDamageEvent;
+    DamagedInfo _damagedInfo;
+
     void OnEnable()
     {
-        _CurrentHealth = _MaxHealth;
+        currentHealth = maxHealth;
         if (GetComponent<DeathHandler>() == null)
         {
             Debug.LogError("No DeathHandler component on " + gameObject);
         }
+        _damagedInfo.maxHealth = maxHealth;
+        _damagedInfo.currentHealth = currentHealth;
     }
 
     #region --HEALTH PROPERTIES--
@@ -50,8 +69,7 @@ public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
         get { return _IsInvulnerable; }
         set { _IsInvulnerable = value; }
     }
-    // Alternative To this is to use a OnTakeDmg event listens to all the other TakeDmg methods
-    // ADVANTAGE: Damager can directly interact with Damageable. Understandable. Not inefficient.
+
     #region IDamageTakerMethods
     public virtual bool CanDamageCheck()
     {
@@ -61,15 +79,6 @@ public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
         {
             Debug.Log(gameObject + " is invulnerable");
             return false;
-        }
-    }
-
-    public virtual void OnTakeDmg()
-    {
-        if (_IsCheckingDeath == false && DeathCheck() == false)
-        {
-            Debug.Log("Starting Co");
-            StartCoroutine(CheckForDeathCo());
         }
     }
 
@@ -96,24 +105,36 @@ public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
         currentHealth -= (_damagePercent * currentHealth);
         OnTakeDmg();
     }
+
+    public virtual void OnTakeDmg()
+    {
+        if (onTakeDamageEvent != null)
+        {
+            _damagedInfo.currentHealth = currentHealth;
+            _damagedInfo.maxHealth = maxHealth;
+            onTakeDamageEvent(_damagedInfo);
+        }
+
+        if (_IsCheckingDeath == false && DeathCheck() == true)
+        {
+            Debug.Log("Starting Co");
+            StartCoroutine(CheckForDeathCo());
+        }
+    }
     #endregion
 
     #region DEATH CHECK
     protected virtual bool DeathCheck()
     {
-        if (currentHealth <= 0)
-        {
-            return true;
-        }
+        if (currentHealth <= 0) { return true; }
         else
             return false;
     }
 
-    private float _WaitTime;
+    private float _WaitTime = 0.01f;
     protected float waitTime
     {
         get { return _WaitTime; }
-
         set
         {
             _WaitTime = value;
@@ -129,15 +150,18 @@ public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
         _IsCheckingDeath = true;
         while (_IsCheckingDeath == true)
         {
-            yield return new WaitForSeconds(waitTime);
-            if (DeathCheck() == true)
+            if (GameManager.instance.state == GameState.End)
             {
-                //_IsDying = true;
                 OnDeath();
             }
+            if (DeathCheck() == true)
+            {
+                yield return new WaitForSeconds(waitTime);
+                OnDeath();
+            }
+            yield return new WaitForSeconds(waitTime);
         }
         yield return null;
-
     }
 
     protected virtual void OnDeath()

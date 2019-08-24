@@ -7,7 +7,6 @@ using UnityEngine;
 /// </summary>
 public class SlingShotVisuals : MonoBehaviour
 {
-    public static SlingShotVisuals instance;
     // Arrows rotating right around player
     public Transform ballArrowTransform;
     // Arrows rotating at First touch
@@ -16,26 +15,25 @@ public class SlingShotVisuals : MonoBehaviour
     public Vector3 offScreenPosition;
     public float angleArrowIsPointing;
 
+    [SerializeField]
+    SlingShotMechanic _slingShotInstance;
+    #region UNITY CALLBACKS
+
     private void OnEnable()
     {
-        if (instance == null)
-            instance = this;
-
-        SlingShotMechanic.slingShotMovesEvent += MoveVisualsOnSlingMove;
-        SlingShotMechanic.slingShotResetEvent += MoveVisualsOffScreen;
+        _slingShotInstance.slingShotMovesEvent += MoveVisualsOnSlingMove;
+        _slingShotInstance.slingShotResetEvent += MoveVisualsOffScreen;
     }
 
     private void OnDisable()
     {
-        SlingShotMechanic.slingShotMovesEvent -= MoveVisualsOnSlingMove;
-        SlingShotMechanic.slingShotResetEvent -= MoveVisualsOffScreen;
-        instance = null;
+        _slingShotInstance.slingShotMovesEvent -= MoveVisualsOnSlingMove;
+        _slingShotInstance.slingShotResetEvent -= MoveVisualsOffScreen;
     }
+    #endregion 
 
-    // NOTE: Maybe make struct of these values? 
     private void MoveVisualsOnSlingMove(TouchInfo _touchInfo, SlingShotInfo _slingShotInfo)
     {
-
         // arrows that rotate around player. 
         ballArrowTransform.position = _slingShotInfo.slingerRigidbody.transform.position;
         // ballArrowTransform and arrowsAtFirstTouchPosition's angle of rotation
