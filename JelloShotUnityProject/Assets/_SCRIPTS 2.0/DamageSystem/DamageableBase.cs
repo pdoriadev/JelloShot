@@ -37,7 +37,7 @@ public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
 
     void OnDisable()
     {
-        
+
     }
 
     #region --HEALTH PROPERTIES--
@@ -69,11 +69,7 @@ public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
     #endregion
 
     private bool _IsInvulnerable = false;
-    public bool isInvulnerable
-    {
-        get { return _IsInvulnerable; }
-        set { _IsInvulnerable = value; }
-    }
+    public bool isInvulnerable { get { return _IsInvulnerable; } set { _IsInvulnerable = value; } }
 
     #region IDamageTakerMethods
     public virtual bool CanDamageCheck()
@@ -133,7 +129,7 @@ public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
     #region DEATH CHECK
     protected virtual bool DeathCheck()
     {
-        if (currentHealth <= 0) { return true; }
+        if (currentHealth <= 0 && isHealing == false) { return true; }
         else
             return false;
     }
@@ -151,7 +147,6 @@ public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
     }
 
     private bool _IsCheckingDeath = false;
-    //private bool _IsDying = false;
     protected IEnumerator CheckForDeathCo()
     {
         _IsCheckingDeath = true;
@@ -184,12 +179,11 @@ public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
     #endregion
 
     #region HEALABLE PROPERTIES
+    [SerializeField]
     private bool _IsHealable = true;
-    public bool isHealable
-    {
-        get { return _IsHealable; }
-        set { _IsHealable = value; }
-    }
+    public bool isHealable { get { return _IsHealable; } set { _IsHealable = value; } }
+    private bool _IsHealing = false;
+    public bool isHealing { get { return _IsHealing; } set { _IsHealing = value; } }
     private float _HealedHPValue;
     protected float healedHPValue
     {
@@ -221,40 +215,42 @@ public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
 
     public virtual void OnHeal()
     {
-        currentHealth = _HealedHPValue;
+        currentHealth = healedHPValue;
+        isHealing = false;
     }
     public virtual void HealToFullHealth()
     {
         if (CanHealCheck())
         {
-            _HealedHPValue = maxHealth;
+            isHealing = true;
+            healedHPValue = maxHealth;
             OnHeal();
         }
-
     }
     public virtual void HealToValue(float _newHealthValue)
     {
         if (CanHealCheck())
         {
-            _HealedHPValue = _newHealthValue;
+            isHealing = true;
+            healedHPValue = _newHealthValue;
             OnHeal();
         }
-
     }
     public virtual void HealByXMuch(float _addedHealth)
     {
         if (CanHealCheck())
         {
-            _HealedHPValue = currentHealth + _addedHealth;
+            isHealing = true;
+            healedHPValue = currentHealth + _addedHealth;
             OnHeal();
         }
     }
-
     public virtual void HealPercentageOfMaxHealth(float _percentageRegenned)
     {
         if (CanHealCheck())
         {
-            _HealedHPValue = currentHealth + (_percentageRegenned * maxHealth);
+            isHealing = true;
+            healedHPValue = currentHealth + (_percentageRegenned * maxHealth);
             OnHeal();
         }
     }
@@ -262,7 +258,8 @@ public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
     {
         if (CanHealCheck())
         {
-            _HealedHPValue = currentHealth + (_percentageRegenned * currentHealth);
+            isHealing = true;
+            healedHPValue = currentHealth + (_percentageRegenned * currentHealth);
             OnHeal();
         }
     }
@@ -270,7 +267,8 @@ public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
     {
         if (CanHealCheck())
         {
-            _HealedHPValue = currentHealth + (_percentageRegenned * (maxHealth - currentHealth));
+            isHealing = true;
+            healedHPValue = currentHealth + (_percentageRegenned * (maxHealth - currentHealth));
             OnHeal();
         }
     }

@@ -569,6 +569,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _CurrentHealth: 2
   _MaxHealth: 2
+  _IsHealable: 1
   _IsSizeLerper: 1
   _IsColorLerper: 0
 --- !u!114 &114081710883767816
