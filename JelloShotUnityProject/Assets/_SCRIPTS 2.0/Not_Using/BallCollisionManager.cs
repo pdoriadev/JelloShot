@@ -30,15 +30,15 @@ public class BallCollisionManager : MonoBehaviour
         if (ballCollisionManagerInstance == null)
             ballCollisionManagerInstance = this;
 
-        GameManager.OnFixedUpdateEvent += OnFixedUpdateHandler;
+        //GameManager.OnFixedUpdateEvent += OnFixedUpdateHandler;
     }
 
     private void OnDisable()
     {
-        GameManager.OnFixedUpdateEvent -= OnFixedUpdateHandler;
+        //GameManager.OnFixedUpdateEvent -= OnFixedUpdateHandler;
     }
 
-    private void OnFixedUpdateHandler()
+    private void FixedUpdate()
     {
 
     }

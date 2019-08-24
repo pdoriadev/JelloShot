@@ -35,6 +35,11 @@ public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
         _damagedInfo.currentHealth = currentHealth;
     }
 
+    void OnDisable()
+    {
+        
+    }
+
     #region --HEALTH PROPERTIES--
     [SerializeField] // so can see it in inspector
     private float _CurrentHealth = 3f;
@@ -108,17 +113,19 @@ public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
 
     public virtual void OnTakeDmg()
     {
-        if (onTakeDamageEvent != null)
+        if (gameObject.activeSelf)
         {
-            _damagedInfo.currentHealth = currentHealth;
-            _damagedInfo.maxHealth = maxHealth;
-            onTakeDamageEvent(_damagedInfo);
-        }
+            if (onTakeDamageEvent != null)
+            {
+                _damagedInfo.currentHealth = currentHealth;
+                _damagedInfo.maxHealth = maxHealth;
+                onTakeDamageEvent(_damagedInfo);
+            }
 
-        if (_IsCheckingDeath == false && DeathCheck() == true)
-        {
-            Debug.Log("Starting Co");
-            StartCoroutine(CheckForDeathCo());
+            if (_IsCheckingDeath == false && DeathCheck() == true)
+            {
+                StartCoroutine(CheckForDeathCo());
+            }
         }
     }
     #endregion

@@ -138,7 +138,7 @@ public class SlingShotMechanic : MonoBehaviour
             Rigidbody2D ballRigidBody = collision.gameObject.GetComponent<Rigidbody2D>();
             Vector3 newBallVelocity = new Vector3((ballRigidBody.velocity.x + (playerRigidbody.velocity.x * _OtherBallSpeedMultip)), (ballRigidBody.velocity.y + (playerRigidbody.velocity.y * _OtherBallSpeedMultip)));
 
-            newBallVelocity = Vector3.ClampMagnitude(newBallVelocity, BallVelocityLimiter.instance.ballVelocityMagnitudeCap);
+            //newBallVelocity = Vector3.ClampMagnitude(newBallVelocity, BallVelocityLimiter.instance.ballVelocityMagnitudeCap);
 
             //Velocity added to collided with ball is proportional to player's current velocity.
             ballRigidBody.AddForceAtPosition(newBallVelocity, collision.gameObject.transform.position, ForceMode2D.Impulse);

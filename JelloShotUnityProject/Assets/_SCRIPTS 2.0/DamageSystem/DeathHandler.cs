@@ -14,7 +14,6 @@ public class DeathHandler : MonoBehaviour
         onKillEvent.Invoke();
         if (_ShouldPool)
         {
-            Debug.Log("DeathHandler OnKill");
             ScoreManager.instance.IterateBallsKoScore();
             SpawnManager.instance.PoolObject(gameObject);
         }

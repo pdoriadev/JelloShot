@@ -18,12 +18,11 @@ public class DifficultyAdjuster : MonoBehaviour
     {
         if (instance == null)
             instance = this;
-        GameManager.OnUpdateEvent += OnUpdateHandler;
     }
     private void OnDisable()
     {
         instance = null;
-        GameManager.OnUpdateEvent -= OnUpdateHandler;
+        StopAllCoroutines();
     }
 
     private void Start()
@@ -32,8 +31,8 @@ public class DifficultyAdjuster : MonoBehaviour
     }
     #endregion
 
-    public int _CurrentDifficulty;
-    public int _StartingDifficulty;
+    public int currentDifficulty;
+    public int startingDifficulty;
     [SerializeField]
     private float _MinSpawnRateChange;
     [SerializeField]
@@ -44,14 +43,20 @@ public class DifficultyAdjuster : MonoBehaviour
         SpawnManager.instance.spawnMinWait = SpawnManager.instance.startMinSpawnWait;
         SpawnManager.instance.spawnMaxWait = SpawnManager.instance.startMaxSpawnWait;
 
-        for (int i = 0; i <= _StartingDifficulty; i++)
+        for (int i = 0; i <= startingDifficulty; i++)
         {
             SpawnManager.instance.spawnMinWait -= _MinSpawnRateChange;
             SpawnManager.instance.spawnMaxWait -= _MaxSpawnRateChange;
 
-            _CurrentDifficulty = i;
+            if (SpawnManager.instance.spawnMaxWait < SpawnManager.instance.spawnMinWait)
+                SpawnManager.instance.spawnMaxWait = SpawnManager.instance.spawnMinWait + _MaxSpawnRateChange;
+
+            currentDifficulty = i;
         }
-        UIManager.instance.DifficultyUpdate(_CurrentDifficulty);
+        UIManager.instance.DifficultyUpdate(currentDifficulty);
+
+        _IsChecking = true;
+        StartCoroutine(ChangeDifficultyCheckerCo());
     }
 
     [SerializeField]
@@ -60,18 +65,42 @@ public class DifficultyAdjuster : MonoBehaviour
     private int _KOsNeededForChange = 0;
     [SerializeField]
     private int _KODifferenceBetweenDifficulties = 5;
+    [SerializeField]
+    private int _KODifferenceBetweenDifficultiesIncrease = 1;
+    [SerializeField]
+    private float _WaitTime = 0.02f;
 
-    public void OnUpdateHandler()
+    private bool _IsChecking = false;
+    IEnumerator ChangeDifficultyCheckerCo()
+    {
+        while (_IsChecking)
+        {
+            yield return new WaitForSeconds(_WaitTime);
+            if (ShouldChangeDifficulty() ) { ChangeDifficulty(); }
+        }
+
+        yield return null;
+    }
+
+    bool ShouldChangeDifficulty()
     {
         if (ScoreManager.instance.ballsKnockedOut == _KOsNeededForChange)
-        {
-            SpawnManager.instance.spawnMinWait -= _MinSpawnRateChange;
-            SpawnManager.instance.spawnMaxWait -= _MaxSpawnRateChange;
+            return true;
+        else return false;
+    }
 
-            _LastNumberOfBallsKOd = ScoreManager.instance.ballsKnockedOut;
-            _KOsNeededForChange += _KODifferenceBetweenDifficulties;
-            _CurrentDifficulty += 1;
-            UIManager.instance.DifficultyUpdate(_CurrentDifficulty);
+    void ChangeDifficulty()
+    {
+        if ((SpawnManager.instance.spawnMaxWait - _MaxSpawnRateChange) > SpawnManager.instance.spawnMinWait)
+        {
+            SpawnManager.instance.spawnMaxWait -= _MaxSpawnRateChange;
         }
+        SpawnManager.instance.spawnMinWait -= _MinSpawnRateChange;
+
+        _LastNumberOfBallsKOd = ScoreManager.instance.ballsKnockedOut;
+        _KODifferenceBetweenDifficulties += _KODifferenceBetweenDifficultiesIncrease;
+        _KOsNeededForChange += _KODifferenceBetweenDifficulties;
+        currentDifficulty += 1;
+        UIManager.instance.DifficultyUpdate(currentDifficulty);
     }
 }

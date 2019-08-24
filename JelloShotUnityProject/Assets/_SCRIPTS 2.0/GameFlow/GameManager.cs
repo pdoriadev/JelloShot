@@ -42,10 +42,10 @@ public class GameManager : MonoBehaviour
     // variable for GameState enum
     public GameState state;
     // events
-    internal delegate void OnUpdate();
-    internal static event OnUpdate OnUpdateEvent; 
-    internal delegate void OnFixedUpdate();
-    internal static event OnFixedUpdate OnFixedUpdateEvent; 
+    //internal delegate void OnUpdate();
+    //internal static event OnUpdate OnUpdateEvent; 
+    //internal delegate void OnFixedUpdate();
+    //internal static event OnFixedUpdate OnFixedUpdateEvent; 
     internal delegate void OnRetry();
     internal static event OnRetry OnRetryEvent;
 
@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        OnUpdateEvent();
+        //OnUpdateEvent();
 
         _CurrentTime += Time.deltaTime;
 
@@ -95,10 +95,10 @@ public class GameManager : MonoBehaviour
             UIManager.instance.UIScoreUpdate(ScoreManager.instance.ballsKnockedOut);
     }
 
-    private void FixedUpdate()
-    {
-        OnFixedUpdateEvent();
-    }
+    //private void FixedUpdate()
+    //{
+    //    OnFixedUpdateEvent();
+    //}
     #endregion
 
     private int _FinalScore;
@@ -108,7 +108,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         retryUIIsOn = true;
 
-        _FinalScore = ScoreManager.instance.CountScore(DifficultyAdjuster.instance._CurrentDifficulty);
+        _FinalScore = ScoreManager.instance.CountScore(DifficultyAdjuster.instance.currentDifficulty);
         UIManager.instance.RetryUI(_FinalScore, DataManagement.instance.dManHighScore, retryUIIsOn);
         SpawnManager.instance.PoolAllSpawnables();
     }

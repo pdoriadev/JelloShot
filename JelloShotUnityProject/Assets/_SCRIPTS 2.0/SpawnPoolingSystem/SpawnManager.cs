@@ -49,9 +49,37 @@ public class SpawnManager : MonoBehaviour
     public float startWait;
     // bool that stops spawning when false. 
     public bool IsSpawning = true;
+    public float spawnMinWaitFloor;
+    public float spawnMaxWaitFloor;
 
-    public float spawnMinWait;
-    public float spawnMaxWait;
+    [SerializeField]
+    private float _SpawnMinWait;
+    public float spawnMinWait
+    {
+        get { return _SpawnMinWait; }
+        set
+        {
+            _SpawnMinWait = value;
+            if (_SpawnMinWait < spawnMinWaitFloor)
+            {
+                _SpawnMinWait = spawnMinWaitFloor;
+            }
+        }
+    }
+    [SerializeField]
+    private float _SpawnMaxWait;
+    public float spawnMaxWait
+    {
+        get { return _SpawnMaxWait; }
+        set
+        {
+            _SpawnMaxWait = value;
+            if (_SpawnMaxWait < spawnMaxWaitFloor)
+            {
+                _SpawnMaxWait = spawnMaxWaitFloor;
+            }
+        }
+    }
     public float spawnWait;
     public float startMinSpawnWait;
     public float startMaxSpawnWait;
@@ -114,7 +142,6 @@ public class SpawnManager : MonoBehaviour
     // Sets passed object to inactive and pools it. Called by OutOfBounds and BallCollisions Script
     public void PoolObject(GameObject _pooledObj)
     {
-        Debug.Log("Pooling");
         _pooledObj.SetActive(false);
         pooledObjectsList.Add(_pooledObj);
         spawnablesInGame.Remove(_pooledObj);

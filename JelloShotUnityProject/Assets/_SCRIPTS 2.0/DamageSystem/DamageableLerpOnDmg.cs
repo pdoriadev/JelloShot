@@ -66,11 +66,11 @@ public class DamageableLerpOnDmg : DamageableBase
 
     public override void OnHeal()
     {
+        base.OnHeal();
         if (_SizeLerper != null)
             _SizeLerper.StartLerp(currentHealth, healedHPValue);
         if (_ColorLerper != null)
-            _ColorLerper.StartLerp(currentHealth, healedHPValue);
-        base.OnHeal();
+            _ColorLerper.StartLerp(currentHealth, healedHPValue);     
     }
 }
 

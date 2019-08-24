@@ -11,28 +11,10 @@ public class BallVelocityLimiter : MonoBehaviour
     // Max velocity of balls
     public float ballVelocityMagnitudeCap = 100;
 
-    #region ENABLE AND DISABLE
-
-    // Called when monobehaviour has been enabled. Adds BallSpawnDestroy instance to scene if there is none. 
-    // Subscribes BallSpawnDestroy's FixedUpdateHandler to GM's FixedUpdate Event
-    private void OnEnable()
-    {
-        if (instance == null)
-            instance = this;
-        GameManager.OnFixedUpdateEvent += OnFixedUpdateHandler;
-    }
-
-    private void OnDisable()
-    {
-        // Unsubscribes BallSpawnDestroy methods from GM's Events
-        GameManager.OnFixedUpdateEvent -= OnFixedUpdateHandler;
-    }
-
-    void OnFixedUpdateHandler()
+    void FixedUpdate()
     {
         LimitBallVelocity();
     }
-    #endregion
 
     public void LimitBallVelocity()
     {

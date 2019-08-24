@@ -235,7 +235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ReflectOn: 1
   _ReflectForceMultiplier: 20
-  _WhatToReflect: 0
+  _WhatToReflect: 1
 --- !u!114 &114458574378322188
 MonoBehaviour:
   m_ObjectHideFlags: 0
