@@ -54,11 +54,13 @@ public class SlingShotMechanic : MonoBehaviour
         slingShotInfo = new SlingShotInfo(playerRigidbody, shotVelocity, shotVelocityMaxMagnitude );
 
         SingleTouchInputController.OnTouchInputEvent += OnTouchInputObserver;
+        GameManager.OnRetryEvent += ResetSlingShot;
     }
 
     private void OnDisable()
     {
         SingleTouchInputController.OnTouchInputEvent -= OnTouchInputObserver;
+        GameManager.OnRetryEvent -= ResetSlingShot;
     }
 
     private void FixedUpdate()
@@ -101,7 +103,7 @@ public class SlingShotMechanic : MonoBehaviour
 
                 Time.timeScale = fastTimeScale;
 
-                Reset();
+                ResetSlingShot();
             }
 
             // if shot velocity is slower than min/max velocities, shotVelocity = appropriate min/max velocities
@@ -119,15 +121,15 @@ public class SlingShotMechanic : MonoBehaviour
                 if (shotVelocity.y < 0)
                     shotVelocity.y = Mathf.Min(shotVelocity.y, -10);
             }
-
-            void Reset()
-            {
-                if (slingShotResetEvent != null)
-                    slingShotResetEvent();
-                else Debug.LogWarning(slingShotResetEvent + " is null");
-            }
         }
 #endif
+    }
+
+    private void ResetSlingShot()
+    {
+        if (slingShotResetEvent != null)
+            slingShotResetEvent();
+        else Debug.LogWarning(slingShotResetEvent + " is null");
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

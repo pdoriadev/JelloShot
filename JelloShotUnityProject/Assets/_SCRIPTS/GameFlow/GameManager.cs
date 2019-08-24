@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
-/// Manages when game state changes from gameplay to retry states. Handles OnStart, OnUpdate, and OnFixedUpdate events. 
-/// Calls UiManager, ScoreManager, GroundScript, and BallManager. References ScoreManager. 
+/// Manages when game state changes. Handles OnRetry event. 
+/// Calls UIManager, ScoreManager, DifficultyAdjuster, and SpawnManager. References ScoreManager and DataManagement. 
+/// LevelEnd() is called by Ground game object's DeathHandler. 
 /// </summary>
 public enum GameState
 {
@@ -37,24 +38,14 @@ public enum GameLayers
 }
 public class GameManager : MonoBehaviour
 {
-    // instance of game manager script
-    internal static GameManager instance;
-    // variable for GameState enum
+    public static GameManager instance;
     public GameState state;
     // events
-    //internal delegate void OnUpdate();
-    //internal static event OnUpdate OnUpdateEvent; 
-    //internal delegate void OnFixedUpdate();
-    //internal static event OnFixedUpdate OnFixedUpdateEvent; 
-    internal delegate void OnRetry();
-    internal static event OnRetry OnRetryEvent;
+    public delegate void OnRetry();
+    public static event OnRetry OnRetryEvent;
 
     private bool _RetryUIIsOn = false;
-    public bool retryUIIsOn
-    {
-        get { return _RetryUIIsOn; }
-        set { _RetryUIIsOn = value; }
-    }
+    public bool isRetryUIOn { get { return _RetryUIIsOn; }  set { _RetryUIIsOn = value; } }
 
     [SerializeField]
     private GameObject _PlayerGameObject;
@@ -63,7 +54,6 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private float _CurrentTime;
 
-
     #region UNITY CALLBACKS
     private void OnEnable()
     {
@@ -71,34 +61,23 @@ public class GameManager : MonoBehaviour
             instance = this;
         state = GameState.Gameplay;
         _PlayerStartPos = _PlayerGameObject.transform.position;
-        OnRetryEvent += Retry;
     }
-
     private void OnDisable()
     {
-        OnRetryEvent -= Retry;
         instance = null;    
     }
 
     private void Update()
     {
-        //OnUpdateEvent();
-
         _CurrentTime += Time.deltaTime;
 
-        if (retryUIIsOn && TapChecker.instance._NumberOfTapsInARow > 1)
+        if (isRetryUIOn && TapChecker.instance._NumberOfTapsInARow > 1)
         {
-            OnRetryEvent();
+            Retry();
         }
-
-        if (retryUIIsOn == false)
+        if (isRetryUIOn == false)
             UIManager.instance.UIScoreUpdate(ScoreManager.instance.ballsKnockedOut);
     }
-
-    //private void FixedUpdate()
-    //{
-    //    OnFixedUpdateEvent();
-    //}
     #endregion
 
     private int _FinalScore;
@@ -106,23 +85,25 @@ public class GameManager : MonoBehaviour
     {
         state = GameState.End;
         Time.timeScale = 0f;
-        retryUIIsOn = true;
+        isRetryUIOn = true;
 
         _FinalScore = ScoreManager.instance.CountScore(DifficultyAdjuster.instance.currentDifficulty);
-        UIManager.instance.RetryUI(_FinalScore, DataManagement.instance.dManHighScore, retryUIIsOn);
+        UIManager.instance.RetryUI(_FinalScore, DataManagement.instance.dManHighScore, isRetryUIOn);
         SpawnManager.instance.PoolAllSpawnables();
     }
 
     private void Retry()
     {
+        OnRetryEvent();
+
         _CurrentTime = 0;
         _PlayerGameObject.transform.position = _PlayerStartPos;
 
         UIManager.instance.UIScoreUpdate(ScoreManager.instance.ballsKnockedOut);
         DifficultyAdjuster.instance.SetStartingDifficulty();
 
-        retryUIIsOn = false;
-        UIManager.instance.RetryUI(_FinalScore, DataManagement.instance.dManHighScore, retryUIIsOn);
+        isRetryUIOn = false;
+        UIManager.instance.RetryUI(_FinalScore, DataManagement.instance.dManHighScore, isRetryUIOn);
 
         state = GameState.Gameplay;
         Time.timeScale = 1f;

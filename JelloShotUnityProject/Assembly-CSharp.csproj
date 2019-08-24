@@ -10,8 +10,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <ProjectGuid>{BE2F0B1A-644E-B349-891C-5021F11A24FD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -63,61 +62,59 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\_PVNET\ExampleScriptJulytenth.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\BallVelocityLimiter.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\BounceAnimation.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\CameraController.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\DamageSystem\DamageableBase.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\DamageSystem\DamageableLerpOnDmg.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\DamageSystem\Damager.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\DamageSystem\DamagerEnemyFaction.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\DamageSystem\DamagerPlayerFaction.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\DamageSystem\DeathHandler.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\DamageSystem\IDamageable.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\DamageSystem\IHealable.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\DataManagement.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\FactionSystem-WIP\FactionImmunityManager.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\FactionSystem-WIP\FactionImmunitySO.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\GameFlow\DifficultyAdjuster.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\GameFlow\GameManager.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\GameFlow\TapChecker.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\Graphics\BoxBlur.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\Graphics\QuickGlow.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\Graphics\ReplacementShaderEffect.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\Graphics\SimpleBlur.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\GroundHealth.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\ILerpable.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\JellyClickReceiver2D.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\JiggleOnCollision2D.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\JointConnect.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\Lerping\ColorHSV.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\Lerping\ColorLerper.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\Lerping\LerperBase.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\Lerping\SizeLerper.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\Not_Using\BallCollisionManager.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\Not_Using\BallObjectPool.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\Not_Using\HelloWorld.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\Not_Using\PcControls.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\Not_Using\PlayerScreenWrap.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\OutOfBounds.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\Player\PlayerCollisions.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\Player\PlayerSizeController.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\Player\PlayerSlingShotMechanic.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\Player\SingleTouchInputController.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\Player\SlingShotMechanic.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\Player\SlingShotVisuals.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\Reflector.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\ScoreManager.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\ScreenShaderFX.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\SideyCollisions.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\SpawnPoolingSystem\ItemSelector.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\SpawnPoolingSystem\PoolingTrigger.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\SpawnPoolingSystem\SpawnManager.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\Thwump.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\TweenSystem\LazySingleton.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\TweenSystem\TweenManager.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\TweenSystem\TweenTester.cs" />
-    <Compile Include="Assets\_SCRIPTS 2.0\UIManager.cs" />
+    <Compile Include="Assets\_SCRIPTS\BallVelocityLimiter.cs" />
+    <Compile Include="Assets\_SCRIPTS\BounceAnimation.cs" />
+    <Compile Include="Assets\_SCRIPTS\CameraController.cs" />
+    <Compile Include="Assets\_SCRIPTS\DamageSystem\DamageableBase.cs" />
+    <Compile Include="Assets\_SCRIPTS\DamageSystem\DamageableLerpOnDmg.cs" />
+    <Compile Include="Assets\_SCRIPTS\DamageSystem\Damager.cs" />
+    <Compile Include="Assets\_SCRIPTS\DamageSystem\DamagerEnemyFaction.cs" />
+    <Compile Include="Assets\_SCRIPTS\DamageSystem\DamagerPlayerFaction.cs" />
+    <Compile Include="Assets\_SCRIPTS\DamageSystem\DeathHandler.cs" />
+    <Compile Include="Assets\_SCRIPTS\DamageSystem\IDamageable.cs" />
+    <Compile Include="Assets\_SCRIPTS\DamageSystem\IHealable.cs" />
+    <Compile Include="Assets\_SCRIPTS\DataManagement.cs" />
+    <Compile Include="Assets\_SCRIPTS\FactionSystem-WIP\FactionImmunityManager.cs" />
+    <Compile Include="Assets\_SCRIPTS\FactionSystem-WIP\FactionImmunitySO.cs" />
+    <Compile Include="Assets\_SCRIPTS\GameFlow\DifficultyAdjuster.cs" />
+    <Compile Include="Assets\_SCRIPTS\GameFlow\GameManager.cs" />
+    <Compile Include="Assets\_SCRIPTS\GameFlow\TapChecker.cs" />
+    <Compile Include="Assets\_SCRIPTS\Graphics\BoxBlur.cs" />
+    <Compile Include="Assets\_SCRIPTS\Graphics\QuickGlow.cs" />
+    <Compile Include="Assets\_SCRIPTS\Graphics\ReplacementShaderEffect.cs" />
+    <Compile Include="Assets\_SCRIPTS\Graphics\SimpleBlur.cs" />
+    <Compile Include="Assets\_SCRIPTS\GroundHealth.cs" />
+    <Compile Include="Assets\_SCRIPTS\ILerpable.cs" />
+    <Compile Include="Assets\_SCRIPTS\JellyClickReceiver2D.cs" />
+    <Compile Include="Assets\_SCRIPTS\JiggleOnCollision2D.cs" />
+    <Compile Include="Assets\_SCRIPTS\JointConnect.cs" />
+    <Compile Include="Assets\_SCRIPTS\Lerping\ColorHSV.cs" />
+    <Compile Include="Assets\_SCRIPTS\Lerping\ColorLerper.cs" />
+    <Compile Include="Assets\_SCRIPTS\Lerping\LerperBase.cs" />
+    <Compile Include="Assets\_SCRIPTS\Lerping\SizeLerper.cs" />
+    <Compile Include="Assets\_SCRIPTS\Not_Using\BallCollisionManager.cs" />
+    <Compile Include="Assets\_SCRIPTS\Not_Using\BallObjectPool.cs" />
+    <Compile Include="Assets\_SCRIPTS\Not_Using\HelloWorld.cs" />
+    <Compile Include="Assets\_SCRIPTS\Not_Using\PcControls.cs" />
+    <Compile Include="Assets\_SCRIPTS\Not_Using\PlayerScreenWrap.cs" />
+    <Compile Include="Assets\_SCRIPTS\OutOfBounds.cs" />
+    <Compile Include="Assets\_SCRIPTS\Player\PlayerCollisions.cs" />
+    <Compile Include="Assets\_SCRIPTS\Player\PlayerSizeController.cs" />
+    <Compile Include="Assets\_SCRIPTS\Player\PlayerSlingShotMechanic.cs" />
+    <Compile Include="Assets\_SCRIPTS\Player\SingleTouchInputController.cs" />
+    <Compile Include="Assets\_SCRIPTS\Player\SlingShotMechanic.cs" />
+    <Compile Include="Assets\_SCRIPTS\Player\SlingShotVisuals.cs" />
+    <Compile Include="Assets\_SCRIPTS\Reflector.cs" />
+    <Compile Include="Assets\_SCRIPTS\ScoreManager.cs" />
+    <Compile Include="Assets\_SCRIPTS\ScreenShaderFX.cs" />
+    <Compile Include="Assets\_SCRIPTS\SideyCollisions.cs" />
+    <Compile Include="Assets\_SCRIPTS\SpawnPoolingSystem\ItemSelector.cs" />
+    <Compile Include="Assets\_SCRIPTS\SpawnPoolingSystem\PoolingTrigger.cs" />
+    <Compile Include="Assets\_SCRIPTS\SpawnPoolingSystem\SpawnManager.cs" />
+    <Compile Include="Assets\_SCRIPTS\TweenSystem\LazySingleton.cs" />
+    <Compile Include="Assets\_SCRIPTS\TweenSystem\TweenManager.cs" />
+    <Compile Include="Assets\_SCRIPTS\TweenSystem\TweenTester.cs" />
+    <Compile Include="Assets\_SCRIPTS\UIManager.cs" />
     <Compile Include="Assets\DamagerOutOfBounds.cs" />
     <Compile Include="Assets\GroundDeath.cs" />
     <Compile Include="Assets\JellyShader\Example\Scripts\JellyClickReceiver.cs" />
