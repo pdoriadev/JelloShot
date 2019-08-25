@@ -53,8 +53,9 @@ public class DifficultyAdjuster : MonoBehaviour
 
             currentDifficulty = i;
         }
-        UIManager.instance.DifficultyUpdate(currentDifficulty);
+        UIManager.instance.UpdateDifficulty(currentDifficulty);
 
+        _KOsNeededForChange = _StartingKOsNeededForChange;
         _IsChecking = true;
         StartCoroutine(ChangeDifficultyCheckerCo());
     }
@@ -63,6 +64,8 @@ public class DifficultyAdjuster : MonoBehaviour
     private int _LastNumberOfBallsKOd = 0;
     [SerializeField]
     private int _KOsNeededForChange = 0;
+    [SerializeField]
+    private int _StartingKOsNeededForChange = 2;
     [SerializeField]
     private int _KODifferenceBetweenDifficulties = 5;
     [SerializeField]
@@ -101,6 +104,6 @@ public class DifficultyAdjuster : MonoBehaviour
         _KODifferenceBetweenDifficulties += _KODifferenceBetweenDifficultiesIncrease;
         _KOsNeededForChange += _KODifferenceBetweenDifficulties;
         currentDifficulty += 1;
-        UIManager.instance.DifficultyUpdate(currentDifficulty);
+        UIManager.instance.UpdateDifficulty(currentDifficulty);
     }
 }

@@ -32,20 +32,22 @@ public class DataManagement : MonoBehaviour
 
     public void SaveData() // serializes save data down to binary
     {
-        BinaryFormatter BinForm = new BinaryFormatter(); // creates bin formatter
-        FileStream file = File.Create(Application.persistentDataPath + "/gameInfo.dat"); // creates File
-        gameData data = new gameData(); // creates container for data
-        data.savedHighScore = dManHighScore; 
-        BinForm.Serialize(file, data); // serializes
-        file.Close(); // closes file
+        FileStream file = File.Create(Application.persistentDataPath + "/gameInfo.dat"); 
+        gameData data = new gameData(); 
+        data.savedHighScore = dManHighScore;
+
+        BinaryFormatter BinForm = new BinaryFormatter();
+        BinForm.Serialize(file, data); 
+        file.Close(); 
     }
 
     public void LoadData()
     {
         if (File.Exists (Application.persistentDataPath + "/gameInfo.dat"))
         {
-            BinaryFormatter BinForm = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + "/gameInfo.dat", FileMode.Open);
+
+            BinaryFormatter BinForm = new BinaryFormatter();
             gameData data = (gameData)BinForm.Deserialize(file);
             file.Close();
             dManHighScore = data.savedHighScore;           
@@ -58,11 +60,18 @@ public class DataManagement : MonoBehaviour
     public bool _ShouldClearHighScoreKeyTwo;
     public void ResetHighScore()
     {
-        dManHighScore = 0;
-        SaveData();
-        _ShouldClearHighScoreKeyOne = false;
-        _ShouldClearHighScoreKeyTwo = false;
-        Debug.Log("You just wiped the high score. New score is: " + dManHighScore);
+        if (File.Exists(Application.persistentDataPath + "/gameInfo.dat"))
+        {
+            BinaryFormatter BinForm = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/gameInfo.dat", FileMode.Open);
+            gameData data = (gameData)BinForm.Deserialize(file);
+            Debug.Log("Previous High Score was " + data.savedHighScore);
+            data.savedHighScore = 0;
+            file.Close();
+
+            SaveData();
+            Debug.Log("You just wiped the high score. New score is: " + dManHighScore);
+        }       
     }
 }
 
@@ -88,3 +97,18 @@ public class DataClearer : Editor
     }
 }
 #endif
+
+//public void ResetHighScore()
+//{
+//    if (File.Exists(Application.persistentDataPath + "/gameInfo.dat"))
+//    {
+//        BinaryFormatter BinForm = new BinaryFormatter();
+//        FileStream file = File.Open(Application.persistentDataPath + "/gameInfo.dat", FileMode.Open);
+//        gameData data = (gameData)BinForm.Deserialize(file);
+//        data.savedHighScore = 0;
+//        file.Close();
+
+//        SaveData();
+//        Debug.Log("You just wiped the high score. New score is: " + dManHighScore);
+//    }
+//}

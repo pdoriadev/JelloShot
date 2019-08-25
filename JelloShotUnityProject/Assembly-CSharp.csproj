@@ -83,7 +83,6 @@
     <Compile Include="Assets\_SCRIPTS\Graphics\QuickGlow.cs" />
     <Compile Include="Assets\_SCRIPTS\Graphics\ReplacementShaderEffect.cs" />
     <Compile Include="Assets\_SCRIPTS\Graphics\SimpleBlur.cs" />
-    <Compile Include="Assets\_SCRIPTS\GroundHealth.cs" />
     <Compile Include="Assets\_SCRIPTS\ILerpable.cs" />
     <Compile Include="Assets\_SCRIPTS\JellyClickReceiver2D.cs" />
     <Compile Include="Assets\_SCRIPTS\JiggleOnCollision2D.cs" />

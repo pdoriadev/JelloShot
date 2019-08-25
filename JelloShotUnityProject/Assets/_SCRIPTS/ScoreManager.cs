@@ -17,12 +17,12 @@ public class ScoreManager : MonoBehaviour
     {
         if (instance == null)
             instance = this;
-        GameManager.OnRetryEvent += LevelScoreSetup;
+        GameManager.OnLevelEndEvent += LevelScoreSetup;
     }
 
     private void OnDisable()
     {
-        GameManager.OnRetryEvent -= LevelScoreSetup;
+        GameManager.OnLevelEndEvent -= LevelScoreSetup;
         instance = null;
     }
 

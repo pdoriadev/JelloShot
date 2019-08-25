@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
-/// Manages when game state changes. Handles OnRetry event. 
+/// Manages when game state changes. Handles OnLevelEnd event and OnRetry event.
 /// Calls UIManager, ScoreManager, DifficultyAdjuster, and SpawnManager. References ScoreManager and DataManagement. 
 /// LevelEnd() is called by Ground game object's DeathHandler. 
 /// </summary>
@@ -43,6 +43,8 @@ public class GameManager : MonoBehaviour
     // events
     public delegate void OnRetry();
     public static event OnRetry OnRetryEvent;
+    public delegate void OnLevelEnd();
+    public static event OnLevelEnd OnLevelEndEvent;
 
     private bool _RetryUIIsOn = false;
     public bool isRetryUIOn { get { return _RetryUIIsOn; }  set { _RetryUIIsOn = value; } }
@@ -83,6 +85,8 @@ public class GameManager : MonoBehaviour
     private int _FinalScore;
     public void LevelEnd()
     {
+        OnLevelEndEvent();
+
         state = GameState.End;
         Time.timeScale = 0f;
         isRetryUIOn = true;
