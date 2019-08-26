@@ -65,8 +65,10 @@ public class SingleTouchInputController : MonoBehaviour
             {
                 _TouchInfo = new TouchInfo(_LatestTouch);
                 _TouchInfo.touchState = TouchInputState.BeginningTap;
-                
-                OnTouchInputEvent(_TouchInfo);
+
+                if (OnTouchInputEvent != null)
+                    OnTouchInputEvent(_TouchInfo);
+                else Debug.Log(OnTouchInputEvent + " is null.");
             }
 
             // Drag circle to latest touch position. 

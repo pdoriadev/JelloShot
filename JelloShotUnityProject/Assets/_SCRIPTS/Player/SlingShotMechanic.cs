@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
 /// - Controls slingshot physics and listens to SingleTouchInputController's events to know when to enter each phase of the slingshot. 
-/// - Has events for when the slingshot changes position (pre-release) and when it is released. 
+/// - Has events for when the slingshot starts, when it changes position (pre-release), and when it is released. 
 /// - Clamps player rigidbody's velocity so (1) it will never exceed the max velocity and (2) whenever the player shoots the slingshot, 
 ///     it will always be at least a minimum velocity. 
 /// - Adds additional force to each enemy the player collides with. 
@@ -16,7 +16,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class SlingShotMechanic : MonoBehaviour
 {
-
+    public delegate void SlingShotStart(TouchInfo _touchInfo, SlingShotInfo _slingShotInfo);
+    public event SlingShotStart slingShotStartEvent;
     public delegate void SlingShotMoves(TouchInfo _touchInfo, SlingShotInfo _slingShotInfo);
     public event SlingShotMoves slingShotMovesEvent;
     public delegate void SlingShotReset();
@@ -70,7 +71,7 @@ public class SlingShotMechanic : MonoBehaviour
     #endregion
     private void OnTouchInputObserver(TouchInfo _touchInfo)
     {
-        // Controls 3 phases of touch movement
+        // Controls 3  phases of touch movement
 #if UNITY_STANDALONE || UNITY_ANDROID
         if (GameManager.instance.state == GameState.Gameplay)
         {
@@ -78,6 +79,10 @@ public class SlingShotMechanic : MonoBehaviour
             if (_touchInfo.touchState == TouchInputState.BeginningTap)
             {
                 Time.timeScale = slowTimeScale;
+                if (slingShotStartEvent != null)
+                {
+                    slingShotStartEvent(_touchInfo, slingShotInfo);
+                }
             }
 
             // Drag circle to latest touch position. 
@@ -162,12 +167,12 @@ public struct SlingShotInfo
 {
     public Rigidbody2D slingerRigidbody;
     public Vector3 shotVelocity;
-    public float slingShotMaxMagnitude;
+    public float slingMaxMagnitude;
 
     public SlingShotInfo(Rigidbody2D _slingerRB, Vector3 _shotVel, float _slingShotMaxMagnitude)
     {
         slingerRigidbody = _slingerRB;
         shotVelocity = _shotVel;
-        slingShotMaxMagnitude = _slingShotMaxMagnitude;
+        slingMaxMagnitude = _slingShotMaxMagnitude;
     }
 }

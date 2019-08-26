@@ -30,7 +30,7 @@ public class DataManagement : MonoBehaviour
         }
     }
 
-    public void SaveData() // serializes save data down to binary
+    public void SaveData() // Saves high score then serializes it down to binary. 
     {
         FileStream file = File.Create(Application.persistentDataPath + "/gameInfo.dat"); 
         gameData data = new gameData(); 

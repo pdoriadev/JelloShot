@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
 /// <summary>
+/// By Michael Wolf
 /// Inherit from this base class to create a singleton.
 /// e.g. public class MyClassName : Singleton<MyClassName> {}
 /// </summary>
@@ -12,7 +13,7 @@ public class LazySingleton<T> : MonoBehaviour where T : MonoBehaviour
     private static T m_Instance;
 
     /// <summary>
-    /// Access singleton instance through this propriety.
+    /// Access singleton instance through this property.
     /// </summary>
     public static T Instance
     {

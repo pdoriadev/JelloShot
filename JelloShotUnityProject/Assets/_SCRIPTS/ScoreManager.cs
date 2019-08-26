@@ -17,12 +17,12 @@ public class ScoreManager : MonoBehaviour
     {
         if (instance == null)
             instance = this;
-        GameManager.OnLevelEndEvent += LevelScoreSetup;
+        GameManager.OnRetryEvent += LevelScoreSetup;
     }
 
     private void OnDisable()
     {
-        GameManager.OnLevelEndEvent -= LevelScoreSetup;
+        GameManager.OnRetryEvent -= LevelScoreSetup;
         instance = null;
     }
 
@@ -45,7 +45,9 @@ public class ScoreManager : MonoBehaviour
     public void IterateBallsKoScore()
     {      
         ballsKnockedOut++;
-        OnScoreUpdateEvent(ballsKnockedOut);
+        if (OnScoreUpdateEvent != null)
+            OnScoreUpdateEvent(ballsKnockedOut);
+        else Debug.Log(OnScoreUpdateEvent + " is null");
     }
 
     public int CountScore(int difficulty)
@@ -57,7 +59,6 @@ public class ScoreManager : MonoBehaviour
         {
             DataManagement.instance.dManHighScore = _FinalScore;
             DataManagement.instance.SaveData();
-            Debug.Log("Now that we've added the score to DataManagement, Data says high score is " + DataManagement.instance.dManHighScore);
         }
 
         return _FinalScore;

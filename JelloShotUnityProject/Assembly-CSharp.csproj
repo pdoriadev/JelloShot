@@ -101,6 +101,7 @@
     <Compile Include="Assets\_SCRIPTS\Player\PlayerSizeController.cs" />
     <Compile Include="Assets\_SCRIPTS\Player\PlayerSlingShotMechanic.cs" />
     <Compile Include="Assets\_SCRIPTS\Player\SingleTouchInputController.cs" />
+    <Compile Include="Assets\_SCRIPTS\Player\SlingShotFlasher.cs" />
     <Compile Include="Assets\_SCRIPTS\Player\SlingShotMechanic.cs" />
     <Compile Include="Assets\_SCRIPTS\Player\SlingShotVisuals.cs" />
     <Compile Include="Assets\_SCRIPTS\Reflector.cs" />

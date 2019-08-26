@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+// By Michael Wolf
 public class TweenTester : MonoBehaviour
 {
     // Use this for initialization

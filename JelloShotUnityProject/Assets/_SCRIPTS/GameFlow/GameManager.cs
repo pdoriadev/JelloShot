@@ -85,7 +85,9 @@ public class GameManager : MonoBehaviour
     private int _FinalScore;
     public void LevelEnd()
     {
-        OnLevelEndEvent();
+        if (OnLevelEndEvent != null)
+            OnLevelEndEvent();
+        else Debug.Log(OnLevelEndEvent + " is null.");
 
         state = GameState.End;
         Time.timeScale = 0f;
@@ -98,7 +100,9 @@ public class GameManager : MonoBehaviour
 
     private void Retry()
     {
-        OnRetryEvent();
+        if (OnRetryEvent != null)
+            OnRetryEvent();
+        else Debug.Log(OnRetryEvent + " is null.");
 
         _CurrentTime = 0;
         _PlayerGameObject.transform.position = _PlayerStartPos;

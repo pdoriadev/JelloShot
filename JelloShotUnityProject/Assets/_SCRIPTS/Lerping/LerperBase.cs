@@ -15,6 +15,11 @@ public abstract class LerperBase : MonoBehaviour
     public bool canLerp { get { return _CanLerp; } }
     [SerializeField]
     private bool _IsLerping = false;
+    public bool isLerping
+    {
+        get { return _IsLerping; }
+        set { _IsLerping = value; }
+    }
     [SerializeField]
     private float _LerpPercentageComplete;
     [HideInInspector]
@@ -32,23 +37,18 @@ public abstract class LerperBase : MonoBehaviour
         get { return _LerpTime; }
         set
         {
-            if (value <= 0)
-            {
-                _LerpTime = value;
-                lerpTime = _LerpTime;
-            }
+            _LerpTime = value;
 
             if (_LerpTime <= 0)
             {
-                _LerpTime = 0.4f;
-                lerpTime = _LerpTime;
+                _LerpTime = 0.2f;
             }
         }
     }
     #endregion 
 
     // params are used in child class overrides
-    public virtual void StartLerp(float _currentHealth, float _maxHealth)
+    public virtual void StartLerp(float _scalarNumerator, float _scalarDenominator)
     {
         if (_CanLerp)
         {

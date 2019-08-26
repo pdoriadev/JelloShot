@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic; // For List
 using System;
-
+// By Michael Wolf
 public class TweenManager : LazySingleton<TweenManager>
 {
     private List<Coroutine> currentTweens = new List<Coroutine>();
@@ -36,7 +36,6 @@ public class TweenManager : LazySingleton<TweenManager>
         {
             onComplete();
         }
-
     }
 
     private void Update()

@@ -36,13 +36,13 @@ public class ColorLerper : LerperBase
     private Color _FinalColor;
 
 
-    public override void StartLerp(float _currentHealth, float _maxHealth)
+    public override void StartLerp(float _scalarNumerator, float _scalarDenominator)
     {
         _StartLerpColor = _SpriteRend.color;
 
-        float _Scaler = (_maxHealth - _currentHealth) / _maxHealth;
+        float _Scaler = (_scalarDenominator - _scalarNumerator) / _scalarDenominator;
         _NextLerpColor = Color.Lerp(_ColorAtSpawn, _FinalColor, _Scaler);
-        base.StartLerp(_currentHealth, _maxHealth);
+        base.StartLerp(_scalarNumerator, _scalarDenominator);
     }
 
     protected override void HandleLerp()
