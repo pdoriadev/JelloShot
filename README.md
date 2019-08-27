@@ -2,4 +2,4 @@
 
 Android
 
-Nice little game to pass the time without feeling you have to pay to play.
+Nice little game to pass the time. Completely free.
