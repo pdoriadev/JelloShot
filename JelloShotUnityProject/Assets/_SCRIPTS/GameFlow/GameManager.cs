@@ -8,9 +8,10 @@ using UnityEngine;
 /// </summary>
 public enum GameState
 {
+    MainMenu,
     Gameplay,
     Paused,
-    End
+    LevelEnd
 }
 public enum GameLayers
 {
@@ -89,7 +90,7 @@ public class GameManager : MonoBehaviour
             OnLevelEndEvent();
         else Debug.Log(OnLevelEndEvent + " is null.");
 
-        state = GameState.End;
+        state = GameState.LevelEnd;
         Time.timeScale = 0f;
         isRetryUIOn = true;
 

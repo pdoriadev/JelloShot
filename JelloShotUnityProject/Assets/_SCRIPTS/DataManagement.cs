@@ -97,18 +97,3 @@ public class DataClearer : Editor
     }
 }
 #endif
-
-//public void ResetHighScore()
-//{
-//    if (File.Exists(Application.persistentDataPath + "/gameInfo.dat"))
-//    {
-//        BinaryFormatter BinForm = new BinaryFormatter();
-//        FileStream file = File.Open(Application.persistentDataPath + "/gameInfo.dat", FileMode.Open);
-//        gameData data = (gameData)BinForm.Deserialize(file);
-//        data.savedHighScore = 0;
-//        file.Close();
-
-//        SaveData();
-//        Debug.Log("You just wiped the high score. New score is: " + dManHighScore);
-//    }
-//}

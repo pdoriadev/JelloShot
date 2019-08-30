@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-// Lerps between green and red depending on the values passed to it.
+
+// Lerps between two colors defined here based on values passed to StartLerp().
 public class ColorLerper : LerperBase
 {
     private void OnEnable()
@@ -24,11 +25,10 @@ public class ColorLerper : LerperBase
         _SpriteRend.color = _ColorAtSpawn;
     }
 
-    private SpriteRenderer _SpriteRend;
+    public SpriteRenderer _SpriteRend;
 
     [HeaderAttribute("Color")]
-    [SerializeField]
-    private Color _ColorAtSpawn;
+    public Color _ColorAtSpawn;
     private Color _StartLerpColor;
     private Color _NextLerpColor;
     // Set in the inspector

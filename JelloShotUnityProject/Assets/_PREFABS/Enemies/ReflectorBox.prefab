@@ -199,6 +199,7 @@ MonoBehaviour:
   _StartLerpTime: 0
   _TimeSinceLerpStarted: 0
   _LerpTime: 0.2
+  _SpriteRend: {fileID: 0}
   _ColorAtSpawn: {r: 1, g: 1, b: 1, a: 1}
   _FinalColor: {r: 1, g: 0, b: 0, a: 0.24313726}
 --- !u!114 &114939047325599278

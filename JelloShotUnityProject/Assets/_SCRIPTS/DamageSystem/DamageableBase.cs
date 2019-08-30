@@ -152,7 +152,7 @@ public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
         _IsCheckingDeath = true;
         while (_IsCheckingDeath == true)
         {
-            if (GameManager.instance.state == GameState.End)
+            if (GameManager.instance.state == GameState.LevelEnd)
             {
                 OnDeath();
             }
