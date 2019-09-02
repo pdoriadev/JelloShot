@@ -6,20 +6,7 @@ using UnityEngine;
 /// </summary>
 public class OutOfBounds : MonoBehaviour
 {
-    OutOfBounds instance;
 
-    #region UNITY CALLBACKS
-    private void OnEnable()
-    {
-        if (instance == null)
-            instance = this;
-    }
-
-    private void OnDisable()
-    {
-        instance = null;
-    }
-    #endregion
 
     private void OnTriggerExit2D(Collider2D collision)
     {

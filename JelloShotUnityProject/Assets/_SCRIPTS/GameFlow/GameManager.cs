@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
     {
         if (OnLevelEndEvent != null)
             OnLevelEndEvent();
-        else Debug.Log(OnLevelEndEvent + " is null.");
+        else Debug.Log("OnLevelEndEvent is null.");
 
         state = GameState.LevelEnd;
         Time.timeScale = 0f;

@@ -64,7 +64,6 @@
   <ItemGroup>
     <Compile Include="Assets\_SCRIPTS\BallVelocityLimiter.cs" />
     <Compile Include="Assets\_SCRIPTS\BounceAnimation.cs" />
-    <Compile Include="Assets\_SCRIPTS\CameraController.cs" />
     <Compile Include="Assets\_SCRIPTS\DamageSystem\DamageableBase.cs" />
     <Compile Include="Assets\_SCRIPTS\DamageSystem\DamageableLerpOnDmg.cs" />
     <Compile Include="Assets\_SCRIPTS\DamageSystem\Damager.cs" />
@@ -114,6 +113,8 @@
     <Compile Include="Assets\_SCRIPTS\TweenSystem\TweenManager.cs" />
     <Compile Include="Assets\_SCRIPTS\TweenSystem\TweenTester.cs" />
     <Compile Include="Assets\_SCRIPTS\UIManager.cs" />
+    <Compile Include="Assets\CameraShake.cs" />
+    <Compile Include="Assets\CollisionEventPublisher.cs" />
     <Compile Include="Assets\DamagerOutOfBounds.cs" />
     <Compile Include="Assets\GroundDeath.cs" />
     <Compile Include="Assets\JellyShader\Example\Scripts\JellyClickReceiver.cs" />

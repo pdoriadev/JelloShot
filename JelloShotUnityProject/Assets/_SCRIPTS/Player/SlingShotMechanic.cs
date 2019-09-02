@@ -22,12 +22,14 @@ public class SlingShotMechanic : MonoBehaviour
     public event SlingShotMoves slingShotMovesEvent;
     public delegate void SlingShotReset();
     public event SlingShotReset slingShotResetEvent;
+    public delegate void PlayerCollides();
+    public event PlayerCollides playerCollidesEvent;
 
     #region PUBLIC VARIABLES
     [Space(10)]
     public Vector3 shotVelocity;
     public float shotVelocityMaxMagnitude = 0;
-    public float shotForceMultiplier = 0;
+    public float VelocityMultiplier = 0;
 
     [Space(10)]
     public Vector3 playerReboundVelocity;
@@ -88,7 +90,7 @@ public class SlingShotMechanic : MonoBehaviour
             // Drag circle to latest touch position. 
             if (_touchInfo.touchState == TouchInputState.Dragging)
             {
-                shotVelocity = new Vector3(_touchInfo.dragVector.x * _touchInfo.dragDistance * shotForceMultiplier, _touchInfo.dragVector.y * _touchInfo.dragDistance * shotForceMultiplier);
+                shotVelocity = new Vector3(_touchInfo.dragVector.x * _touchInfo.dragDistance * VelocityMultiplier, _touchInfo.dragVector.y * _touchInfo.dragDistance * VelocityMultiplier);
                 shotVelocity = Vector3.ClampMagnitude(shotVelocity, shotVelocityMaxMagnitude);
 
                 slingShotInfo.shotVelocity = shotVelocity;
@@ -139,6 +141,8 @@ public class SlingShotMechanic : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        playerCollidesEvent();
+
         // Applies force to ball player collides with
         if (collision.gameObject.layer == (int)GameLayers.BallsLayer)
         {
@@ -149,8 +153,6 @@ public class SlingShotMechanic : MonoBehaviour
 
             //Velocity added to collided with ball is proportional to player's current velocity.
             ballRigidBody.AddForceAtPosition(newBallVelocity, collision.gameObject.transform.position, ForceMode2D.Impulse);
-
-            Time.timeScale = regularTimeScale;
         }
 
         BounceAnimation.instance.PlayBounce();

@@ -40,16 +40,16 @@ public class DifficultyAdjuster : MonoBehaviour
 
     public void SetStartingDifficulty()
     {
-        SpawnManager.instance.spawnMinWait = SpawnManager.instance.startMinSpawnWait;
-        SpawnManager.instance.spawnMaxWait = SpawnManager.instance.startMaxSpawnWait;
+        SpawnManager.instance.currentMinWait = SpawnManager.instance.startMinSpawnWait;
+        SpawnManager.instance.currentMaxWait = SpawnManager.instance.startMaxSpawnWait;
 
         for (int i = 0; i <= startingDifficulty; i++)
         {
-            SpawnManager.instance.spawnMinWait -= _MinSpawnRateChange;
-            SpawnManager.instance.spawnMaxWait -= _MaxSpawnRateChange;
+            SpawnManager.instance.currentMinWait -= _MinSpawnRateChange;
+            SpawnManager.instance.currentMaxWait -= _MaxSpawnRateChange;
 
-            if (SpawnManager.instance.spawnMaxWait < SpawnManager.instance.spawnMinWait)
-                SpawnManager.instance.spawnMaxWait = SpawnManager.instance.spawnMinWait + _MaxSpawnRateChange;
+            if (SpawnManager.instance.currentMaxWait < SpawnManager.instance.currentMinWait)
+                SpawnManager.instance.currentMaxWait = SpawnManager.instance.currentMinWait + _MaxSpawnRateChange;
 
             currentDifficulty = i;
         }
@@ -94,11 +94,11 @@ public class DifficultyAdjuster : MonoBehaviour
 
     void ChangeDifficulty()
     {
-        if ((SpawnManager.instance.spawnMaxWait - _MaxSpawnRateChange) > SpawnManager.instance.spawnMinWait)
+        if ((SpawnManager.instance.currentMaxWait - _MaxSpawnRateChange) > SpawnManager.instance.currentMinWait)
         {
-            SpawnManager.instance.spawnMaxWait -= _MaxSpawnRateChange;
+            SpawnManager.instance.currentMaxWait -= _MaxSpawnRateChange;
         }
-        SpawnManager.instance.spawnMinWait -= _MinSpawnRateChange;
+        SpawnManager.instance.currentMinWait -= _MinSpawnRateChange;
 
         _LastNumberOfBallsKOd = ScoreManager.instance.ballsKnockedOut;
         _KODifferenceBetweenDifficulties += _KODifferenceBetweenDifficultiesIncrease;

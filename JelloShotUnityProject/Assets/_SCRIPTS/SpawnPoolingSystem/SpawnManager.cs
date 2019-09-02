@@ -31,8 +31,8 @@ public class SpawnManager : MonoBehaviour
 
     private void Awake()
     {
-        startMinSpawnWait = spawnMinWait;
-        startMaxSpawnWait = spawnMaxWait;
+        startMinSpawnWait = currentMinWait;
+        startMaxSpawnWait = currentMaxWait;
     }
 
     private void Start()
@@ -53,34 +53,34 @@ public class SpawnManager : MonoBehaviour
     public float spawnMaxWaitFloor;
 
     [SerializeField]
-    private float _SpawnMinWait;
-    public float spawnMinWait
+    private float _CurrentMinWait;
+    public float currentMinWait
     {
-        get { return _SpawnMinWait; }
+        get { return _CurrentMinWait; }
         set
         {
-            _SpawnMinWait = value;
-            if (_SpawnMinWait < spawnMinWaitFloor)
+            _CurrentMinWait = value;
+            if (_CurrentMinWait < spawnMinWaitFloor)
             {
-                _SpawnMinWait = spawnMinWaitFloor;
+                _CurrentMinWait = spawnMinWaitFloor;
             }
         }
     }
     [SerializeField]
-    private float _SpawnMaxWait;
-    public float spawnMaxWait
+    private float _CurrentMaxWait;
+    public float currentMaxWait
     {
-        get { return _SpawnMaxWait; }
+        get { return _CurrentMaxWait; }
         set
         {
-            _SpawnMaxWait = value;
-            if (_SpawnMaxWait < spawnMaxWaitFloor)
+            _CurrentMaxWait = value;
+            if (_CurrentMaxWait < spawnMaxWaitFloor)
             {
-                _SpawnMaxWait = spawnMaxWaitFloor;
+                _CurrentMaxWait = spawnMaxWaitFloor;
             }
         }
     }
-    public float spawnWait;
+    public float currentWaitTime;
     public float startMinSpawnWait;
     public float startMaxSpawnWait;
 
@@ -97,7 +97,7 @@ public class SpawnManager : MonoBehaviour
 
         while (IsSpawning)
         {
-            spawnWait = Random.Range(spawnMinWait, spawnMaxWait);
+            currentWaitTime = Random.Range(currentMinWait, currentMaxWait);
             spawnPosition = new Vector3(Random.Range(-spawningZone.x, spawningZone.x), Random.Range(-spawningZone.y, spawningZone.y), 1);
             GameObject spawnable = null;
             int index = 0;
@@ -135,7 +135,7 @@ public class SpawnManager : MonoBehaviour
                 spawnable.SetActive(true);
             }
 
-            yield return new WaitForSeconds(spawnWait);
+            yield return new WaitForSeconds(currentWaitTime);
         }
     }
 

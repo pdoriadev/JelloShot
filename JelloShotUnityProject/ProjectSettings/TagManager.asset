@@ -20,6 +20,8 @@ TagManager:
   - wall
   - bomb
   - reflector
+  - playerRoot
+  - slingShotVisuals
   layers:
   - Default
   - TransparentFX
@@ -40,7 +42,7 @@ TagManager:
   - SideyTopseyWall
   - SideyTopsey
   - Bomb
-  - 
+  - Camera
   - 
   - 
   - 
