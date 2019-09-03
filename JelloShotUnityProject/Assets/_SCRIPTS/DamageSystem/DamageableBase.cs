@@ -156,7 +156,7 @@ public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
             {
                 OnDeath();
             }
-            if (DeathCheck() == true)
+            else if (DeathCheck() == true)
             {
                 yield return new WaitForSeconds(waitTime);
                 OnDeath();

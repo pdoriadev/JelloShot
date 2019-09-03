@@ -40,15 +40,33 @@ public enum GameLayers
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public GameState state;
-    // events
+
+
+    #region EVENTS 
+
+    public delegate void OnEnterMainMenu();
+    public static event OnEnterMainMenu onEnterMainMenuEvent;
+    public delegate void OnEnterGameplay();
+    public static event OnEnterGameplay onEnterGameplayEvent;
     public delegate void OnRetry();
-    public static event OnRetry OnRetryEvent;
+    public static event OnRetry onRetryEvent;
     public delegate void OnLevelEnd();
-    public static event OnLevelEnd OnLevelEndEvent;
+    public static event OnLevelEnd onLevelEndEvent;
+
+    #endregion
+
+
+    #region PROPERTIES
 
     private bool _RetryUIIsOn = false;
     public bool isRetryUIOn { get { return _RetryUIIsOn; }  set { _RetryUIIsOn = value; } }
+    private GameState _State;
+    public GameState state { get { return _State; } set { _State = value; } }
+
+    #endregion
+
+
+    #region PRIVATE SERIALIZED VARIABLES
 
     [SerializeField]
     private GameObject _PlayerGameObject;
@@ -57,14 +75,19 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private float _CurrentTime;
 
+    #endregion
+
+
     #region UNITY CALLBACKS
+
     private void OnEnable()
     {
         if (instance == null)
             instance = this;
-        state = GameState.Gameplay;
+        state = GameState.MainMenu;
         _PlayerStartPos = _PlayerGameObject.transform.position;
     }
+
     private void OnDisable()
     {
         instance = null;    
@@ -81,13 +104,17 @@ public class GameManager : MonoBehaviour
         if (isRetryUIOn == false)
             UIManager.instance.UIScoreUpdate(ScoreManager.instance.ballsKnockedOut);
     }
+
     #endregion
 
+
+    #region PUBLIC STATE CONTROL METHODS
+
     private int _FinalScore;
-    public void LevelEnd()
+    public void EndGame()
     {
-        if (OnLevelEndEvent != null)
-            OnLevelEndEvent();
+        if (onLevelEndEvent != null)
+            onLevelEndEvent();
         else Debug.Log("OnLevelEndEvent is null.");
 
         state = GameState.LevelEnd;
@@ -99,11 +126,31 @@ public class GameManager : MonoBehaviour
         SpawnManager.instance.PoolAllSpawnables();
     }
 
+    public void ChangeStateTo(GameState _state)
+    {
+        state = _state;
+
+        if (state == GameState.MainMenu)
+        {
+            onEnterMainMenuEvent();
+        }
+    }
+
+    #endregion
+
+
+    #region PRIVATE STATE CONTROL METHODS
+
+    private void MainMenu()
+    {
+
+    }
+
     private void Retry()
     {
-        if (OnRetryEvent != null)
-            OnRetryEvent();
-        else Debug.Log(OnRetryEvent + " is null.");
+        if (onRetryEvent != null)
+            onRetryEvent();
+        else Debug.Log(onRetryEvent + " is null.");
 
         _CurrentTime = 0;
         _PlayerGameObject.transform.position = _PlayerStartPos;
@@ -117,4 +164,6 @@ public class GameManager : MonoBehaviour
         state = GameState.Gameplay;
         Time.timeScale = 1f;
     }
+
+    #endregion
 }

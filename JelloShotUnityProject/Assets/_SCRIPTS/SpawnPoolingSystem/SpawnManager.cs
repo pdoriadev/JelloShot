@@ -15,42 +15,30 @@ public class SpawnManager : MonoBehaviour
 
     public static SpawnManager instance;
 
-    #region UNITY CALLBACKS
-    private void OnEnable()
-    {
-        if (instance == null)
-            instance = this;
-        GameManager.OnRetryEvent += PoolAllSpawnables;
-    }
+    #region PUBLIC VARIABLES
 
-    private void OnDisable()
-    {
-        GameManager.OnRetryEvent -= PoolAllSpawnables;
-        instance = null;
-    }
-
-    private void Awake()
-    {
-        startMinSpawnWait = currentMinWait;
-        startMaxSpawnWait = currentMaxWait;
-    }
-
-    private void Start()
-    {
-        StartCoroutine(CoSpawnItem());
-    }
-    #endregion
-
-    #region VARIABLES
     public List<GameObject> spawnablesInGame = new List<GameObject>();
     public List<GameObject> pooledObjectsList = new List<GameObject>();
 
     // Wait time before checking if can spawn
     public float startWait;
     // bool that stops spawning when false. 
-    public bool IsSpawning = true;
+    public bool isSpawning = false;
     public float spawnMinWaitFloor;
     public float spawnMaxWaitFloor;
+
+    public float currentWaitTime;
+    public float startMinSpawnWait;
+    public float startMaxSpawnWait;
+
+    // Defines where objects can spawn
+    public Vector3 spawningZone;
+    // Where objects do spawn
+    public Vector3 spawnPosition;
+
+    #endregion
+
+    #region WAIT TIME PROPERTIES
 
     [SerializeField]
     private float _CurrentMinWait;
@@ -80,22 +68,51 @@ public class SpawnManager : MonoBehaviour
             }
         }
     }
-    public float currentWaitTime;
-    public float startMinSpawnWait;
-    public float startMaxSpawnWait;
-
-    // Defines where objects can spawn
-    public Vector3 spawningZone;
-    // Where objects do spawn
-    public Vector3 spawnPosition;
     #endregion
+
+    #region UNITY CALLBACKS
+
+    private void OnEnable()
+    {
+        if (instance == null)
+            instance = this;
+        GameManager.onRetryEvent += PoolAllSpawnables;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.onRetryEvent -= PoolAllSpawnables;
+        instance = null;
+    }
+
+    private void Awake()
+    {
+        startMinSpawnWait = currentMinWait;
+        startMaxSpawnWait = currentMaxWait;
+    }
+
+    private void Update()
+    {
+        if (GameManager.instance.state == GameState.Gameplay)
+        {
+            StartCoroutine(CoSpawnItem());
+            isSpawning = true;
+        }
+        else if (GameManager.instance.state != GameState.Gameplay && isSpawning == true)
+        {
+            StopCoroutine(CoSpawnItem());
+            isSpawning = false;
+        }
+    }
+    #endregion
+
 
     // Handles spawn loop
     IEnumerator CoSpawnItem()
     {
         yield return new WaitForSeconds(startWait);
 
-        while (IsSpawning)
+        while (isSpawning)
         {
             currentWaitTime = Random.Range(currentMinWait, currentMaxWait);
             spawnPosition = new Vector3(Random.Range(-spawningZone.x, spawningZone.x), Random.Range(-spawningZone.y, spawningZone.y), 1);
@@ -139,6 +156,8 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
+    #region PUBLIC POOLING METHODS
+
     // Sets passed object to inactive and pools it. Called by OutOfBounds and BallCollisions Script
     public void PoolObject(GameObject _pooledObj)
     {
@@ -163,6 +182,8 @@ public class SpawnManager : MonoBehaviour
         if (SpawnManager.instance.spawnablesInGame.Count > 0)
             Debug.LogError("spawnablesInGame list should be empty");
     }
+
+    #endregion
 }
 
 

@@ -8,7 +8,7 @@ public class GroundDeath : MonoBehaviour
     {
         if (GetComponent<DamageableLerpOnDmg>().currentHealth == 0)
         {
-            GameManager.instance.LevelEnd();
+            GameManager.instance.EndGame();
         }
     }
 
