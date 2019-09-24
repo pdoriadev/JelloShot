@@ -128,11 +128,21 @@ public class GameManager : MonoBehaviour
 
     public void ChangeStateTo(GameState _state)
     {
+        if (state == GameState.Paused && _state == GameState.Paused)
+        {
+            state = GameState.Gameplay;
+            return;
+        }
+
         state = _state;
 
         if (state == GameState.MainMenu)
         {
             onEnterMainMenuEvent();
+        }
+        if (state == GameState.Paused)
+        {
+            PauseGame();
         }
     }
 
@@ -140,6 +150,11 @@ public class GameManager : MonoBehaviour
 
 
     #region PRIVATE STATE CONTROL METHODS
+
+    private void PauseGame()
+    {
+        Time.timeScale = 0;
+    }
 
     private void MainMenu()
     {

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -22,6 +23,7 @@ public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
 {
     public delegate void OnTakeDamageEvent(DamagedInfo _damagedInfo);
     public event OnTakeDamageEvent onTakeDamageEvent;
+    public UnityEvent onTakeDamageUnityEvent;
     DamagedInfo _damagedInfo;
 
     void OnEnable()
@@ -111,6 +113,8 @@ public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
     {
         if (gameObject.activeSelf)
         {
+            onTakeDamageUnityEvent.Invoke();
+
             if (onTakeDamageEvent != null)
             {
                 _damagedInfo.currentHealth = currentHealth;

@@ -29,7 +29,7 @@ public class UIManager : MonoBehaviour
 
     public void UIScoreUpdate(int _ballsKnockedOut)
     {
-        ballsKnockedOutText.text = ("KOs: " + _ballsKnockedOut);
+        ballsKnockedOutText.text = _ballsKnockedOut.ToString(); ;
         inGameHighScoreText.text = ("HIGH SCORE: " + DataManagement.instance.dManHighScore);
     }
 

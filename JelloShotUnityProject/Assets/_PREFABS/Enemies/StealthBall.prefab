@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 2905812106191907326}
   - component: {fileID: 114202580910492734}
   m_Layer: 14
-  m_Name: BounceBallBig
+  m_Name: StealthBall
   m_TagString: bigBall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -187,6 +187,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e296f4540fff5945b72c9c53de78deb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onTakeDamageUnityEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   _CurrentHealth: 4
   _MaxHealth: 4
   _IsHealable: 0

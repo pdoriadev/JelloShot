@@ -20,7 +20,8 @@ public class CameraShake : MonoBehaviour
         }
 
         slingShot.slingShotResetEvent += ShotReleaseListener;
-        slingShot.playerCollidesEvent += HighIntensityShake;
+        slingShot.playerCollidesOnFriendly += LowIntensityShake;
+        slingShot.playerCollidesOnEnemy += HighIntensityShake;
         damageable.onTakeDamageEvent += OnTakeDamageListener;
 
         if (_CamTransform == null)
@@ -30,7 +31,8 @@ public class CameraShake : MonoBehaviour
     private void OnDisable()
     {
         slingShot.slingShotResetEvent -= ShotReleaseListener;
-        slingShot.playerCollidesEvent -= HighIntensityShake;
+        slingShot.playerCollidesOnFriendly -= LowIntensityShake;
+        slingShot.playerCollidesOnEnemy -= HighIntensityShake;
         damageable.onTakeDamageEvent -= OnTakeDamageListener;
     }
     #endregion
@@ -43,9 +45,11 @@ public class CameraShake : MonoBehaviour
     [SerializeField]
     private float _DampingSpeed = 0.1f;
     [SerializeField]
+    private float _LowMagnitude = 0.4f;
+    [SerializeField]
     private float _RegularMagnitude = 1f;
     [SerializeField]
-    private float _DmgdMagnitude = 2f;
+    private float _HighMagnitude = 2f;
     [SerializeField]
     private bool _Shaking = true;
     #endregion
@@ -73,16 +77,26 @@ public class CameraShake : MonoBehaviour
     }
     private void ShotReleaseListener()
     {
-        _Magnitude = _RegularMagnitude;
-        _Shaking = true;
+        RegularIntensityShake();
     }
     private void OnTakeDamageListener(DamagedInfo _info)
     {
         HighIntensityShake();
     }
+
+    private void LowIntensityShake()
+    {
+        _Magnitude = _LowMagnitude;
+        _Shaking = true;
+    }
+    private void RegularIntensityShake()
+    {
+        _Magnitude = _RegularMagnitude;
+        _Shaking = true;
+    }
     private void HighIntensityShake()
     {
-        _Magnitude = _DmgdMagnitude;
+        _Magnitude = _HighMagnitude;
         _Shaking = true;
     }
 }

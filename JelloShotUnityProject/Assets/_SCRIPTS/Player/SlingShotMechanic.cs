@@ -25,7 +25,8 @@ public class SlingShotMechanic : MonoBehaviour
     public delegate void SlingShotReset();
     public event SlingShotReset slingShotResetEvent;
     public delegate void PlayerCollides();
-    public event PlayerCollides playerCollidesEvent;
+    public event PlayerCollides playerCollidesOnEnemy;
+    public event PlayerCollides playerCollidesOnFriendly;
     
     #endregion
 
@@ -154,7 +155,15 @@ public class SlingShotMechanic : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        playerCollidesEvent();
+        if (collision.gameObject.GetComponent<DamagerPlayerFaction>() != null)
+        {
+            playerCollidesOnFriendly();
+        }
+        else
+        {
+
+            playerCollidesOnEnemy();
+        }
 
         // Applies force to ball player collides with
         if (collision.gameObject.layer == (int)GameLayers.BallsLayer)
