@@ -10,7 +10,7 @@ public enum GameState
 {
     MainMenu,
     Gameplay,
-    Paused,
+    PausedGameplay,
     LevelEnd
 }
 public enum GameLayers
@@ -46,14 +46,28 @@ public class GameManager : MonoBehaviour
 
     public delegate void OnEnterMainMenu();
     public static event OnEnterMainMenu onEnterMainMenuEvent;
+    public delegate void OnExitMainMenu();
+    public static event OnExitMainMenu onExitMainMenuEvent;
     public delegate void OnEnterGameplay();
     public static event OnEnterGameplay onEnterGameplayEvent;
+    public delegate void OnExitGameplay();
+    public static event OnExitGameplay onExitGameplayEvent;
+    public delegate void OnPauseGameplay();
+    public static event OnPauseGameplay onPauseGameplayEvent;
+    public delegate void OnUnPauseGameplay();
+    public static event OnUnPauseGameplay onUnPauseGameplayEvent;
     public delegate void OnRetry();
     public static event OnRetry onRetryEvent;
     public delegate void OnLevelEnd();
     public static event OnLevelEnd onLevelEndEvent;
 
     #endregion
+
+    public bool isTutorial = true;
+    public void SetTutorialFalse()
+    {
+        isTutorial = false;
+    }
 
 
     #region PROPERTIES
@@ -64,7 +78,6 @@ public class GameManager : MonoBehaviour
     public GameState state { get { return _State; } set { _State = value; } }
 
     #endregion
-
 
     #region PRIVATE SERIALIZED VARIABLES
 
@@ -84,8 +97,9 @@ public class GameManager : MonoBehaviour
     {
         if (instance == null)
             instance = this;
-        state = GameState.MainMenu;
+        ChangeStateTo(GameState.MainMenu);
         _PlayerStartPos = _PlayerGameObject.transform.position;
+        isTutorial = true;
     }
 
     private void OnDisable()
@@ -103,6 +117,13 @@ public class GameManager : MonoBehaviour
         }
         if (isRetryUIOn == false)
             UIManager.instance.UIScoreUpdate(ScoreManager.instance.ballsKnockedOut);
+
+        if (state == GameState.MainMenu && TapChecker.instance._NumberOfTapsInARow > 1)
+        {
+            ChangeStateTo(GameState.Gameplay);
+        }
+
+        Debug.Log(isTutorial);
     }
 
     #endregion
@@ -122,27 +143,41 @@ public class GameManager : MonoBehaviour
         isRetryUIOn = true;
 
         _FinalScore = ScoreManager.instance.CountScore(DifficultyAdjuster.instance.currentDifficulty);
-        UIManager.instance.RetryUI(_FinalScore, DataManagement.instance.dManHighScore, isRetryUIOn);
+        UIManager.instance.EnterRetryUI(_FinalScore, DataManagement.instance.dManHighScore, isRetryUIOn);
         SpawnManager.instance.PoolAllSpawnables();
     }
 
     public void ChangeStateTo(GameState _state)
     {
-        if (state == GameState.Paused && _state == GameState.Paused)
+        if (state == GameState.MainMenu && _state != GameState.MainMenu)
         {
-            state = GameState.Gameplay;
-            return;
+            ExitMainMenu();
+        }
+        if (state == GameState.PausedGameplay && _state != GameState.PausedGameplay)
+        {
+            UnPauseGameplay();
+        }
+        if (state == GameState.Gameplay && _state != GameState.Gameplay)
+        {
+            ExitGameplay();
         }
 
         state = _state;
 
         if (state == GameState.MainMenu)
         {
-            onEnterMainMenuEvent();
+            EnterMainMenu();
+            return;
         }
-        if (state == GameState.Paused)
+        else if (state == GameState.PausedGameplay)
         {
-            PauseGame();
+            PauseGameplay();
+            return;
+        }
+        else if (state == GameState.Gameplay)
+        {
+            EnterGameplay();
+            return;
         }
     }
 
@@ -151,20 +186,70 @@ public class GameManager : MonoBehaviour
 
     #region PRIVATE STATE CONTROL METHODS
 
-    private void PauseGame()
+    private void EnterMainMenu()
     {
+        if (onEnterMainMenuEvent != null)
+        {
+            onEnterMainMenuEvent();
+        }
+        else Debug.LogError(onEnterMainMenuEvent.ToString() + " is null ");
+
+        _PlayerGameObject.SetActive(false);
+
+    }
+    private void ExitMainMenu()
+    {
+        if (onExitMainMenuEvent != null)
+        {
+            onExitMainMenuEvent();
+        }
+        else Debug.LogError(onExitMainMenuEvent.ToString() + " is null ");
+    }
+    private void EnterGameplay()
+    {
+        state = GameState.Gameplay;
+        _PlayerGameObject.SetActive(true);
+        if (onEnterGameplayEvent != null)
+        {
+            onEnterGameplayEvent();
+        }
+        else Debug.LogError(onEnterGameplayEvent.ToString() + " is null ");
+
+    }
+    private void ExitGameplay()
+    {
+        _PlayerGameObject.SetActive(false);
+        if (onExitGameplayEvent != null)
+        {
+            onExitGameplayEvent();
+        }
+        else Debug.LogError(onExitGameplayEvent.ToString() + " is null ");
+    }
+    private void PauseGameplay()
+    {
+        if (onPauseGameplayEvent != null)
+        {
+            onPauseGameplayEvent();
+        }
+        else Debug.LogError(onPauseGameplayEvent.ToString() + " is null ");
+
         Time.timeScale = 0;
     }
-
-    private void MainMenu()
+    private void UnPauseGameplay()
     {
-
+        if (onUnPauseGameplayEvent != null)
+        {
+            onUnPauseGameplayEvent();
+        }
+        else Debug.LogError(onUnPauseGameplayEvent.ToString() + " is null ");
     }
 
     private void Retry()
     {
         if (onRetryEvent != null)
+        {
             onRetryEvent();
+        }
         else Debug.Log(onRetryEvent + " is null.");
 
         _CurrentTime = 0;
@@ -174,7 +259,7 @@ public class GameManager : MonoBehaviour
         DifficultyAdjuster.instance.SetStartingDifficulty();
 
         isRetryUIOn = false;
-        UIManager.instance.RetryUI(_FinalScore, DataManagement.instance.dManHighScore, isRetryUIOn);
+        UIManager.instance.EnterRetryUI(_FinalScore, DataManagement.instance.dManHighScore, isRetryUIOn);
 
         state = GameState.Gameplay;
         Time.timeScale = 1f;

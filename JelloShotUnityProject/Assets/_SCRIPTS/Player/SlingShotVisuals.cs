@@ -2,8 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 /// <summary>
-/// Moves and rotates touch visuals. To be attached to touch visuals. Called by player manager. 
+/// Moves and rotates touch visuals. To be attached to touch visuals. Subscribes to SlingShotMechanics' events. . 
 /// </summary>
 public class SlingShotVisuals : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class SlingShotVisuals : MonoBehaviour
     public Vector3 offScreenPosition;
     public float angleArrowIsPointing;
 
+    public UnityEvent OnRelease;
+
     [SerializeField]
     private SlingShotMechanic _SlingShotInstance;
     #region UNITY CALLBACKS
@@ -23,7 +26,9 @@ public class SlingShotVisuals : MonoBehaviour
     private void OnEnable()
     {
         if (_SlingShotInstance == null)
-            GameObject.FindGameObjectWithTag("Player").GetComponent<SlingShotMechanic>();
+            _SlingShotInstance = GameObject.FindGameObjectWithTag("Player").GetComponent<SlingShotMechanic>();
+        if (lineRend == null)
+            lineRend = GameObject.FindGameObjectWithTag("dragLine").GetComponent<LineRenderer>();
 
         _SlingShotInstance.slingShotStartEvent += OnSlingStartListener;
         _SlingShotInstance.slingShotMovesEvent += OnSlingMoveListener;
@@ -53,9 +58,14 @@ public class SlingShotVisuals : MonoBehaviour
 
 
         Vector3 PosOffset = _slingShotInfo.slingerRigidbody.transform.position - _touchInfo.firstTouchPos;
+        int MagnitudeIncrease = 100;
         // line end points positions
         lineRend.SetPosition(0, _slingShotInfo.slingerRigidbody.transform.position);
-        lineRend.SetPosition(lineRend.positionCount - 1, _touchInfo.lastTouchPos + PosOffset);
+        lineRend.SetPosition(lineRend.positionCount - 1, Vector3.ClampMagnitude(_touchInfo.lastTouchPos + PosOffset, _slingShotInfo.slingMaxMagnitude - MagnitudeIncrease));
+        //if ((_touchInfo.lastTouchPos + PosOffset).magnitude > _slingShotInfo.slingMaxMagnitude)
+        //{
+        //    lineRend.SetPosition(lineRend.positionCount - 1, Vector3.ClampMagnitude(_touchInfo.lastTouchPos + PosOffset, _slingShotInfo.slingMaxMagnitude + MagnitudeIncrease));
+        //}
         Vector3 lineEndsOffset = lineRend.GetPosition(0) - lineRend.GetPosition(lineRend.positionCount - 1);
         // set each inner line point's position equidistant to each other with the correct offset.
         for (int i = 1; i < lineRend.positionCount - 1; i++)
@@ -89,6 +99,7 @@ public class SlingShotVisuals : MonoBehaviour
         arrowsAtFirstTouchTransform.position = _touchInfo.firstTouchPos;
     }
 
+
     public void OnSlingResetListener()
     {
         ballArrowTransform.position = offScreenPosition;
@@ -98,5 +109,13 @@ public class SlingShotVisuals : MonoBehaviour
         {
             lineRend.SetPosition(i, offScreenPosition);
         }
+        OnRelease.Invoke();
     }
+
+    // IDEA: Dont' want another line/trail where the player is touching the screen. Can distract from actual sling. BUT could have 'sparkle' effect wherever they 
+    //      last touched it. 
+    // IDEA: Effect where sling gradient flashes white and blue with same timing as other sling shot effect flashes. 
+    // IDEA: Effect where, on release, the sling will zoom into its center point where the player was. When it reaches that point, an EXPLOSION or some other particle effect happens.
+    //      Could use a coroutine. 
+    
 }

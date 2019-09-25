@@ -93,7 +93,7 @@ public class SpawnManager : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.instance.state == GameState.Gameplay && isSpawning == false)
+        if (GameManager.instance.state == GameState.Gameplay && isSpawning == false && GameManager.instance.isTutorial == false)
         {
             StartCoroutine(CoSpawnItem());
             isSpawning = true;

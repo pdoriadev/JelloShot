@@ -16,6 +16,10 @@ public class UIManager : MonoBehaviour
         if (instance == null)
             instance = this;
         ScoreManager.OnScoreUpdateEvent += UIScoreUpdate;
+        GameManager.onEnterMainMenuEvent += EnterMainMenuListener;
+        GameManager.onExitMainMenuEvent += ExitMainMenuListener;
+        GameManager.onEnterGameplayEvent += EnterGameplayListener;
+        GameManager.onPauseGameplayEvent += EnterPauseListener;
     }
     private void OnDisable()
     {
@@ -26,6 +30,8 @@ public class UIManager : MonoBehaviour
 
     public Text ballsKnockedOutText;
     public Text inGameHighScoreText;
+
+    #region PUBLIC METHODS
 
     public void UIScoreUpdate(int _ballsKnockedOut)
     {
@@ -42,7 +48,7 @@ public class UIManager : MonoBehaviour
     public GameObject retryPanel;
     public Text finalScoreText;
     public Text retryHighScoreText;
-    public void RetryUI(int _finalScore, int _highScore, bool _isPanelActive)
+    public void EnterRetryUI(int _finalScore, int _highScore, bool _isPanelActive)
     {
         retryPanel.SetActive(_isPanelActive);
         
@@ -57,4 +63,30 @@ public class UIManager : MonoBehaviour
             retryHighScoreText.text = ("HIGH SCORE: " + _highScore);
         }       
     }
+    #endregion
+
+    public GameObject MainMenuPanel;
+    private void EnterMainMenuListener()
+    {
+        MainMenuPanel.SetActive(true);
+    }
+    private void ExitMainMenuListener()
+    {
+        MainMenuPanel.SetActive(false);
+    }
+
+    private void EnterGameplayListener()
+    {
+
+    }
+
+    private void EnterPauseListener()
+    {
+
+    }
+    private void ExitPauseListener()
+    {
+
+    }
+
 }

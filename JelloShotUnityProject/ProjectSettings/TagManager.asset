@@ -22,6 +22,7 @@ TagManager:
   - reflector
   - playerRoot
   - slingShotVisuals
+  - dragLine
   layers:
   - Default
   - TransparentFX

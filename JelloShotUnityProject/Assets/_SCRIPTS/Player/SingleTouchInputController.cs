@@ -68,7 +68,7 @@ public class SingleTouchInputController : MonoBehaviour
 
                 if (OnTouchInputEvent != null)
                     OnTouchInputEvent(_TouchInfo);
-                else Debug.Log(OnTouchInputEvent + " is null.");
+                else Debug.LogWarning("OnTouchInputEvent  is null.");
             }
 
             // Drag circle to latest touch position. 
@@ -83,7 +83,9 @@ public class SingleTouchInputController : MonoBehaviour
                 // Can change this to square magnitude method
                 _TouchInfo.dragDistance = Vector3.Distance(_TouchInfo.firstTouchPos, _TouchInfo.lastTouchPos);
 
-                OnTouchInputEvent(_TouchInfo);
+                if (OnTouchInputEvent != null)
+                    OnTouchInputEvent(_TouchInfo);
+                else Debug.LogWarning("OnTouchInputEvent  is null.");
             }
 
             // Multiplies dragVector, dragDist, and slingShotForce to get shotVelocity. 
@@ -91,7 +93,9 @@ public class SingleTouchInputController : MonoBehaviour
             else if (_LatestTouch.phase == TouchPhase.Ended)
             {
                 _TouchInfo.touchState = TouchInputState.Release;
-                OnTouchInputEvent(_TouchInfo);
+                if (OnTouchInputEvent != null)
+                    OnTouchInputEvent(_TouchInfo);
+                else Debug.LogWarning("OnTouchInputEvent  is null.");
 
                 Reset();
             }
@@ -99,7 +103,9 @@ public class SingleTouchInputController : MonoBehaviour
             void Reset()
             {
                 _TouchInfo.touchState = TouchInputState.AtRest;
-                OnTouchInputEvent(_TouchInfo);
+                if (OnTouchInputEvent != null)
+                    OnTouchInputEvent(_TouchInfo);
+                else Debug.LogWarning("OnTouchInputEvent  is null.");
             }
         }
     }
