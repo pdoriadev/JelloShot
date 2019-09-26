@@ -87,8 +87,8 @@ public class SpawnManager : MonoBehaviour
 
     private void Awake()
     {
-        startMinSpawnWait = currentMinWait;
-        startMaxSpawnWait = currentMaxWait;
+        currentMinWait = startMinSpawnWait;
+        currentMaxWait = startMaxSpawnWait;
     }
 
     private void Update()

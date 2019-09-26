@@ -62,10 +62,7 @@ public class SlingShotVisuals : MonoBehaviour
         // line end points positions
         lineRend.SetPosition(0, _slingShotInfo.slingerRigidbody.transform.position);
         lineRend.SetPosition(lineRend.positionCount - 1, Vector3.ClampMagnitude(_touchInfo.lastTouchPos + PosOffset, _slingShotInfo.slingMaxMagnitude - MagnitudeIncrease));
-        //if ((_touchInfo.lastTouchPos + PosOffset).magnitude > _slingShotInfo.slingMaxMagnitude)
-        //{
-        //    lineRend.SetPosition(lineRend.positionCount - 1, Vector3.ClampMagnitude(_touchInfo.lastTouchPos + PosOffset, _slingShotInfo.slingMaxMagnitude + MagnitudeIncrease));
-        //}
+
         Vector3 lineEndsOffset = lineRend.GetPosition(0) - lineRend.GetPosition(lineRend.positionCount - 1);
         // set each inner line point's position equidistant to each other with the correct offset.
         for (int i = 1; i < lineRend.positionCount - 1; i++)
