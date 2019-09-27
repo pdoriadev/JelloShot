@@ -31,10 +31,14 @@ public class DifficultyAdjuster : MonoBehaviour
     }
     #endregion
 
-    public int currentDifficulty;
-    public int startingDifficulty;
+    private int _CurrentDiff;
+    public int currentDiff { get { return _CurrentDiff; } }
     [SerializeField]
-    private float _MinSpawnRateChange;
+    private int _BeginnerDiff = 10;
+    public int beginnerDiff { get { return _BeginnerDiff; } }
+    public int startingDiff;
+    [SerializeField]
+    private float _MinSpawnRateChange; 
     [SerializeField]
     private float _MaxSpawnRateChange;
 
@@ -43,7 +47,7 @@ public class DifficultyAdjuster : MonoBehaviour
         SpawnManager.instance.currentMinWait = SpawnManager.instance.startMinSpawnWait;
         SpawnManager.instance.currentMaxWait = SpawnManager.instance.startMaxSpawnWait;
 
-        for (int i = 0; i <= startingDifficulty; i++)
+        for (int i = 0; i <= startingDiff; i++)
         {
             SpawnManager.instance.currentMinWait -= _MinSpawnRateChange;
             SpawnManager.instance.currentMaxWait -= _MaxSpawnRateChange;
@@ -51,9 +55,9 @@ public class DifficultyAdjuster : MonoBehaviour
             if (SpawnManager.instance.currentMaxWait < SpawnManager.instance.currentMinWait)
                 SpawnManager.instance.currentMaxWait = SpawnManager.instance.currentMinWait + _MaxSpawnRateChange;
 
-            currentDifficulty = i;
+            _CurrentDiff = i;
         }
-        UIManager.instance.UpdateDifficulty(currentDifficulty);
+        UIManager.instance.UpdateDifficulty(currentDiff);
 
         _KOsNeededForChange = _StartingKOsNeededForChange;
         _IsChecking = true;
@@ -103,7 +107,7 @@ public class DifficultyAdjuster : MonoBehaviour
         _LastNumberOfBallsKOd = ScoreManager.instance.ballsKnockedOut;
         _KODifferenceBetweenDifficulties += _KODifferenceBetweenDifficultiesIncrease;
         _KOsNeededForChange += _KODifferenceBetweenDifficulties;
-        currentDifficulty += 1;
-        UIManager.instance.UpdateDifficulty(currentDifficulty);
+        _CurrentDiff += 1;
+        UIManager.instance.UpdateDifficulty(currentDiff);
     }
 }

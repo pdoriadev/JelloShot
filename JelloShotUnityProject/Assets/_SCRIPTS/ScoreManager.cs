@@ -9,27 +9,30 @@ using UnityEngine.UI;
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager instance;
-    internal delegate void OnScoreUpdate(int _param);
-    internal static event OnScoreUpdate OnScoreUpdateEvent;
+    public delegate void OnScoreUpdate(ScoreInfo _scoreInfo);
+    public static event OnScoreUpdate OnScoreUpdateEvent;
+
+    private ScoreInfo _ScoreInfo;
+    public ScoreInfo scoreInfo { get { return _ScoreInfo; } }
 
     #region UNITY CALLBACKS
     private void OnEnable()
     {
         if (instance == null)
             instance = this;
-        GameManager.onRetryEvent += LevelScoreSetup;
+        GameManager.onResetLevel += LevelScoreSetup;
     }
 
     private void OnDisable()
     {
-        GameManager.onRetryEvent -= LevelScoreSetup;
+        GameManager.onResetLevel -= LevelScoreSetup;
         instance = null;
     }
 
     private void Start()
     {
         DataManagement.instance.LoadData();
-        previouslySavedScore = DataManagement.instance.dManHighScore;
+        previouslySavedScore = DataManagement.instance.dManDiffKOScore;
     }
     #endregion
 
@@ -38,30 +41,51 @@ public class ScoreManager : MonoBehaviour
 
     public void LevelScoreSetup()
     {
-        ballsKnockedOut = 0;
-        previouslySavedScore = DataManagement.instance.dManHighScore;
+        //ballsKnockedOut = 0;
+        //previouslySavedScore = DataManagement.instance.dManHighScore;
+        _ScoreInfo.kOScore = 0;
+        _ScoreInfo.bestScore = DataManagement.instance.dManDiffKOScore;
     }
 
     public void IterateBallsKoScore()
     {      
-        ballsKnockedOut++;
+        //ballsKnockedOut++;
+        _ScoreInfo.kOScore++;
+
         if (OnScoreUpdateEvent != null)
-            OnScoreUpdateEvent(ballsKnockedOut);
+            OnScoreUpdateEvent(_ScoreInfo);
         else Debug.Log(OnScoreUpdateEvent + " is null");
     }
 
     public int CountScore(int difficulty)
     {
-        int _FinalScore;
-        _FinalScore = difficulty * ballsKnockedOut;
+        _ScoreInfo.KOTimesDifficulty = difficulty * _ScoreInfo.kOScore;
 
-        if (_FinalScore > DataManagement.instance.dManHighScore)
+        if (_ScoreInfo.KOTimesDifficulty > DataManagement.instance.dManDiffKOScore)
         {
-            DataManagement.instance.dManHighScore = _FinalScore;
+            DataManagement.instance.dManDiffKOScore = _ScoreInfo.KOTimesDifficulty;
+            DataManagement.instance.SaveData();
+        }
+        if (_ScoreInfo.kOScore > DataManagement.instance.dManKOScore)
+        {
+            DataManagement.instance.dManKOScore = _ScoreInfo.kOScore;
             DataManagement.instance.SaveData();
         }
 
-        return _FinalScore;
+        return _ScoreInfo.KOTimesDifficulty;
     }
 }
 
+public struct ScoreInfo
+{
+    public int bestScore;
+    public int kOScore;
+    public int KOTimesDifficulty;
+
+    public ScoreInfo(int _bestScore, int _currentScore, int _ballsKOd)
+    {
+        bestScore = _bestScore;
+        KOTimesDifficulty = _currentScore;
+        kOScore = _ballsKOd;
+    }
+}

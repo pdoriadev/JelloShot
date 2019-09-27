@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
 /// Singleton Manager spawning loop for enemy spawnables. 
-/// 1. Does NOT select what to spawn (see ItemSelector script). 
+/// 1. Does NOT select what to spawn (see ItemSelector script). Only when to spawn. 
 /// 2. Spawning: If selected item has a matching pooled item, then SpawnManager spawns the pooled item. If selected item has no matching item 
 ///    in pooled objects list, then a new instance of that item is instantiated. 
 /// 3. PoolObject() function.
@@ -27,6 +27,7 @@ public class SpawnManager : MonoBehaviour
     public float spawnMinWaitFloor;
     public float spawnMaxWaitFloor;
 
+    public float beginnerHandicapTime = 1f;
     public float currentWaitTime;
     public float startMinSpawnWait;
     public float startMaxSpawnWait;
@@ -70,18 +71,21 @@ public class SpawnManager : MonoBehaviour
     }
     #endregion
 
+    [SerializeField]
+    private float _PreviousWaitTime;
+
     #region UNITY CALLBACKS
 
     private void OnEnable()
     {
         if (instance == null)
             instance = this;
-        GameManager.onRetryEvent += PoolAllSpawnables;
+        GameManager.onResetLevel += PoolAllSpawnables;
     }
 
     private void OnDisable()
     {
-        GameManager.onRetryEvent -= PoolAllSpawnables;
+        GameManager.onResetLevel -= PoolAllSpawnables;
         instance = null;
     }
 
@@ -97,6 +101,7 @@ public class SpawnManager : MonoBehaviour
         {
             StartCoroutine(CoSpawnItem());
             isSpawning = true;
+            currentWaitTime = 10f;
         }
         else if (GameManager.instance.state != GameState.Gameplay && isSpawning == true)
         {
@@ -114,7 +119,14 @@ public class SpawnManager : MonoBehaviour
 
         while (isSpawning)
         {
-            currentWaitTime = Random.Range(currentMinWait, currentMaxWait);
+            if (_PreviousWaitTime < (_PreviousWaitTime + beginnerHandicapTime) 
+                && DifficultyAdjuster.instance.currentDiff < DifficultyAdjuster.instance.beginnerDiff)
+            {
+                currentWaitTime = Random.Range(currentMinWait + beginnerHandicapTime, currentMaxWait);
+            }
+            else
+                currentWaitTime = Random.Range(currentMinWait, currentMaxWait);
+
             spawnPosition = new Vector3(Random.Range(-spawningZone.x, spawningZone.x), Random.Range(-spawningZone.y, spawningZone.y), 1);
             GameObject spawnable = null;
             int index = 0;
@@ -153,6 +165,7 @@ public class SpawnManager : MonoBehaviour
             }
 
             yield return new WaitForSeconds(currentWaitTime);
+            _PreviousWaitTime = currentWaitTime;
         }
     }
 

@@ -79,6 +79,7 @@
     <Compile Include="Assets\_SCRIPTS\GameFlow\DifficultyAdjuster.cs" />
     <Compile Include="Assets\_SCRIPTS\GameFlow\GameManager.cs" />
     <Compile Include="Assets\_SCRIPTS\GameFlow\TapChecker.cs" />
+    <Compile Include="Assets\_SCRIPTS\GameFlow\TutorialHand.cs" />
     <Compile Include="Assets\_SCRIPTS\Graphics\BoxBlur.cs" />
     <Compile Include="Assets\_SCRIPTS\Graphics\QuickGlow.cs" />
     <Compile Include="Assets\_SCRIPTS\Graphics\ReplacementShaderEffect.cs" />

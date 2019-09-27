@@ -15,7 +15,7 @@ public class DataManagement : MonoBehaviour
     public static DataManagement instance;
 
     [SerializeField]
-    public int dManHighScore;
+    public int dManDiffKOScore, dManKOScore;
 
     private void Awake()
     {
@@ -34,7 +34,8 @@ public class DataManagement : MonoBehaviour
     {
         FileStream file = File.Create(Application.persistentDataPath + "/gameInfo.dat"); 
         gameData data = new gameData(); 
-        data.savedHighScore = dManHighScore;
+        data.savedDiffTimesKOScore = dManDiffKOScore;
+        data.savedHighKOScore = dManKOScore;
 
         BinaryFormatter BinForm = new BinaryFormatter();
         BinForm.Serialize(file, data); 
@@ -50,7 +51,8 @@ public class DataManagement : MonoBehaviour
             BinaryFormatter BinForm = new BinaryFormatter();
             gameData data = (gameData)BinForm.Deserialize(file);
             file.Close();
-            dManHighScore = data.savedHighScore;           
+            dManDiffKOScore = data.savedDiffTimesKOScore;
+            dManKOScore = data.savedHighKOScore;
         }
     }
 
@@ -65,12 +67,14 @@ public class DataManagement : MonoBehaviour
             BinaryFormatter BinForm = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + "/gameInfo.dat", FileMode.Open);
             gameData data = (gameData)BinForm.Deserialize(file);
-            Debug.Log("Previous High Score was " + data.savedHighScore);
-            data.savedHighScore = 0;
+            Debug.Log("Previous Difficulty times KO score was: " + data.savedDiffTimesKOScore);
+            Debug.Log("Previous KO Score was" + data.savedHighKOScore);
+            data.savedDiffTimesKOScore = 0;
+            data.savedHighKOScore = 0;
             file.Close();
 
             SaveData();
-            Debug.Log("You just wiped the high score. New score is: " + dManHighScore);
+            Debug.Log("You just wiped the high score. New score is: " + dManDiffKOScore);
         }       
     }
 }
@@ -78,7 +82,8 @@ public class DataManagement : MonoBehaviour
 [Serializable]
 class gameData
 {
-    public int savedHighScore;
+    public int savedDiffTimesKOScore;
+    public int savedHighKOScore;
 }
 
 #if UNITY_EDITOR

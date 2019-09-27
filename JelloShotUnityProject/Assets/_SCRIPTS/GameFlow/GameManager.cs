@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
-/// Manages when game state changes. Handles OnLevelEnd event and OnRetry event.
+/// Manages game state changes and enter/exit events for each state. 
 /// Calls UIManager, ScoreManager, DifficultyAdjuster, and SpawnManager. References ScoreManager and DataManagement. 
 /// LevelEnd() is called by Ground game object's DeathHandler. 
 /// </summary>
 public enum GameState
 {
     MainMenu,
+    Tutorial, 
     Gameplay,
     PausedGameplay,
     LevelEnd
@@ -48,6 +49,10 @@ public class GameManager : MonoBehaviour
     public static event OnEnterMainMenu onEnterMainMenuEvent;
     public delegate void OnExitMainMenu();
     public static event OnExitMainMenu onExitMainMenuEvent;
+    public delegate void OnEnterTutorial();
+    public static event OnEnterTutorial onEnterTutorialEvent;
+    public delegate void OnExitTutorial();
+    public static event OnExitTutorial onExitTutorialEvent;
     public delegate void OnEnterGameplay();
     public static event OnEnterGameplay onEnterGameplayEvent;
     public delegate void OnExitGameplay();
@@ -56,8 +61,10 @@ public class GameManager : MonoBehaviour
     public static event OnPauseGameplay onPauseGameplayEvent;
     public delegate void OnUnPauseGameplay();
     public static event OnUnPauseGameplay onUnPauseGameplayEvent;
-    public delegate void OnRetry();
-    public static event OnRetry onRetryEvent;
+    public delegate void OnRetryOrNot();
+    public static event OnRetryOrNot onRetryOrNot;
+    public delegate void OnResetGame();
+    public static event OnResetGame onResetLevel;
     public delegate void OnLevelEnd();
     public static event OnLevelEnd onLevelEndEvent;
 
@@ -113,60 +120,63 @@ public class GameManager : MonoBehaviour
 
         if (isRetryUIOn && TapChecker.instance._NumberOfTapsInARow > 1)
         {
-            Retry();
+            ResetLevel();
         }
         if (isRetryUIOn == false)
-            UIManager.instance.UIScoreUpdate(ScoreManager.instance.ballsKnockedOut);
+        {
+            UIManager.instance.UIScoreUpdate(ScoreManager.instance.scoreInfo);
+        }
 
+        // If double tap during main menu, enter gameplay state
         if (state == GameState.MainMenu && TapChecker.instance._NumberOfTapsInARow > 1)
         {
             ChangeStateTo(GameState.Gameplay);
         }
-
-        Debug.Log(isTutorial);
     }
 
     #endregion
 
 
     #region PUBLIC STATE CONTROL METHODS
-
-    private int _FinalScore;
     public void EndGame()
     {
         if (onLevelEndEvent != null)
             onLevelEndEvent();
-        else Debug.Log("OnLevelEndEvent is null.");
+        else Debug.LogWarning("OnLevelEndEvent is null.");
 
-        state = GameState.LevelEnd;
-        Time.timeScale = 0f;
-        isRetryUIOn = true;
-
-        _FinalScore = ScoreManager.instance.CountScore(DifficultyAdjuster.instance.currentDifficulty);
-        UIManager.instance.EnterRetryUI(_FinalScore, DataManagement.instance.dManHighScore, isRetryUIOn);
-        SpawnManager.instance.PoolAllSpawnables();
+        ChangeStateTo(GameState.LevelEnd);
     }
 
     public void ChangeStateTo(GameState _state)
     {
-        if (state == GameState.MainMenu && _state != GameState.MainMenu)
-        {
-            ExitMainMenu();
-        }
-        if (state == GameState.PausedGameplay && _state != GameState.PausedGameplay)
-        {
-            UnPauseGameplay();
-        }
+        // if-else chain to see what state is being exited
         if (state == GameState.Gameplay && _state != GameState.Gameplay)
-        {
             ExitGameplay();
-        }
+
+        else if (state == GameState.PausedGameplay && _state != GameState.PausedGameplay)
+            UnPauseGameplay();
+
+        else if (state == GameState.LevelEnd && _state == GameState.Gameplay)
+            ResetLevel();
+
+        else if (state == GameState.MainMenu && _state != GameState.MainMenu)
+            ExitMainMenu();
+
+        else if (state == GameState.Tutorial && _state != GameState.Tutorial)
+            ExitTutorial();
+
 
         state = _state;
 
-        if (state == GameState.MainMenu)
+        // if-else chain to see what state is being entered
+        if (state == GameState.Gameplay)
         {
-            EnterMainMenu();
+            EnterGameplay();
+            return;
+        }
+        else if (state == GameState.LevelEnd)
+        {
+            EnterLevelEnd();
             return;
         }
         else if (state == GameState.PausedGameplay)
@@ -174,25 +184,28 @@ public class GameManager : MonoBehaviour
             PauseGameplay();
             return;
         }
-        else if (state == GameState.Gameplay)
+        else if (state == GameState.MainMenu)
         {
-            EnterGameplay();
+            EnterMainMenu();
+            return;
+        }
+        else if (state == GameState.Tutorial)
+        {
+            EnterTutorial();
             return;
         }
     }
 
     #endregion
 
-
+    // Methods called from the ChangeStateTo() method. 
     #region PRIVATE STATE CONTROL METHODS
-
+    // Main Menu
     private void EnterMainMenu()
     {
         if (onEnterMainMenuEvent != null)
-        {
             onEnterMainMenuEvent();
-        }
-        else Debug.LogError(onEnterMainMenuEvent.ToString() + " is null ");
+        else Debug.LogWarning(onEnterMainMenuEvent.ToString() + " is null ");
 
         _PlayerGameObject.SetActive(false);
 
@@ -200,70 +213,88 @@ public class GameManager : MonoBehaviour
     private void ExitMainMenu()
     {
         if (onExitMainMenuEvent != null)
-        {
             onExitMainMenuEvent();
-        }
-        else Debug.LogError(onExitMainMenuEvent.ToString() + " is null ");
+        else Debug.LogWarning(onExitMainMenuEvent.ToString() + " is null ");
     }
+
+    // Tutorial
+    private void EnterTutorial()
+    {
+        if (onEnterTutorialEvent != null)
+            onEnterTutorialEvent();
+        else Debug.LogWarning(onExitMainMenuEvent.ToString() + " is null ");
+    }
+    private void ExitTutorial()
+    {
+        if (onExitTutorialEvent != null)
+            onExitTutorialEvent();
+        else Debug.LogWarning(onExitTutorialEvent.ToString() + "is null");
+    }
+
+    // Gameplay
     private void EnterGameplay()
     {
-        state = GameState.Gameplay;
         _PlayerGameObject.SetActive(true);
+        Time.timeScale = 1f;
         if (onEnterGameplayEvent != null)
-        {
             onEnterGameplayEvent();
-        }
-        else Debug.LogError(onEnterGameplayEvent.ToString() + " is null ");
-
+        else Debug.LogWarning(onEnterGameplayEvent.ToString() + " is null ");
     }
     private void ExitGameplay()
     {
         _PlayerGameObject.SetActive(false);
         if (onExitGameplayEvent != null)
-        {
             onExitGameplayEvent();
-        }
-        else Debug.LogError(onExitGameplayEvent.ToString() + " is null ");
+        else Debug.LogWarning(onExitGameplayEvent.ToString() + " is null ");
     }
+
+    // Pause
     private void PauseGameplay()
     {
         if (onPauseGameplayEvent != null)
-        {
             onPauseGameplayEvent();
-        }
-        else Debug.LogError(onPauseGameplayEvent.ToString() + " is null ");
+        else Debug.LogWarning(onPauseGameplayEvent.ToString() + " is null ");
 
         Time.timeScale = 0;
     }
     private void UnPauseGameplay()
     {
         if (onUnPauseGameplayEvent != null)
-        {
             onUnPauseGameplayEvent();
-        }
-        else Debug.LogError(onUnPauseGameplayEvent.ToString() + " is null ");
+        else Debug.LogWarning(onUnPauseGameplayEvent.ToString() + " is null ");
     }
 
-    private void Retry()
+        #region LEVEL END AND RETRY
+
+    private int _FinalScore;
+    private void EnterLevelEnd()
     {
-        if (onRetryEvent != null)
+        Time.timeScale = 0f;
+        isRetryUIOn = true;
+
+        ScoreManager.instance.CountScore(DifficultyAdjuster.instance.currentDiff);
+        UIManager.instance.InputRetryUI(ScoreManager.instance.scoreInfo, isRetryUIOn);
+        SpawnManager.instance.PoolAllSpawnables();
+    }
+
+    private void ResetLevel()
+    {
+        if (onResetLevel != null)
         {
-            onRetryEvent();
+            onResetLevel();
         }
-        else Debug.Log(onRetryEvent + " is null.");
+        else Debug.LogWarning(onResetLevel + " is null.");
 
         _CurrentTime = 0;
         _PlayerGameObject.transform.position = _PlayerStartPos;
 
-        UIManager.instance.UIScoreUpdate(ScoreManager.instance.ballsKnockedOut);
+        UIManager.instance.UIScoreUpdate(ScoreManager.instance.scoreInfo);
         DifficultyAdjuster.instance.SetStartingDifficulty();
 
         isRetryUIOn = false;
-        UIManager.instance.EnterRetryUI(_FinalScore, DataManagement.instance.dManHighScore, isRetryUIOn);
-
-        state = GameState.Gameplay;
-        Time.timeScale = 1f;
+        UIManager.instance.InputRetryUI(ScoreManager.instance.scoreInfo, isRetryUIOn);
     }
+        #endregion  
 
     #endregion
 }

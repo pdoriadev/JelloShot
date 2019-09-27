@@ -67,13 +67,13 @@ public class SlingShotMechanic : MonoBehaviour
         _SlingShotInfo = new SlingShotInfo(_PlayerRigidbody, shotVelocity, shotVelocityMaxMagnitude );
 
         SingleTouchInputController.OnTouchInputEvent += OnTouchInputObserver;
-        GameManager.onRetryEvent += ResetSlingShot;
+        GameManager.onResetLevel += ResetSlingShot;
     }
 
     private void OnDisable()
     {
         SingleTouchInputController.OnTouchInputEvent -= OnTouchInputObserver;
-        GameManager.onRetryEvent -= ResetSlingShot;
+        GameManager.onResetLevel -= ResetSlingShot;
     }
 
     private void FixedUpdate()
@@ -87,7 +87,7 @@ public class SlingShotMechanic : MonoBehaviour
     {
         // Controls 3  phases of touch movement
 #if UNITY_STANDALONE || UNITY_ANDROID
-        if (GameManager.instance.state == GameState.Gameplay || GameManager.instance.state == GameState.MainMenu)
+        if (GameManager.instance.state != GameState.LevelEnd || GameManager.instance.state != GameState.MainMenu)
         {
             // Create drag anchor at tap position. Slow Down time.
             if (_touchInfo.touchState == TouchInputState.BeginningTap)

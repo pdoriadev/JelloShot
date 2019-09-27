@@ -33,10 +33,10 @@ public class UIManager : MonoBehaviour
 
     #region PUBLIC METHODS
 
-    public void UIScoreUpdate(int _ballsKnockedOut)
+    public void UIScoreUpdate(ScoreInfo _scoreInfo)
     {
-        ballsKnockedOutText.text = _ballsKnockedOut.ToString(); ;
-        inGameHighScoreText.text = ("HIGH SCORE: " + DataManagement.instance.dManHighScore);
+        ballsKnockedOutText.text = _scoreInfo.kOScore.ToString(); ;
+        inGameHighScoreText.text = ("BEST:" + DataManagement.instance.dManDiffKOScore);
     }
 
     public Text currentDifficultyText;
@@ -48,19 +48,19 @@ public class UIManager : MonoBehaviour
     public GameObject retryPanel;
     public Text finalScoreText;
     public Text retryHighScoreText;
-    public void EnterRetryUI(int _finalScore, int _highScore, bool _isPanelActive)
+    public void InputRetryUI(ScoreInfo _scoreInfo, bool _isPanelActive)
     {
         retryPanel.SetActive(_isPanelActive);
         
-        if (ScoreManager.instance.previouslySavedScore < _finalScore)
+        if (ScoreManager.instance.previouslySavedScore < _scoreInfo.kOScore)
         {
-            finalScoreText.text = ("SCORE: " + _finalScore);
-            retryHighScoreText.text = ("NEW HIGH SCORE: " + _highScore);
+            finalScoreText.text = ("KOs: " + _scoreInfo.kOScore);
+            retryHighScoreText.text = ("Best: " + _scoreInfo.bestScore);
         }
         else
         {
-            finalScoreText.text = ("SCORE: " + _finalScore);
-            retryHighScoreText.text = ("HIGH SCORE: " + _highScore);
+            finalScoreText.text = ("KOs: " + _scoreInfo.kOScore);
+            retryHighScoreText.text = ("Best: " + _scoreInfo.kOScore);
         }       
     }
     #endregion
