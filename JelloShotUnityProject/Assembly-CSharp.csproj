@@ -109,9 +109,10 @@
     <Compile Include="Assets\_SCRIPTS\ScoreManager.cs" />
     <Compile Include="Assets\_SCRIPTS\ScreenShaderFX.cs" />
     <Compile Include="Assets\_SCRIPTS\SideyCollisions.cs" />
-    <Compile Include="Assets\_SCRIPTS\SpawnPoolingSystem\ItemSelector.cs" />
-    <Compile Include="Assets\_SCRIPTS\SpawnPoolingSystem\PoolingTrigger.cs" />
-    <Compile Include="Assets\_SCRIPTS\SpawnPoolingSystem\SpawnManager.cs" />
+    <Compile Include="Assets\_SCRIPTS\SpawnPoolingSystem\EnemyPooling\ItemSelector.cs" />
+    <Compile Include="Assets\_SCRIPTS\SpawnPoolingSystem\EnemyPooling\SpawnManager.cs" />
+    <Compile Include="Assets\_SCRIPTS\SpawnPoolingSystem\Universal\UniversalPoolable.cs" />
+    <Compile Include="Assets\_SCRIPTS\SpawnPoolingSystem\Universal\UniversalPooler.cs" />
     <Compile Include="Assets\_SCRIPTS\TweenSystem\LazySingleton.cs" />
     <Compile Include="Assets\_SCRIPTS\TweenSystem\TweenManager.cs" />
     <Compile Include="Assets\_SCRIPTS\TweenSystem\TweenTester.cs" />

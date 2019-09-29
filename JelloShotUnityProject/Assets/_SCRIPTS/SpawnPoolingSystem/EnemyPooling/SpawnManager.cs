@@ -138,7 +138,7 @@ public class SpawnManager : MonoBehaviour
             // 2. Check object pool for matching item
             for ( ; index < pooledObjectsList.Count; index++ )
             {
-                // iterate through pooled obj list. if equivalent obj, spawn it.
+                // iterate through pooled obj list. if obj of equivalent type is found, spawn .
                 if (pooledObjectsList[index].tag == spawnable.tag)
                 {
                     spawnPooledObject = true;
@@ -147,7 +147,7 @@ public class SpawnManager : MonoBehaviour
                 }
             }
 
-            // Unpool and move GameObject to spawnPosition. Add item to spawnablesInGameList.
+            // 3a. Unpool and move GameObject to spawnPosition. Add item to spawnablesInGameList.
             // random spawn position on x and z axis min/max of spawn values. spawn position does not go above 1 on the y axis.  <---- ???
             if (spawnPooledObject == true)
             {
@@ -157,7 +157,7 @@ public class SpawnManager : MonoBehaviour
                 pooledObjectsList.Remove(spawnable);
             }
 
-            // Instantiate GameObject at spawn position. Add to spawnablesInGameList.
+            // 3b. Instantiate GameObject at spawn position. Add to spawnablesInGameList.
             if (spawnPooledObject == false)
             {
                 spawnablesInGame.Add(Instantiate(spawnable, spawnPosition + transform.TransformPoint(0, 0, 0), gameObject.transform.rotation));
@@ -171,7 +171,7 @@ public class SpawnManager : MonoBehaviour
 
     #region PUBLIC POOLING METHODS
 
-    // Sets passed object to inactive and pools it. Called by OutOfBounds and BallCollisions Script
+    // Sets passed object to inactive and pools it. 
     public void PoolObject(GameObject _pooledObj)
     {
         _pooledObj.SetActive(false);
@@ -191,7 +191,6 @@ public class SpawnManager : MonoBehaviour
             currentBall.SetActive(false);
         }
 
-        //spawnablesInGame.Clear();
         if (SpawnManager.instance.spawnablesInGame.Count > 0)
             Debug.LogError("spawnablesInGame list should be empty");
     }

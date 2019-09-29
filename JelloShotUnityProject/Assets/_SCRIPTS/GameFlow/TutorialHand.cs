@@ -42,6 +42,6 @@ public class TutorialHand : MonoBehaviour
         _HandAnimator.SetBool("IsAnimating", false);
         _HandAnimator.gameObject.transform.position = _StartPos;
         _HandAnimator.gameObject.SetActive(false);
-
     }
+
 }
