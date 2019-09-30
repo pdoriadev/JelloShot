@@ -10,7 +10,7 @@ public class UniversalPoolable : MonoBehaviour
     private PoolableType _Type;
     private PoolableInfo _Info;
 
-    public UnityEvent poolThis;
+    public UnityEvent onPool;
 
     private void OnEnable()
     {
@@ -23,7 +23,8 @@ public class UniversalPoolable : MonoBehaviour
 
     public void PoolThis()
     {
-        poolThis.Invoke();
+        onPool.Invoke();
+        UniversalPooler.instance.PoolPoolable(_Info);
     }
 
 }

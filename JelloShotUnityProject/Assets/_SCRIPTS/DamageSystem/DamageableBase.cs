@@ -18,11 +18,18 @@ public struct DamagedInfo
     }
 }
 
+public enum BoolCheckType
+{
+    GreaterThan,
+    LessThan,
+    EqualTo,
+}
+
 [RequireComponent(typeof(DeathHandler))]
 public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
 {
     public delegate void OnTakeDamageEvent(DamagedInfo _damagedInfo);
-    public event OnTakeDamageEvent onTakeDamageEvent;
+    public event OnTakeDamageEvent onTakeDamageEvent; 
     public UnityEvent onTakeDamageUnityEvent;
     DamagedInfo _damagedInfo;
 
@@ -68,10 +75,46 @@ public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
                 _MaxHealth = value;
         }
     }
-    #endregion
-
     private bool _IsInvulnerable = false;
     public bool isInvulnerable { get { return _IsInvulnerable; } set { _IsInvulnerable = value; } }
+    #endregion
+
+    #region IsHealthValueCheck
+    public BoolCheckType isHealthValue;
+    public float numToCheckAgainst;
+    /// <summary>
+    ///  Checks if the health value returns true or false based on the numToCheckAgainst. 
+    /// </summary>
+    public bool IsHealthValue()
+    {
+        if (isHealthValue <= BoolCheckType.LessThan)
+        {
+            if (currentHealth <= numToCheckAgainst)
+            {
+                return true;
+            }
+            else return false;
+        }
+        else if (isHealthValue >= BoolCheckType.GreaterThan)
+        {
+            if (currentHealth >= numToCheckAgainst)
+            {
+                return true;
+            }
+            else return false;
+        }
+        else if (isHealthValue == BoolCheckType.EqualTo)
+        {
+            if (currentHealth == numToCheckAgainst)
+            {
+                return true;
+            }
+            else return false;
+        }
+        else Debug.LogWarning(" Bool Check Type type does not exist.");
+        return false;
+    }
+    #endregion
 
     #region IDamageTakerMethods
     public virtual bool CanDamageCheck()
@@ -114,6 +157,7 @@ public abstract class DamageableBase : MonoBehaviour, IDamageable, IHealable
         if (gameObject.activeSelf)
         {
             onTakeDamageUnityEvent.Invoke();
+            IsHealthValue();
 
             if (onTakeDamageEvent != null)
             {

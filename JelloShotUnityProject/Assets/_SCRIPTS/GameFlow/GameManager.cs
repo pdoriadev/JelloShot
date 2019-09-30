@@ -130,7 +130,7 @@ public class GameManager : MonoBehaviour
         // If double tap during main menu, enter gameplay state
         if (state == GameState.MainMenu && TapChecker.instance._NumberOfTapsInARow > 1)
         {
-            ChangeStateTo(GameState.Gameplay);
+            ChangeStateTo(GameState.Tutorial);
         }
     }
 
@@ -220,6 +220,8 @@ public class GameManager : MonoBehaviour
     // Tutorial
     private void EnterTutorial()
     {
+        _PlayerGameObject.SetActive(true);
+        Time.timeScale = 1f;
         if (onEnterTutorialEvent != null)
             onEnterTutorialEvent();
         else Debug.LogWarning(onExitMainMenuEvent.ToString() + " is null ");

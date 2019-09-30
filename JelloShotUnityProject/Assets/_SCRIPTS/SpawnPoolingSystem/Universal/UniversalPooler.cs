@@ -4,19 +4,21 @@ using UnityEngine;
 
 public class UniversalPooler : MonoBehaviour
 {
-	//public Vector3 holdingZone = new Vector3(100, 100, -100);
- //   private Quaternion holdingRotation;
+    public static UniversalPooler instance;
 
-    //private Dictionary<string, Queue<GameObject>> types;
+    private void OnEnable()
+    {
+        if (instance == null)
+            instance = this;
+        _PoolTypes = new Dictionary<PoolableType, Queue<GameObject>>();
+    }
+    private void OnDisable()
+    {
+        instance = null;
+    }
+
     private Dictionary<PoolableType, Queue<GameObject>> _PoolTypes;
     private Queue<GameObject> pool;
-
-    void Start()
-    {
-        //types = new Dictionary<string, Queue<GameObject>>();
-        _PoolTypes = new Dictionary<PoolableType, Queue<GameObject>>();
-        //holdingRotation.eulerAngles = new Vector3(0, 0, 0);
-    }
 
     // Pools and spawns. Adds new queue pool to types if pool of this poolable's type does not exist.  
     public void PoolPoolable(PoolableInfo _info)

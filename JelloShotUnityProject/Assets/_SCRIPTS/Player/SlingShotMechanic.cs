@@ -168,13 +168,16 @@ public class SlingShotMechanic : MonoBehaviour
         // Applies force to ball player collides with
         if (collision.gameObject.layer == (int)GameLayers.BallsLayer)
         {
-            Rigidbody2D ballRigidBody = collision.gameObject.GetComponent<Rigidbody2D>();
-            Vector3 newBallVelocity = new Vector3((ballRigidBody.velocity.x + (_PlayerRigidbody.velocity.x * _OtherBallSpeedMultip)), (ballRigidBody.velocity.y + (_PlayerRigidbody.velocity.y * _OtherBallSpeedMultip)));
+            if (collision.gameObject.GetComponent<Rigidbody2D>())
+            {
+                Rigidbody2D ballRigidBody = collision.gameObject.GetComponent<Rigidbody2D>();
+                Vector3 newBallVelocity = new Vector3((ballRigidBody.velocity.x + (_PlayerRigidbody.velocity.x * _OtherBallSpeedMultip)), (ballRigidBody.velocity.y + (_PlayerRigidbody.velocity.y * _OtherBallSpeedMultip)));
 
-            //newBallVelocity = Vector3.ClampMagnitude(newBallVelocity, BallVelocityLimiter.instance.ballVelocityMagnitudeCap);
+                //newBallVelocity = Vector3.ClampMagnitude(newBallVelocity, BallVelocityLimiter.instance.ballVelocityMagnitudeCap);
 
-            //Velocity added to collided with ball is proportional to player's current velocity.
-            ballRigidBody.AddForceAtPosition(newBallVelocity, collision.gameObject.transform.position, ForceMode2D.Impulse);
+                //Velocity added to collided with ball is proportional to player's current velocity.
+                ballRigidBody.AddForceAtPosition(newBallVelocity, collision.gameObject.transform.position, ForceMode2D.Impulse);
+            }
         }
 
         BounceAnimation.instance.PlayBounce();
