@@ -6,9 +6,17 @@ public class StateChanger : MonoBehaviour
 {
     [SerializeField]
     GameState stateToChangeTo;
+    private GameState stateToSwitchTo;
 
     public void ChangeState()
     {
-        GameManager.instance.state = stateToChangeTo;
+        stateToSwitchTo = GameManager.instance.state;
+        GameManager.instance.ChangeStateTo(stateToChangeTo);
+    }
+    public void SwitchStatesToChangeTo()
+    {
+        GameState tempState = stateToChangeTo;
+        stateToChangeTo = stateToSwitchTo;
+        stateToSwitchTo = tempState;
     }
 }

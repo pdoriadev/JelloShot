@@ -36,6 +36,14 @@ public class UniversalPooler : MonoBehaviour
         }
     }
 
+    public void SpawnGameObject(GameObject _gO, Vector3 _pos)
+    {
+        if (_gO != null)
+            Instantiate(_gO, _pos, Quaternion.identity);
+        else Debug.Log("_gO is null");
+
+    }
+
 
     //public void addType(string type, GameObject prefab, int number)
     //{

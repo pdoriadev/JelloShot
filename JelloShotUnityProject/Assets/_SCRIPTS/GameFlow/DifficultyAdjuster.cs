@@ -91,7 +91,7 @@ public class DifficultyAdjuster : MonoBehaviour
 
     bool ShouldChangeDifficulty()
     {
-        if (ScoreManager.instance.ballsKnockedOut == _KOsNeededForChange)
+        if (ScoreManager.instance.scoreInfo.kOScore == _KOsNeededForChange)
             return true;
         else return false;
     }
@@ -109,5 +109,6 @@ public class DifficultyAdjuster : MonoBehaviour
         _KOsNeededForChange += _KODifferenceBetweenDifficulties;
         _CurrentDiff += 1;
         UIManager.instance.UpdateDifficulty(currentDiff);
+        Debug.Log("DiffUpdate");
     }
 }

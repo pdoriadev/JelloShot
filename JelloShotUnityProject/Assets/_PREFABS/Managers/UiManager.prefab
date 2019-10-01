@@ -393,7 +393,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7870515429627962620}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1218,7 +1218,12 @@ MonoBehaviour:
   retryPanel: {fileID: 1463030354898350}
   finalScoreText: {fileID: 114510804509033862}
   retryHighScoreText: {fileID: 114560395867886802}
+  _GroundText: {fileID: 0}
+  _GroundDmgble: {fileID: 0}
+  _GroundDeathHandler: {fileID: 0}
+  _WaitTime: 1.5
   MainMenuPanel: {fileID: 1819543597}
+  groundVoicePanel: {fileID: 0}
 --- !u!1 &1698918885774802
 GameObject:
   m_ObjectHideFlags: 0
@@ -1655,7 +1660,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7870515429627962620}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1793,7 +1798,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7870515429627962620}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1945,9 +1950,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1852189186}
   - {fileID: 569294158340479428}
   - {fileID: 6756250088355823463}
-  - {fileID: 1852189186}
   - {fileID: 84924467}
   m_Father: {fileID: 1819543598}
   m_RootOrder: 1

@@ -106,7 +106,6 @@ public class GameManager : MonoBehaviour
             instance = this;
         ChangeStateTo(GameState.MainMenu);
         _PlayerStartPos = _PlayerGameObject.transform.position;
-        isTutorial = true;
     }
 
     private void OnDisable()
@@ -132,6 +131,10 @@ public class GameManager : MonoBehaviour
         {
             ChangeStateTo(GameState.Tutorial);
         }
+        if (DifficultyAdjuster.instance.currentDiff > DifficultyAdjuster.instance.beginnerDiff 
+            && state == GameState.Tutorial)
+        { ChangeStateTo(GameState.Gameplay); Debug.Log("WTF"); }
+
     }
 
     #endregion
@@ -222,48 +225,59 @@ public class GameManager : MonoBehaviour
     {
         _PlayerGameObject.SetActive(true);
         Time.timeScale = 1f;
+        isTutorial = true;
         if (onEnterTutorialEvent != null)
             onEnterTutorialEvent();
         else Debug.LogWarning(onExitMainMenuEvent.ToString() + " is null ");
     }
     private void ExitTutorial()
     {
+        isTutorial = false;
         if (onExitTutorialEvent != null)
             onExitTutorialEvent();
         else Debug.LogWarning(onExitTutorialEvent.ToString() + "is null");
+        Debug.Log("exit tutorial");
     }
 
     // Gameplay
     private void EnterGameplay()
     {
-        _PlayerGameObject.SetActive(true);
-        Time.timeScale = 1f;
+
         if (onEnterGameplayEvent != null)
             onEnterGameplayEvent();
         else Debug.LogWarning(onEnterGameplayEvent.ToString() + " is null ");
+        _PlayerGameObject.SetActive(true);
+        _PlayerGameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+        Time.timeScale = 1f;
+        Debug.Log("EnterG");
     }
     private void ExitGameplay()
     {
-        _PlayerGameObject.SetActive(false);
+        _PlayerGameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         if (onExitGameplayEvent != null)
             onExitGameplayEvent();
-        else Debug.LogWarning(onExitGameplayEvent.ToString() + " is null ");
+        else Debug.Log(" onExitGameplayEvent is null ");
+        Debug.Log("ExitG");
     }
 
     // Pause
     private void PauseGameplay()
     {
+        _PlayerGameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         if (onPauseGameplayEvent != null)
             onPauseGameplayEvent();
         else Debug.LogWarning(onPauseGameplayEvent.ToString() + " is null ");
-
         Time.timeScale = 0;
+        Debug.Log("Paused");
     }
     private void UnPauseGameplay()
     {
+        _PlayerGameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
         if (onUnPauseGameplayEvent != null)
             onUnPauseGameplayEvent();
         else Debug.LogWarning(onUnPauseGameplayEvent.ToString() + " is null ");
+        Time.timeScale = 1;
+        Debug.Log("Unpaused");
     }
 
         #region LEVEL END AND RETRY
@@ -289,12 +303,14 @@ public class GameManager : MonoBehaviour
 
         _CurrentTime = 0;
         _PlayerGameObject.transform.position = _PlayerStartPos;
+        _PlayerGameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
 
         UIManager.instance.UIScoreUpdate(ScoreManager.instance.scoreInfo);
         DifficultyAdjuster.instance.SetStartingDifficulty();
 
         isRetryUIOn = false;
         UIManager.instance.InputRetryUI(ScoreManager.instance.scoreInfo, isRetryUIOn);
+        
     }
         #endregion  
 

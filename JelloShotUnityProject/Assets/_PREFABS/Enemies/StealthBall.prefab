@@ -194,6 +194,8 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   _CurrentHealth: 4
   _MaxHealth: 4
+  isHealthValue: 0
+  numToCheckAgainst: 0
   _IsHealable: 0
   _IsSizeLerper: 1
   _IsColorLerper: 1
@@ -251,7 +253,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39d146723ca4e34449b62b02d2319724, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ShouldPool: 1
   onKillEvent:
     m_PersistentCalls:
       m_Calls:
@@ -269,6 +270,10 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  killEffectGO: {fileID: 1329845292236604, guid: 9bba9cf244c53c5439505dfc96fdd11c,
+    type: 3}
+  _KillWaitTime: 0
+  _ShouldPool: 1
 --- !u!1 &1153477819578954
 GameObject:
   m_ObjectHideFlags: 0

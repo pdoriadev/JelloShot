@@ -14,7 +14,7 @@ public class SlingShotFlasher : MonoBehaviour
         if (slingInstance == null)
         {
             slingInstance = GameObject.FindGameObjectWithTag("Player").GetComponent<SlingShotMechanic>();
-            Debug.LogWarning("SlingShotMechanic instance had to be found with FindGameObjectWithTag");
+            Debug.LogWarning("SlingShotMechanic instance had to be found with FindGameObjectWithTag for " + gameObject.ToString());
         }
         if (lerperInstance == null)
         {

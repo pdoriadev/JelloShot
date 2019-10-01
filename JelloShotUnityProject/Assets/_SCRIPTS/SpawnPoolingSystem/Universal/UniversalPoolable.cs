@@ -27,6 +27,11 @@ public class UniversalPoolable : MonoBehaviour
         UniversalPooler.instance.PoolPoolable(_Info);
     }
 
+    private void OnUpdate()
+    {
+       // if (GetComponent<ParticleSystem>().isPlaying == false)
+    }
+
 }
 
 public enum PoolableType

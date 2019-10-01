@@ -19,6 +19,7 @@ public class SpawnManager : MonoBehaviour
 
     public List<GameObject> spawnablesInGame = new List<GameObject>();
     public List<GameObject> pooledObjectsList = new List<GameObject>();
+    public GameObject tutorialSpawnable;
 
     // Wait time before checking if can spawn
     public float startWait;
@@ -81,11 +82,18 @@ public class SpawnManager : MonoBehaviour
         if (instance == null)
             instance = this;
         GameManager.onResetLevel += PoolAllSpawnables;
+        GameManager.onEnterTutorialEvent += onEnterTutorialListener;
+        GameManager.onPauseGameplayEvent += onEnterPauseListener;
+        GameManager.onUnPauseGameplayEvent += onExitPauseListener;
     }
 
     private void OnDisable()
     {
         GameManager.onResetLevel -= PoolAllSpawnables;
+        GameManager.onEnterTutorialEvent -= onEnterTutorialListener;
+        GameManager.onPauseGameplayEvent -= onEnterPauseListener;
+        GameManager.onUnPauseGameplayEvent -= onExitPauseListener;
+
         instance = null;
     }
 
@@ -97,21 +105,57 @@ public class SpawnManager : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.instance.state == GameState.Gameplay && isSpawning == false && GameManager.instance.isTutorial == false)
+        if ((GameManager.instance.state != GameState.Tutorial && GameManager.instance.state != GameState.Gameplay)
+            && isSpawning == true)
         {
-            StartCoroutine(CoSpawnItem());
-            isSpawning = true;
-            currentWaitTime = 10f;
-        }
-        else if (GameManager.instance.state != GameState.Gameplay && isSpawning == true)
-        {
-            StopCoroutine(CoSpawnItem());
+            
             isSpawning = false;
         }
     }
     #endregion
 
+    #region StateEventListeners
+    private bool _IsFirstIntro = true;
+    private void onEnterTutorialListener()
+    {
+        if (_IsFirstIntro == true)
+        {
+            StartCoroutine(CoSpawnItem());
+            _IsFirstIntro = false;
+        }
+        isSpawning = true;
+    }
+    // freezes all enemies spawned
+    private void onEnterPauseListener()
+    {
+        isSpawning = false;
+        if (spawnablesInGame.Count > 0)
+        {
+            for (int index = 0; index < SpawnManager.instance.spawnablesInGame.Count; index++)
+            {
+                GameObject currentBall = (GameObject)SpawnManager.instance.spawnablesInGame[index];
+                currentBall.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+            }
+        }
+    }
+    // unfreezes all spawned enemies
+    private void onExitPauseListener()
+    {
+        _JustPaused = true;
+        isSpawning = true;
+        if (spawnablesInGame.Count > 0)
+        {
+            for (int index = 0; index < SpawnManager.instance.spawnablesInGame.Count; index++)
+            {
+                GameObject currentBall = (GameObject)SpawnManager.instance.spawnablesInGame[index];
+                currentBall.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+            }
+        }
+    }
+    #endregion
 
+    private bool _JustPaused = false;
+    private float _TimeStartedWaiting = 2;
     // Handles spawn loop
     IEnumerator CoSpawnItem()
     {
@@ -119,21 +163,37 @@ public class SpawnManager : MonoBehaviour
 
         while (isSpawning)
         {
-            if (_PreviousWaitTime < (_PreviousWaitTime + beginnerHandicapTime) 
-                && DifficultyAdjuster.instance.currentDiff < DifficultyAdjuster.instance.beginnerDiff)
+            if (_JustPaused == true)
+            {
+                currentWaitTime -= (Time.time - _TimeStartedWaiting);
+                _JustPaused = false;
+
+            }
+            else if (_PreviousWaitTime < (_PreviousWaitTime + beginnerHandicapTime) 
+                && GameManager.instance.state == GameState.Tutorial)
             {
                 currentWaitTime = Random.Range(currentMinWait + beginnerHandicapTime, currentMaxWait);
             }
             else
+            {
                 currentWaitTime = Random.Range(currentMinWait, currentMaxWait);
+            }
+            _TimeStartedWaiting = Time.time;
+            yield return new WaitForSeconds(currentWaitTime);
+            _PreviousWaitTime = currentWaitTime;
+
 
             spawnPosition = new Vector3(Random.Range(-spawningZone.x, spawningZone.x), Random.Range(-spawningZone.y, spawningZone.y), 1);
             GameObject spawnable = null;
             int index = 0;
             bool spawnPooledObject = false;
 
-            // 1. Select item to spawn
-            spawnable = ItemSelector.instance.SelectItem();
+            if (GameManager.instance.state != GameState.Tutorial)
+            {
+                // 1. Select item to spawn
+                spawnable = ItemSelector.instance.SelectItem();
+            }
+            else spawnable = tutorialSpawnable;
 
             // 2. Check object pool for matching item
             for ( ; index < pooledObjectsList.Count; index++ )
@@ -158,14 +218,12 @@ public class SpawnManager : MonoBehaviour
             }
 
             // 3b. Instantiate GameObject at spawn position. Add to spawnablesInGameList.
-            if (spawnPooledObject == false)
+            else
             {
                 spawnablesInGame.Add(Instantiate(spawnable, spawnPosition + transform.TransformPoint(0, 0, 0), gameObject.transform.rotation));
                 spawnable.SetActive(true);
             }
 
-            yield return new WaitForSeconds(currentWaitTime);
-            _PreviousWaitTime = currentWaitTime;
         }
     }
 

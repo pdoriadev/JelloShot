@@ -109,7 +109,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1387913447705422}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.1, y: 34.7, z: 0}
   m_LocalScale: {x: 4.9042, y: 4.9042, z: 4.9042}
   m_Children:
@@ -183,6 +183,8 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   _CurrentHealth: 3
   _MaxHealth: 3
+  isHealthValue: 0
+  numToCheckAgainst: 0
   _IsHealable: 1
   _IsSizeLerper: 1
   _IsColorLerper: 1
@@ -255,7 +257,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39d146723ca4e34449b62b02d2319724, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ShouldPool: 1
   onKillEvent:
     m_PersistentCalls:
       m_Calls:
@@ -273,3 +274,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  killEffectGO: {fileID: 1828176872806910, guid: 64891a0eb28db934898420d80ca07cb3,
+    type: 3}
+  _KillWaitTime: 0
+  _ShouldPool: 1

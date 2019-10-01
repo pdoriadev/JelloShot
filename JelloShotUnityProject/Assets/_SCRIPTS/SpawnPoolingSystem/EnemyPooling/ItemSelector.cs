@@ -96,8 +96,6 @@ public class ItemSelector : MonoBehaviour
             string selectedBallType = string.Empty;
             selectedBallType = (SelectItem(_BallTypeDict));
 
-        //selectedBallType = "Tank";
-
             if (selectedBallType == "Tank")
             {
                 gameObjectToReturn = (SelectItem(_TankBalls));

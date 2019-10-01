@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class AnimationController : MonoBehaviour
 {
-    #region VARIABLES
-    [SerializeField]
-    private AnimationClip[] clipArray;
-
     private Animator animator;
-    #endregion
 
     private void Start()
     {
@@ -19,5 +14,26 @@ public class AnimationController : MonoBehaviour
     public void PlayMove()
     {
         animator.SetBool("ShouldMove", true);
+    }
+
+    private Vector3 _Pos;
+    public void EndAnimListener()
+    {
+        if (animator.GetBool("ShouldSpawn") == true
+            && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.97f)
+        {
+            _Pos = transform.position;
+            animator.StopPlayback();
+            animator.SetBool("ShouldSpawn", false);
+            animator.StartPlayback();
+            animator.SetBool("ShouldRotate", true);
+        }
+    }
+    public void StartAnimListener()
+    {
+        if (animator.GetBool("ShouldRotate") == true)
+        {
+            transform.position = _Pos;
+        }
     }
 }

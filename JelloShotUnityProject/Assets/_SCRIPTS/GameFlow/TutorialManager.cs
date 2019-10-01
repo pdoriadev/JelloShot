@@ -39,21 +39,23 @@ public class TutorialManager : MonoBehaviour
             if (tutorialEnemies[i].activeSelf == true)
                 return;
         }
-        GameManager.instance.ChangeStateTo(GameState.Gameplay);
+        //GameManager.instance.ChangeStateTo(GameState.Gameplay);
     }
 
     private void TutorialStartListener()
     {
         _TutorialTriAnim.SetBool("ShouldSpawn", true);
+        _TutorialTriAnim.fireEvents = true;
     }
 
     private void Update()
     {
         if (_TutorialTriAnim.GetBool("ShouldSpawn") == true 
-            && _TutorialTriAnim.GetCurrentAnimatorStateInfo(0). >  _TutorialTriAnim.GetCurrentAnimatorStateInfo(0).normalizedTime
-                && !_TutorialTriAnim.IsInTransition(0))
+            && _TutorialTriAnim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.98f )
         {
+            Vector3 pos = _TutorialEnemy.transform.position;
             _TutorialEnemy.GetComponent<Animator>().SetBool("ShouldRotate", true);
+            _TutorialEnemy.transform.position = pos;
         }
     }
 
