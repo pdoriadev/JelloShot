@@ -32,7 +32,8 @@ public class ScoreManager : MonoBehaviour
     private void Start()
     {
         DataManagement.instance.LoadData();
-        previouslySavedScore = DataManagement.instance.dManDiffKOScore;
+        _ScoreInfo.bestKOScore = DataManagement.instance.savedKOScore;
+        _ScoreInfo.bestKOTimesDiffScore = DataManagement.instance.savedDiffKOScore;
     }
     #endregion
 
@@ -41,15 +42,13 @@ public class ScoreManager : MonoBehaviour
 
     public void LevelScoreSetup()
     {
-        //ballsKnockedOut = 0;
-        //previouslySavedScore = DataManagement.instance.dManHighScore;
         _ScoreInfo.kOScore = 0;
-        _ScoreInfo.bestScore = DataManagement.instance.dManDiffKOScore;
+        _ScoreInfo.bestKOScore = DataManagement.instance.savedKOScore;
+        _ScoreInfo.bestKOTimesDiffScore = DataManagement.instance.savedDiffKOScore;
     }
 
     public void IterateBallsKoScore()
     {      
-        //ballsKnockedOut++;
         _ScoreInfo.kOScore++;
 
         if (OnScoreUpdateEvent != null)
@@ -61,14 +60,16 @@ public class ScoreManager : MonoBehaviour
     {
         _ScoreInfo.KOTimesDifficulty = difficulty * _ScoreInfo.kOScore;
 
-        if (_ScoreInfo.KOTimesDifficulty > DataManagement.instance.dManDiffKOScore)
+        // if this round's KO times Difficulty score is better than its high score, replace it. 
+        if (_ScoreInfo.KOTimesDifficulty > DataManagement.instance.savedDiffKOScore)
         {
-            DataManagement.instance.dManDiffKOScore = _ScoreInfo.KOTimesDifficulty;
+            DataManagement.instance.savedDiffKOScore = _ScoreInfo.KOTimesDifficulty;
             DataManagement.instance.SaveData();
         }
-        if (_ScoreInfo.kOScore > DataManagement.instance.dManKOScore)
+        // if this round's KO score is better than its high score, replace it. 
+        if (_ScoreInfo.kOScore > DataManagement.instance.savedKOScore)
         {
-            DataManagement.instance.dManKOScore = _ScoreInfo.kOScore;
+            DataManagement.instance.savedKOScore = _ScoreInfo.kOScore;
             DataManagement.instance.SaveData();
         }
 
@@ -78,13 +79,15 @@ public class ScoreManager : MonoBehaviour
 
 public struct ScoreInfo
 {
-    public int bestScore;
+    public int bestKOScore;
+    public int bestKOTimesDiffScore;
     public int kOScore;
     public int KOTimesDifficulty;
 
-    public ScoreInfo(int _bestScore, int _currentScore, int _ballsKOd)
+    public ScoreInfo(int _bestScore, int _currentScore, int _ballsKOd, int _bestKOTimesDiff)
     {
-        bestScore = _bestScore;
+        bestKOScore = _bestScore;
+        bestKOTimesDiffScore = _bestKOTimesDiff;
         KOTimesDifficulty = _currentScore;
         kOScore = _ballsKOd;
     }

@@ -87,7 +87,7 @@ public class SlingShotMechanic : MonoBehaviour
     {
         // Controls 3  phases of touch movement
 #if UNITY_STANDALONE || UNITY_ANDROID
-        if (GameManager.instance.state != GameState.LevelEnd || GameManager.instance.state != GameState.MainMenu || GameManager.instance.state != GameState.PausedGameplay)
+        if (GameManager.instance.state != GameState.LevelEnd && GameManager.instance.state != GameState.MainMenu && GameManager.instance.state != GameState.PausedGame)
         {
             // Create drag anchor at tap position. Slow Down time.
             if (_touchInfo.touchState == TouchInputState.BeginningTap)

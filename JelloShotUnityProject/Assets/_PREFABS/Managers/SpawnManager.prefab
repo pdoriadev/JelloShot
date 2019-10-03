@@ -1,21 +1,11 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &100100000
-Prefab:
-  m_ObjectHideFlags: 1
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications: []
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1921727309574588}
-  m_IsPrefabAsset: 1
 --- !u!1 &1921727309574588
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4828278520351632}
@@ -30,9 +20,10 @@ GameObject:
   m_IsActive: 1
 --- !u!4 &4828278520351632
 Transform:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1921727309574588}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1.5, y: 36.27, z: 0}
@@ -43,9 +34,10 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &114355629047773390
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1921727309574588}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -54,34 +46,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnablesInGame: []
   pooledObjectsList: []
+  tutorialSpawnable: {fileID: 1138869199507208, guid: b7c41f0ea77121b4cb12ad0dc37c9fc4,
+    type: 3}
   startWait: 0.1
-  IsSpawning: 1
-  spawnMinWait: 4
-  spawnMaxWait: 6
-  spawnWait: 0
+  isSpawning: 0
+  spawnMinWaitFloor: 0
+  spawnMaxWaitFloor: 0
+  beginnerHandicapTime: 1
+  currentWaitTime: 0
   startMinSpawnWait: 2.5
   startMaxSpawnWait: 6
   spawningZone: {x: 5, y: 3, z: 0}
   spawnPosition: {x: 0, y: 0, z: 0}
+  _CurrentMinWait: 0
+  _CurrentMaxWait: 0
+  _PreviousWaitTime: 0
 --- !u!114 &114997902193888820
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1921727309574588}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3814481cdfc6cb1459abb1efbd617a97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _TankOne: {fileID: 1387913447705422, guid: 218b5bff0a758d143820b025b6d0c7ec, type: 2}
-  _TankTwo: {fileID: 1418212708434406, guid: 19111e88a125df041897b5310d0e6747, type: 2}
+  _TankOne: {fileID: 1387913447705422, guid: 218b5bff0a758d143820b025b6d0c7ec, type: 3}
+  _TankTwo: {fileID: 1418212708434406, guid: 19111e88a125df041897b5310d0e6747, type: 3}
   _SupportOne: {fileID: 1138869199507208, guid: 20cb2dadc5dc8ea41bf45b1f0e56d38e,
-    type: 2}
+    type: 3}
   _SupportTwo: {fileID: 1138869199507208, guid: 20cb2dadc5dc8ea41bf45b1f0e56d38e,
-    type: 2}
-  _AttackOne: {fileID: 1914277872518012, guid: e7335bc4c643e26499f1512d34524b46, type: 2}
-  _AttackTwo: {fileID: 1138869199507208, guid: b7c41f0ea77121b4cb12ad0dc37c9fc4, type: 2}
+    type: 3}
+  _AttackOne: {fileID: 1914277872518012, guid: e7335bc4c643e26499f1512d34524b46, type: 3}
+  _AttackTwo: {fileID: 1138869199507208, guid: b7c41f0ea77121b4cb12ad0dc37c9fc4, type: 3}
   _SupportChanceThreshold: 33
   _AttackChanceThreshold: 50
   _TankTwoThreshold: 70

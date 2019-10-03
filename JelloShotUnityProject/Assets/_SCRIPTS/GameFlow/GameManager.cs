@@ -11,7 +11,7 @@ public enum GameState
     MainMenu,
     Tutorial, 
     Gameplay,
-    PausedGameplay,
+    PausedGame,
     LevelEnd
 }
 public enum GameLayers
@@ -117,11 +117,11 @@ public class GameManager : MonoBehaviour
     {
         _CurrentTime += Time.deltaTime;
 
-        if (isRetryUIOn && TapChecker.instance._NumberOfTapsInARow > 1)
+        if (state == GameState.LevelEnd && TapChecker.instance._NumberOfTapsInARow > 1)
         {
-            ResetLevel();
+            ChangeStateTo(GameState.Gameplay);
         }
-        if (isRetryUIOn == false)
+        else if (isRetryUIOn == false)
         {
             UIManager.instance.UIScoreUpdate(ScoreManager.instance.scoreInfo);
         }
@@ -133,7 +133,7 @@ public class GameManager : MonoBehaviour
         }
         if (DifficultyAdjuster.instance.currentDiff > DifficultyAdjuster.instance.beginnerDiff 
             && state == GameState.Tutorial)
-        { ChangeStateTo(GameState.Gameplay); Debug.Log("WTF"); }
+        { ChangeStateTo(GameState.Gameplay); Debug.Log("tutorial finished. Welcome to the Gameplay"); }
 
     }
 
@@ -156,10 +156,10 @@ public class GameManager : MonoBehaviour
         if (state == GameState.Gameplay && _state != GameState.Gameplay)
             ExitGameplay();
 
-        else if (state == GameState.PausedGameplay && _state != GameState.PausedGameplay)
+        else if (state == GameState.PausedGame && _state != GameState.PausedGame)
             UnPauseGameplay();
 
-        else if (state == GameState.LevelEnd && _state == GameState.Gameplay)
+        else if (state == GameState.LevelEnd && (_state == GameState.Gameplay || _state == GameState.Tutorial))
             ResetLevel();
 
         else if (state == GameState.MainMenu && _state != GameState.MainMenu)
@@ -182,9 +182,9 @@ public class GameManager : MonoBehaviour
             EnterLevelEnd();
             return;
         }
-        else if (state == GameState.PausedGameplay)
+        else if (state == GameState.PausedGame)
         {
-            PauseGameplay();
+            EnterPauseGame();
             return;
         }
         else if (state == GameState.MainMenu)
@@ -224,6 +224,7 @@ public class GameManager : MonoBehaviour
     private void EnterTutorial()
     {
         _PlayerGameObject.SetActive(true);
+        _PlayerGameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
         Time.timeScale = 1f;
         isTutorial = true;
         if (onEnterTutorialEvent != null)
@@ -246,14 +247,15 @@ public class GameManager : MonoBehaviour
         if (onEnterGameplayEvent != null)
             onEnterGameplayEvent();
         else Debug.LogWarning(onEnterGameplayEvent.ToString() + " is null ");
+
         _PlayerGameObject.SetActive(true);
-        _PlayerGameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+        //_PlayerGameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
         Time.timeScale = 1f;
         Debug.Log("EnterG");
     }
     private void ExitGameplay()
     {
-        _PlayerGameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        //_PlayerGameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         if (onExitGameplayEvent != null)
             onExitGameplayEvent();
         else Debug.Log(" onExitGameplayEvent is null ");
@@ -261,9 +263,9 @@ public class GameManager : MonoBehaviour
     }
 
     // Pause
-    private void PauseGameplay()
+    private void EnterPauseGame()
     {
-        _PlayerGameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        //_PlayerGameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         if (onPauseGameplayEvent != null)
             onPauseGameplayEvent();
         else Debug.LogWarning(onPauseGameplayEvent.ToString() + " is null ");
@@ -272,25 +274,25 @@ public class GameManager : MonoBehaviour
     }
     private void UnPauseGameplay()
     {
-        _PlayerGameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+       // _PlayerGameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
         if (onUnPauseGameplayEvent != null)
             onUnPauseGameplayEvent();
         else Debug.LogWarning(onUnPauseGameplayEvent.ToString() + " is null ");
-        Time.timeScale = 1;
+        //Time.timeScale = 1;
         Debug.Log("Unpaused");
     }
 
-        #region LEVEL END AND RETRY
+        #region Level End and Retry State Methods
 
     private int _FinalScore;
     private void EnterLevelEnd()
     {
-        Time.timeScale = 0f;
         isRetryUIOn = true;
 
         ScoreManager.instance.CountScore(DifficultyAdjuster.instance.currentDiff);
         UIManager.instance.InputRetryUI(ScoreManager.instance.scoreInfo, isRetryUIOn);
-        SpawnManager.instance.PoolAllSpawnables();
+
+        Time.timeScale = 0f;
     }
 
     private void ResetLevel()
@@ -303,14 +305,12 @@ public class GameManager : MonoBehaviour
 
         _CurrentTime = 0;
         _PlayerGameObject.transform.position = _PlayerStartPos;
-        _PlayerGameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
 
         UIManager.instance.UIScoreUpdate(ScoreManager.instance.scoreInfo);
         DifficultyAdjuster.instance.SetStartingDifficulty();
 
         isRetryUIOn = false;
         UIManager.instance.InputRetryUI(ScoreManager.instance.scoreInfo, isRetryUIOn);
-        
     }
         #endregion  
 

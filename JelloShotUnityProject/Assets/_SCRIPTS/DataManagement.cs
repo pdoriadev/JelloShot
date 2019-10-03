@@ -15,7 +15,7 @@ public class DataManagement : MonoBehaviour
     public static DataManagement instance;
 
     [SerializeField]
-    public int dManDiffKOScore, dManKOScore;
+    public int savedDiffKOScore, savedKOScore;
 
     private void Awake()
     {
@@ -34,8 +34,8 @@ public class DataManagement : MonoBehaviour
     {
         FileStream file = File.Create(Application.persistentDataPath + "/gameInfo.dat"); 
         gameData data = new gameData(); 
-        data.savedDiffTimesKOScore = dManDiffKOScore;
-        data.savedHighKOScore = dManKOScore;
+        data.savedDiffTimesKOScore = savedDiffKOScore;
+        data.savedHighKOScore = savedKOScore;
 
         BinaryFormatter BinForm = new BinaryFormatter();
         BinForm.Serialize(file, data); 
@@ -51,8 +51,8 @@ public class DataManagement : MonoBehaviour
             BinaryFormatter BinForm = new BinaryFormatter();
             gameData data = (gameData)BinForm.Deserialize(file);
             file.Close();
-            dManDiffKOScore = data.savedDiffTimesKOScore;
-            dManKOScore = data.savedHighKOScore;
+            savedDiffKOScore = data.savedDiffTimesKOScore;
+            savedKOScore = data.savedHighKOScore;
         }
     }
 
@@ -74,7 +74,7 @@ public class DataManagement : MonoBehaviour
             file.Close();
 
             SaveData();
-            Debug.Log("You just wiped the high score. New score is: " + dManDiffKOScore);
+            Debug.Log("You just wiped the high score. New KO score is: " + savedKOScore);
         }       
     }
 }

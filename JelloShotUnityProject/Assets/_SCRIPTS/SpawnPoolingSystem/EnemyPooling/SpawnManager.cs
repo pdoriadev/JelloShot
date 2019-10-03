@@ -74,6 +74,7 @@ public class SpawnManager : MonoBehaviour
 
     [SerializeField]
     private float _PreviousWaitTime;
+    private float _TimeGamePaused;
 
     #region UNITY CALLBACKS
 
@@ -83,16 +84,16 @@ public class SpawnManager : MonoBehaviour
             instance = this;
         GameManager.onResetLevel += PoolAllSpawnables;
         GameManager.onEnterTutorialEvent += onEnterTutorialListener;
+        GameManager.onEnterGameplayEvent += onEnterGameplayListener;
         GameManager.onPauseGameplayEvent += onEnterPauseListener;
-        GameManager.onUnPauseGameplayEvent += onExitPauseListener;
     }
 
     private void OnDisable()
     {
         GameManager.onResetLevel -= PoolAllSpawnables;
         GameManager.onEnterTutorialEvent -= onEnterTutorialListener;
+        GameManager.onEnterGameplayEvent -= onEnterGameplayListener;
         GameManager.onPauseGameplayEvent -= onEnterPauseListener;
-        GameManager.onUnPauseGameplayEvent -= onExitPauseListener;
 
         instance = null;
     }
@@ -103,15 +104,6 @@ public class SpawnManager : MonoBehaviour
         currentMaxWait = startMaxSpawnWait;
     }
 
-    private void Update()
-    {
-        if ((GameManager.instance.state != GameState.Tutorial && GameManager.instance.state != GameState.Gameplay)
-            && isSpawning == true)
-        {
-            
-            isSpawning = false;
-        }
-    }
     #endregion
 
     #region StateEventListeners
@@ -125,36 +117,18 @@ public class SpawnManager : MonoBehaviour
         }
         isSpawning = true;
     }
-    // freezes all enemies spawned
+    private void onEnterGameplayListener()
+    {
+        isSpawning = true;
+    }  
     private void onEnterPauseListener()
     {
+        _TimeGamePaused = Time.time;
         isSpawning = false;
-        if (spawnablesInGame.Count > 0)
-        {
-            for (int index = 0; index < SpawnManager.instance.spawnablesInGame.Count; index++)
-            {
-                GameObject currentBall = (GameObject)SpawnManager.instance.spawnablesInGame[index];
-                currentBall.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-            }
-        }
-    }
-    // unfreezes all spawned enemies
-    private void onExitPauseListener()
-    {
-        _JustPaused = true;
-        isSpawning = true;
-        if (spawnablesInGame.Count > 0)
-        {
-            for (int index = 0; index < SpawnManager.instance.spawnablesInGame.Count; index++)
-            {
-                GameObject currentBall = (GameObject)SpawnManager.instance.spawnablesInGame[index];
-                currentBall.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
-            }
-        }
     }
     #endregion
 
-    private bool _JustPaused = false;
+    private bool _WasStoppedMidWait = false;
     private float _TimeStartedWaiting = 2;
     // Handles spawn loop
     IEnumerator CoSpawnItem()
@@ -163,13 +137,7 @@ public class SpawnManager : MonoBehaviour
 
         while (isSpawning)
         {
-            if (_JustPaused == true)
-            {
-                currentWaitTime -= (Time.time - _TimeStartedWaiting);
-                _JustPaused = false;
-
-            }
-            else if (_PreviousWaitTime < (_PreviousWaitTime + beginnerHandicapTime) 
+            if (_PreviousWaitTime < (_PreviousWaitTime + beginnerHandicapTime) 
                 && GameManager.instance.state == GameState.Tutorial)
             {
                 currentWaitTime = Random.Range(currentMinWait + beginnerHandicapTime, currentMaxWait);
@@ -179,18 +147,17 @@ public class SpawnManager : MonoBehaviour
                 currentWaitTime = Random.Range(currentMinWait, currentMaxWait);
             }
             _TimeStartedWaiting = Time.time;
-            yield return new WaitForSeconds(currentWaitTime);
+            yield return new WaitForSeconds (currentWaitTime);
             _PreviousWaitTime = currentWaitTime;
-
 
             spawnPosition = new Vector3(Random.Range(-spawningZone.x, spawningZone.x), Random.Range(-spawningZone.y, spawningZone.y), 1);
             GameObject spawnable = null;
             int index = 0;
             bool spawnPooledObject = false;
 
+            // 1. Select item to spawn
             if (GameManager.instance.state != GameState.Tutorial)
             {
-                // 1. Select item to spawn
                 spawnable = ItemSelector.instance.SelectItem();
             }
             else spawnable = tutorialSpawnable;
@@ -207,7 +174,7 @@ public class SpawnManager : MonoBehaviour
                 }
             }
 
-            // 3a. Unpool and move GameObject to spawnPosition. Add item to spawnablesInGameList.
+            // 3a. If spawnPooledObject is true, Unpool and move GameObject to spawnPosition. Add item to spawnablesInGameList.
             // random spawn position on x and z axis min/max of spawn values. spawn position does not go above 1 on the y axis.  <---- ???
             if (spawnPooledObject == true)
             {

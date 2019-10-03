@@ -50,7 +50,7 @@ public class UIManager : MonoBehaviour
     public void UIScoreUpdate(ScoreInfo _scoreInfo)
     {
         ballsKnockedOutText.text = _scoreInfo.kOScore.ToString(); ;
-        inGameHighScoreText.text = ("BEST:" + DataManagement.instance.dManDiffKOScore.ToString());
+        inGameHighScoreText.text = ("BEST:" + DataManagement.instance.savedDiffKOScore.ToString());
     }
 
     public Text currentDifficultyText;
@@ -69,7 +69,7 @@ public class UIManager : MonoBehaviour
         if (ScoreManager.instance.previouslySavedScore < _scoreInfo.kOScore)
         {
             finalScoreText.text = ("KOs: " + _scoreInfo.kOScore);
-            retryHighScoreText.text = ("Best: " + _scoreInfo.bestScore);
+            retryHighScoreText.text = ("Best: " + _scoreInfo.bestKOScore);
         }
         else
         {
@@ -168,7 +168,6 @@ public class UIManager : MonoBehaviour
     }
     private void ExitPauseListener()
     {
-        Debug.Log("UI Exit Pause");
         _GroundText.text = _PreviousText;
         if (_TutorialIsTrue)
             StartCoroutine(TutorialTextCo());

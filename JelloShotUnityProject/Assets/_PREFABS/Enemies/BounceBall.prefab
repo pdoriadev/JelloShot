@@ -195,7 +195,7 @@ MonoBehaviour:
   _MaxHealth: 3
   isHealthValue: 0
   numToCheckAgainst: 0
-  _IsHealable: 0
+  _IsHealable: 1
   _IsSizeLerper: 1
   _IsColorLerper: 0
 --- !u!114 &114888527880253010
@@ -250,7 +250,6 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   killEffectGO: {fileID: 1329845292236604, guid: 9bba9cf244c53c5439505dfc96fdd11c,
     type: 3}
-  _KillWaitTime: 0
   _ShouldPool: 1
 --- !u!1 &1155077933520020
 GameObject:

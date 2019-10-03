@@ -10,8 +10,8 @@ public class DeathHandler : MonoBehaviour
     public UnityEvent onKillEvent;
     public GameObject killEffectGO;
 
-    [SerializeField]
-    private float _KillWaitTime;
+    //[SerializeField]
+    //private float _KillWaitTime;
     [SerializeField]
     private bool _ShouldPool = true;
 

@@ -276,5 +276,4 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   killEffectGO: {fileID: 1828176872806910, guid: 64891a0eb28db934898420d80ca07cb3,
     type: 3}
-  _KillWaitTime: 0
   _ShouldPool: 1
