@@ -65,6 +65,7 @@
     <Compile Include="Assets\_SCRIPTS\AnimationController.cs" />
     <Compile Include="Assets\_SCRIPTS\Audio\AudioClipPlayer.cs" />
     <Compile Include="Assets\_SCRIPTS\Audio\AudioManager.cs" />
+    <Compile Include="Assets\_SCRIPTS\Audio\AudioStorage.cs" />
     <Compile Include="Assets\_SCRIPTS\BallVelocityLimiter.cs" />
     <Compile Include="Assets\_SCRIPTS\BounceAnimation.cs" />
     <Compile Include="Assets\_SCRIPTS\DamageSystem\DamageableBase.cs" />

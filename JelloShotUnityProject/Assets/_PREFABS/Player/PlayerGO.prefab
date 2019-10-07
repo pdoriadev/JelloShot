@@ -94,6 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slingInstance: {fileID: 2175361366139196771}
+  _FlashRateMultiplier: 0.5
 --- !u!114 &5817581385707077181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,6 +113,7 @@ MonoBehaviour:
   _StartLerpTime: 0
   _TimeSinceLerpStarted: 0
   _LerpTime: 0.5
+  _SpriteRend: {fileID: 0}
   _ColorAtSpawn: {r: 1, g: 1, b: 1, a: 0}
   _FinalColor: {r: 1, g: 0.67031866, b: 0, a: 1}
 --- !u!1 &5133488854063765032
@@ -291,6 +293,7 @@ GameObject:
   - component: {fileID: 9044615554373155033}
   - component: {fileID: 1134856482634638079}
   - component: {fileID: 510234943569028158}
+  - component: {fileID: 6155668458150137688}
   m_Layer: 9
   m_Name: PlayerGO
   m_TagString: Player
@@ -328,12 +331,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shotVelocity: {x: 0, y: 0, z: 0}
   shotVelocityMaxMagnitude: 110
-  shotForceMultiplier: 0.9
+  VelocityMultiplier: 0
   playerReboundVelocity: {x: 0, y: 0, z: 0}
   fastTimeScale: 1.25
   regularTimeScale: 1
   slowTimeScale: 0.25
   _OtherBallSpeedMultip: 1
+  onSlingReset:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!50 &5921399368658056473
 Rigidbody2D:
   serializedVersion: 4
@@ -541,6 +549,25 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6155668458150137688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6577600486325830618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b27b39477e215b946b34fb97d643d2f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioFileName: 
+  shouldResyncLists: 0
+  sFXNames: []
+  musicNames: []
+  useCase: 0
+  playType: 1
+  delayTime: 0
 --- !u!1 &8313697277620168631
 GameObject:
   m_ObjectHideFlags: 0

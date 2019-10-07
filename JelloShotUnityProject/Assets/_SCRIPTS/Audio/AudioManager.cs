@@ -10,12 +10,14 @@ using UnityEditor;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
-    public bool _RunClipSetup = false;
+    public bool runClipSetup = false;
+    public bool justRanSetup = false;
 
-    [SerializeField]
-    public AudioStorage holderInstance;
+    public AudioStorage storageInstance;
 
     private AudioClip _Clip;
+    // in the event playscheduled is used
+    private AudioClip _StitchedClip;
 
     #region Unity Callbacks
     private void OnEnable()
@@ -32,66 +34,123 @@ public class AudioManager : MonoBehaviour
     public void PlayAudioFromSource(ClipHolder _clipHolder)
     {
         _Clip = null;
-        if (_clipHolder.audioUse == AudioUse.SFX)
-        {
-            for (int i = 0; i < holderInstance.sFXClips.Count; i++)
-            {
-                if (_clipHolder.clipName == holderInstance.sFXClips[i].name)
-                {
-                    _Clip = holderInstance.sFXClips[i];
-                    break;
-                }      
-            }
+        _StitchedClip = null;
 
-        }
-        if (_clipHolder.audioUse == AudioUse.Music)
+        if (_clipHolder.audioUse == AudioUseCase.SFX)
         {
-            for (int i = 0; i < holderInstance.musicClips.Count; i++)
+            for (int i = 0; i < storageInstance.sFXClips.Count; i++)
             {
-                if (_clipHolder.clipName == holderInstance.musicClips[i].name)
+                bool primClipFound = false;
+                if (primClipFound == false && _clipHolder.primaryClipName == storageInstance.sFXClips[i].name)
                 {
-                    _Clip = holderInstance.sFXClips[i];
-                    break;
+                    _Clip = storageInstance.sFXClips[i];
+                    primClipFound = true;
                 }
+                bool stitchedClipFound = false;
+                if (_clipHolder.stitchedClipName != null)
+                {
+                    if (stitchedClipFound == false && _clipHolder.stitchedClipName == storageInstance.sFXClips[i].name)
+                    {
+                        _StitchedClip = storageInstance.sFXClips[i];
+                        stitchedClipFound = true;
+                    }
+                }
+                else stitchedClipFound = true;
+
+                if (primClipFound && stitchedClipFound)
+                    break;
+               // else Debug.LogWarning("No clip found for " + _clipHolder.audioSource.gameObject);
+            }
+        }
+        if (_clipHolder.audioUse == AudioUseCase.Music)
+        {
+            for (int i = 0; i < storageInstance.musicClips.Count; i++)
+            {
+                bool primClipFound = false;
+                if (primClipFound == false && _clipHolder.primaryClipName == storageInstance.musicClips[i].name)
+                {
+                    _Clip = storageInstance.sFXClips[i];
+                    primClipFound = true;
+                }
+                bool stitchedClipFound = false;
+                if (_clipHolder.stitchedClipName != null)
+                {
+                    if (stitchedClipFound == false && _clipHolder.stitchedClipName == storageInstance.musicClips[i].name)
+                    {
+                        _StitchedClip = storageInstance.sFXClips[i];
+                        stitchedClipFound = true;
+                    }
+                }
+                if (primClipFound && stitchedClipFound)
+                    break;
+                else stitchedClipFound = true;
+
+                if (primClipFound && stitchedClipFound)
+                    break;
+                //else Debug.LogWarning("No clip found for " + _clipHolder.audioSource.gameObject);
             }
         }
 
-        if (_clipHolder.isOneShot)
+        if (_clipHolder.playType == AudioPlayType.Play)
+        {
+            _clipHolder.audioSource.Play();
+        }
+        else if (_clipHolder.playType == AudioPlayType.PlayDelayed)
+        {
+            _clipHolder.audioSource.PlayDelayed(_clipHolder.delayTime);
+        }
+        else if (_clipHolder.playType == AudioPlayType.PlayOneShot)
+        {
+            _clipHolder.audioSource.pitch = Random.Range(0.8f, 1.2f);
             _clipHolder.audioSource.PlayOneShot(_Clip);
-        else _clipHolder.audioSource.Play();
-    }
-}
-
-public class AudioStorage
-{
-    public List<AudioClip> sFXClips;
-    public List<string> sfXNames;
-    public List<AudioClip> musicClips;
-    public List<string> musicNames;
-
-    public void SetupNames()
-    {
-        for (int i = 0; i < sFXClips.Count - 1; i++)
-        {
-            sfXNames[i] = sFXClips[i].name;
-            musicNames[i] = musicClips[i].name;
         }
-    }
-    public bool CheckIfNamesMatchClips()
-    {
-        for (int i = 0; i < sFXClips.Count - 1; i++)
+
+        // How PlayScheduled works OR how to stitch together clips seamlsessly  
+        else if (_clipHolder.playType == AudioPlayType.PlayScheduled)
         {
-            if (sfXNames[i] != sFXClips[i].name)
+            //1.Work out the length of the first clip as a double value. Get this by casting the clip's total samples as a double
+            /// and then divide it by the sample rate.This gives you a super accurate duration value.
+            double clipDuration = (double)_clipHolder.audioSource.clip.samples / _clipHolder.audioSource.clip.frequency;
+
+            /// 2.Setup two audio sources.You must use 2 audio sources, as it's impossible to schedule an audio source to play what's already playing,
+            /// or that's already scheduled to play. However, if you intend to trigger more than two clips in a row, siply toggle between
+            /// the two audio sources as you schedule clips.
+            AudioSource otherAudioSource;
+            AudioSource[] sourcesOnGO = _clipHolder.audioSource.gameObject.GetComponents<AudioSource>();
+            if (sourcesOnGO.Length < 2)
             {
-                return false;
+                otherAudioSource = _clipHolder.audioSource.gameObject.AddComponent<AudioSource>();
+                otherAudioSource.clip = _Clip;
+
+                _clipHolder.audioSource.PlayScheduled(AudioSettings.dspTime + 0.1f);
+                otherAudioSource.PlayScheduled(AudioSettings.dspTime + 0.1f + clipDuration);
             }
-            if (musicNames[i] != musicClips[i].name)
+            else
             {
-                return false;
+                for (int i = 0; i < _clipHolder.audioSource.gameObject.GetComponents<AudioSource>().Length; i++)
+                {
+                    if (_clipHolder.audioSource != sourcesOnGO[i])
+                    {
+                        otherAudioSource = sourcesOnGO[i];
+                        otherAudioSource.PlayScheduled(clipDuration);
+                        break;
+                    }
+                    else Debug.LogWarning("Couldn't find another audio source on " + _clipHolder.audioSource.gameObject.name);
+                }    
             }
-           
+            /// 3. (Look in the above if statements) Schedule audio clips. Start the first clip using PlayScheduled.
+            /// This way you can use the exact start time in your calculation.
+            /// Schedule the first clip to play at the current Audio DSP time, pl-us a small delay(to make sure it plays at the correct time.
+            /// Next, schedule the second audio source to play at the current DSP time plus the small delay plus the first clip's duration.
         }
-        return true;
+        else if (_clipHolder.playType == AudioPlayType.Pause)
+        {
+            _clipHolder.audioSource.Pause();
+        }     
+        else if (_clipHolder.playType == AudioPlayType.UnPause)
+        {
+            _clipHolder.audioSource.UnPause();
+        }
     }
 }
 
@@ -105,14 +164,26 @@ public class AudioSetup : Editor
 
         AudioManager _AudioManager = (AudioManager)target;
 
-      
-        if (_AudioManager._RunClipSetup && _AudioManager.holderInstance.CheckIfNamesMatchClips())
+        if (_AudioManager.storageInstance == null)
+            _AudioManager.storageInstance = _AudioManager.gameObject.GetComponent<AudioStorage>();
+        Debug.Log("Pre ifs");
+        // Checks if names and audio files need to be resynced. 
+        if (_AudioManager.justRanSetup)
         {
-            _AudioManager._RunClipSetup = false ;
+            _AudioManager.justRanSetup = false;
+            Debug.Log("just ran setup setting to false");
         }
-        else if (_AudioManager._RunClipSetup || !_AudioManager.holderInstance.CheckIfNamesMatchClips())
+
+        else if (_AudioManager.runClipSetup || !_AudioManager.storageInstance.CheckIfNamesMatchClips())
         {
-            _AudioManager.holderInstance.SetupNames();
+            Debug.Log("pre-setup setup");
+            _AudioManager.storageInstance.SetupNames();
+            _AudioManager.runClipSetup = false;
+
+            Debug.Log("post setup");
+
+            // AudioClipPlayers check if this is true to know when to subscribe to know when to resync their clipName lists. 
+            _AudioManager.justRanSetup = true;
         }
     }
 }

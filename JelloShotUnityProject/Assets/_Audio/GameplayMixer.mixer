@@ -121,7 +121,9 @@ AudioMixerSnapshotController:
   m_Name: Gameplay
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 773ad0ac184b46a449b380c0d36dd16d
-  m_FloatValues: {}
+  m_FloatValues:
+    650926415c97bef4ba227fbc4d1bc4d2: -0.025776565
+    7b9d4af490250ac43882e99933797ed7: -0.02577689
   m_TransitionOverrides: {}
 --- !u!245 &8631868064657584545
 AudioMixerSnapshotController:

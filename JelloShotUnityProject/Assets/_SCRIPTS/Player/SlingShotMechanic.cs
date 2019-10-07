@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 /// <summary>
 /// - Controls slingshot physics and listens to SingleTouchInputController's events to know when to enter each phase of the slingshot. 
 /// - Has events for when the slingshot starts, when it changes position (pre-release), and when it is released. 
@@ -82,6 +83,8 @@ public class SlingShotMechanic : MonoBehaviour
     }
     #endregion
 
+    public UnityEvent onTouchBegin;
+    public UnityEvent onTouchMove;
     #region PRIVATE SLING SHOT METHODS
     private void OnTouchInputObserver(TouchInfo _touchInfo)
     {
@@ -96,6 +99,7 @@ public class SlingShotMechanic : MonoBehaviour
                 if (slingShotStartEvent != null)
                 {
                     slingShotStartEvent(_touchInfo, _SlingShotInfo);
+                    onTouchBegin.Invoke();
                 }
             }
 
@@ -109,6 +113,7 @@ public class SlingShotMechanic : MonoBehaviour
                 if (slingShotMovesEvent != null)
                 {
                     slingShotMovesEvent(_touchInfo, _SlingShotInfo);
+                    onTouchMove.Invoke();
                 }
             }
 
@@ -144,15 +149,21 @@ public class SlingShotMechanic : MonoBehaviour
 #endif
     }
 
+    public UnityEvent onSlingReset;
     private void ResetSlingShot()
     {
         if (slingShotResetEvent != null)
+        {
             slingShotResetEvent();
+            onSlingReset.Invoke();
+        }
         else Debug.LogWarning(slingShotResetEvent + " is null");
     }
 
     #endregion
 
+    public UnityEvent onCollideFriendly;
+    public UnityEvent onCollideEnemy;
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.GetComponent<DamagerPlayerFaction>() != null)
@@ -161,7 +172,6 @@ public class SlingShotMechanic : MonoBehaviour
         }
         else
         {
-
             playerCollidesOnEnemy();
         }
 

@@ -8,7 +8,6 @@ TagManager:
   - Enemy
   - LevelEnd
   - PlayerSprite
-  - sp2
   - ball
   - bigBall
   - ground
