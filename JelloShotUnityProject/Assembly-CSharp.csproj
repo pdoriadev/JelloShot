@@ -126,6 +126,7 @@
     <Compile Include="Assets\DamagerOutOfBounds.cs" />
     <Compile Include="Assets\GroundDeath.cs" />
     <Compile Include="Assets\JellyShader\Example\Scripts\JellyClickReceiver.cs" />
+    <Compile Include="Assets\MusicController.cs" />
     <Compile Include="Assets\ParticlePack\EffectExamples\Misc Effects\Scripts\SpawnEffect.cs" />
     <Compile Include="Assets\ParticlePack\Shared\Ramps\Runtime\RampAsset.cs" />
     <Compile Include="Assets\ParticlePack\Shared\Scripts\AdjustTimeScale.cs" />

@@ -19,12 +19,12 @@ public class AudioClipPlayer : MonoBehaviour
     public AudioPlayType playType = AudioPlayType.PlayOneShot;
 
     public float delayTime;
-    
 
+    private AudioSource _Audio;
+    
     private void OnEnable()
     {
-        clipHolder.audioSource = GetComponent<AudioSource>();
-        
+        _Audio = GetComponent<AudioSource>();
     }
 
 
@@ -34,11 +34,13 @@ public class AudioClipPlayer : MonoBehaviour
     /// </summary>
     public void PlayAudio()
     {
-        clipHolder.audioUse = useCase;
         clipHolder.primaryClipName = audioFileName;
+        if (stitchedFileName != null)
+            clipHolder.stitchedClipName = stitchedFileName;
+        clipHolder.audioUse = useCase;
         clipHolder.playType = playType;
-        clipHolder.stitchedClipName = stitchedFileName;
         clipHolder.delayTime = delayTime;
+        clipHolder.audioSource = _Audio;
 
         AudioManager.instance.PlayAudioFromSource(clipHolder);
     }
@@ -67,8 +69,6 @@ public class AudioClipPlayer : MonoBehaviour
         musicNames.Clear();
         sFXNames.AddRange(AudioManager.instance.storageInstance.sfXNames);
         musicNames.AddRange(AudioManager.instance.storageInstance.musicNames);
-        //sFXNames = AudioManager.instance.storageInstance.sfXNames;
-        //musicNames = AudioManager.instance.storageInstance.musicNames;
     }
 
 }

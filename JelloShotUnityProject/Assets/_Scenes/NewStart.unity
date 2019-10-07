@@ -942,6 +942,14 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 738568255}
   m_PrefabAsset: {fileID: 0}
+--- !u!81 &461284109
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461284108}
+  m_Enabled: 1
 --- !u!114 &461284116 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6444345820909259692, guid: 71dbfe7099bc9954388240969dfe1193,
@@ -1420,6 +1428,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6444345820909259692, guid: 71dbfe7099bc9954388240969dfe1193,
         type: 3}
+      propertyPath: onSlingReset.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6444345820909259692, guid: 71dbfe7099bc9954388240969dfe1193,
+        type: 3}
       propertyPath: onCollideEnemy.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
       objectReference: {fileID: 0}
@@ -1442,6 +1455,36 @@ PrefabInstance:
         type: 3}
       propertyPath: onCollideEnemy.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6444345820909259692, guid: 71dbfe7099bc9954388240969dfe1193,
+        type: 3}
+      propertyPath: onSlingReset.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6444345820909259692, guid: 71dbfe7099bc9954388240969dfe1193,
+        type: 3}
+      propertyPath: onSlingReset.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6444345820909259692, guid: 71dbfe7099bc9954388240969dfe1193,
+        type: 3}
+      propertyPath: onSlingReset.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 738568256}
+    - target: {fileID: 6444345820909259692, guid: 71dbfe7099bc9954388240969dfe1193,
+        type: 3}
+      propertyPath: onSlingReset.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: SetClipname
+      objectReference: {fileID: 0}
+    - target: {fileID: 6444345820909259692, guid: 71dbfe7099bc9954388240969dfe1193,
+        type: 3}
+      propertyPath: onSlingReset.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6444345820909259692, guid: 71dbfe7099bc9954388240969dfe1193,
+        type: 3}
+      propertyPath: onTouchBegin.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetPlayTypeAsPlayOneShot
       objectReference: {fileID: 0}
     - target: {fileID: 4693007853085734, guid: 71dbfe7099bc9954388240969dfe1193, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1486,6 +1529,28 @@ PrefabInstance:
     - target: {fileID: 4693007853085734, guid: 71dbfe7099bc9954388240969dfe1193, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1311627329505169815, guid: 71dbfe7099bc9954388240969dfe1193,
+        type: 3}
+      propertyPath: playType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 461284109, guid: 71dbfe7099bc9954388240969dfe1193, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -7860383547706108724, guid: 087d84cd1dc52704f82b05c1f2a41f2c,
+        type: 2}
+    - target: {fileID: 461284109, guid: 71dbfe7099bc9954388240969dfe1193, type: 3}
+      propertyPath: m_Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 461284109, guid: 71dbfe7099bc9954388240969dfe1193, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 461284109, guid: 71dbfe7099bc9954388240969dfe1193, type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71dbfe7099bc9954388240969dfe1193, type: 3}
@@ -2272,8 +2337,8 @@ MonoBehaviour:
   _Duration: 0.2
   _DampingSpeed: 1
   _LowMagnitude: 0.05
-  _RegularMagnitude: 0.1
-  _HighMagnitude: 0.4
+  _RegularMagnitude: 0.075
+  _HighMagnitude: 0.2
   _Shaking: 0
 --- !u!1001 &1083480300
 PrefabInstance:
@@ -3056,7 +3121,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 6490207824634520301}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6490207824634520302}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7e296f4540fff5945b72c9c53de78deb, type: 3}
@@ -3213,6 +3278,7 @@ GameObject:
   - component: {fileID: 2024247443}
   - component: {fileID: 2024247445}
   - component: {fileID: 2024247444}
+  - component: {fileID: 2024247446}
   m_Layer: 19
   m_Name: Music
   m_TagString: Untagged
@@ -3267,7 +3333,7 @@ MonoBehaviour:
   - JelloShotTitleIntroV2Music
   - FAM_Intimate Comedy
   useCase: 1
-  playType: 0
+  playType: 1
   delayTime: 0
 --- !u!82 &2024247445
 AudioSource:
@@ -3278,13 +3344,13 @@ AudioSource:
   m_GameObject: {fileID: 2024247442}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -9043082357134243439, guid: c55dec15ca8a55e42a0a144a35eeec81,
+  OutputAudioMixerGroup: {fileID: -5148965771943047918, guid: 087d84cd1dc52704f82b05c1f2a41f2c,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: f44fff1105b7f2e4c876965a4abd4bea, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -3366,6 +3432,77 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2024247446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2024247442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc7daee36e2604d4b8947423852c03c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playMenuEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2024247444}
+        m_MethodName: SetClipname
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: JelloShotTitleIntroV2Music
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2024247444}
+        m_MethodName: PlayAudio
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  playGameplayEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2024247444}
+        m_MethodName: SetClipname
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: FAM_Intimate Comedy
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2024247444}
+        m_MethodName: PlayAudio
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  playLevelEndEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1001 &2076687280
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3428,7 +3565,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 6490207824634520301}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6490207824634520302}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 39d146723ca4e34449b62b02d2319724, type: 3}
@@ -4018,20 +4155,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd7d912c31352be4ea512fe04364b761, type: 3}
---- !u!1 &6490207824634520302 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6490207824472628762, guid: fd7d912c31352be4ea512fe04364b761,
-    type: 3}
-  m_PrefabInstance: {fileID: 6490207824634520301}
-  m_PrefabAsset: {fileID: 0}
---- !u!81 &6490207824634520303
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6490207824634520302}
-  m_Enabled: 1
 --- !u!1001 &8702994292533875843
 PrefabInstance:
   m_ObjectHideFlags: 0

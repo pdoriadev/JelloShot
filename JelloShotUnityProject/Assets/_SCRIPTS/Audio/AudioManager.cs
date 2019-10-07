@@ -38,15 +38,15 @@ public class AudioManager : MonoBehaviour
 
         if (_clipHolder.audioUse == AudioUseCase.SFX)
         {
+            bool primClipFound = false;
+            bool stitchedClipFound = false;
             for (int i = 0; i < storageInstance.sFXClips.Count; i++)
             {
-                bool primClipFound = false;
                 if (primClipFound == false && _clipHolder.primaryClipName == storageInstance.sFXClips[i].name)
                 {
                     _Clip = storageInstance.sFXClips[i];
                     primClipFound = true;
                 }
-                bool stitchedClipFound = false;
                 if (_clipHolder.stitchedClipName != null)
                 {
                     if (stitchedClipFound == false && _clipHolder.stitchedClipName == storageInstance.sFXClips[i].name)
@@ -64,35 +64,43 @@ public class AudioManager : MonoBehaviour
         }
         if (_clipHolder.audioUse == AudioUseCase.Music)
         {
+            bool primClipFound = false;
+            bool stitchedClipFound = false;
             for (int i = 0; i < storageInstance.musicClips.Count; i++)
             {
-                bool primClipFound = false;
                 if (primClipFound == false && _clipHolder.primaryClipName == storageInstance.musicClips[i].name)
                 {
-                    _Clip = storageInstance.sFXClips[i];
+                    _Clip = storageInstance.musicClips[i];
                     primClipFound = true;
+                    Debug.Log(_Clip + " foudn ");
                 }
-                bool stitchedClipFound = false;
                 if (_clipHolder.stitchedClipName != null)
                 {
                     if (stitchedClipFound == false && _clipHolder.stitchedClipName == storageInstance.musicClips[i].name)
                     {
-                        _StitchedClip = storageInstance.sFXClips[i];
+                        _StitchedClip = storageInstance.musicClips[i];
                         stitchedClipFound = true;
+                        Debug.Log(_StitchedClip + " foudn ");
                     }
                 }
+                // if stitchedClipName == null and primClipFound
+                else if (primClipFound)
+                    break;
                 if (primClipFound && stitchedClipFound)
                     break;
-                else stitchedClipFound = true;
 
-                if (primClipFound && stitchedClipFound)
-                    break;
+                Debug.Log(_clipHolder.audioSource);
                 //else Debug.LogWarning("No clip found for " + _clipHolder.audioSource.gameObject);
             }
+            Debug.Log(_clipHolder.audioSource);
+
         }
+        Debug.Log(_clipHolder.audioSource);
+
 
         if (_clipHolder.playType == AudioPlayType.Play)
         {
+            _clipHolder.audioSource.clip = _Clip;
             _clipHolder.audioSource.Play();
         }
         else if (_clipHolder.playType == AudioPlayType.PlayDelayed)
@@ -101,7 +109,8 @@ public class AudioManager : MonoBehaviour
         }
         else if (_clipHolder.playType == AudioPlayType.PlayOneShot)
         {
-            _clipHolder.audioSource.pitch = Random.Range(0.8f, 1.2f);
+            Debug.Log(_clipHolder.audioSource);
+            _clipHolder.audioSource.pitch = Random.Range(1.2f, 1.8f);
             _clipHolder.audioSource.PlayOneShot(_Clip);
         }
 

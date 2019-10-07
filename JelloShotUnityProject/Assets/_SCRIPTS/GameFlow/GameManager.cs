@@ -143,10 +143,6 @@ public class GameManager : MonoBehaviour
     #region PUBLIC STATE CONTROL METHODS
     public void EndGame()
     {
-        if (onLevelEndEvent != null)
-            onLevelEndEvent();
-        else Debug.LogWarning("OnLevelEndEvent is null.");
-
         ChangeStateTo(GameState.LevelEnd);
     }
 
@@ -249,13 +245,11 @@ public class GameManager : MonoBehaviour
         else Debug.LogWarning(onEnterGameplayEvent.ToString() + " is null ");
 
         _PlayerGameObject.SetActive(true);
-        //_PlayerGameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
         Time.timeScale = 1f;
         Debug.Log("EnterG");
     }
     private void ExitGameplay()
     {
-        //_PlayerGameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         if (onExitGameplayEvent != null)
             onExitGameplayEvent();
         else Debug.Log(" onExitGameplayEvent is null ");
@@ -265,7 +259,6 @@ public class GameManager : MonoBehaviour
     // Pause
     private void EnterPauseGame()
     {
-        //_PlayerGameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         if (onPauseGameplayEvent != null)
             onPauseGameplayEvent();
         else Debug.LogWarning(onPauseGameplayEvent.ToString() + " is null ");
@@ -274,11 +267,10 @@ public class GameManager : MonoBehaviour
     }
     private void UnPauseGameplay()
     {
-       // _PlayerGameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
         if (onUnPauseGameplayEvent != null)
             onUnPauseGameplayEvent();
         else Debug.LogWarning(onUnPauseGameplayEvent.ToString() + " is null ");
-        //Time.timeScale = 1;
+
         Debug.Log("Unpaused");
     }
 
@@ -287,6 +279,10 @@ public class GameManager : MonoBehaviour
     private int _FinalScore;
     private void EnterLevelEnd()
     {
+        if (onLevelEndEvent != null)
+            onLevelEndEvent();
+        else Debug.LogWarning("OnLevelEndEvent is null.");
+
         isRetryUIOn = true;
 
         ScoreManager.instance.CountScore(DifficultyAdjuster.instance.currentDiff);
