@@ -109,6 +109,5 @@ public class DifficultyAdjuster : MonoBehaviour
         _KOsNeededForChange += _KODifferenceBetweenDifficulties;
         _CurrentDiff += 1;
         UIManager.instance.UpdateDifficulty(currentDiff);
-        Debug.Log("DiffUpdate");
     }
 }

@@ -169,10 +169,12 @@ public class SlingShotMechanic : MonoBehaviour
         if (collision.gameObject.GetComponent<DamagerPlayerFaction>() != null)
         {
             playerCollidesOnFriendly();
+            onCollideFriendly.Invoke();
         }
         else
         {
             playerCollidesOnEnemy();
+            onCollideEnemy.Invoke();
         }
 
         // Applies force to ball player collides with

@@ -18,6 +18,7 @@ public class AudioManager : MonoBehaviour
     private AudioClip _Clip;
     // in the event playscheduled is used
     private AudioClip _StitchedClip;
+    private float _ChangingPitch = 1f;
 
     #region Unity Callbacks
     private void OnEnable()
@@ -100,6 +101,7 @@ public class AudioManager : MonoBehaviour
 
         if (_clipHolder.playType == AudioPlayType.Play)
         {
+            Debug.Log("play");
             _clipHolder.audioSource.clip = _Clip;
             _clipHolder.audioSource.Play();
         }
@@ -109,8 +111,15 @@ public class AudioManager : MonoBehaviour
         }
         else if (_clipHolder.playType == AudioPlayType.PlayOneShot)
         {
-            Debug.Log(_clipHolder.audioSource);
-            _clipHolder.audioSource.pitch = Random.Range(1.2f, 1.8f);
+            if (_clipHolder.affectedByPitch)
+            {
+                _ChangingPitch += 0.1f;
+                if (_ChangingPitch > 3f)
+                    _ChangingPitch = 1;
+                _clipHolder.audioSource.pitch = _ChangingPitch;
+            }
+            else
+                _clipHolder.audioSource.pitch = 1f;
             _clipHolder.audioSource.PlayOneShot(_Clip);
         }
 

@@ -409,6 +409,8 @@ MonoBehaviour:
   audioFileName: SFX_BitSoundChange
   stitchedFileName: 
   shouldResyncLists: 0
+  nextClipShouldLoop: 0
+  affectedByPitch: 0
   sFXNames:
   - SFX_BitSoundChange
   - SFX_BubblePopHard

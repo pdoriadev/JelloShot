@@ -6,17 +6,29 @@ using UnityEngine.Events;
 public class MusicController : MonoBehaviour
 {
     #region Unity Callbacks
-    private void OnEnable()
+    private bool _WasDisabled;
+    private void Awake()
     {
         GameManager.onEnterMainMenuEvent += OnEnterMainMenuListener;
         GameManager.onEnterGameplayEvent += OnEnterGameplayListener;
         GameManager.onLevelEndEvent += OnEnterLevelEndListener;
+    }
+    private void OnEnable()
+    {
+        if (_WasDisabled)
+        {
+            GameManager.onEnterMainMenuEvent += OnEnterMainMenuListener;
+            GameManager.onEnterGameplayEvent += OnEnterGameplayListener;
+            GameManager.onLevelEndEvent += OnEnterLevelEndListener;
+            _WasDisabled = false;
+        }
     }
     private void OnDisable()
     {
         GameManager.onEnterMainMenuEvent -= OnEnterMainMenuListener;
         GameManager.onEnterGameplayEvent -= OnEnterGameplayListener;
         GameManager.onLevelEndEvent -= OnEnterLevelEndListener;
+        _WasDisabled = true;
     }
     #endregion
 
@@ -39,6 +51,7 @@ public class MusicController : MonoBehaviour
     {
         if (_IsGameplayMusic == false)
         {
+            Debug.Log("gameplay music");
             playGameplayEvent.Invoke();
             _IsMenuMusic = false;
             _IsLevelEndMusic = false;

@@ -124,6 +124,7 @@ public class SlingShotVisuals : MonoBehaviour
         arrowsAtFirstTouchTransform.position = offScreenPosition;
         latestTouchVisualTransform.position = offScreenPosition;
         dragLineTrail.SetPosition(0, offScreenPosition);
+        dragLineTrail.SetPosition(dragLineTrail.positionCount - 1, offScreenPosition * 1.001f);
         dragLineTrail.Clear();
         lastTouchTrail.Clear();
         for (int i = 0; i < dragLineRend.positionCount; i++)

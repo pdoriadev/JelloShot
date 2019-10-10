@@ -10,6 +10,8 @@ public class AudioClipPlayer : MonoBehaviour
     public string audioFileName;
     public string stitchedFileName;
     public bool shouldResyncLists = false;
+    public bool nextClipShouldLoop;
+    public bool affectedByPitch;
 
     public List<string> sFXNames;
     public List<string> musicNames;
@@ -27,13 +29,19 @@ public class AudioClipPlayer : MonoBehaviour
         _Audio = GetComponent<AudioSource>();
     }
 
-
     /// <summary>
     /// sends clipholder object to audio manager to be read through and played. 
     /// NOTE: Only send clips of one type if sending multiple clips. AudioManager needs edit to check for mutliple AudioUse types. 
     /// </summary>
     public void PlayAudio()
     {
+        if (nextClipShouldLoop)
+            _Audio.loop = true;
+        else _Audio.loop = false;
+        if (affectedByPitch)
+            clipHolder.affectedByPitch = true;
+        else clipHolder.affectedByPitch = false;
+
         clipHolder.primaryClipName = audioFileName;
         if (stitchedFileName != null)
             clipHolder.stitchedClipName = stitchedFileName;
@@ -41,8 +49,12 @@ public class AudioClipPlayer : MonoBehaviour
         clipHolder.playType = playType;
         clipHolder.delayTime = delayTime;
         clipHolder.audioSource = _Audio;
+        Debug.Log(clipHolder.audioSource);
 
         AudioManager.instance.PlayAudioFromSource(clipHolder);
+
+        nextClipShouldLoop = false;
+        clipHolder.affectedByPitch = false;
     }
     public void SetClipname(string _clipName)
     {
@@ -54,6 +66,14 @@ public class AudioClipPlayer : MonoBehaviour
     public void SetPlayTypeAsPlayDelayed() { playType = AudioPlayType.PlayDelayed; }
     public void SetPlayTypeAsPause() { playType = AudioPlayType.Pause; }
     public void SetPlayTypeAsUnpause() { playType = AudioPlayType.UnPause; }
+    public void SetNextClipShouldLoopToTrue()
+    {
+        nextClipShouldLoop = true;
+    }
+    public void SetAffectedByPitchToTrue()
+    {
+        affectedByPitch = true;
+    }
 
     public bool CheckIfNamesMatch()
     {
@@ -82,7 +102,9 @@ public struct ClipHolder
     public AudioUseCase audioUse;
     public AudioPlayType playType;
     public float delayTime;
-    public ClipHolder (AudioSource _audioSource, string _name, string _otherName, AudioUseCase _audioUse, AudioPlayType _playType, float _delayTime)
+    public bool shouldLoop;
+    public bool affectedByPitch;
+    public ClipHolder (AudioSource _audioSource, string _name, string _otherName, AudioUseCase _audioUse, AudioPlayType _playType, float _delayTime, bool _shouldLoop, bool _affectedByPitch)
     {
         audioSource = _audioSource;
         primaryClipName = _name;
@@ -90,6 +112,8 @@ public struct ClipHolder
         audioUse = _audioUse;
         playType = _playType;
         delayTime = _delayTime;
+        shouldLoop = _shouldLoop;
+        affectedByPitch = _affectedByPitch;
     }
 }
 

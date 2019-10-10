@@ -104,13 +104,17 @@ public class GameManager : MonoBehaviour
     {
         if (instance == null)
             instance = this;
-        ChangeStateTo(GameState.MainMenu);
-        _PlayerStartPos = _PlayerGameObject.transform.position;
     }
 
     private void OnDisable()
     {
         instance = null;    
+    }
+
+    private void Start()
+    {
+        ChangeStateTo(GameState.MainMenu);
+        _PlayerStartPos = _PlayerGameObject.transform.position;
     }
 
     private void Update()
@@ -184,7 +188,7 @@ public class GameManager : MonoBehaviour
             return;
         }
         else if (state == GameState.MainMenu)
-        {
+        { 
             EnterMainMenu();
             return;
         }
@@ -206,7 +210,8 @@ public class GameManager : MonoBehaviour
             onEnterMainMenuEvent();
         else Debug.LogWarning(onEnterMainMenuEvent.ToString() + " is null ");
 
-        _PlayerGameObject.SetActive(false);
+        //_PlayerGameObject.SetActive(false);
+        _PlayerGameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
 
     }
     private void ExitMainMenu()

@@ -14,6 +14,11 @@ public class ScoreManager : MonoBehaviour
 
     private ScoreInfo _ScoreInfo;
     public ScoreInfo scoreInfo { get { return _ScoreInfo; } }
+    public int ballsKnockedOut;
+    public int previouslySavedScore;
+
+    [SerializeField]
+    private AudioClipPlayer _ClipPlayer;
 
     #region UNITY CALLBACKS
     private void OnEnable()
@@ -21,6 +26,7 @@ public class ScoreManager : MonoBehaviour
         if (instance == null)
             instance = this;
         GameManager.onResetLevel += LevelScoreSetup;
+        _ClipPlayer = GetComponent<AudioClipPlayer>();
     }
 
     private void OnDisable()
@@ -37,9 +43,6 @@ public class ScoreManager : MonoBehaviour
     }
     #endregion
 
-    public int ballsKnockedOut;
-    public int previouslySavedScore;
-
     public void LevelScoreSetup()
     {
         _ScoreInfo.kOScore = 0;
@@ -50,6 +53,8 @@ public class ScoreManager : MonoBehaviour
     public void IterateBallsKoScore()
     {      
         _ScoreInfo.kOScore++;
+        _ClipPlayer.audioFileName = "SFX_Blop";
+        _ClipPlayer.PlayAudio();
 
         if (OnScoreUpdateEvent != null)
             OnScoreUpdateEvent(_ScoreInfo);
