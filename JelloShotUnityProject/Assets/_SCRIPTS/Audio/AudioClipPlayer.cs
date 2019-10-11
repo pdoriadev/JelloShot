@@ -49,7 +49,6 @@ public class AudioClipPlayer : MonoBehaviour
         clipHolder.playType = playType;
         clipHolder.delayTime = delayTime;
         clipHolder.audioSource = _Audio;
-        Debug.Log(clipHolder.audioSource);
 
         AudioManager.instance.PlayAudioFromSource(clipHolder);
 

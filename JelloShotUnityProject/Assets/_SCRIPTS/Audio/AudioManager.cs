@@ -73,7 +73,6 @@ public class AudioManager : MonoBehaviour
                 {
                     _Clip = storageInstance.musicClips[i];
                     primClipFound = true;
-                    Debug.Log(_Clip + " foudn ");
                 }
                 if (_clipHolder.stitchedClipName != null)
                 {
@@ -81,7 +80,6 @@ public class AudioManager : MonoBehaviour
                     {
                         _StitchedClip = storageInstance.musicClips[i];
                         stitchedClipFound = true;
-                        Debug.Log(_StitchedClip + " foudn ");
                     }
                 }
                 // if stitchedClipName == null and primClipFound
@@ -89,19 +87,12 @@ public class AudioManager : MonoBehaviour
                     break;
                 if (primClipFound && stitchedClipFound)
                     break;
-
-                Debug.Log(_clipHolder.audioSource);
                 //else Debug.LogWarning("No clip found for " + _clipHolder.audioSource.gameObject);
             }
-            Debug.Log(_clipHolder.audioSource);
-
         }
-        Debug.Log(_clipHolder.audioSource);
-
 
         if (_clipHolder.playType == AudioPlayType.Play)
         {
-            Debug.Log("play");
             _clipHolder.audioSource.clip = _Clip;
             _clipHolder.audioSource.Play();
         }

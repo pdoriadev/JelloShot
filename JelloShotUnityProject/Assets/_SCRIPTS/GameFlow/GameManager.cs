@@ -137,7 +137,9 @@ public class GameManager : MonoBehaviour
         }
         if (DifficultyAdjuster.instance.currentDiff > DifficultyAdjuster.instance.beginnerDiff 
             && state == GameState.Tutorial)
-        { ChangeStateTo(GameState.Gameplay); Debug.Log("tutorial finished. Welcome to the Gameplay"); }
+        {
+            ChangeStateTo(GameState.Gameplay);
+        }
 
     }
 
@@ -208,7 +210,7 @@ public class GameManager : MonoBehaviour
     {
         if (onEnterMainMenuEvent != null)
             onEnterMainMenuEvent();
-        else Debug.LogWarning(onEnterMainMenuEvent.ToString() + " is null ");
+        else Debug.LogWarning("onEnterMainMenuEvent is null ");
 
         //_PlayerGameObject.SetActive(false);
         _PlayerGameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
@@ -238,7 +240,6 @@ public class GameManager : MonoBehaviour
         if (onExitTutorialEvent != null)
             onExitTutorialEvent();
         else Debug.LogWarning(onExitTutorialEvent.ToString() + "is null");
-        Debug.Log("exit tutorial");
     }
 
     // Gameplay
@@ -251,14 +252,12 @@ public class GameManager : MonoBehaviour
 
         _PlayerGameObject.SetActive(true);
         Time.timeScale = 1f;
-        Debug.Log("EnterG");
     }
     private void ExitGameplay()
     {
         if (onExitGameplayEvent != null)
             onExitGameplayEvent();
         else Debug.Log(" onExitGameplayEvent is null ");
-        Debug.Log("ExitG");
     }
 
     // Pause
@@ -266,17 +265,14 @@ public class GameManager : MonoBehaviour
     {
         if (onPauseGameplayEvent != null)
             onPauseGameplayEvent();
-        else Debug.LogWarning(onPauseGameplayEvent.ToString() + " is null ");
+        else Debug.LogWarning(" onPauseGameplayEvent is null ");
         Time.timeScale = 0;
-        Debug.Log("Paused");
     }
     private void UnPauseGameplay()
     {
         if (onUnPauseGameplayEvent != null)
             onUnPauseGameplayEvent();
-        else Debug.LogWarning(onUnPauseGameplayEvent.ToString() + " is null ");
-
-        Debug.Log("Unpaused");
+        else Debug.LogWarning(" onUnpauseGameplayEvent is null ");
     }
 
         #region Level End and Retry State Methods

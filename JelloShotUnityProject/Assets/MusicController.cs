@@ -51,7 +51,6 @@ public class MusicController : MonoBehaviour
     {
         if (_IsGameplayMusic == false)
         {
-            Debug.Log("gameplay music");
             playGameplayEvent.Invoke();
             _IsMenuMusic = false;
             _IsLevelEndMusic = false;
