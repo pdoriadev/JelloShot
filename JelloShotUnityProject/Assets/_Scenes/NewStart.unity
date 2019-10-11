@@ -1993,12 +1993,12 @@ PrefabInstance:
     - target: {fileID: 114355629047773390, guid: 2827f755fe290834a8e903f36931689c,
         type: 3}
       propertyPath: spawnMinWaitFloor
-      value: 2
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 114355629047773390, guid: 2827f755fe290834a8e903f36931689c,
         type: 3}
       propertyPath: spawnMaxWaitFloor
-      value: 4
+      value: 3.3
       objectReference: {fileID: 0}
     - target: {fileID: 114355629047773390, guid: 2827f755fe290834a8e903f36931689c,
         type: 3}
