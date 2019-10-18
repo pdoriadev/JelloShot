@@ -135,18 +135,9 @@
     <Compile Include="Assets\ParticlePack\Shared\Scripts\SimpleCharacterMotor.cs" />
     <Compile Include="Assets\ParticlePack\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\StateChanger.cs" />
-    <Compile Include="Assets\Virtual Joystick Pack\Examples\2D Example\Player2DExample.cs" />
-    <Compile Include="Assets\Virtual Joystick Pack\Examples\3D Example\Player3DExample.cs" />
-    <Compile Include="Assets\Virtual Joystick Pack\Scripts\Base\Joystick.cs" />
-    <Compile Include="Assets\Virtual Joystick Pack\Scripts\Joysticks\FixedJoystick.cs" />
-    <Compile Include="Assets\Virtual Joystick Pack\Scripts\Joysticks\FloatingJoystick.cs" />
-    <Compile Include="Assets\Virtual Joystick Pack\Scripts\Joysticks\VariableJoystick.cs" />
     <None Include="Assets\_Shaders\QuickBlur.shader" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
-    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\_Shaders\Unlit\BasicShaderUnlit.shader" />
     <None Include="Assets\_Shaders\ImageEffects\HeatEffectShader.shader" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\_Shaders\Unlit\AdditiveSha.shader" />
     <None Include="Assets\ParticlePack\EffectExamples\Misc Effects\Shaders\Dissolve.shader" />
     <None Include="Assets\ParticlePack\EffectExamples\Misc Effects\Shaders\FireFly.shader" />
@@ -156,26 +147,14 @@
     <None Include="Assets\_Shaders\Unlit\AlphaBlendShader.shader" />
     <None Include="Assets\JellyShader\Shaders\JellyShader.shader" />
     <None Include="Assets\_Shaders\CompositeAdd.shader" />
-    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\_Shaders\Unlit\InnerSpriteOutline.shader" />
     <None Include="Assets\ParticlePack\EffectExamples\Misc Effects\Shaders\Respawn.shader" />
     <None Include="Assets\_Shaders\Unlit\BasicImageEffect.shader" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\_Shaders\OverDraw.shader" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\_Shaders\ShowDepth.shader" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\_Shaders\ImageEffects\SimpleBoxBlur.shader" />
     <None Include="Assets\_Shaders\Unlit\InterpBtwnTxtursShader.shader" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader" />
     <None Include="Assets\_Shaders\Unlit\WobblyShader.shader" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Users/peter/UnityInstalls/UnityEditorInstalls/2019.1.12f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
     </Reference>
