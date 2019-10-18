@@ -563,10 +563,10 @@ MonoBehaviour:
   - SFX_Blop
   musicClips:
   - {fileID: 8300000, guid: f44fff1105b7f2e4c876965a4abd4bea, type: 3}
-  - {fileID: 8300000, guid: 9b7b55344b51043d1b7aa37b01338ecf, type: 3}
+  - {fileID: 8300000, guid: 1e750eebb7f931a40a44e4334f21e7e4, type: 3}
   musicNames:
   - JelloShotTitleIntroV2Music
-  - FAM_Intimate Comedy
+  - FAM_Intimate_ComedyMP3
 --- !u!1 &401883898
 GameObject:
   m_ObjectHideFlags: 0
@@ -703,7 +703,7 @@ MonoBehaviour:
   - SFX_Blop
   musicNames:
   - JelloShotTitleIntroV2Music
-  - FAM_Intimate Comedy
+  - FAM_Intimate_ComedyMP3
   useCase: 0
   playType: 1
   delayTime: 0
@@ -1160,8 +1160,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1311627329505169815, guid: 71dbfe7099bc9954388240969dfe1193,
         type: 3}
+      propertyPath: sFXNames.Array.size
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1311627329505169815, guid: 71dbfe7099bc9954388240969dfe1193,
+        type: 3}
       propertyPath: playType
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1311627329505169815, guid: 71dbfe7099bc9954388240969dfe1193,
+        type: 3}
+      propertyPath: shouldResyncLists
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1311627329505169815, guid: 71dbfe7099bc9954388240969dfe1193,
+        type: 3}
+      propertyPath: sFXNames.Array.data[13]
+      value: SFX_Blop
+      objectReference: {fileID: 0}
+    - target: {fileID: 1311627329505169815, guid: 71dbfe7099bc9954388240969dfe1193,
+        type: 3}
+      propertyPath: musicNames.Array.data[1]
+      value: FAM_Intimate_ComedyMP3
       objectReference: {fileID: 0}
     - target: {fileID: 461284109, guid: 71dbfe7099bc9954388240969dfe1193, type: 3}
       propertyPath: OutputAudioMixerGroup
@@ -2042,9 +2062,10 @@ MonoBehaviour:
   - SFX_LowSwish
   - SFX_TimpaniBounceLow
   - SFX_YouDidIt
+  - SFX_Blop
   musicNames:
   - JelloShotTitleIntroV2Music
-  - FAM_Intimate Comedy
+  - FAM_Intimate_ComedyMP3
   useCase: 1
   playType: 0
   delayTime: 0
@@ -2196,7 +2217,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: FAM_Intimate Comedy
+          m_StringArgument: FAM_Intimate_ComedyMP3
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 2024247444}
