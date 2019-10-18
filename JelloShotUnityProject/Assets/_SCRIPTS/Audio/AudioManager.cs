@@ -89,22 +89,18 @@ public class AudioManager : MonoBehaviour
             }
         }
 
-        Debug.Log("yo");
         if (_clipHolder.playType == AudioPlayType.Play)
         {
             _clipHolder.audioSource.clip = _Clip;
             _clipHolder.audioSource.Play();
-            Debug.Log(_Clip.name);
-            if (_clipHolder.audioSource.isPlaying) Debug.Log("it's playing");
+
         }
         else if (_clipHolder.playType == AudioPlayType.PlayDelayed)
         {
-            Debug.Log("delayed");
             _clipHolder.audioSource.PlayDelayed(_clipHolder.delayTime);
         }
         else if (_clipHolder.playType == AudioPlayType.PlayOneShot)
         {
-            Debug.Log("oneshot");
             if (_clipHolder.shouldAffectPitch)
             {
 
@@ -125,7 +121,6 @@ public class AudioManager : MonoBehaviour
         // How PlayScheduled works OR how to stitch together clips seamlsessly  
         else if (_clipHolder.playType == AudioPlayType.PlayScheduled)
         {
-            Debug.Log("Playscheduled");
             //1.Work out the length of the first clip as a double value. Get this by casting the clip's total samples as a double
             /// and then divide it by the sample rate.This gives you a super accurate duration value.
             double clipDuration = (double)_clipHolder.audioSource.clip.samples / _clipHolder.audioSource.clip.frequency;
@@ -163,12 +158,10 @@ public class AudioManager : MonoBehaviour
         }
         else if (_clipHolder.playType == AudioPlayType.Pause)
         {
-            Debug.Log("pause");
             _clipHolder.audioSource.Pause();
         }
         else if (_clipHolder.playType == AudioPlayType.UnPause)
         {
-            Debug.Log("unpause");
             _clipHolder.audioSource.UnPause();
         }
         else Debug.LogError("No audio play type");
