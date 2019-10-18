@@ -123,8 +123,10 @@ public class SlingShotVisuals : MonoBehaviour
         ballArrowTransform.position = offScreenPosition;
         arrowsAtFirstTouchTransform.position = offScreenPosition;
         latestTouchVisualTransform.position = offScreenPosition;
-        dragLineTrail.SetPosition(0, offScreenPosition);
-        dragLineTrail.SetPosition(dragLineTrail.positionCount - 1, offScreenPosition * 1.001f);
+        if (dragLineTrail.positionCount > 0)
+        {
+            dragLineTrail.SetPosition(0, offScreenPosition);
+        }
         dragLineTrail.Clear();
         lastTouchTrail.Clear();
         for (int i = 0; i < dragLineRend.positionCount; i++)
@@ -134,8 +136,6 @@ public class SlingShotVisuals : MonoBehaviour
         OnRelease.Invoke();
     }
 
-    // IDEA: Dont' want another line/trail where the player is touching the screen. Can distract from actual sling. BUT could have 'sparkle' effect wherever they 
-    //      last touched it. 
     // IDEA: Effect where sling gradient flashes white and blue with same timing as other sling shot effect flashes. 
     // IDEA: Effect where, on release, the sling will zoom into its center point where the player was. When it reaches that point, an EXPLOSION or some other particle effect happens.
     //      Could use a coroutine. 

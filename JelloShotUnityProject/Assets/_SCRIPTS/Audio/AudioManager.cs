@@ -18,7 +18,7 @@ public class AudioManager : MonoBehaviour
     private AudioClip _Clip;
     // in the event playscheduled is used
     private AudioClip _StitchedClip;
-    private float _ChangingPitch = 1f;
+    private float _ChangedPitch = 1f;
 
     #region Unity Callbacks
     private void OnEnable()
@@ -102,15 +102,20 @@ public class AudioManager : MonoBehaviour
         }
         else if (_clipHolder.playType == AudioPlayType.PlayOneShot)
         {
-            if (_clipHolder.affectedByPitch)
+            if (_clipHolder.shouldAffectPitch)
             {
-                _ChangingPitch += 0.1f;
-                if (_ChangingPitch > 3f)
-                    _ChangingPitch = 1;
-                _clipHolder.audioSource.pitch = _ChangingPitch;
+
+                if (_ChangedPitch > 3f)
+                {
+                    _ChangedPitch = 1;
+                }
+                else
+                {
+                    _ChangedPitch += 0.1f;
+                    _clipHolder.audioSource.pitch = _ChangedPitch;
+                }
             }
-            else
-                _clipHolder.audioSource.pitch = 1f;
+
             _clipHolder.audioSource.PlayOneShot(_Clip);
         }
 

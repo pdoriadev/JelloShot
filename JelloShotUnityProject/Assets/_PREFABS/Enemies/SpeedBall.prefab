@@ -790,3 +790,4 @@ MonoBehaviour:
   useCase: 0
   playType: 1
   delayTime: 0
+  audioSource: {fileID: 0}

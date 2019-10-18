@@ -22,11 +22,11 @@ public class AudioClipPlayer : MonoBehaviour
 
     public float delayTime;
 
-    private AudioSource _Audio;
+    public AudioSource audioSource;
     
     private void OnEnable()
     {
-        _Audio = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     /// <summary>
@@ -36,11 +36,11 @@ public class AudioClipPlayer : MonoBehaviour
     public void PlayAudio()
     {
         if (nextClipShouldLoop)
-            _Audio.loop = true;
-        else _Audio.loop = false;
+            audioSource.loop = true;
+        else audioSource.loop = false;
         if (affectedByPitch)
-            clipHolder.affectedByPitch = true;
-        else clipHolder.affectedByPitch = false;
+            clipHolder.shouldAffectPitch = true;
+        else clipHolder.shouldAffectPitch = false;
 
         clipHolder.primaryClipName = audioFileName;
         if (stitchedFileName != null)
@@ -48,12 +48,12 @@ public class AudioClipPlayer : MonoBehaviour
         clipHolder.audioUse = useCase;
         clipHolder.playType = playType;
         clipHolder.delayTime = delayTime;
-        clipHolder.audioSource = _Audio;
+        clipHolder.audioSource = audioSource;
 
         AudioManager.instance.PlayAudioFromSource(clipHolder);
 
         nextClipShouldLoop = false;
-        clipHolder.affectedByPitch = false;
+        clipHolder.shouldAffectPitch = false;
     }
     public void SetClipname(string _clipName)
     {
@@ -102,7 +102,7 @@ public struct ClipHolder
     public AudioPlayType playType;
     public float delayTime;
     public bool shouldLoop;
-    public bool affectedByPitch;
+    public bool shouldAffectPitch;
     public ClipHolder (AudioSource _audioSource, string _name, string _otherName, AudioUseCase _audioUse, AudioPlayType _playType, float _delayTime, bool _shouldLoop, bool _affectedByPitch)
     {
         audioSource = _audioSource;
@@ -112,7 +112,7 @@ public struct ClipHolder
         playType = _playType;
         delayTime = _delayTime;
         shouldLoop = _shouldLoop;
-        affectedByPitch = _affectedByPitch;
+        shouldAffectPitch = _affectedByPitch;
     }
 }
 

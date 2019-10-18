@@ -51,14 +51,26 @@ public class ScoreManager : MonoBehaviour
     }
 
     public void IterateBallsKoScore()
-    {      
+    {
         _ScoreInfo.kOScore++;
-        _ClipPlayer.audioFileName = "SFX_Blop";
-        _ClipPlayer.PlayAudio();
+        PlaySound();
 
         if (OnScoreUpdateEvent != null)
             OnScoreUpdateEvent(_ScoreInfo);
         else Debug.Log(OnScoreUpdateEvent + " is null");
+    }
+
+    private float _PitchFloor = 0.5f;
+    private float _PitchIterator = 0.1f;
+    private void PlaySound()
+    {
+        _ClipPlayer.audioFileName = "SFX_Blop";
+        if (_ClipPlayer.audioSource.pitch < (_PitchFloor + (_PitchIterator * 10))) 
+        {
+            _ClipPlayer.audioSource.pitch += _PitchIterator;
+        }
+        else _ClipPlayer.audioSource.pitch = _PitchFloor;
+        _ClipPlayer.PlayAudio();
     }
 
     public int CountScore(int difficulty)

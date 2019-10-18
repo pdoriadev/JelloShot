@@ -707,6 +707,7 @@ MonoBehaviour:
   useCase: 0
   playType: 1
   delayTime: 0
+  audioSource: {fileID: 0}
 --- !u!82 &466288610
 AudioSource:
   m_ObjectHideFlags: 0
@@ -720,7 +721,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 0.6
+  m_Pitch: 0.5
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -2047,6 +2048,7 @@ MonoBehaviour:
   useCase: 1
   playType: 0
   delayTime: 0
+  audioSource: {fileID: 0}
 --- !u!82 &2024247445
 AudioSource:
   m_ObjectHideFlags: 0

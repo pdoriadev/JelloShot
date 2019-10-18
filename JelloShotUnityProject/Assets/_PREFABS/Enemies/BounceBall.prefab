@@ -409,6 +409,7 @@ MonoBehaviour:
   useCase: 0
   playType: 1
   delayTime: 0
+  audioSource: {fileID: 0}
 --- !u!1 &1155077933520020
 GameObject:
   m_ObjectHideFlags: 0
