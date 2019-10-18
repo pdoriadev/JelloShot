@@ -17,7 +17,6 @@ public class AudioClipPlayer : MonoBehaviour
     public List<string> musicNames;
 
     public AudioUseCase useCase = AudioUseCase.SFX;
-    [SerializeField]
     public AudioPlayType playType = AudioPlayType.PlayOneShot;
 
     public float delayTime;
@@ -59,12 +58,14 @@ public class AudioClipPlayer : MonoBehaviour
     {
         audioFileName = _clipName;
     }
+
     public void SetPlayTypeAsPlay()  { playType = AudioPlayType.Play; }
     public void SetPlayTypeAsPlayOneShot() { playType = AudioPlayType.PlayOneShot; }
     public void SetPlayTypeAsPlayScheduled() { playType = AudioPlayType.PlayScheduled; }
     public void SetPlayTypeAsPlayDelayed() { playType = AudioPlayType.PlayDelayed; }
     public void SetPlayTypeAsPause() { playType = AudioPlayType.Pause; }
     public void SetPlayTypeAsUnpause() { playType = AudioPlayType.UnPause; }
+
     public void SetNextClipShouldLoopToTrue()
     {
         nextClipShouldLoop = true;

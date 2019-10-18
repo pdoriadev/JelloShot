@@ -68,12 +68,7 @@ public class AudioManager : MonoBehaviour
             bool primClipFound = false;
             bool stitchedClipFound = false;
             for (int i = 0; i < storageInstance.musicClips.Count; i++)
-            {
-                if (primClipFound == false && _clipHolder.primaryClipName == storageInstance.musicClips[i].name)
-                {
-                    _Clip = storageInstance.musicClips[i];
-                    primClipFound = true;
-                }
+            {             
                 if (_clipHolder.stitchedClipName != null)
                 {
                     if (stitchedClipFound == false && _clipHolder.stitchedClipName == storageInstance.musicClips[i].name)
@@ -82,26 +77,34 @@ public class AudioManager : MonoBehaviour
                         stitchedClipFound = true;
                     }
                 }
-                // if stitchedClipName == null and primClipFound
-                else if (primClipFound)
+                if (primClipFound == false && _clipHolder.primaryClipName == storageInstance.musicClips[i].name)
+                {
+                    _Clip = storageInstance.musicClips[i];
+                    primClipFound = true;
+                }
+                if (_clipHolder.stitchedClipName == null && primClipFound == true)
                     break;
                 if (primClipFound && stitchedClipFound)
                     break;
-                //else Debug.LogWarning("No clip found for " + _clipHolder.audioSource.gameObject);
             }
         }
 
+        Debug.Log("yo");
         if (_clipHolder.playType == AudioPlayType.Play)
         {
             _clipHolder.audioSource.clip = _Clip;
             _clipHolder.audioSource.Play();
+            Debug.Log(_Clip.name);
+            if (_clipHolder.audioSource.isPlaying) Debug.Log("it's playing");
         }
         else if (_clipHolder.playType == AudioPlayType.PlayDelayed)
         {
+            Debug.Log("delayed");
             _clipHolder.audioSource.PlayDelayed(_clipHolder.delayTime);
         }
         else if (_clipHolder.playType == AudioPlayType.PlayOneShot)
         {
+            Debug.Log("oneshot");
             if (_clipHolder.shouldAffectPitch)
             {
 
@@ -122,6 +125,7 @@ public class AudioManager : MonoBehaviour
         // How PlayScheduled works OR how to stitch together clips seamlsessly  
         else if (_clipHolder.playType == AudioPlayType.PlayScheduled)
         {
+            Debug.Log("Playscheduled");
             //1.Work out the length of the first clip as a double value. Get this by casting the clip's total samples as a double
             /// and then divide it by the sample rate.This gives you a super accurate duration value.
             double clipDuration = (double)_clipHolder.audioSource.clip.samples / _clipHolder.audioSource.clip.frequency;
@@ -150,7 +154,7 @@ public class AudioManager : MonoBehaviour
                         break;
                     }
                     else Debug.LogWarning("Couldn't find another audio source on " + _clipHolder.audioSource.gameObject.name);
-                }    
+                }
             }
             /// 3. (Look in the above if statements) Schedule audio clips. Start the first clip using PlayScheduled.
             /// This way you can use the exact start time in your calculation.
@@ -159,12 +163,15 @@ public class AudioManager : MonoBehaviour
         }
         else if (_clipHolder.playType == AudioPlayType.Pause)
         {
+            Debug.Log("pause");
             _clipHolder.audioSource.Pause();
-        }     
+        }
         else if (_clipHolder.playType == AudioPlayType.UnPause)
         {
+            Debug.Log("unpause");
             _clipHolder.audioSource.UnPause();
         }
+        else Debug.LogError("No audio play type");
     }
 }
 
